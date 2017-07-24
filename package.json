@@ -1,0 +1,19 @@
+{
+  "name": "faithpromise.org",
+  "version": "1.0.0",
+  "description": "Website for Faith Promise Church",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-rev": "^7.1.2",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-watch": "^4.3.11",
+    "yargs": "^7.0.1"
+  }
+}
