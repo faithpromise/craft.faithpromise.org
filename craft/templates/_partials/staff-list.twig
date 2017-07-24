@@ -1,0 +1,16 @@
+<ul class="Person-grid">
+    {% for staffer in members %}
+        <li class="Person-gridItem">
+            <a href="{{ staffer.url }}" class="PersonCard">
+                {% if staffer.staffPhoto | length %}
+                    {#<img class="PersonCard-photo" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">#}
+                    <img class="PersonCard-photo" src="{{ staffer.staffPhoto[0].getUrl({ width: 480 }) }}">
+                {% else %}
+                    <span class="PersonCard-photoPlaceholder"></span>
+                {% endif %}
+                <span class="PersonCard-name">{{ staffer.title }}</span>
+                <span class="PersonCard-title">{{ staffer.jobTitle }}</span>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

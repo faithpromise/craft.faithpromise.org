@@ -1,0 +1,38 @@
+{% set title        = title is defined ? title : block['title'] is defined ? block.title : '' %}
+{% set text         = text is defined ? text : block['text'] is defined ? block.text : '' %}
+{% set align        = align is defined ? align : block['align'] is defined ? block.align : 'left' %}
+{#{% set linkUrl_1    = linkUrl_1 is defined ? linkUrl_1 : block['linkUrl_1'] is defined ? block.linkUrl_1 : false %}#}
+{#{% set linkText_1   = linkText_1 is defined ? linkText_1 : block['linkText_1'] is defined ? block.linkText_1 : false %}#}
+{#{% set linkUrl_2    = linkUrl_2 is defined ? linkUrl_2 : block['linkUrl_2'] is defined ? block.linkUrl_2 : false %}#}
+{#{% set linkText_2   = linkText_2 is defined ? linkText_2 : block['linkText_2'] is defined ? block.linkText_2 : false %}#}
+{% set striped      = striped is defined ? striped : block['striped'] is defined ? block.striped : false %}
+{% set questions    = questions is defined ? questions : block['questions'] is defined ? block.questions : false %}
+
+{% if not questions %}
+    {% exit %}
+{% endif %}
+
+{% set section_class = 'Section--' ~ random(9999999) %}
+
+{% embed '_partials/section-default.twig' with { 'title' : title, 'align': 'center', 'striped': striped } %}
+    {% block text %}
+        {{ text }}
+    {% endblock %}
+    {% block body %}
+        <div class="Faq">
+            <div class="Faq-list">
+                {% for q in questions %}
+                    <label class="Faq-wrap">
+                        <input class="Faq-control" type="checkbox" checked>
+                        <div class="Faq-item">
+                            <div class="Faq-toggle"></div>
+                            <h3 class="Faq-title">{{ q.question }}</h3>
+                            <div class="Faq-text">{{ q.answer | markdown }}</div>
+                        </div>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+
+{% endembed %}

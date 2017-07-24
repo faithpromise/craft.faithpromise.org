@@ -1,0 +1,54 @@
+.Person-grid {
+  display:    flex;
+  flex-wrap:  wrap;
+  margin:     0 0 0 -1em;
+  padding:    0;
+  list-style: none;
+}
+
+.Person-gridItem {
+  margin-bottom: 3em;
+  padding-left:  1em;
+  width:         50%;
+  max-width:     240px;
+
+  @media (min-width: 45em) {
+    width: 33.33333%;
+  }
+}
+
+.PersonCard-photo,
+.PersonCard-photoPlaceholder {
+  width:           100%;
+  margin-bottom:   $spacing-fourth;
+  background:      $color-gray-dark url(/assets/fp-mark.svg) no-repeat center;
+  background-size: 60%;
+}
+
+.PersonCard-photoPlaceholder {
+  display:     block;
+  padding-top: 100%;
+  font-size:   0;
+  opacity:     .4;
+}
+
+.PersonCard {
+  @extend .unlink;
+  display: block;
+  width:   100%;
+
+  &:hover .PersonCard-name {
+    text-decoration: underline;
+  }
+}
+
+.PersonCard-name {
+  display: block;
+  @include fluid-type(320px, 16px, 1000px, 19px);
+}
+
+.PersonCard-title {
+  display:   block;
+  font-size: .875em;
+  color:     #555;
+}

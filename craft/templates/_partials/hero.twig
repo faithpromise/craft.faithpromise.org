@@ -1,0 +1,26 @@
+{% set hero_class = 'Hero--' ~ random(9999999) %}
+
+{% set hero_title = entry is defined ? entry.title : title is defined ? title : '' %}
+{% set hero_image = entry is defined ? entry.pageImage[0] : image is defined ? image : false %}
+{% set hero_style = entry is defined ? entry.pageHeaderStyle.value : style is defined ? style : 'imageOnly' %}
+
+{% if hero_image %}
+    <style>
+        .{{ hero_class }} {
+            background-image: url({{ hero_image.getUrl() }});
+        }
+    </style>
+{% endif %}
+
+{% set hero_class = hero_class ~ ' Hero--' ~ hero_style %}
+
+<header class="Hero {{ hero_class }}">
+    <div class="Hero-container">
+        <div class="Hero-content">
+            {% if hero_style == 'textOverlay' %}
+                <h1 class="Hero-title">{{ title }}</h1>
+                <p class="Hero-text">{% block text %}{% endblock %}</p>
+            {% endif %}
+        </div>
+    </div>
+</header>

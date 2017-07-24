@@ -1,0 +1,86 @@
+//
+// Base
+//
+// The base spacing unit is set equal to the `line-height` by default. This helps
+// create a consistent vertical rhythm throughout the framework.
+//
+
+$spacing-base: $line-height;
+
+//
+// Smaller
+//
+
+// Half
+$spacing-half: ($spacing-base / 2);
+
+// Thirds
+$spacing-third: ($spacing-base / 3);
+$spacing-two-thirds: ($spacing-third * 2);
+
+// Fourths
+$spacing-fourth: ($spacing-base / 4);
+$spacing-three-fourths: ($spacing-fourth * 3);
+
+// Fifths
+$spacing-fifth: ($spacing-base / 5);
+$spacing-two-fifths: ($spacing-fifth * 2);
+$spacing-three-fifths: ($spacing-fifth * 3);
+$spacing-four-fifths: ($spacing-fifth * 4);
+
+// Sixths
+$spacing-sixth: ($spacing-base / 6);
+$spacing-five-sixths: ($spacing-sixth * 5);
+
+// Micro
+$spacing-micro: 2;
+
+// 1px
+
+$spacing-1px: 1;
+
+//
+// Larger
+//
+
+// + Half
+$spacing-base-plus-half: ($spacing-base + $spacing-half);
+
+// + Thirds
+$spacing-base-plus-third: ($spacing-base + $spacing-third);
+$spacing-base-plus-two-thirds: ($spacing-base + ($spacing-third * 2));
+
+// + Fourths
+$spacing-base-plus-fourth: ($spacing-base + $spacing-fourth);
+$spacing-base-plus-three-fourths: ($spacing-base + ($spacing-fourth * 3));
+
+// + Fifths
+$spacing-base-plus-fifth: ($spacing-base + $spacing-fifth);
+$spacing-base-plus-two-fifths: ($spacing-base + ($spacing-fifth * 2));
+$spacing-base-plus-three-fifths: ($spacing-base + ($spacing-fifth * 3));
+$spacing-base-plus-four-fifths: ($spacing-base + ($spacing-fifth * 4));
+
+// + Sixths
+$spacing-base-plus-sixth: ($spacing-base + $spacing-sixth);
+$spacing-base-plus-five-sixths: ($spacing-base + ($spacing-sixth * 5));
+
+// + Micro
+$spacing-base-plus-micro: ($spacing-base + 2);
+
+// + 1px
+$spacing-base-plus-1px: ($spacing-base + 1);
+
+// Double
+$spacing-double: ($spacing-base * 2);
+
+// Triple
+$spacing-triple: ($spacing-base * 3);
+
+// Quadruple
+$spacing-quadruple: ($spacing-base * 4);
+
+// Macro
+$spacing-macro: ($spacing-base * 8);
+
+// None (0)
+$spacing-none: 0;

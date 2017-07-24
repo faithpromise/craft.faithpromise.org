@@ -1,0 +1,59 @@
+$VideoSection-2-col-width: 1200px;
+
+.VideoSection {
+  padding: $Section-padding;
+}
+
+.VideoSection-container {
+  @extend .Container;
+}
+
+.VideoSection-copy {
+  max-width: $Section-text-max-width;
+}
+
+.VideoSection-title {
+  @extend .Section-title;
+}
+
+.VideoSection-text {
+  @extend .Section-text;
+}
+
+@media (max-width: calc-em($VideoSection-2-col-width - 1, $font-size)) {
+
+  .VideoSection {
+    text-align: center;
+  }
+
+  .VideoSection-copy {
+    margin: 0 auto 3em;
+  }
+
+  .VideoSection-container {
+    max-width: 50em;
+  }
+
+}
+
+@media (min-width: calc-em($VideoSection-2-col-width, $font-size)) {
+
+  .VideoSection-container {
+    display:     flex;
+    align-items: center;
+  }
+
+  .VideoSection-copy,
+  .VideoSection-media {
+    width: 50%;
+  }
+
+  .VideoSection-copy {
+    padding-right: 3em;
+  }
+
+  .VideoSection--right {
+    flex-direction: row-reverse;
+  }
+
+}

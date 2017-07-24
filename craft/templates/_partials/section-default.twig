@@ -1,0 +1,52 @@
+
+{% set title        = title is defined ? title : block['title'] is defined ? block.title : '' %}
+{% set text         = text is defined ? text : block['text'] is defined ? block.text : '' %}
+{% set align        = align is defined ? align : block['align'] is defined ? block.align : 'left' %}
+{% set linkUrl_1    = linkUrl_1 is defined ? linkUrl_1 : block['linkUrl_1'] is defined ? block.linkUrl_1 : false %}
+{% set linkText_1   = linkText_1 is defined ? linkText_1 : block['linkText_1'] is defined ? block.linkText_1 : false %}
+{% set linkUrl_2    = linkUrl_2 is defined ? linkUrl_2 : block['linkUrl_2'] is defined ? block.linkUrl_2 : false %}
+{% set linkText_2   = linkText_2 is defined ? linkText_2 : block['linkText_2'] is defined ? block.linkText_2 : false %}
+{% set striped      = striped is defined ? striped : block['striped'] is defined ? block.striped : false %}
+{% set image        = image is defined ? image : block['bgImage'] is defined and block['bgImage'][0] is defined ? block.bgImage[0] : false %}
+{% set flipBgImage  = flipBackgroundImage is defined ? flipBackgroundImage : block['flipBackgroundImage'] is defined ? block.flipBackgroundImage : false %}
+
+{% set section_class_name = 'Section--' ~ ident | default(random(9999999)) %}
+{% set section_class = section_class_name ~ (striped ? ' Section--striped' : '') %}
+{% set section_class = section_class ~ (image  ? ' Section--withOverlay' : '') %}
+{% set section_class = section_class ~ (flipBgImage  ? ' Section--flipBackground' : '') %}
+
+{% if image %}
+    <style>
+        .{{ section_class_name }} > .Section-background {
+            background-image: url({{ image.getUrl() }});
+        }
+    </style>
+{% endif %}
+
+<section class="Section {{ section_class }} {{ image ? 'has-bg-image ' : '' }} Section--{{ align | default('left') }}">
+
+    <div class="Section-background"></div>
+    <div class="Section-overlay"></div>
+
+    <div class="Section-container">
+
+        <div class="Section-header">
+            <h2 class="Section-title">{{ title }}</h2>
+            <p class="Section-text">{% block text %}{{ text | markdown }}{% endblock %}</p>
+            {% if linkUrl_1 or linkUrl_2 %}
+                <div class="Section-actions">
+                    {% if linkUrl_1 and linkText_1 %}
+                        <a class="Section-button" href="{{ linkUrl_1 }}">{{ linkText_1 }}</a>
+                    {% endif %}
+                    {% if linkUrl_2 and linkText_2 %}
+                        <a class="Section-button" href="{{ linkUrl_2 }}">{{ linkText_2 }}</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="Section-content">{% block body %}{% endblock %}</div>
+
+    </div>
+
+</section>

@@ -1,0 +1,111 @@
+.EventHero .Button {
+  @extend .Button--light;
+}
+
+.EventHero {
+  position:            relative;
+  height:              85vh;
+  background-position: center;
+  background-size:     cover;
+  color:               #fff;
+}
+
+.EventHero-fadeup {
+  position:   absolute;
+  z-index:    $z-index-EventHero;
+  top:        0;
+  right:      0;
+  bottom:     0;
+  left:       0;
+  background: linear-gradient(to top, #000 0, transparent 70%);
+  opacity:    .7;
+}
+
+.EventHero-container {
+
+  @extend .Container;
+  @include antialiasing;
+
+  position:        relative;
+  z-index:         $z-index-EventHero;
+  display:         flex;
+  flex-direction:  column;
+  justify-content: flex-end;
+  height:          100%;
+  padding-bottom:  3em;
+}
+
+.EventHero-title {
+  margin:      0;
+  line-height: 1;
+  font-size:   calc-em(64px);
+  font-family: "bebas-neue", #{$font-family-titles};
+  font-weight: normal;
+  text-shadow: 0 0 40px rgba(0, 0, 0, .75);
+}
+
+.EventHero-text {
+  max-width:   calc-em(740px, 24px);
+  margin:      0 0 1.5em;
+  font-size:   calc-em(22px);
+  line-height: 1.2;
+  text-shadow: 0 1px 40px rgba(0, 0, 0, .75);
+}
+
+.EventHero-action {
+  margin-top:   1em;
+  margin-right: calc-em(16px);
+}
+
+.Hero {
+  @include fluid-size('min-height', 320px, 300px, 1000px, 520px);
+  display:         flex;
+  flex-direction:  column;
+  justify-content: flex-end;
+  padding-bottom:  7vw;
+  color:           #fff;
+  background:      $color-gray-darker center;
+  background-size: cover;
+  position:        relative;
+
+  &.Hero--textOverlay:before {
+    content:    '';
+    position:   absolute;
+    z-index:    1;
+    top:        0;
+    bottom:     0;
+    left:       0;
+    right:      0;
+    opacity:    .6;
+    background: linear-gradient(to bottom, transparent 0, #000 100%);
+  }
+
+}
+
+.Hero-container {
+  @extend .Container;
+  position: relative;
+  z-index:  2;
+}
+
+.Hero--center {
+  text-align: center;
+}
+
+.Hero-content {
+  max-width: 35.5em;
+}
+
+.Hero-title {
+  margin:         0;
+  text-transform: uppercase;
+}
+
+.Hero-text {
+  @include fluid-type(320px, 18px, 1000px, 24px);
+  margin: 0;
+
+  &:empty {
+    display: none;
+  }
+}

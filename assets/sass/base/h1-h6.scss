@@ -1,0 +1,31 @@
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-family: $font-family-titles;
+  font-weight: $heading-font-weight;
+  line-height: 1.2;
+  color:       inherit;
+}
+
+h1, .h1 {
+  //font-size: calc-rem($font-size-heading-1);
+  @include fluid-type(320px, $font-size-heading-1-mobile, 1000px, $font-size-heading-1-desktop);
+}
+
+h2, .h2 {
+  @include fluid-type(320px, $font-size-heading-2-mobile, 1000px, $font-size-heading-2-desktop);
+}
+
+h3, .h3 {
+  @include fluid-type(320px, $font-size-heading-3-mobile, 1000px, $font-size-heading-3-desktop);
+}
+
+h4, .h4 {
+  @include fluid-type(320px, $font-size-heading-4-mobile, 1000px, $font-size-heading-4-desktop);
+}
+
+h5, .h5 {
+  @include fluid-type(320px, $font-size-heading-5-mobile, 1000px, $font-size-heading-5-desktop);
+}
+
+h6, .h6 {
+  @include fluid-type(320px, $font-size-heading-6-mobile, 1000px, $font-size-heading-6-desktop);
+}

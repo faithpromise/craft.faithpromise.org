@@ -1,0 +1,3 @@
+@mixin text-section-overlay($color, $direction) {
+  background: linear-gradient(to $direction, $color 0%, $color 40%, rgba($color, 0) 70%);
+}

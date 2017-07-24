@@ -1,0 +1,27 @@
+{% set staff_by_team = craft.entries.section('staff') | group( 'ministries.first().slug' ) %}
+
+{% set teams = craft.categories.group('ministries').titles %}
+
+{% set is_odd = false %}
+
+{% for team in craft.categories.group('ministries') %}
+
+    {% set members = staff_by_team['' ~ team.slug] | default([]) %}
+
+    {% if members | length %}
+
+        {% embed '_partials/section-default.twig' with { 'title' : team.title, 'striped': is_odd } %}
+            {% block text %}
+                {{ team.text }}
+            {% endblock %}
+            {% block body %}
+                {% include '_partials/staff-list.twig' %}
+            {% endblock %}
+
+        {% endembed %}
+
+        {% set is_odd = (not is_odd) %}
+
+    {% endif %}
+
+{% endfor %}

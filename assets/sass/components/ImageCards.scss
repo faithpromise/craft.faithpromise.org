@@ -1,0 +1,141 @@
+$ImageCards-margin: 16px;
+$ImageCards-margin-desktop: 48px;
+
+.ImageCards-list {
+  @extend %list-unstyled;
+}
+
+.ImageCards-row {
+  margin: calc-em($ImageCards-margin);
+}
+
+.ImageCards-item {
+
+  @include link-colors-all(#fff);
+
+  position:       relative;
+  display:        block;
+  height:         0;
+  width:          100%;
+  padding-bottom: 56.25%;
+  overflow:       hidden;
+  user-select:    none;
+
+  &:after {
+    content:    '';
+    position:   absolute;
+    top:        0;
+    right:      0;
+    bottom:     -2em;
+    left:       0;
+    background: linear-gradient(to top, #000 0, transparent 40%);
+    opacity:    .5;
+  }
+}
+
+.ImageCards-image {
+  position: absolute;
+  top:      0;
+  left:     0;
+  width:    100%;
+}
+
+.ImageCards-link {
+  position:       absolute;
+  z-index:        3;
+  right:          0;
+  bottom:         0;
+  display:        block;
+  padding:        1em;
+  font-weight:    600;
+  text-transform: uppercase;
+
+}
+
+// Box with arrow
+
+@media (min-width: calc-em(450px)) {
+
+  .ImageCards-link {
+
+    margin-bottom: .5em;
+    padding-right: calc-em(80px);
+
+    &:before {
+      content:          '';
+      position:         absolute;
+      z-index:          -1;
+      top:              .15em;
+      right:            1em;
+      display:          inline-block;
+      vertical-align:   middle;
+      height:           calc-em(48px);
+      width:            calc-em(48px);
+      border:           2px solid currentColor;
+      border-radius:    4px;
+      background-color: rgba(0, 0, 0, 0.35);
+      transition:       all .2s ease-in-out;
+
+      .ImageCards-item:hover & {
+        width: 100%;
+      }
+    }
+
+    &:after {
+      content:      '';
+      position:     absolute;
+      top:          1.05em;
+      right:        2.2em;
+      height:       1em;
+      width:        1em;
+      border-top:   3px solid #fff;
+      border-right: 3px solid #fff;
+      transform:    rotate(45deg);
+    }
+
+  }
+
+}
+
+// 2 columns
+
+@media (min-width: calc-em(800px)) {
+
+  .ImageCards-container {
+    padding-right: calc-em($ImageCards-margin);
+    padding-left:  calc-em($ImageCards-margin);
+  }
+
+  .ImageCards-list {
+    display:     flex;
+    margin-left: -$ImageCards-margin;
+  }
+
+  .ImageCards-row {
+    width:        50%;
+    margin-right: 0;
+    margin-left:  0;
+    padding-left: calc-em($ImageCards-margin);
+  }
+
+}
+
+// Increase space around cards
+
+@media (min-width: calc-em(1200px)) {
+
+  .ImageCards-container {
+    @include container($Container-max-width, $ImageCards-margin-desktop);
+  }
+
+  .ImageCards-list {
+    margin-left: -$ImageCards-margin-desktop;
+  }
+
+  .ImageCards-row {
+    margin-top:    calc-em($ImageCards-margin-desktop);
+    margin-bottom: calc-em($ImageCards-margin-desktop);
+    padding-left:  calc-em($ImageCards-margin-desktop);
+  }
+
+}

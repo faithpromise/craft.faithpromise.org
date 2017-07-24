@@ -1,0 +1,4 @@
+
+%paragraph-text {
+  @include fluid-type(320px, $font-size-paragraph-mobile, 1000px, $font-size-paragraph-desktop);
+}

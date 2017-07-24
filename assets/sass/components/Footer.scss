@@ -1,0 +1,29 @@
+
+.Footer-container {
+  @extend .Container;
+
+  background-color: $color-gray-darkest;
+  color:            #fff;
+}
+
+.FooterSocial-heading {
+  margin: 0;
+}
+
+.Footer-info {
+  //display: flex;
+}
+
+.FooterNav {
+  @extend %list-unstyled;
+  display:   flex;
+  flex-wrap: wrap;
+}
+
+.FooterNav-item {
+  width: 50%;
+}
+
+.FooterNav-link {
+  @extend %link-color-inherit-all;
+}

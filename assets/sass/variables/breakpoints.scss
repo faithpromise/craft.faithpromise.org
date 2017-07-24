@@ -1,0 +1,9 @@
+// Nav
+$breakpoint_desktop_nav_gte: 769;
+$breakpoint_tablet_nav_lte: $breakpoint_desktop_nav_gte - 1;
+$breakpoint_mobile_nav_lte: 426;
+
+// Agent detail
+$breakpoint_agent_tablet_gte: 680;
+$breakpoint_agent_desktop_gte: 1180;
+$breakpoint_agent_mobile_lte: $breakpoint_agent_tablet_gte - 1;

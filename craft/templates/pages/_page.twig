@@ -1,0 +1,28 @@
+{% extends "_layout" %}
+
+{% block content %}
+
+    {# Hero
+    ============================== #}
+    {% embed '_partials/hero.twig' with { 'title' : entry.title } %}
+        {% block text %}
+            {{ entry.intro }}
+        {% endblock %}
+    {% endembed %}
+
+
+    {# Custom page template
+    ============================== #}
+    {% include 'pages/' ~ entry.slug ~ '.twig' ignore missing %}
+
+
+    {# CMS Content
+    ============================== #}
+
+    {% for block in entry.pageContent %}
+        {% embed '_partials/section-' ~ block.type ~ '.twig' ignore missing with { 'title': block.blockTitle } %}
+            {% block text %}{{ block.text }}{% endblock %}
+        {% endembed %}
+    {% endfor %}
+
+{% endblock %}

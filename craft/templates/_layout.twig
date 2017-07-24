@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% if title is defined %}{{ title }} - {% endif %}{{ siteName }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="google-site-verification" content="hbqvrQMid1Tpy4mlqi-wtEVGpcZ-tlZ5P_28dOhUgQU">
+        <!-- TODO: Canonical URL -->
+
+        <link rel="canonical" href="">
+        <!-- TODO: Apple icons -->
+
+        <!-- TODO: Social tags (see old site) -->
+
+        <!-- Fonts -->
+        <script src="https://use.typekit.net/vyb6fjv.js"></script>
+        <script>try {Typekit.load({ async: false });} catch (e) {}</script>
+
+        <!-- TODO: Stylesheet -->
+        <link rel="stylesheet" href="/build/main.css">
+
+        <link rel="home" href="{{ siteUrl }}">
+    </head>
+
+    <body>
+
+        <!-- TODO: Include Google Analytics -->
+        <!-- TODO: Facebook SDK -->
+
+        <div id="top" class="Layout">
+
+            <nav class="Nav">
+                <div class="Nav-bg"></div>
+                <div class="Nav-container">
+                    <a id="to_home_from_headerLogo" class="Nav-logo" href="/" title="Return to Home Page">
+                        <svg>
+                            <use xlink:href="/assets/logos.svg#logo"></use>
+                        </svg>
+                    </a>
+                    <ul class="Nav-menu">
+                        <li class="Nav-item"><a class="Nav-link" href="/about">About</a></li>
+                        <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
+                        <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
+                        <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
+                    </ul>
+                    <span class="Nav-toggle">
+                        <svg>
+                            <use xlink:href="/assets/icons.svg#menu"></use>
+                        </svg>
+                    </span>
+                </div>
+            </nav>
+
+            <div class="Layout-content">
+
+                {% block content %}{% endblock %}
+
+                <footer class="Layout-footer">
+
+                </footer>
+
+            </div>
+
+            <div class="Footer">
+                <div class="Footer-container">
+
+                    <div class="Footer-social">
+                        <h5 class="FooterSocial-heading">Connect with us</h5>
+                        <ul class="FooterSocial-list">
+                            <li class="FooterSocial-item">
+                                <a class="FooterSocial-link" href="https://www.facebook.com/faithpromise"><i class="FooterSocial-icon icon-facebook-circled"></i></a>
+                            </li>
+                            <li class="FooterSocial-item">
+                                <a class="FooterSocial-link" href="https://twitter.com/faithpromise"><i class="FooterSocial-icon icon-twitter-circled"></i></a>
+                            </li>
+                            <li class="FooterSocial-item">
+                                <a class="FooterSocial-link" href="https://instagram.com/faithpromise"><i class="FooterSocial-icon icon-instagram-circled"></i></a>
+                            </li>
+                            <li class="FooterSocial-item">
+                                <a class="FooterSocial-link" href="https://www.pinterest.com/faithpromise/"><i class="FooterSocial-icon icon-pinterest-circled"></i></a>
+                            </li>
+                            <li class="FooterSocial-item">
+                                <a class="FooterSocial-link" href="https://vimeo.com/faithpromise"><i class="FooterSocial-icon icon-vimeo-circled"></i></a>
+                            </li>
+                            <li class="FooterSocial-item">
+                                <a class="FooterSocial-link" href="https://github.com/faithpromise"><i class="FooterSocial-icon icon-github-circled"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="Footer-info">
+
+                        <div class="Footer-nav">
+                            <ul class="FooterNav">
+                                <li class="FooterNav-item">
+                                    <a id="to_locations_from_footer" class="FooterNav-link" href="/locations">Times &amp; Locations</a>
+                                </li>
+                                <li class="FooterNav-item">
+                                    <a id="to_updates_from_footer" class="FooterNav-link" href="/updates">Get updates</a>
+                                </li>
+                                <li class="FooterNav-item">
+                                    <a id="to_events_from_footer" class="FooterNav-link" href="/events">Events</a>
+                                </li>
+                                <li class="FooterNav-item">
+                                    <a id="to_blog_from_footer" class="FooterNav-link" href="http://blog.faithpromise.org">Blog</a>
+                                </li>
+                                <li class="FooterNav-item">
+                                    <a id="to_jobs_from_footer" class="FooterNav-link" href="/jobs">Jobs</a>
+                                </li>
+                                <li class="FooterNav-item">
+                                    <a id="to_give_from_footer" class="FooterNav-link" href="/give">Give Online</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="Footer-contact">
+                            <p>Mailing address:</p>
+                            <p>10740 Faith Promise Lane, <span class="no-wrap">Knoxville, TN 37931</span></p>
+                            <p>
+                                <a href="mailto:office@faithpromise.org">office@faithpromise.org</a> &nbsp;|&nbsp;
+                                <a href="tel:1-865-251-2590" class="no-wrap">(865) 251-2590</a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

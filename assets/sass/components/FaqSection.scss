@@ -1,0 +1,137 @@
+//.Faq-container {
+//  @extend .Container;
+//}
+
+$Faq-toggle-width: 48px;
+
+.Faq-list {
+  margin:     0;
+  padding:    0;
+  list-style: none;
+}
+
+.Faq-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.Faq-control {
+  position: absolute;
+  left:     -100em;
+}
+
+.Faq-item {
+  display:       flex;
+  flex-wrap:     wrap;
+  align-items:   center;
+  margin-top:    -1px; // overlap borders
+  padding:       1em 0;
+
+  border-top:    1px dashed $color-gray-light;
+  border-bottom: 1px dashed $color-gray-light;
+
+  overflow:      hidden;
+
+  .Section--striped & {
+    border-color: #d0d0d0;
+  }
+
+}
+
+.Faq-title {
+  margin:    0;
+  max-width: calc(100% - #{$Faq-toggle-width});
+  cursor:    pointer;
+}
+
+.Faq-text {
+  width:        100%;
+  padding-left: 48px;
+  color:        $color-gray-dark;
+}
+
+.Faq-title,
+.Faq-text {
+  @include fluid-type(320px, 18px, 1000px, $font-size-heading-5-desktop);
+  line-height: 1.4;
+}
+
+.Faq-toggle {
+  position:     relative;
+  width:        $Faq-toggle-width;
+  padding-left: .7em;
+  flex-shrink:  0;
+
+  &:after {
+    content:      '';
+    display:      inline-block;
+    width:        1em;
+    height:       1em;
+    border-color: $anchor-color;
+    border-style: solid;
+    border-width: 0 3px 3px 0;
+    transform:    rotate(-135deg);
+    transition:   all .25s ease;
+  }
+
+}
+
+.Faq-control:checked + .Faq-item:hover > .Faq-toggle:after {
+  transform: rotate(-45deg);
+}
+
+.Faq-control:checked + .Faq-item {
+
+  flex-wrap:   nowrap;
+  user-select: none;
+  cursor:      pointer;
+
+  .Faq-toggle:after {
+    top:       -.8em;
+    transform: rotate(45deg);
+  }
+
+  .Faq-title {
+    white-space: nowrap;
+  }
+
+  .Faq-text {
+    padding-left:  .4em;
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    white-space:   nowrap;
+    cursor:        pointer;
+
+    * {
+      display: inline
+    }
+  }
+
+}
+
+@media (max-width: 59.9375em) {
+
+  .Faq-title {
+    white-space: normal !important;
+  }
+
+  .Faq-control:checked + .Faq-item > .Faq-text {
+    display: none;
+  }
+}
+
+//@media (min-width: 50em) {
+//
+//  .Faq-list {
+//    display:     flex;
+//    flex-wrap:   wrap;
+//    padding:     0;
+//    margin-left: -5em;
+//    list-style:  none;
+//  }
+//
+//  .Faq-item {
+//    width:        50%;
+//    padding-left: 5em;
+//  }
+//}

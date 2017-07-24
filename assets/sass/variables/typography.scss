@@ -1,0 +1,65 @@
+// Font families
+
+$font-family-titles: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+// Base size
+
+$font-size: 16px;
+
+// Smaller
+
+$font-size-small: ($font-size - 1);
+$font-size-x-small: ($font-size - 2);
+$font-size-xx-small: ($font-size - 3);
+$font-size-xxx-small: ($font-size - 4);
+
+// Larger
+
+$font-size-large: ($font-size + 1);
+$font-size-x-large: ($font-size + 2);
+$font-size-xx-large: ($font-size + 3);
+$font-size-xxx-large: ($font-size + 4);
+
+// 100%
+
+$font-size-100: 100%;
+
+// 0
+
+$font-size-0: 0;
+
+// Headings
+
+$heading-modular-scale-mobile: 1.1;
+
+$font-size-heading-6-mobile: $font-size * 1.331;
+$font-size-heading-5-mobile: $font-size-heading-6-mobile * $heading-modular-scale-mobile;
+$font-size-heading-4-mobile: $font-size-heading-5-mobile * $heading-modular-scale-mobile;
+$font-size-heading-3-mobile: $font-size-heading-4-mobile * $heading-modular-scale-mobile;
+$font-size-heading-2-mobile: $font-size-heading-3-mobile * $heading-modular-scale-mobile;
+$font-size-heading-1-mobile: $font-size-heading-2-mobile * $heading-modular-scale-mobile;
+
+$heading-modular-scale-desktop: 1.27;
+
+$font-size-heading-6-desktop: $font-size * 1.25;
+$font-size-heading-5-desktop: $font-size-heading-6-desktop * $heading-modular-scale-desktop;
+$font-size-heading-4-desktop: $font-size-heading-5-desktop * $heading-modular-scale-desktop;
+$font-size-heading-3-desktop: $font-size-heading-4-desktop * $heading-modular-scale-desktop;
+$font-size-heading-2-desktop: $font-size-heading-3-desktop * $heading-modular-scale-desktop;
+$font-size-heading-1-desktop: $font-size-heading-2-desktop * $heading-modular-scale-desktop;
+
+$heading-font-family: $font-family-sans-serif;
+$heading-font-weight: 600;
+$heading-text-color: $color-gray-darker;
+
+// Paragraph text
+$font-size-paragraph-mobile: $font-size;
+$font-size-paragraph-desktop: 18px;
+
+//
+// Line height
+//
+
+$line-height: 22.4px;
+$line-height-ratio: ($line-height / $font-size);

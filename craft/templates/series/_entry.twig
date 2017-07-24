@@ -1,0 +1,13 @@
+{% extends "_layout" %}
+
+{% set thumb = { width: 800 } %}
+
+{% block content %}
+
+<h1>{{ entry.title }}</h1>
+
+{{ dump(entry.seriesImage[0].getUrl(thumb)) }}
+
+<img src="{{ entry.seriesImage[0].getUrl(thumb) }}">
+
+{% endblock %}

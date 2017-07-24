@@ -1,0 +1,16 @@
+$Section-v-padding: 3.5em !default;
+
+$Section-button-padding: 0.7em 1em;
+$Section-button-bg-color: $color-gray-light !default;
+$Section-button-bg-color-hover: darken($color-gray-light, 10%) !default;
+$Section-button-text-color: $root-text-color !default;
+$Section-button-text-color-hover: $root-text-color !default;
+$Section-button-height: 3em !default;
+$Section-button-border-radius: 5px !default;
+$Section-button-border: none !default;
+$Section-button-font-size: 1.25em !default;
+
+$BackgroundSection-text-color: #fff;
+$BackgroundSection-fade-color: #000 !default;
+
+$HeroSection-text-color: $root-text-color !default;

@@ -1,0 +1,70 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+
+    <div class="EventHero" style="background-image: url(/assets/temp.jpg)">
+        <div class="EventHero-fadeup"></div>
+        <div class="EventHero-container">
+            <div class="EventHero-content">
+                <h2 class="EventHero-title">&quot;At The Movies&quot; Begins July 29</h2>
+                <p class="EventHero-text">During our upcoming series, we’ll look at several popular movies, including Star Wars, Moana, and The Lion King. Drawing biblical principles out of each story, we'll see these movies in a whole new light.</p>
+                <div class="EventHero-actions">
+                    <a class="Button EventHero-action" href="/">Find a Location</a>
+                    <a class="Button EventHero-action" href="/">Watch Online</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ImageCards">
+        <div class="ImageCards-container">
+            <ul class="ImageCards-list">
+                <li class="ImageCards-row">
+                    <a class="ImageCards-item">
+                        <img class="ImageCards-image" src="http://faithpromise.192.168.10.10.xip.io/images/series/holy-land-tall.jpg">
+                        <span class="ImageCards-link" href="/">
+                    Latest Sermon
+                </span>
+                    </a>
+                </li>
+                <li class="ImageCards-row">
+                    <a class="ImageCards-item">
+                        <img class="ImageCards-image" src="http://faithpromise.192.168.10.10.xip.io/images/pages/events-tall.jpg">
+                        <span class="ImageCards-link" href="/">
+                    News &amp; Events
+                </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {#{{ entry.body }}#}
+
+    {#<h2>Recent News</h2>#}
+    {#<ul>#}
+    {#{% for entry in craft.entries.section('news').limit(5).find() %}#}
+    {#<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>#}
+    {#{% endfor %}#}
+    {#</ul>#}
+
+{% endblock %}

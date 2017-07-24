@@ -1,0 +1,24 @@
+.Button {
+  @extend .unlink;
+  display:        inline-block;
+  padding:        .75em 1.8em;
+  border:         2px solid currentColor;
+  border-radius:  4px;
+  background:     none;
+  font-weight:    800;
+  text-transform: uppercase;
+
+  transition:     all .1s ease-in-out;
+}
+
+.Button--light {
+
+  border-color:     #fff;
+  background-color: rgba(0, 0, 0, 0.35);
+  color:            #fff;
+
+  &:hover {
+    background-color: #fff;
+    color:            $color-gray-darker;
+  }
+}
