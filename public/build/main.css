@@ -712,7 +712,7 @@ img {
   max-width: 100%;
 }
 
-.Container, .Nav-container, .EventHero-container, .Hero-container, .Section-container, .Footer-container, .VideoSection-container {
+.Container, .Nav-container, .EventHero-container, .Section-container, .Footer-container, .VideoSection-container {
   padding-right: 1rem;
   padding-left: 1rem;
   width: 100%;
@@ -722,30 +722,31 @@ img {
 }
 
 @media screen and (min-width: 320px) {
-  .Container, .Nav-container, .EventHero-container, .Hero-container, .Section-container, .Footer-container, .VideoSection-container {
+  .Container, .Nav-container, .EventHero-container, .Section-container, .Footer-container, .VideoSection-container {
     padding-right: calc(1rem + 44 * (100vw - 320px) / 1180);
   }
 }
 
 @media (min-width: 1500px) {
-  .Container, .Nav-container, .EventHero-container, .Hero-container, .Section-container, .Footer-container, .VideoSection-container {
+  .Container, .Nav-container, .EventHero-container, .Section-container, .Footer-container, .VideoSection-container {
     padding-right: 3.75rem;
   }
 }
 
 @media screen and (min-width: 320px) {
-  .Container, .Nav-container, .EventHero-container, .Hero-container, .Section-container, .Footer-container, .VideoSection-container {
+  .Container, .Nav-container, .EventHero-container, .Section-container, .Footer-container, .VideoSection-container {
     padding-left: calc(1rem + 44 * (100vw - 320px) / 1180);
   }
 }
 
 @media (min-width: 1500px) {
-  .Container, .Nav-container, .EventHero-container, .Hero-container, .Section-container, .Footer-container, .VideoSection-container {
+  .Container, .Nav-container, .EventHero-container, .Section-container, .Footer-container, .VideoSection-container {
     padding-left: 3.75rem;
   }
 }
 
 .Button, .Section-button {
+  font-size: 0.875rem;
   display: inline-block;
   padding: .75em 1.8em;
   border: 2px solid currentColor;
@@ -754,6 +755,18 @@ img {
   font-weight: 800;
   text-transform: uppercase;
   transition: all .1s ease-in-out;
+}
+
+@media screen and (min-width: 320px) {
+  .Button, .Section-button {
+    font-size: calc(0.875rem + 2 * (100vw - 320px) / 960);
+  }
+}
+
+@media (min-width: 1280px) {
+  .Button, .Section-button {
+    font-size: 1rem;
+  }
 }
 
 .Button--light, .EventHero .Button, .EventHero .Section-button {
@@ -847,6 +860,12 @@ img {
   height: 1.77778em;
   width: 1.77778em;
   fill: currentColor;
+}
+
+@media (max-width: 719px) {
+  .Nav-menu {
+    display: none;
+  }
 }
 
 .Person-grid {
@@ -954,103 +973,88 @@ img {
 }
 
 .EventHero-title {
+  font-size: 3rem;
   margin: 0;
   line-height: 1;
-  font-size: 4em;
   font-family: "bebas-neue", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
   font-weight: normal;
   text-shadow: 0 0 40px rgba(0, 0, 0, 0.75);
 }
 
+@media screen and (min-width: 320px) {
+  .EventHero-title {
+    font-size: calc(3rem + 16 * (100vw - 320px) / 960);
+  }
+}
+
+@media (min-width: 1280px) {
+  .EventHero-title {
+    font-size: 4rem;
+  }
+}
+
 .EventHero-text {
+  font-size: 1rem;
   max-width: 30.83333em;
   margin: 0 0 1.5em;
-  font-size: 1.375em;
   line-height: 1.2;
   text-shadow: 0 1px 40px rgba(0, 0, 0, 0.75);
 }
 
+@media screen and (min-width: 320px) {
+  .EventHero-text {
+    font-size: calc(1rem + 6 * (100vw - 320px) / 960);
+  }
+}
+
+@media (min-width: 1280px) {
+  .EventHero-text {
+    font-size: 1.375rem;
+  }
+}
+
 .EventHero-action {
   margin-top: 1em;
-  margin-right: 1em;
+  margin-right: 0.5em;
 }
 
-.Hero {
-  min-height: 18.75rem;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  padding-bottom: 7vw;
-  color: #fff;
-  background: #444444 center;
-  background-size: cover;
-  position: relative;
+.EventHero-action:last-child {
+  margin-right: 0;
 }
 
-@media screen and (min-width: 320px) {
-  .Hero {
-    min-height: calc(18.75rem + 220 * (100vw - 320px) / 680);
+@media (min-width: 30em) {
+  .EventHero-text.is-truncated {
+    display: none;
   }
 }
 
-@media (min-width: 1000px) {
-  .Hero {
-    min-height: 32.5rem;
+@media (max-width: 29.9375em) {
+  .EventHero-title,
+  .EventHero-text {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .EventHero-content:not(.is-expanded) .EventHero-text.is-full {
+    display: none;
+  }
+  .EventHero-content.is-expanded .EventHero-text.is-truncated {
+    display: none;
   }
 }
 
-.Hero.Hero--textOverlay:before {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: .6;
-  background: linear-gradient(to bottom, transparent 0, #000 100%);
-}
-
-.Hero-container {
-  position: relative;
-  z-index: 2;
-}
-
-.Hero--center {
-  text-align: center;
-}
-
-.Hero-content {
-  max-width: 35.5em;
-}
-
-.Hero-title {
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.Hero-text {
-  font-size: 1.125rem;
-  margin: 0;
-}
-
-@media screen and (min-width: 320px) {
-  .Hero-text {
-    font-size: calc(1.125rem + 6 * (100vw - 320px) / 680);
+@media (max-width: 29.9375em) {
+  .u-hide-lt-480 {
+    display: none;
   }
 }
 
-@media (min-width: 1000px) {
-  .Hero-text {
-    font-size: 1.5rem;
+@media (min-width: 30em) {
+  .u-hide-gte-480 {
+    display: none;
   }
-}
-
-.Hero-text:empty {
-  display: none;
 }
 
 .Section {
@@ -1466,6 +1470,10 @@ img {
   .ImageCards-link {
     margin-bottom: .5em;
     padding-right: 5em;
+    transition: all .2s ease-in-out;
+  }
+  .ImageCards-item:hover .ImageCards-link {
+    padding-right: 3.75em;
   }
   .ImageCards-link:before {
     content: '';
@@ -1488,10 +1496,10 @@ img {
   .ImageCards-link:after {
     content: '';
     position: absolute;
-    top: 1.05em;
-    right: 2.2em;
-    height: 1em;
-    width: 1em;
+    top: 1.3125em;
+    right: 2.25em;
+    height: 0.8125em;
+    width: 0.8125em;
     border-top: 3px solid #fff;
     border-right: 3px solid #fff;
     transform: rotate(45deg);

@@ -21,6 +21,11 @@ gulp.task('sass', function () {
         .pipe(rev.manifest());
 });
 
+gulp.task('js', function () {
+    return gulp.src('assets/js/main.js')
+        .pipe(gulp.dest('public/build'))
+});
+
 // Watch
 
 gulp.task('watch', function () {

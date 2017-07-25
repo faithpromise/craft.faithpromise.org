@@ -52,7 +52,7 @@ $ImageCards-margin-desktop: 48px;
 
 }
 
-// Box with arrow
+// Add arrow to link
 
 @media (min-width: calc-em(450px)) {
 
@@ -60,6 +60,11 @@ $ImageCards-margin-desktop: 48px;
 
     margin-bottom: .5em;
     padding-right: calc-em(80px);
+    transition:    all .2s ease-in-out;
+
+    .ImageCards-item:hover & {
+      padding-right: calc-em(60px);
+    }
 
     &:before {
       content:          '';
@@ -84,13 +89,14 @@ $ImageCards-margin-desktop: 48px;
     &:after {
       content:      '';
       position:     absolute;
-      top:          1.05em;
-      right:        2.2em;
-      height:       1em;
-      width:        1em;
+      top:          calc-em(21px);
+      right:        calc-em(36px);
+      height:       calc-em(13px);
+      width:        calc-em(13px);
       border-top:   3px solid #fff;
       border-right: 3px solid #fff;
       transform:    rotate(45deg);
+
     }
 
   }

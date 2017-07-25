@@ -36,76 +36,64 @@
 }
 
 .EventHero-title {
+  @include fluid-type(320px, 48px, 1280px, 64px);
   margin:      0;
   line-height: 1;
-  font-size:   calc-em(64px);
   font-family: "bebas-neue", #{$font-family-titles};
   font-weight: normal;
   text-shadow: 0 0 40px rgba(0, 0, 0, .75);
 }
 
 .EventHero-text {
+  @include fluid-type(320px, 16px, 1280px, 22px);
   max-width:   calc-em(740px, 24px);
   margin:      0 0 1.5em;
-  font-size:   calc-em(22px);
   line-height: 1.2;
   text-shadow: 0 1px 40px rgba(0, 0, 0, .75);
 }
 
 .EventHero-action {
   margin-top:   1em;
-  margin-right: calc-em(16px);
-}
+  margin-right: calc-em(8px);
 
-.Hero {
-  @include fluid-size('min-height', 320px, 300px, 1000px, 520px);
-  display:         flex;
-  flex-direction:  column;
-  justify-content: flex-end;
-  padding-bottom:  7vw;
-  color:           #fff;
-  background:      $color-gray-darker center;
-  background-size: cover;
-  position:        relative;
-
-  &.Hero--textOverlay:before {
-    content:    '';
-    position:   absolute;
-    z-index:    1;
-    top:        0;
-    bottom:     0;
-    left:       0;
-    right:      0;
-    opacity:    .6;
-    background: linear-gradient(to bottom, transparent 0, #000 100%);
+  &:last-child {
+    margin-right: 0;
   }
 
 }
 
-.Hero-container {
-  @extend .Container;
-  position: relative;
-  z-index:  2;
+@media (min-width: calc-em(480px)) {
+  .EventHero-text.is-truncated {
+    display: none;
+  }
 }
 
-.Hero--center {
-  text-align: center;
+@media (max-width: calc-em(479px)) {
+
+  .EventHero-title,
+  .EventHero-text {
+    cursor:      pointer;
+    user-select: none;
+  }
+
+  .EventHero-content:not(.is-expanded) .EventHero-text.is-full {
+    display: none;
+  }
+
+  .EventHero-content.is-expanded .EventHero-text.is-truncated {
+    display: none;
+  }
+
 }
 
-.Hero-content {
-  max-width: 35.5em;
+@media (max-width: calc-em(479px)) {
+  &.u-hide-lt-480 {
+    display: none;
+  }
 }
 
-.Hero-title {
-  margin:         0;
-  text-transform: uppercase;
-}
-
-.Hero-text {
-  @include fluid-type(320px, 18px, 1000px, 24px);
-  margin: 0;
-
-  &:empty {
+@media (min-width: calc-em(480px)) {
+  &.u-hide-gte-480 {
     display: none;
   }
 }

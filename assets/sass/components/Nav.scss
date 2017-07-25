@@ -1,6 +1,9 @@
 $Nav-font-size: 18px;
 $Nav-link-padding-h: 8px;
 
+$Nav-desktop-start: 720px;
+$Nav-mobile-end: $Nav-desktop-start - 1px;
+
 .Nav {
   position:  absolute;
   z-index:   $z-index-nav;
@@ -83,6 +86,14 @@ $Nav-link-padding-h: 8px;
     height: calc-em(32px, $Nav-font-size);
     width:  calc-em(32px, $Nav-font-size);
     fill:   currentColor;
+  }
+
+}
+
+@media (max-width: $Nav-mobile-end) {
+
+  .Nav-menu {
+    display: none;
   }
 
 }
