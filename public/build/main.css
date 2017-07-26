@@ -883,6 +883,7 @@ body.nav-open {
   color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
