@@ -55,7 +55,11 @@
 
             <transition name="transition">
                 <div class="FullNav" v-show="is_nav_open">
-                    <span class="FullNav-close" @click="nav_close">close</span>
+                    <span class="FullNav-close" @click="nav_close">
+                        <svg>
+                            <use xlink:href="/assets/icons.svg#close"></use>
+                        </svg>
+                    </span>
                     <div class="FullNav-container">
                         <div class="FullNav-category">
                             <h5 class="FullNav-heading">Locations</h5>

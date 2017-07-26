@@ -850,7 +850,7 @@ img {
   display: block;
   height: 1.77778em;
   width: 1.77778em;
-  margin-left: 0.44444em;
+  margin-left: 0.88889em;
   cursor: pointer;
 }
 
@@ -866,9 +866,12 @@ img {
   }
 }
 
-html.nav-open > body,
 body.nav-open {
   overflow: hidden;
+}
+
+body.nav-open,
+body.nav-open .Nav {
   padding-right: 15px;
 }
 
@@ -882,7 +885,7 @@ body.nav-open {
   background-color: rgba(0, 0, 0, 0.9);
   color: #fff;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -893,6 +896,10 @@ body.nav-open {
 
 .FullNav.transition-enter, .FullNav.transition-leave-to {
   opacity: 0;
+}
+
+body.nav-open .FullNav {
+  overflow-y: auto;
 }
 
 .FullNav-container {
@@ -952,21 +959,16 @@ body.nav-open {
 .FullNav-close {
   position: fixed;
   z-index: 11;
-  top: 1em;
-  right: 2em;
+  top: 1.5em;
+  left: calc(100vw - 5.3em);
   cursor: pointer;
   overflow: hidden;
 }
 
-.FullNav-close:before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 3em;
-  background: linear-gradient(to bottom, #000 0, transparent 100%);
+.FullNav-close > svg {
+  height: 2.625em;
+  width: 2.625em;
+  fill: currentColor;
 }
 
 @media (max-width: 32.4375em) {

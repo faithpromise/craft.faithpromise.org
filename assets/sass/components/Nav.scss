@@ -78,7 +78,7 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
   display:     block;
   height:      calc-em(32px, $Nav-font-size);
   width:       calc-em(32px, $Nav-font-size);
-  margin-left: calc-em($Nav-link-padding-h, $Nav-font-size);
+  margin-left: calc-em($Nav-link-padding-h * 2, $Nav-font-size);
   cursor:      pointer;
 
   > svg {

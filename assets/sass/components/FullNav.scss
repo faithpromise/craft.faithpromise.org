@@ -1,8 +1,10 @@
-// TODO: When nav opened...
-html.nav-open > body,
 body.nav-open {
-  overflow:      hidden;
-  padding-right: 15px;
+  overflow: hidden;
+
+  &,
+  & .Nav {
+    padding-right: 15px;
+  }
 }
 
 .FullNav {
@@ -15,7 +17,7 @@ body.nav-open {
   background-color:           rgba(0, 0, 0, .9);
   color:                      #fff;
   overflow-x:                 hidden;
-  overflow-y:                 auto;
+  overflow-y:                 hidden;
   -webkit-overflow-scrolling: touch;
   user-select:                none;
   transition:                 opacity .25s ease-in-out;
@@ -23,6 +25,10 @@ body.nav-open {
   &.transition-enter,
   &.transition-leave-to {
     opacity: 0;
+  }
+
+  body.nav-open & {
+    overflow-y: auto;
   }
 
 }
@@ -65,20 +71,15 @@ body.nav-open {
 .FullNav-close {
   position: fixed;
   z-index:  $z-full-nav-close;
-  top:      1em;
-  right:    2em;
+  top:      1.5em;
+  left:     calc(100vw - 5.3em);
   cursor:   pointer;
   overflow: hidden;
 
-  &:before {
-    content:    '';
-    position:   absolute;
-    z-index:    -1;
-    top:        0;
-    right:      0;
-    left:       0;
-    height:     3em;
-    background: linear-gradient(to bottom, #000 0, transparent 100%);
+  > svg {
+    height: calc-em(42px);
+    width:  calc-em(42px);
+    fill:   currentColor;
   }
 
 }
