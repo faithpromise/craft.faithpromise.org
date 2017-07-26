@@ -881,7 +881,8 @@ body.nav-open {
   left: 0;
   background-color: rgba(0, 0, 0, 0.9);
   color: #fff;
-  overflow: hidden auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -898,7 +899,7 @@ body.nav-open {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 5em 2em;
+  padding: 5em 1em;
   transition: all .5s ease-in-out;
 }
 
@@ -908,7 +909,7 @@ body.nav-open {
 }
 
 .FullNav-category {
-  margin: 0 4em 7em 0;
+  margin: 0 0 7em 0;
 }
 
 .FullNav-heading {
@@ -923,9 +924,8 @@ body.nav-open {
 }
 
 .FullNav-link {
-  display: block;
-  margin-left: 0.75em;
   line-height: 2;
+  white-space: nowrap;
 }
 
 .FullNav-link {
@@ -954,6 +954,48 @@ body.nav-open {
   top: 1em;
   right: 2em;
   cursor: pointer;
+  overflow: hidden;
+}
+
+.FullNav-close:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3em;
+  background: linear-gradient(to bottom, #000 0, transparent 100%);
+}
+
+@media (max-width: 32.4375em) {
+  .FullNav-category {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .FullNav-heading {
+    width: 100%;
+  }
+  .FullNav-link {
+    min-width: 50%;
+    padding-left: 1em;
+  }
+}
+
+@media (min-width: 32.5em) {
+  .FullNav-container {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  .FullNav-category {
+    margin-right: 4em;
+  }
+  .FullNav-link {
+    display: block;
+    margin-left: 0.75em;
+  }
 }
 
 .Person-grid {
