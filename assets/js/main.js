@@ -1,13 +1,37 @@
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
-        fn();
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
+(function () {
 
-ready(function() {
+    new Vue({
 
+        el: '#app',
 
+        data: function () {
+            return {
+                is_nav_open: false
+            }
+        },
 
-});
+        watch: {
+            is_nav_open: function (value) {
+                document.body.classList[value ? 'add' : 'remove']('nav-open');
+            }
+        },
+
+        methods: {
+
+            nav_open: function () {
+                this.is_nav_open = true;
+            },
+
+            nav_close: function () {
+                this.is_nav_open = false;
+            },
+
+            nav_toggle: function () {
+                this.is_nav_open = !this.is_nav_open;
+            }
+
+        }
+
+    });
+
+}());

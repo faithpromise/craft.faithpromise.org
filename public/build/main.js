@@ -1,19 +1,37 @@
-new Vue({
+(function () {
 
-    el: '#Special',
+    new Vue({
 
-    data: function () {
-        return {
-            is_expanded: false
+        el: '#app',
+
+        data: function () {
+            return {
+                is_nav_open: false
+            }
+        },
+
+        watch: {
+            is_nav_open: function (value) {
+                document.body.classList[value ? 'add' : 'remove']('nav-open');
+            }
+        },
+
+        methods: {
+
+            nav_open: function () {
+                this.is_nav_open = true;
+            },
+
+            nav_close: function () {
+                this.is_nav_open = false;
+            },
+
+            nav_toggle: function () {
+                this.is_nav_open = !this.is_nav_open;
+            }
+
         }
-    },
 
-    methods: {
+    });
 
-        toggle_text: function () {
-            this.is_expanded = !this.is_expanded;
-        }
-
-    }
-
-});
+}());

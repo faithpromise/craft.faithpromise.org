@@ -1,0 +1,75 @@
+// TODO: When nav opened...
+html.nav-open > body,
+body.nav-open {
+  overflow:      hidden;
+  padding-right: 15px;
+}
+
+.FullNav {
+  position:         fixed;
+  z-index:          $z-full-nav;
+  top:              0;
+  right:            0;
+  bottom:           0;
+  left:             0;
+  background-color: rgba(0, 0, 0, .9);
+  color:            #fff;
+  overflow:         hidden auto;
+  user-select:      none;
+  transition:       opacity .25s ease-in-out;
+
+  //
+  //&.transition-enter-active,
+  //&.transition-leave-active {
+  //  transition: opacity .5s ease-in-out;
+  //}
+
+  &.transition-enter,
+  &.transition-leave-to {
+    opacity: 0;
+  }
+
+}
+
+.FullNav-container {
+  display:    flex;
+  flex-wrap:  wrap;
+  padding:    calc-em(80px) calc-em(32px);
+  transition: all .5s ease-in-out;
+
+  //.FullNav.transition-leave-to > &,
+  .FullNav.transition-enter > & {
+    transform: translateX(2em);
+    opacity:   0;
+  }
+}
+
+.FullNav-category {
+  margin: 0 4em 7em 0; // right margin only on larger screens
+}
+
+.FullNav-heading {
+  margin:         0 0 calc-em(8px);
+  padding-left:   calc-em(12px, 24px);
+  border-left:    5px solid #21e317;
+  line-height:    1.4;
+  font-size:      calc-em(24px);
+  font-weight:    400;
+  text-transform: uppercase;
+  cursor:         default;
+}
+
+.FullNav-link {
+  @include link-colors-all(currentColor);
+  display:     block;
+  margin-left: calc-em(12px);
+  line-height: 2;
+}
+
+.FullNav-close {
+  position: fixed;
+  z-index:  $z-full-nav-close;
+  top:      1em;
+  right:    2em;
+  cursor:   pointer;
+}

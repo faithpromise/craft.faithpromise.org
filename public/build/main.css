@@ -82,7 +82,7 @@
   text-decoration: none;
 }
 
-.FooterNav, .ImageCards-list {
+.FooterSocial-list, .FooterNav, .ImageCards-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -826,8 +826,6 @@ img {
 }
 
 .Nav-menu {
-  -ms-flex-align: end;
-  align-items: flex-end;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -866,6 +864,96 @@ img {
   .Nav-menu {
     display: none;
   }
+}
+
+html.nav-open > body,
+body.nav-open {
+  overflow: hidden;
+  padding-right: 15px;
+}
+
+.FullNav {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  overflow: hidden auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: opacity .25s ease-in-out;
+}
+
+.FullNav.transition-enter, .FullNav.transition-leave-to {
+  opacity: 0;
+}
+
+.FullNav-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 5em 2em;
+  transition: all .5s ease-in-out;
+}
+
+.FullNav.transition-enter > .FullNav-container {
+  transform: translateX(2em);
+  opacity: 0;
+}
+
+.FullNav-category {
+  margin: 0 4em 7em 0;
+}
+
+.FullNav-heading {
+  margin: 0 0 0.5em;
+  padding-left: 0.5em;
+  border-left: 5px solid #21e317;
+  line-height: 1.4;
+  font-size: 1.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.FullNav-link {
+  display: block;
+  margin-left: 0.75em;
+  line-height: 2;
+}
+
+.FullNav-link {
+  color: currentColor;
+}
+
+.FullNav-link:visited {
+  color: currentColor;
+}
+
+.FullNav-link:focus {
+  color: currentColor;
+}
+
+.FullNav-link:hover {
+  color: currentColor;
+}
+
+.FullNav-link:active {
+  color: currentColor;
+}
+
+.FullNav-close {
+  position: fixed;
+  z-index: 11;
+  top: 1em;
+  right: 2em;
+  cursor: pointer;
 }
 
 .Person-grid {
@@ -1323,13 +1411,40 @@ img {
   }
 }
 
-.Footer-container {
+.SocialIcon {
+  height: 1.5em;
+  width: 1.5em;
+  fill: currentColor;
+}
+
+.Footer {
+  padding: 3em 0;
   background-color: #222222;
   color: #fff;
 }
 
+.Footer-social {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .FooterSocial-heading {
   margin: 0;
+  font-size: 1.5em;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.FooterSocial-item {
+  display: inline-block;
+}
+
+.FooterSocial-link {
+  display: block;
+  height: 1.5em;
+  width: 1.5em;
 }
 
 .FooterNav {
