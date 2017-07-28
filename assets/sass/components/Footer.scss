@@ -1,12 +1,15 @@
 .SocialIcon {
-  height: calc-em(24px);
-  width:  calc-em(24px);
-  fill:   currentColor;
+  height:         calc-em(24px);
+  width:          calc-em(24px);
+  vertical-align: middle;
+  fill:           currentColor;
 }
+
+$Footer-bg-color: $color-gray-darkest;
 
 .Footer {
   padding:          3em 0;
-  background-color: $color-gray-darkest;
+  background-color: $Footer-bg-color;
   color:            #fff;
 }
 
@@ -14,46 +17,194 @@
   @extend .Container;
 }
 
-.Footer-social {
-  display:     flex;
-  align-items: center;
+.Footer-section {
+  display:        flex;
+  flex-direction: column;
+  margin-bottom:  2em;
 }
 
-.FooterSocial-heading {
-  margin:         0;
-  font-size:      calc-em(24px);
+.Footer-heading {
+  margin:         0 0 1em;
+  font-size:      calc-em(13px);
   font-weight:    normal;
   text-transform: uppercase;
+  opacity:        .4;
 }
 
-.FooterSocial-list {
+.Footer-address {
+  margin-bottom: 1em;
+}
+
+.Footer-nav {
   @extend %list-unstyled;
+
+  > li {
+    line-height: 2;
+  }
+
+  .SocialIcon {
+    height: 1.2em;
+    width:  1.2em;
+  }
+
 }
 
-.FooterSocial-item {
-  display: inline-block;
-}
-
-.FooterSocial-link {
-  display: block;
-  height: calc-em(24px);
-  width:  calc-em(24px);
-}
-
-.Footer-info {
-  //display: flex;
-}
-
-.FooterNav {
-  @extend %list-unstyled;
-  display:   flex;
-  flex-wrap: wrap;
-}
-
-.FooterNav-item {
-  width: 50%;
-}
-
-.FooterNav-link {
+.Footer a {
   @extend %link-color-inherit-all;
+  white-space: nowrap;
 }
+
+.Footer-end {
+  border-top:  1px solid $color-gray-darker;
+  margin-top:  2em;
+  padding-top: 2em;
+  text-align:  center;
+  overflow:    hidden;
+}
+
+.Footer-logoWrap {
+  position: relative;
+  display:  inline-block;
+
+}
+
+.Footer-logoCover {
+  content:          '';
+  position:         absolute;
+  top:              0;
+  left:             -225px;
+  height:           45px;
+  width:            275px;
+  background-color: $Footer-bg-color;
+  transition:       width .3s;
+
+  .Footer-logoWrap:hover & {
+    width: 188px;
+  }
+}
+
+.Footer-mark {
+  position:   relative;
+  top:        0;
+  left:       0;
+  display:    block;
+  height:     45px;
+  width:      45px;
+  fill:       currentColor;
+  transition: left .3s;
+
+  .Footer-logoWrap:hover & {
+    left: -85px;
+  }
+
+}
+
+.Footer-logo {
+  position:   absolute;
+  top:        0;
+  left:       -265px;
+  height:     45px;
+  fill:       currentColor;
+  transition: left .3s;
+
+  .Footer-logoWrap:hover & {
+    left: -127px;
+  }
+}
+
+@media (max-width: calc-em(619px)) {
+
+  .Footer-nav {
+    display:   flex;
+    flex-wrap: wrap;
+
+    > li {
+      min-width:     50%;
+      padding-right: 1em;
+    }
+
+  }
+
+}
+
+@media (min-width: calc-em(620px)) {
+
+  .Footer-container {
+    display:   flex;
+    flex-wrap: wrap;
+    //justify-content: space-between;
+  }
+
+  .Footer-section {
+    margin-right: 5em;
+  }
+
+}
+
+@media (min-width: calc-em(960px)) {
+
+  .Footer-container {
+    justify-content: space-between;
+  }
+
+}
+
+//.Footer-social {
+//  display:     flex;
+//  align-items: center;
+//}
+//
+//.FooterSocial-heading {
+//  margin:         0;
+//  font-size:      calc-em(24px);
+//  font-weight:    normal;
+//  text-transform: uppercase;
+//}
+//
+//.FooterSocial-list {
+//  @extend %list-unstyled;
+//}
+//
+//.FooterSocial-item {
+//  display: inline-block;
+//}
+//
+//.FooterSocial-link {
+//  display: block;
+//  height:  calc-em(24px);
+//  width:   calc-em(24px);
+//}
+//
+//.Footer-info {
+//  //display: flex;
+//}
+//
+//.FooterNav {
+//  @extend %list-unstyled;
+//  display:   flex;
+//  flex-wrap: wrap;
+//}
+//
+//.FooterNav-item {
+//  width: 50%;
+//}
+//
+//.FooterNav-link {
+//  @extend %link-color-inherit-all;
+//}
+//
+//.Footer-address {
+//  display:     flex;
+//}
+//
+//.Footer-logo {
+//  height:       3em;
+//  width:        3em;
+//  margin-right: 1em;
+//  fill:         currentColor;
+//}
+//
+//.FooterAddress-heading {
+//  font-size: 1em;
+//  margin:    0;
+//}

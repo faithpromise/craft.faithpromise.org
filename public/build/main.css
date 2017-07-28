@@ -10,23 +10,23 @@
  *
  * @link http://cbrac.co/1FT6aqC
  */
-.Nav-logo, .FooterNav-link {
+.Nav-logo, .Footer a {
   color: inherit;
 }
 
-.Nav-logo:visited, .FooterNav-link:visited {
+.Nav-logo:visited, .Footer a:visited {
   color: inherit;
 }
 
-.Nav-logo:focus, .FooterNav-link:focus {
+.Nav-logo:focus, .Footer a:focus {
   color: inherit;
 }
 
-.Nav-logo:hover, .FooterNav-link:hover {
+.Nav-logo:hover, .Footer a:hover {
   color: inherit;
 }
 
-.Nav-logo:active, .FooterNav-link:active {
+.Nav-logo:active, .Footer a:active {
   color: inherit;
 }
 
@@ -82,7 +82,7 @@
   text-decoration: none;
 }
 
-.FooterSocial-list, .FooterNav, .ImageCards-list {
+.Footer-nav, .ImageCards-list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -917,7 +917,7 @@ body.nav-open .FullNav {
 }
 
 .FullNav-category {
-  margin: 0 0 7em 0;
+  margin: 0 0 4em 0;
 }
 
 .FullNav-heading {
@@ -1459,6 +1459,7 @@ body.nav-open .FullNav {
 .SocialIcon {
   height: 1.5em;
   width: 1.5em;
+  vertical-align: middle;
   fill: currentColor;
 }
 
@@ -1468,39 +1469,125 @@ body.nav-open .FullNav {
   color: #fff;
 }
 
-.Footer-social {
+.Footer-section {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: center;
-  align-items: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 2em;
 }
 
-.FooterSocial-heading {
-  margin: 0;
-  font-size: 1.5em;
+.Footer-heading {
+  margin: 0 0 1em;
+  font-size: 0.8125em;
   font-weight: normal;
   text-transform: uppercase;
+  opacity: .4;
 }
 
-.FooterSocial-item {
+.Footer-address {
+  margin-bottom: 1em;
+}
+
+.Footer-nav > li {
+  line-height: 2;
+}
+
+.Footer-nav .SocialIcon {
+  height: 1.2em;
+  width: 1.2em;
+}
+
+.Footer a {
+  white-space: nowrap;
+}
+
+.Footer-end {
+  border-top: 1px solid #444444;
+  margin-top: 2em;
+  padding-top: 2em;
+  text-align: center;
+  overflow: hidden;
+}
+
+.Footer-logoWrap {
+  position: relative;
   display: inline-block;
 }
 
-.FooterSocial-link {
+.Footer-logoCover {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -225px;
+  height: 45px;
+  width: 275px;
+  background-color: #222222;
+  transition: width .3s;
+}
+
+.Footer-logoWrap:hover .Footer-logoCover {
+  width: 188px;
+}
+
+.Footer-mark {
+  position: relative;
+  top: 0;
+  left: 0;
   display: block;
-  height: 1.5em;
-  width: 1.5em;
+  height: 45px;
+  width: 45px;
+  fill: currentColor;
+  transition: left .3s;
 }
 
-.FooterNav {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+.Footer-logoWrap:hover .Footer-mark {
+  left: -85px;
 }
 
-.FooterNav-item {
-  width: 50%;
+.Footer-logo {
+  position: absolute;
+  top: 0;
+  left: -265px;
+  height: 45px;
+  fill: currentColor;
+  transition: left .3s;
+}
+
+.Footer-logoWrap:hover .Footer-logo {
+  left: -127px;
+}
+
+@media (max-width: 38.6875em) {
+  .Footer-nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .Footer-nav > li {
+    min-width: 50%;
+    padding-right: 1em;
+  }
+}
+
+@media (min-width: 38.75em) {
+  .Footer-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .Footer-section {
+    margin-right: 5em;
+  }
+}
+
+@media (min-width: 60em) {
+  .Footer-container {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
 }
 
 .VideoSection {
