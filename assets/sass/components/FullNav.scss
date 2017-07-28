@@ -54,7 +54,7 @@ body.nav-open {
 .FullNav-heading {
   margin:         0 0 calc-em(8px);
   padding-left:   calc-em(12px, 24px);
-  border-left:    5px solid #21e317;
+  border-left:    5px solid $color-highlight;
   line-height:    1.4;
   font-size:      calc-em(24px);
   font-weight:    400;
