@@ -12,7 +12,7 @@
 
         watch: {
             is_nav_open: function (value) {
-                document.body.classList[value ? 'add' : 'remove']('nav-open');
+                document.documentElement.classList[value ? 'add' : 'remove']('nav-open');
             }
         },
 

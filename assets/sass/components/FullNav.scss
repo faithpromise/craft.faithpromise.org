@@ -1,10 +1,13 @@
-body.nav-open {
+html.nav-open {
+
+  height:   100vh;
   overflow: hidden;
 
-  &,
-  & .Nav {
+  > body,
+  .Nav {
     padding-right: 15px;
   }
+
 }
 
 .FullNav {
@@ -69,10 +72,11 @@ body.nav-open {
 }
 
 .FullNav-close {
+  @include fluid-size(right, 320px, 16px, $Container-max-width, $Container-padding-h);
   position: fixed;
   z-index:  $z-full-nav-close;
   top:      1.5em;
-  left:     calc(100vw - 5.3em);
+  //left:     calc(100vw - 5.3em);
   cursor:   pointer;
   overflow: hidden;
 
