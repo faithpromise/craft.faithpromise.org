@@ -1,0 +1,41 @@
+$Cards-compact-end: 599px;
+
+.Cards {
+  @extend %list-unstyled;
+}
+
+.Cards-item {
+  padding-bottom: 2em;
+}
+
+@media (max-width: calc-em($Cards-compact-end)) {
+
+  .Cards--compact > .Cards-item {
+    padding-bottom: .5em;
+  }
+
+}
+
+@media (min-width: calc-em(760px)) {
+
+  .Cards {
+    display:         flex;
+    flex-wrap:       wrap;
+    justify-content: center;
+    margin-left:     -2em;
+  }
+
+  .Cards-item {
+    width:   50%;
+    padding: 0 0 2em 2em;
+  }
+
+}
+
+@media (min-width: calc-em(1080px)) {
+
+  .Cards-item {
+    width: 33.3333%;
+  }
+
+}

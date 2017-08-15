@@ -1,0 +1,32 @@
+{% set image       = image is defined ? image : null %}
+{% set title       = title is defined ? title : '' %}
+{% set subtitle    = subtitle is defined ? subtitle : '' %}
+{% set text        = text is defined ? text : '' %}
+{% set action_url  = action_url is defined ? action_url : '' %}
+{% set action_text = action_text is defined ? action_text : 'More Details' %}
+
+{% if action_url %}
+    {% set start_tag = '<a class="Card" href="' ~ action_url ~ '">' %}
+    {% set end_tag = '</a>' %}
+{% else %}
+    {% set start_tag = '<div class="Card">' %}
+    {% set end_tag = '</div>' %}
+{% endif %}
+
+{{ start_tag|raw }}
+{% if image %}
+    <div class="Card-image">
+        <img src="{{ image.getUrl() }}">
+    </div>
+{% endif %}
+<div class="Card-body">
+    <h3 class="Card-title">{{ title }}</h3>
+    <h4 class="Card-subtitle">{{ subtitle }}</h4>
+    <div class="Card-text">{{ text|raw }}</div>{# raw allows html, like svg icons #}
+</div>
+{% if action_url %}
+    <div class="Card-footer">
+        <span class="Card-action">{{ action_text }}</span>
+    </div>
+{% endif %}
+{{ end_tag|raw }}

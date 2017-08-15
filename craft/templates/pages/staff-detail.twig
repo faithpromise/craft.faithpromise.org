@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {% embed '_partials/hero.twig' with { 'title' : entry.title, 'class' : '' } %}
+    {% embed '_layout/hero.twig' with { 'title' : entry.title, 'class' : '' } %}
         {% block text %}
             We'd love for you to get to know the people who lead our church on the weekends and throughout the week. We're passionate about serving our city and surrounding areas for the glory of God's Kingdom.
         {% endblock %}

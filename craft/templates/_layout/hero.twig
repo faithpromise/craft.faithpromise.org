@@ -5,11 +5,12 @@
 {% set hero_style = entry is defined ? entry.pageHeaderStyle.value : style is defined ? style : 'imageOnly' %}
 
 {% if hero_image %}
-    <style>
+    {% set heroCss %}
         .{{ hero_class }} {
             background-image: url({{ hero_image.getUrl() }});
         }
-    </style>
+    {% endset %}
+    {% includeCss heroCss %}
 {% endif %}
 
 {% set hero_class = hero_class ~ ' Hero--' ~ hero_style %}

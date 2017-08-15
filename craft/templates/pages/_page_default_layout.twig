@@ -1,0 +1,26 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {# Hero
+    ============================== #}
+    {% embed '_layout/hero.twig' with { 'entry' : entry } %}
+        {% block text %}
+            {{ entry.intro }}
+        {% endblock %}
+    {% endembed %}
+
+    {# Templates that extend this one
+    can output content here
+    ============================== #}
+
+    {% block page_content %}{% endblock %}
+
+    {# CMS Content
+    ============================== #}
+
+    {% for block in entry.pageContent %}
+        {% include 'pages/content_blocks/' ~ block.type ~ '.twig' ignore missing %}
+    {% endfor %}
+
+{% endblock %}

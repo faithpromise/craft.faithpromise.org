@@ -1,0 +1,41 @@
+{% set text = '' %}
+
+    {# Build out the service times #}
+    {% for day in item.serviceTimes %}
+
+        {% if loop.index > 1 %}
+            {% set text = text ~ '<br>' %}
+        {% endif %}
+
+        {% set text = text ~ day.dayOfWeek.label|slice(0, 3) ~ ' at ' %}
+
+        {% for time in day.times %}
+
+            {% if loop.index == 1 %}
+                {% set text = text ~ time.startTime|lower %}
+            {% elseif day.times|length == 2 %}
+                {% set text = text ~ ' & ' ~ time.startTime|lower %}
+            {% elseif day.times|length > 2 and loop.index == day.times|length %}
+                {% set text = text ~ ', & ' ~ time.startTime|lower %}
+            {% elseif day.times|length > 2 and loop.index < day.times|length %}
+                {% set text = text ~ ', ' ~ time.startTime|lower %}
+            {% endif %}
+
+            {% if time.hasSignLanguage %}
+                {% set text = text ~ ' <svg><use xlink:href="/assets/icons.svg#asl"></use></svg> - ASL available' %}
+            {% endif %}
+
+        {% endfor %}
+
+    {% endfor %}
+
+    {% set params = {
+    'image': item.campusPhoto[0],
+    'title': item.area,
+    'subtitle': item.title ~ ' Campus',
+    'text': text,
+    'action_url': item.url,
+    'action_text': 'More Details'
+    } %}
+
+{% include '_items/_card.twig' with params %}

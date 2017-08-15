@@ -8,8 +8,15 @@
   background:     none;
   font-weight:    800;
   text-transform: uppercase;
+  user-select:    none;
 
   transition:     all .1s ease-in-out;
+
+  &:hover {
+    background-color: $root-text-color;
+    color:            #fff;
+  }
+
 }
 
 .Button--light {

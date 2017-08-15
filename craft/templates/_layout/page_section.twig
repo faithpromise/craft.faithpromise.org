@@ -1,0 +1,30 @@
+{% set has_link_1    = block['linkUrl_1'] is defined and block.linkUrl_1 %}
+{% set has_link_2    = block['linkUrl_2'] is defined and block.linkUrl_2 %}
+{% set striped       = block['striped'] is defined ? block.striped : false %}
+{% set bg_style      = block['bgStyle'] is defined ? block.bgStyle : 'default' %}
+{% set section_class = 'Section Section--' ~ bg_style %}
+
+<section class="{{ section_class }}">
+
+    <div class="Section-container">
+
+        <div class="Section-copy">
+
+            <h2 class="Section-title">{{ block.blockTitle }}</h2>
+
+            <div class="Section-text">{{ block.text | markdown }}</div>
+
+            <div class="TextSection-actions">
+                {% if has_link_1 %}
+                    <a class="Button" href="{{ block.linkUrl_1 }}">{{ block.linkText_1 }}</a>{% endif %}
+                {% if has_link_2 %}
+                    <a class="Button" href="{{ block.linkUrl_2 }}">{{ block.linkText_2 }}</a>{% endif %}
+            </div>
+
+        </div>
+
+        <div class="Section-content">{% block body %}{% endblock %}</div>
+
+    </div>
+
+</section>

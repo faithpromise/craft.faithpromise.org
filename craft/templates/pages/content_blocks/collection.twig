@@ -1,0 +1,20 @@
+{#
+ # This template is used when a pageContent field contains
+ # a `collection` block.
+ #
+ # A collection block uses a `block.entryType` field to
+ # determine which collection of items should be displaed,
+ # such as campuses, events, staff, sermon series, etc.
+ #
+#}
+
+{% set collection_template = 'pages/content_blocks/collections/' ~ block.entryType.value %}
+
+{#
+ # Wrap the collection in a page section
+#}
+{% embed '_layout/page_section.twig' with { 'block': block } %}
+    {% block body %}
+        {% include collection_template ignore missing %}
+    {% endblock %}
+{% endembed %}

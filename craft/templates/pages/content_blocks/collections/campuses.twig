@@ -1,0 +1,3 @@
+{% set campuses = craft.entries.section('campuses').find() %}
+
+{% include '_items/_cards.twig' with { 'items': campuses, 'compact': true } %}

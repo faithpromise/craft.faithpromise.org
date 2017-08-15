@@ -1,0 +1,61 @@
+{% set has_link_1 = block['linkUrl_1'] is defined and block.linkUrl_1 %}
+{% set has_link_2 = block['linkUrl_2'] is defined and block.linkUrl_2 %}
+{% set align      = block['align'] is defined ? block.align : 'left' %}
+{% set bg_style   = block['bgStyle'] is defined ? block.bgStyle : 'default' %}
+
+{% set video_url  = block['videoUrl'] is defined and block.videoUrl | length ? block.videoUrl : false %}
+{% set bg_image   = block['bgImage'] is defined and block.bgImage | length ? block.bgImage[0] : false %}
+
+{% set section_class = 'TextSection--' ~ random(9999999) %}
+
+{# Build the CSS class #}
+{% set klass = 'TextSection TextSection--' ~ align ~ ' TextSection--' ~ bg_style %}
+{% set klass = klass ~ (video_url ? ' has-media') %}
+{% set klass = klass ~ (bg_image ? ' has-bg') %}
+
+{% if bg_image %}
+    {% set sectionCss %}
+        .{{ section_class }} > .TextSection-background { background-image: url({{ bg_image.getUrl() }}); }
+        {# TODO: Responsive image sizes #}
+    {% endset %}
+    {% includeCss sectionCss %}
+{% endif %}
+
+<section class="{{ klass }} {{ section_class }}">
+
+    {% if bg_image %}
+        <div class="TextSection-background"></div>
+        <div class="TextSection-overlay"></div>
+    {% endif %}
+
+    <div class="TextSection-container">
+
+        {% if video_url %}
+            <div class="TextSection-media">
+                {% set videoSegments = block.videoUrl | split('/') %}
+                {% set vimeoId = videoSegments | last %}
+                {% set vimeoUrl = 'https://player.vimeo.com/video/' ~ vimeoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=false' %}
+                <div class="VideoPlayer">
+                    <iframe src="{{ vimeoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="TextSection-copy">
+
+            <h2 class="TextSection-title">{{ block.blockTitle }}</h2>
+
+            <div class="TextSection-text">{{ block.text | markdown }}</div>
+
+            <div class="TextSection-actions">
+                {% if has_link_1 %}
+                    <a class="Button" href="{{ block.linkUrl_1 }}">{{ block.linkText_1 }}</a>{% endif %}
+                {% if has_link_2 %}
+                    <a class="Button" href="{{ block.linkUrl_2 }}">{{ block.linkText_2 }}</a>{% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

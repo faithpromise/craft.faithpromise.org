@@ -1,0 +1,19 @@
+{% set items = craft.entries({
+section: 'events',
+relatedTo: block.ministry
+}) %}
+
+{% if items | length %}
+
+    {% embed '_layout/page_section.twig' with { 'block': block } %}
+        {% block body %}
+            {% include '_items/_cards.twig' with { 'items': items, 'compact': true } %}
+
+            <div class="Section-actions">
+                <a class="Button" href="/events">View All Events</a>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+
+{% endif %}

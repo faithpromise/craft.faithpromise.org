@@ -1,18 +1,22 @@
-{% set team = team is defined ? team : block['team'] is defined ? block.team[0] : false %}
+{% set title = title is defined ? title : block.title is defined ? block.title : '' %}
+{% set team  = team is defined ? team : block['team'] is defined ? block.team[0] : false %}
 
 {% if not team %}
-    {% exit %}
+
+    {% set members  = craft.entries.relatedTo(team) %}
+
+    {% if members|length %}
+
+        {% embed '_partials/section-default.twig' with { 'title' : title } %}
+            {% block text %}
+                {{ team.text }}
+            {% endblock %}
+            {% block body %}
+                {% include '_partials/staff-list.twig' %}
+            {% endblock %}
+
+        {% endembed %}
+
+    {% endif %}
+
 {% endif %}
-
-{% set members  = craft.entries.relatedTo(team) %}
-{% set title    = title is defined ? title : block.title is defined ? block.title : '' %}
-
-{% embed '_partials/section-default.twig' with { 'title' : title } %}
-    {% block text %}
-        {{ team.text }}
-    {% endblock %}
-    {% block body %}
-        {% include '_partials/staff-list.twig' %}
-    {% endblock %}
-
-{% endembed %}

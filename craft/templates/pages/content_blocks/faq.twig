@@ -1,0 +1,25 @@
+{% set section_class = 'Section--' ~ random(9999999) %}
+
+{% if block.questions|length %}
+
+    {% embed '_layout/page_section.twig' with { 'block': block } %}
+        {% block body %}
+            <div class="Faq">
+                <div class="Faq-list">
+                    {% for q in block.questions %}
+                        <label class="Faq-wrap">
+                            <input class="Faq-control" type="checkbox" checked>
+                            <div class="Faq-item">
+                                <div class="Faq-toggle"></div>
+                                <h3 class="Faq-title">{{ q.question }}</h3>
+                                <div class="Faq-text">{{ q.answer | markdown }}</div>
+                            </div>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+
+{% endif %}

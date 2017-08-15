@@ -1,0 +1,138 @@
+.Card {
+  @include link-colors-all($root-text-color);
+  display:        flex;
+  flex-direction: column;
+  height:         100%;
+  box-shadow:     0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  &:hover {
+    text-decoration: none;
+  }
+
+}
+
+.Card-body {
+  flex-grow: 1;
+  padding: 2em 2em 1em;
+}
+
+.Card-title {
+  @include fluid-type(320px, 22px, 420px, 30px);
+  margin:      0;
+  line-height: 1.4;
+}
+
+.Card-subtitle {
+  @include fluid-type(320px, 14px, 420px, 17px);
+  margin: 0;
+  color: $color-gray-dark;
+}
+
+.Card-text {
+  margin-top: 1em;
+  font-size:  calc-em(18px);
+}
+
+.Card-text svg {
+  height:         1.2em;
+  width:          1.2em;
+  fill:           currentColor;
+  vertical-align: middle;
+}
+
+.Card-footer {
+  padding: 0 2em 2em;
+}
+
+.Card-action {
+  @extend .link;
+  position:      relative;
+  display:       inline-block;
+  padding-right: calc-em(16px, 22px);
+  font-size:     calc-em(22px);
+  font-weight:   600;
+  line-height:   1.2; // Makes height 26px
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  // Arrow
+  &:after {
+    content:      '';
+    position:     absolute;
+    top:          calc-em(8px, 22px);
+    right:        0;
+    height:       calc-em(10px, 22px);
+    width:        calc-em(10px, 22px);
+    border-width: 3px 3px 0 0;
+    border-style: solid;
+    border-color: currentColor;
+    transform:    rotate(45deg);
+    transition:   right .1s ease-in-out;
+  }
+
+  .Card:hover &:after {
+    right: -8px;
+  }
+
+}
+
+// Compact version for smaller screens
+
+@media (max-width: calc-em($Cards-compact-end)) {
+
+  .Cards--compact {
+
+    .Card {
+      position:    relative;
+      min-height:  36.4583333vw;
+      user-select: none;
+    }
+
+    .Card-image {
+      position: absolute;
+      z-index:  -1;
+      top:      0;
+      bottom:   0;
+      left:     0;
+      right:    0;
+
+      &:after {
+        content:    '';
+        position:   absolute;
+        top:        0;
+        right:      0;
+        bottom:     0;
+        left:       0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      > img {
+        object-fit: cover;
+        height:     100%;
+        width:      100%;
+      }
+
+    }
+
+    .Card-body {
+      color:           #fff;
+      display:         flex;
+      justify-content: flex-end;
+      flex-direction:  column;
+      text-align:      right;
+    }
+
+    .Card-text,
+    .Card-footer {
+      display: none;
+    }
+
+    .Card-subtitle {
+      color: inherit;
+    }
+
+  }
+
+}

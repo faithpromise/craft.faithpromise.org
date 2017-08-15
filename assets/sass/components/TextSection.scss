@@ -1,0 +1,257 @@
+$Section-padding: ($spacing-triple * 2);
+$Section-text-max-width: 568px;
+$Section-align-at: 860px;
+
+$z-index-section: 1;
+$z-index-section-bg: 2;
+$z-index-section-overlay: 3;
+$z-index-section-container: 4;
+
+/*
+|--------------------------------------------------------------------------
+| General structure
+|--------------------------------------------------------------------------
+|
+| Here we define the structure of a section,
+| like dimensions, font sizes, etc.
+|
+*/
+
+// Padding
+
+.TextSection {
+  @include fluid-size(padding-top, 320px, 40px, 720px, $Section-padding);
+  @include fluid-size(padding-bottom, 320px, 40px, 720px, $Section-padding);
+  position:   relative;
+  z-index:    $z-index-section;
+  min-height: 35.2vw;
+}
+
+.TextSection-container {
+  @extend .Container;
+  position: relative;
+  z-index:  $z-index-section-container;
+}
+
+// Always limit copy text width
+
+.TextSection-copy {
+  max-width: calc-em(620px);
+}
+
+.TextSection-title {
+  @extend .h2;
+  margin:      0;
+  line-height: 1;
+}
+
+.TextSection-text {
+  @include fluid-type(320px, 18px, 1000px, 24px);
+  margin: 1em 0 0;
+}
+
+.TextSection-actions > .Button + .Button {
+  margin-left: .5em;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Text only - without accompanying video or image
+|--------------------------------------------------------------------------
+|
+| Here we will position the copy/text based on the specified alignment class.
+|
+*/
+
+.TextSection:not(.has-media) {
+
+  // Copy is centered by default - mobile first
+  // regardless of the specified alignment class.
+
+  .TextSection-copy {
+    margin-left:  auto;
+    margin-right: auto;
+  }
+
+  // Allow left and right alignment on larger screens
+
+  @media (min-width: calc-em($Section-align-at)) {
+
+    &.TextSection--left .TextSection-copy {
+      margin-left: 0;
+    }
+
+    &.TextSection--right .TextSection-copy {
+      margin-right: 0;
+    }
+
+  }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Accompanying Media (video or image)
+|--------------------------------------------------------------------------
+|
+| Video or image is placed alongside the text block. We need to position
+| the copy/text and the video/image depending on the screen size and
+| the specified alignment class.
+|
+*/
+
+.TextSection.has-media {
+
+  // Copy/text is centered by default
+
+  .TextSection-copy {
+    margin: 3em auto 0;
+  }
+
+  // Always limit the media width and center by default
+
+  .TextSection-media {
+    max-width: calc-em(720px);
+    margin:    0 auto;
+  }
+
+}
+
+// Larger screen
+
+@media (min-width: calc-em(1080px)) {
+
+  .TextSection--center.has-media {
+
+    .TextSection-media {
+      max-width: calc-em(720px);
+      margin:    0 auto;
+    }
+
+  }
+
+  // Left and right text alignment
+
+  .TextSection--left.has-media,
+  .TextSection--right.has-media {
+
+    & > .TextSection-container {
+      display:        flex;
+      flex-direction: row;
+    }
+
+    .TextSection-copy,
+    .TextSection-media {
+      width: 50%;
+    }
+
+    .TextSection-copy,
+    .TextSection-media {
+      margin: 0;
+    }
+
+  }
+
+  // Left text alignment
+
+  .TextSection--left.has-media {
+
+    & > .TextSection-container {
+      flex-direction: row-reverse;
+    }
+
+    & .TextSection-copy {
+      padding-right: 3em;
+    }
+
+  }
+
+  // Right text alignment
+
+  .TextSection--right.has-media .TextSection-copy {
+    padding-left: 3em;
+  }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Grey background
+|--------------------------------------------------------------------------
+*/
+
+.TextSection--grey {
+  background-color: $color-gray-lighter;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Background image
+|--------------------------------------------------------------------------
+*/
+
+.TextSection.has-bg {
+  color: #fff;
+
+  .Button {
+    @extend .Button--light;
+  }
+
+}
+
+.TextSection-background {
+  position:            absolute;
+  top:                 0;
+  right:               0;
+  bottom:              0;
+  left:                0;
+  z-index:             $z-index-section-bg;
+  background-position: center;
+
+  overflow:            hidden;
+
+  // Covered background image
+
+  .TextSection--cover > &,
+  .TextSection--coverFlip > & {
+    background-size: cover;
+  }
+
+  // Flipped background image
+
+  .TextSection--coverFlip > & {
+    transform: scale(-1, 1);
+  }
+
+}
+
+.TextSection-overlay {
+  position:         absolute;
+  z-index:          $z-index-section-overlay;
+  top:              0;
+  bottom:           0;
+  width:            100%;
+  height:           100%;
+  opacity:          .35;
+  background-color: #000;
+
+  // Background overlay - right and left alignment
+
+  @media (min-width: calc-em($Section-align-at)) {
+
+    width: 80%;
+
+    .TextSection--left > & {
+      left:       0;
+      background: linear-gradient(to right, rgba(0, 0, 0, .9) 50%, transparent 100%);
+    }
+
+    .TextSection--right > & {
+      right:      0;
+      left:       auto;
+      background: linear-gradient(to left, rgba(0, 0, 0, .9) 50%, transparent 100%);
+    }
+
+  }
+
+}
