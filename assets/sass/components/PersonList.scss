@@ -1,0 +1,19 @@
+.PersonList {
+  display:         flex;
+  flex-wrap:       wrap;
+  justify-content: center;
+  margin:          0 0 0 -1em;
+  padding:         0;
+  list-style:      none;
+}
+
+.PersonList-item {
+  margin-bottom: 3em;
+  padding-left:  1em;
+  width:         50%;
+  max-width:     240px;
+
+  @media (min-width: 45em) {
+    width: 33.33333%;
+  }
+}

@@ -1,0 +1,13 @@
+{% if items is defined and items|length %}
+    <ul class="PersonList">
+        {% for item in items %}
+
+            {% set template = '_items/' ~ item.section.handle  ~ '_item.twig' %}
+
+            <li class="PersonList-item">
+                {#TODO: Backup template generic_item.twig#}
+                {% include template with { 'item' : item } %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

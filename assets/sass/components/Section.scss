@@ -1,5 +1,5 @@
 $Section-padding: ($spacing-triple * 2) 0;
-$Section-text-max-width: 568px;
+$Section-text-max-width: 600px;
 //$Section-text-max-width: 720px;
 
 .Section {
@@ -19,7 +19,7 @@ $Section-text-max-width: 568px;
 }
 
 .Section-content {
-  margin-top: 3em;
+  margin-top: 6em;
 
   &:empty {
     display: none;
@@ -42,11 +42,20 @@ $Section-text-max-width: 568px;
   @include fluid-type(320px, 18px, 1000px, 24px);
   margin:     1em 0 0;
   text-align: center;
+  opacity:    .8;
+
+  &:empty {
+    display: none;
+  }
 }
 
 .Section-actions {
   margin-top: $spacing-double;
   text-align: center;
+
+  &:empty {
+    display: none;
+  }
 }
 
 .Section.has-bg-image {

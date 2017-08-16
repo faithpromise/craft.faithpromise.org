@@ -1,0 +1,24 @@
+{% set image = image is defined ? image : null %}
+{% set name  = name is defined ? name : '' %}
+{% set title = title is defined ? title : '' %}
+{% set url   = url is defined ? url : '' %}
+
+{% if url %}
+    {% set start_tag = '<a class="Person" href="' ~ url ~ '">' %}
+    {% set end_tag = '</a>' %}
+{% else %}
+    {% set start_tag = '<div class="Person">' %}
+    {% set end_tag = '</div>' %}
+{% endif %}
+
+{{ start_tag|raw }}
+<div class="Person-photo">
+    {% if image %}
+        <img src="{{ image.getUrl() }}">
+    {% else %}
+        <span class="Person-photoPlaceholder"></span>
+    {% endif %}
+</div>
+<span class="Person-name">{{ name }}</span>
+<span class="Person-title">{{ title }}</span>
+{{ end_tag|raw }}

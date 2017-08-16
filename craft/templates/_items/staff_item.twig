@@ -1,0 +1,8 @@
+{% set params = {
+'image': item.staffPhoto[0],
+'name': item.title,
+'title': item.jobTitle,
+'url': item['theUrl'] is defined and item.theUrl | length ? item.theUrl : item.getUrl(),
+} %}
+
+{% include '_items/_person.twig' with params %}

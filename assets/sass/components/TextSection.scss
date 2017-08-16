@@ -29,18 +29,21 @@ $z-index-section-container: 4;
 
 .TextSection-container {
   @extend .Container;
-  position: relative;
-  z-index:  $z-index-section-container;
+  //max-width: $Container-max-width;
+  //margin:    0 auto;
+  //padding:   0 calc-em(120px);
+  position:  relative;
+  z-index:   $z-index-section-container;
 }
 
 // Always limit copy text width
 
 .TextSection-copy {
-  max-width: calc-em(620px);
+  max-width: calc-em(560px);
 }
 
 .TextSection-title {
-  @extend .h2;
+  @extend .h3;
   margin:      0;
   line-height: 1;
 }
@@ -223,33 +226,55 @@ $z-index-section-container: 4;
     transform: scale(-1, 1);
   }
 
+  > img {
+    height:     100%;
+    width:      100%;
+    object-fit: cover;
+  }
+
 }
 
 .TextSection-overlay {
-  position:         absolute;
-  z-index:          $z-index-section-overlay;
-  top:              0;
-  bottom:           0;
-  width:            100%;
-  height:           100%;
-  opacity:          .35;
-  background-color: #000;
+
+  &,
+  &:before,
+  &:after {
+    content:  '';
+    position: absolute;
+    z-index:  $z-index-section-overlay;
+    top:      0;
+    bottom:   0;
+    width:    100%;
+    height:   100%;
+  }
+
+  &:before {
+    opacity:          .6;
+    background-color: #000;
+  }
 
   // Background overlay - right and left alignment
 
   @media (min-width: calc-em($Section-align-at)) {
 
-    width: 80%;
-
-    .TextSection--left > & {
-      left:       0;
-      background: linear-gradient(to right, rgba(0, 0, 0, .9) 50%, transparent 100%);
+    &:before {
+      opacity: .2;
     }
 
-    .TextSection--right > & {
+    &:after {
+      width:   90%;
+      opacity: .75;
+    }
+
+    .TextSection--left > &:after {
+      left:       0;
+      background: linear-gradient(to right, rgba(0, 0, 0, .75) 35%, transparent 100%);
+    }
+
+    .TextSection--right > &:after {
       right:      0;
       left:       auto;
-      background: linear-gradient(to left, rgba(0, 0, 0, .9) 50%, transparent 100%);
+      background: linear-gradient(to left, rgba(0, 0, 0, .75) 35%, transparent 100%);
     }
 
   }

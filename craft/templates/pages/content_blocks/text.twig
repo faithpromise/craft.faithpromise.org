@@ -13,18 +13,22 @@
 {% set klass = klass ~ (video_url ? ' has-media') %}
 {% set klass = klass ~ (bg_image ? ' has-bg') %}
 
-{% if bg_image %}
-    {% set sectionCss %}
-        .{{ section_class }} > .TextSection-background { background-image: url({{ bg_image.getUrl() }}); }
-        {# TODO: Responsive image sizes #}
-    {% endset %}
-    {% includeCss sectionCss %}
-{% endif %}
-
 <section class="{{ klass }} {{ section_class }}">
 
     {% if bg_image %}
-        <div class="TextSection-background"></div>
+        <div class="TextSection-background">
+            <img
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    sizes="100vw"
+                    srcset="
+                        {{ bg_image.url({ width: 1920 }) }} 1920w,
+                        {{ bg_image.url({ width: 1680 }) }} 1680w,
+                        {{ bg_image.url({ width: 1280 }) }} 1280w,
+                        {{ bg_image.url({ width: 800 }) }} 800w,
+                        {{ bg_image.url({ width: 480 }) }} 480w,
+                        {{ bg_image.url({ width: 320 }) }} 320w,
+                ">
+        </div>
         <div class="TextSection-overlay"></div>
     {% endif %}
 
