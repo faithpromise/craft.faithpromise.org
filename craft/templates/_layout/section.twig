@@ -1,0 +1,41 @@
+{% set linkUrl_1            = linkUrl_1 is defined ? linkUrl_1 : false %}
+{% set linkText_1           = linkText_1 is defined ? linkText_1 : false %}
+
+{% set linkUrl_2            = linkUrl_2 is defined ? linkUrl_2 : false %}
+{% set linkText_2           = linkText_2 is defined ? linkText_2 : false %}
+
+{% set stripedBackground    = stripedBackground is defined ? stripedBackground : false %}
+
+{% set title                = title is defined ? title : '' %}
+{% set text                 = text is defined ? text : '' %}
+
+{% set sectionId            = id is defined ? id : '' %}
+
+{# Build the CSS class #}
+{% set klass = 'Section' %}
+{% set klass = klass ~ (stripedBackground ? ' TextSection--striped') %}
+
+<section class="{{ klass }} {{ sectionId }}">
+
+    <div class="Section-container">
+
+        <div class="Section-copy">
+
+            <h2 class="Section-title">{{ title }}</h2>
+
+            <div class="Section-text">{{ text | markdown }}</div>
+
+            <div class="TextSection-actions">
+                {% if linkUrl_1 and linkText_1 %}
+                    <a class="Button" href="{{ block.linkUrl_1 }}">{{ block.linkText_1 }}</a>{% endif %}
+                {% if linkUrl_2 and linkText_2 %}
+                    <a class="Button" href="{{ block.linkUrl_2 }}">{{ block.linkText_2 }}</a>{% endif %}
+            </div>
+
+        </div>
+
+        <div class="Section-content">{% block body %}{% endblock %}</div>
+
+    </div>
+
+</section>

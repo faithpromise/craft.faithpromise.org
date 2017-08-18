@@ -1,0 +1,88 @@
+{% set linkUrl_1            = linkUrl_1 is defined ? linkUrl_1 : false %}
+{% set linkText_1           = linkText_1 is defined ? linkText_1 : false %}
+
+{% set linkUrl_2            = linkUrl_2 is defined ? linkUrl_2 : false %}
+{% set linkText_2           = linkText_2 is defined ? linkText_2 : false %}
+
+{% set align                = align is defined ? align : 'left' %}
+{% set stripedBackground    = stripedBackground is defined ? stripedBackground : false %}
+
+{% set title                = title is defined ? title : '' %}
+{% set text                 = text is defined ? text : '' %}
+{% set videoUrl             = videoUrl is defined ? videoUrl : false %}
+{% set image                = image is defined ? image : false %}
+{% set imageLayout          = imageLayout is defined ? imageLayout : 'default' %}
+
+{% set hasBgImage           = image and imageLayout == 'background' %}
+{% set hasFloatingImage     = image and imageLayout == 'floating' and not videoUrl %}
+{% set sectionId            = id is defined ? id : '' %}
+
+{# Build the CSS class #}
+{% set klass = 'TextSection TextSection--' ~ align %}
+{% set klass = klass ~ (videoUrl or hasFloatingImage ? ' has-media') %}
+{% set klass = klass ~ (hasBgImage ? ' has-bg') %}
+{% set klass = klass ~ (stripedBackground ? ' TextSection--striped') %}
+
+<section class="{{ klass }} {{ sectionId }}">
+
+    {% if hasBgImage %}
+        <div class="TextSection-background">
+            <img
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    sizes="100vw"
+                    srcset="
+                        {{ image.url({ width: 1920 }) }} 1920w,
+                        {{ image.url({ width: 1680 }) }} 1680w,
+                        {{ image.url({ width: 1280 }) }} 1280w,
+                        {{ image.url({ width: 800 }) }} 800w,
+                        {{ image.url({ width: 480 }) }} 480w,
+                        {{ image.url({ width: 320 }) }} 320w,
+                ">
+        </div>
+        <div class="TextSection-overlay"></div>
+    {% endif %}
+
+    <div class="TextSection-container">
+
+        {% if videoUrl or hasFloatingImage %}
+            <div class="TextSection-media">
+
+                {% if hasFloatingImage %}
+                    <img
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="100vw"
+                            srcset="
+                        {{ image.url({ width: 1920 }) }} 1920w,
+                        {{ image.url({ width: 1680 }) }} 1680w,
+                        {{ image.url({ width: 1280 }) }} 1280w,
+                        {{ image.url({ width: 800 }) }} 800w,
+                        {{ image.url({ width: 480 }) }} 480w,
+                        {{ image.url({ width: 320 }) }} 320w,
+                ">
+                {% endif %}
+
+                {% if videoUrl %}
+                    {% set videoSegments = videoUrl | split('/') %}
+                    {% set vimeoId = videoSegments | last %}
+                    {% set vimeoUrl = 'https://player.vimeo.com/video/' ~ vimeoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=false' %}
+                    <div class="VideoPlayer">
+                        <iframe src="{{ vimeoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="TextSection-copy">
+            <h2 class="TextSection-title">{{ title }}</h2>
+            <div class="TextSection-text">{{ text | markdown }}</div>
+            <div class="TextSection-actions">
+                {% if linkUrl_1 and linkText_1 %}
+                    <a class="Button" href="{{ linkUrl_1 }}">{{ linkText_1 }}</a>{% endif %}
+                {% if linkUrl_2 and linkText_2 %}
+                    <a class="Button" href="{{ linkUrl_2 }}">{{ linkText_2 }}</a>{% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</section>

@@ -1,8 +1,6 @@
-{% set section_class = 'Section--' ~ random(9999999) %}
-
 {% if block.questions|length %}
 
-    {% embed '_layout/page_section.twig' with { 'block': block } %}
+    {% embed '_layout/section.twig' with { params } %}
         {% block body %}
             <div class="Faq">
                 <div class="Faq-list">

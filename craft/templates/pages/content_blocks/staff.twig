@@ -5,16 +5,9 @@ relatedTo: block.team
 
 {% if items | length %}
 
-    {% embed '_layout/page_section.twig' with { 'block': block } %}
+    {% embed '_layout/section.twig' with params %}
         {% block body %}
-            <ul class="PersonList">
-                {% for item in items %}
-                    <li class="PersonList-item">
-                        {#TODO: Backup template generic_item.twig#}
-                        {% include '_items/staff_item.twig' with { 'item' : item } %}
-                    </li>
-                {% endfor %}
-            </ul>
+            {% include '_items/_person_list.twig' with { 'items': items } %}
         {% endblock %}
     {% endembed %}
 

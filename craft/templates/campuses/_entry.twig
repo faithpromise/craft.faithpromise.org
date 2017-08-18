@@ -1,7 +1,26 @@
+{% extends "_layout/layout.twig" %}
 
+{% set params = {
+    title: entry.title,
+    image: entry.campusPhoto[0]
+} %}
 
 {% block content %}
 
-Campus
+    {# Hero
+    ============================== #}
+    {% embed '_layout/hero.twig' with params %}
+        {% block text %}
+            {{ entry.intro }}
+        {% endblock %}
+    {% endembed %}
+
+    {# Hero
+    ============================== #}
+    {% embed '_layout/hero.twig' with params %}
+        {% block text %}
+            {{ entry.intro }}
+        {% endblock %}
+    {% endembed %}
 
 {% endblock %}

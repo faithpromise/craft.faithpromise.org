@@ -5,7 +5,7 @@ relatedTo: block.ministry
 
 {% if items | length %}
 
-    {% embed '_layout/page_section.twig' with { 'block': block } %}
+    {% embed '_layout/section.twig' with params %}
         {% block body %}
             {% include '_items/_cards.twig' with { 'items': items } %}
 
