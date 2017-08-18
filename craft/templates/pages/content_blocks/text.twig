@@ -1,32 +1,34 @@
-{% set has_link_1 = block['linkUrl_1'] is defined and block.linkUrl_1 %}
-{% set has_link_2 = block['linkUrl_2'] is defined and block.linkUrl_2 %}
-{% set align      = block['align'] is defined ? block.align : 'left' %}
-{% set bg_style   = block['bgStyle'] is defined ? block.bgStyle : 'default' %}
-
-{% set video_url  = block['videoUrl'] is defined and block.videoUrl | length ? block.videoUrl : false %}
-{% set bg_image   = block['bgImage'] is defined and block.bgImage | length ? block.bgImage[0] : false %}
-
-{% set section_class = 'TextSection--' ~ random(9999999) %}
+{% set has_link_1           = block['linkUrl_1'] is defined and block.linkUrl_1 %}
+{% set has_link_2           = block['linkUrl_2'] is defined and block.linkUrl_2 %}
+{% set align                = block['align'] is defined ? block.align : 'left' %}
+{% set striped_bg           = block['stripedBackground'] is defined ? block.stripedBackground : false %}
+{% set video_url            = block['videoUrl'] is defined and block.videoUrl | length ? block.videoUrl : false %}
+{% set image                = block['image'] is defined and block.image | length ? block.image[0] : false %}
+{% set image_layout         = block['imageLayout'] is defined ? block.imageLayout : 'default' %}
+{% set has_bg_image         = image and image_layout == 'background' %}
+{% set has_floating_image   = image and image_layout == 'floating' and not video_url %}
+{% set section_id           = 'matrix-block-' ~ block['id'] %}
 
 {# Build the CSS class #}
-{% set klass = 'TextSection TextSection--' ~ align ~ ' TextSection--' ~ bg_style %}
-{% set klass = klass ~ (video_url ? ' has-media') %}
-{% set klass = klass ~ (bg_image ? ' has-bg') %}
+{% set klass = 'TextSection TextSection--' ~ align %}
+{% set klass = klass ~ (video_url or has_floating_image ? ' has-media') %}
+{% set klass = klass ~ (has_bg_image ? ' has-bg') %}
+{% set klass = klass ~ (striped_bg ? ' TextSection--striped') %}
 
-<section class="{{ klass }} {{ section_class }}">
+<section class="{{ klass }} {{ section_id }}">
 
-    {% if bg_image %}
+    {% if has_bg_image %}
         <div class="TextSection-background">
             <img
                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                     sizes="100vw"
                     srcset="
-                        {{ bg_image.url({ width: 1920 }) }} 1920w,
-                        {{ bg_image.url({ width: 1680 }) }} 1680w,
-                        {{ bg_image.url({ width: 1280 }) }} 1280w,
-                        {{ bg_image.url({ width: 800 }) }} 800w,
-                        {{ bg_image.url({ width: 480 }) }} 480w,
-                        {{ bg_image.url({ width: 320 }) }} 320w,
+                        {{ image.url({ width: 1920 }) }} 1920w,
+                        {{ image.url({ width: 1680 }) }} 1680w,
+                        {{ image.url({ width: 1280 }) }} 1280w,
+                        {{ image.url({ width: 800 }) }} 800w,
+                        {{ image.url({ width: 480 }) }} 480w,
+                        {{ image.url({ width: 320 }) }} 320w,
                 ">
         </div>
         <div class="TextSection-overlay"></div>
@@ -34,14 +36,31 @@
 
     <div class="TextSection-container">
 
-        {% if video_url %}
+        {% if video_url or has_floating_image %}
             <div class="TextSection-media">
-                {% set videoSegments = block.videoUrl | split('/') %}
-                {% set vimeoId = videoSegments | last %}
-                {% set vimeoUrl = 'https://player.vimeo.com/video/' ~ vimeoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=false' %}
-                <div class="VideoPlayer">
-                    <iframe src="{{ vimeoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                </div>
+
+                {% if has_floating_image %}
+                    <img
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="100vw"
+                            srcset="
+                        {{ image.url({ width: 1920 }) }} 1920w,
+                        {{ image.url({ width: 1680 }) }} 1680w,
+                        {{ image.url({ width: 1280 }) }} 1280w,
+                        {{ image.url({ width: 800 }) }} 800w,
+                        {{ image.url({ width: 480 }) }} 480w,
+                        {{ image.url({ width: 320 }) }} 320w,
+                ">
+                {% endif %}
+
+                {% if video_url %}
+                    {% set videoSegments = block.videoUrl | split('/') %}
+                    {% set vimeoId = videoSegments | last %}
+                    {% set vimeoUrl = 'https://player.vimeo.com/video/' ~ vimeoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=false' %}
+                    <div class="VideoPlayer">
+                        <iframe src="{{ vimeoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+                {% endif %}
             </div>
         {% endif %}
 

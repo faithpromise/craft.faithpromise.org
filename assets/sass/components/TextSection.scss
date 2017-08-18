@@ -1,6 +1,9 @@
-$Section-padding: ($spacing-triple * 2);
-$Section-text-max-width: 568px;
+$Section-padding: 140px;
+$Section-text-max-width: $Container-max-width / 2 - $Container-padding-h;
 $Section-align-at: 860px;
+
+$Section-stack-float-to: 1199px;
+$Section-media-float-from: 1200px;
 
 $z-index-section: 1;
 $z-index-section-bg: 2;
@@ -9,37 +12,28 @@ $z-index-section-container: 4;
 
 /*
 |--------------------------------------------------------------------------
-| General structure
+| Text sections
 |--------------------------------------------------------------------------
 |
-| Here we define the structure of a section,
-| like dimensions, font sizes, etc.
+| There are several different options for layout
+|
+| - Text only
+| - Supporting image or video `.has-media`
+| - Background image `TextSection-background` div is present
 |
 */
-
-// Padding
 
 .TextSection {
   @include fluid-size(padding-top, 320px, 40px, 720px, $Section-padding);
   @include fluid-size(padding-bottom, 320px, 40px, 720px, $Section-padding);
-  position:   relative;
-  z-index:    $z-index-section;
-  min-height: 35.2vw;
+  position: relative;
+  z-index:  $z-index-section;
 }
 
 .TextSection-container {
   @extend .Container;
-  //max-width: $Container-max-width;
-  //margin:    0 auto;
-  //padding:   0 calc-em(120px);
-  position:  relative;
-  z-index:   $z-index-section-container;
-}
-
-// Always limit copy text width
-
-.TextSection-copy {
-  max-width: calc-em(560px);
+  position: relative;
+  z-index:  $z-index-section-container;
 }
 
 .TextSection-title {
@@ -51,10 +45,17 @@ $z-index-section-container: 4;
 .TextSection-text {
   @include fluid-type(320px, 18px, 1000px, 24px);
   margin: 1em 0 0;
+  color:  $color-gray-dark;
 }
 
 .TextSection-actions > .Button + .Button {
   margin-left: .5em;
+}
+
+// Limit width of copy by default
+
+.TextSection-copy {
+  max-width: calc-em($Section-text-max-width);
 }
 
 /*
@@ -68,6 +69,9 @@ $z-index-section-container: 4;
 
 .TextSection:not(.has-media) {
 
+  @include fluid-size(padding-top, 320px, 40px, 720px, $Section-padding * 1.5);
+  @include fluid-size(padding-bottom, 320px, 40px, 720px, $Section-padding * 1.5);
+
   // Copy is centered by default - mobile first
   // regardless of the specified alignment class.
 
@@ -79,6 +83,14 @@ $z-index-section-container: 4;
   // Allow left and right alignment on larger screens
 
   @media (min-width: calc-em($Section-align-at)) {
+
+    &.TextSection--center .TextSection-title {
+      text-align: center;
+    }
+
+    &.TextSection--center .TextSection-text {
+      text-align: center;
+    }
 
     &.TextSection--left .TextSection-copy {
       margin-left: 0;
@@ -111,68 +123,88 @@ $z-index-section-container: 4;
     margin: 3em auto 0;
   }
 
-  // Always limit the media width and center by default
+  // Always limit the media width and center by default on small screens
 
   .TextSection-media {
-    max-width: calc-em(720px);
-    margin:    0 auto;
+    max-width:  calc-em(720px);
+    margin:     0 auto;
+    text-align: center;
+  }
+
+  // Image max height
+
+  .TextSection-media > img {
+    max-height: calc-em(420px);
   }
 
 }
 
-// Larger screen
+// Smaller screens
 
-@media (min-width: calc-em(1080px)) {
+@media (max-width: calc-em($Section-stack-float-to)) {
 
-  .TextSection--center.has-media {
+  .TextSection.has-media .TextSection-title,
+  .TextSection.has-media .TextSection-actions {
+    margin-top: 2em;
+    text-align: center;
+  }
 
-    .TextSection-media {
+}
+
+// Larger screens should align media to left, right, or center
+
+@media (min-width: calc-em($Section-media-float-from)) {
+
+  .TextSection-copy,
+  .TextSection-media {
+    width:         50%;
+    padding-left:  2em;
+    padding-right: 2em;
+  }
+
+  .TextSection.has-media {
+
+    > .TextSection-container {
+      align-items: center;
+    }
+
+    // Center
+
+    &.TextSection--center .TextSection-media {
       max-width: calc-em(720px);
       margin:    0 auto;
     }
 
-  }
+    // Left and right text alignment
 
-  // Left and right text alignment
+    &.TextSection--left,
+    &.TextSection--right {
 
-  .TextSection--left.has-media,
-  .TextSection--right.has-media {
+      & > .TextSection-container {
+        display: flex;
+      }
 
-    & > .TextSection-container {
-      display:        flex;
-      flex-direction: row;
+      .TextSection-copy,
+      .TextSection-media {
+        margin: 0;
+      }
+
     }
 
-    .TextSection-copy,
-    .TextSection-media {
-      width: 50%;
+    // Left text alignment
+
+    &.TextSection--left {
+
+      & > .TextSection-container {
+        flex-direction: row-reverse;
+      }
+
     }
 
-    .TextSection-copy,
-    .TextSection-media {
-      margin: 0;
+    &.TextSection--right .TextSection-media {
+      text-align: right;
     }
 
-  }
-
-  // Left text alignment
-
-  .TextSection--left.has-media {
-
-    & > .TextSection-container {
-      flex-direction: row-reverse;
-    }
-
-    & .TextSection-copy {
-      padding-right: 3em;
-    }
-
-  }
-
-  // Right text alignment
-
-  .TextSection--right.has-media .TextSection-copy {
-    padding-left: 3em;
   }
 
 }
@@ -183,7 +215,7 @@ $z-index-section-container: 4;
 |--------------------------------------------------------------------------
 */
 
-.TextSection--grey {
+.TextSection--striped {
   background-color: $color-gray-lighter;
 }
 
@@ -194,7 +226,11 @@ $z-index-section-container: 4;
 */
 
 .TextSection.has-bg {
-  color: #fff;
+
+  &,
+  & .TextSection-text {
+    color: #fff;
+  }
 
   .Button {
     @extend .Button--light;
