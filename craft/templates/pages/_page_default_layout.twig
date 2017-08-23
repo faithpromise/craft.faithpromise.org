@@ -47,7 +47,7 @@
         id: 'matrix-block-' ~ block['id'],
         } %}
 
-        {% include 'pages/content_blocks/' ~ block.type ~ '.twig' ignore missing %}
+        {% include 'pages/blocks/' ~ block.type ~ '.twig' ignore missing %}
 
     {% endfor %}
 
