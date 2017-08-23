@@ -50,13 +50,7 @@
 .Card-text {
   margin-top: 1em;
   font-size:  calc-em(18px);
-}
-
-.Card-text svg {
-  height:         1.2em;
-  width:          1.2em;
-  fill:           currentColor;
-  vertical-align: middle;
+  color:      $color-gray-dark;
 }
 
 .Card-footer {

@@ -16,7 +16,15 @@
     {% if image %}
         <img src="{{ image.getUrl() }}">
     {% else %}
-        <span class="Person-photoPlaceholder"></span>
+        <img src="http://s3-us-west-2.amazonaws.com/faithpromise.org/common/profile-photo-female-1.jpg">
+        {#{% cache globally using key 'profile_photo_female_1' for 10 secs %}#}
+        {#{% set default_image = craft.assets({ filename: 'profile-photo-female-1.jpg' }) %}#}
+        {#{% if default_image | length %}#}
+            {#<img src="{{ default_image[0].getUrl() }}">#}
+        {#{% else %}#}
+            {#<span class="Person-photoPlaceholder"></span>#}
+        {#{% endif %}#}
+        {#{% endcache %}#}
     {% endif %}
 </div>
 <span class="Person-name">{{ name }}</span>

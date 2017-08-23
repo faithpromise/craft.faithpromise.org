@@ -267,5 +267,7 @@
 
         <script src="/build/main.js"></script>
 
+        {{ craft.querylog is defined ? (craft.querylog | raw) : '' }}
+
     </body>
 </html>

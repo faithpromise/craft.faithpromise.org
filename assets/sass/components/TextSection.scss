@@ -69,9 +69,6 @@ $z-index-section-container: 4;
 
 .TextSection:not(.has-media) {
 
-  @include fluid-size(padding-top, 320px, 40px, 720px, $Section-padding * 1.5);
-  @include fluid-size(padding-bottom, 320px, 40px, 720px, $Section-padding * 1.5);
-
   // Copy is centered by default - mobile first
   // regardless of the specified alignment class.
 
@@ -80,17 +77,22 @@ $z-index-section-container: 4;
     margin-right: auto;
   }
 
+  .TextSection-actions {
+    margin-top: 3em;
+  }
+
   // Allow left and right alignment on larger screens
 
   @media (min-width: calc-em($Section-align-at)) {
 
-    &.TextSection--center .TextSection-title {
+    &.TextSection--center .TextSection-title,
+    &.TextSection--center .TextSection-actions {
       text-align: center;
     }
 
-    &.TextSection--center .TextSection-text {
-      text-align: center;
-    }
+    //&.TextSection--center .TextSection-text {
+    //  text-align: center;
+    //}
 
     &.TextSection--left .TextSection-copy {
       margin-left: 0;
@@ -143,9 +145,12 @@ $z-index-section-container: 4;
 
 @media (max-width: calc-em($Section-stack-float-to)) {
 
+  .TextSection.has-media .TextSection-title {
+    margin-top: 2em;
+  }
+
   .TextSection.has-media .TextSection-title,
   .TextSection.has-media .TextSection-actions {
-    margin-top: 2em;
     text-align: center;
   }
 

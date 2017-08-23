@@ -1,3 +1,13 @@
-{% set campuses = craft.entries.section('campuses').find() %}
+{% set campuses = craft.entries({
+    section: 'campuses',
+    with: [
+    'campusPhoto',
+    'serviceTimes'
+]
+}) %}
 
-{% include '_items/_cards.twig' with { 'items': campuses, 'compact': true } %}
+{% embed '_layout/section.twig' with params %}
+    {% block body %}
+        {% include '_items/_cards.twig' with { 'items': campuses, 'compact': true } %}
+    {% endblock %}
+{% endembed %}

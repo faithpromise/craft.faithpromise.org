@@ -1,10 +1,12 @@
 {% extends "_layout/layout.twig" %}
 
+{% set page_image = entry.pageImage[0] ?? null %}
+
 {% block content %}
 
     {# Hero
     ============================== #}
-    {% embed '_layout/hero.twig' with { 'entry' : entry } %}
+    {% embed '_layout/hero.twig' with { 'image' : page_image } %}
         {% block text %}
             {{ entry.intro }}
         {% endblock %}
@@ -19,6 +21,15 @@
     {# CMS Content
     ============================== #}
 
+    {% set blocks = entry.pageContent.find({
+        with: [
+        'text:image',
+        'staff:team',
+        'events:ministry',
+        'blocks:blocks',
+    ]
+    }) %}
+
     {% for block in entry.pageContent %}
 
         {% set params = {
@@ -29,7 +40,7 @@
         linkUrl_1: block['linkUrl_2'] is defined ? block.linkUrl_2 : '',
         linkText_1: block['linkText_2'] is defined ? block.linkText_2 : '',
         align: block['align'] is defined ? block.align : 'left',
-        stripedBackground: block['stripedBackground'] is defined ? block.stripedBackground : false,
+        background: block['background'] is defined ? block.background : 'default',
         videoUrl: block['videoUrl'] is defined and block.videoUrl | length ? block.videoUrl : false,
         image: block['image'] is defined and block.image | length ? block.image[0] : false,
         imageLayout: block['imageLayout'] is defined ? block.imageLayout : 'default',

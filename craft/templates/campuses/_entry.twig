@@ -1,26 +1,117 @@
 {% extends "_layout/layout.twig" %}
 
-{% set params = {
-    title: entry.title,
-    image: entry.campusPhoto[0]
-} %}
+{#
+|--------------------------------------------------------------------------
+| Build out the service times
+|--------------------------------------------------------------------------
+#}
+
+{% set service_times = '' %}
+
+{% for day in entry.serviceTimes %}
+
+    {% if loop.index > 1 %}
+        {% set service_times = service_times ~ '<br>' %}
+    {% endif %}
+
+    {% set service_times = service_times ~ day.dayOfWeek.label ~ ' at ' %}
+
+    {% for time in day.times %}
+
+        {% if loop.index == 1 %}
+            {% set service_times = service_times ~ time.startTime|lower %}
+        {% elseif day.times|length == 2 %}
+            {% set service_times = service_times ~ ' & ' ~ time.startTime|lower %}
+        {% elseif day.times|length > 2 and loop.index == day.times|length %}
+            {% set service_times = service_times ~ ', & ' ~ time.startTime|lower %}
+        {% elseif day.times|length > 2 and loop.index < day.times|length %}
+            {% set service_times = service_times ~ ', ' ~ time.startTime|lower %}
+        {% endif %}
+
+        {% if time.hasSignLanguage %}
+            {% set service_times = service_times ~ ' <svg class="InlineIcon"><use xlink:href="/assets/icons.svg#asl"></use></svg> - ASL available' %}
+        {% endif %}
+
+    {% endfor %}
+
+{% endfor %}
 
 {% block content %}
 
-    {# Hero
-    ============================== #}
-    {% embed '_layout/hero.twig' with params %}
+    {#
+    |--------------------------------------------------------------------------
+    | Hero
+    |--------------------------------------------------------------------------
+    #}
+
+    {% embed '_layout/hero.twig' with { title: entry.title, image: entry.campusPhoto[0] } %}
         {% block text %}
             {{ entry.intro }}
         {% endblock %}
     {% endembed %}
 
-    {# Hero
-    ============================== #}
-    {% embed '_layout/hero.twig' with params %}
+    {#
+    |--------------------------------------------------------------------------
+    | Campus info
+    |--------------------------------------------------------------------------
+    #}
+
+    {% embed '_layout/text_section.twig' with { title: entry.title ~ ' Campus', align: 'center', linkUrl_1: entry.mapUrl, linkText_1: 'Get Directions' } %}
         {% block text %}
-            {{ entry.intro }}
+            <p>We'd love to see you this weekend at our {{ entry.title }} Campus. You'll experience contemporary worship and an engaging message from our Senior Pastor,
+                <span class="nowrap">Chris Stephens</span>.
+            </p>
+            <p>
+                <strong>Regular service times are:</strong><br>
+                {{ service_times | raw }}
+            </p>
+            <p>
+                Our {{ entry.title }} Campus is located at <span class="nowrap">{{ entry.address }}</span>,
+                <span class="nowrap">{{ entry.city }}, {{ entry.state }} {{ entry.zip }}</span>.
+            </p>
+            <p>Central office: (865) 251-2590</p>
         {% endblock %}
     {% endembed %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | What to expect
+    |--------------------------------------------------------------------------
+    |
+    | Blocks for worship, kids, stucents, etc
+    |
+    #}
+
+    {% embed '_layout/section.twig' with { title: 'What to Expect', stripedBackground: true } %}
+        {% block text %}
+            <p>When you come, the only thing we ask of you is simple... Relax. You're with friends. Whether you've never been to church before or you're a seasoned church veteran, you can anticipate an encouraging and enlightening experience.</p>
+        {% endblock %}
+        {% block body %}
+            {% include '_items/_cards.twig' with { 'items': craft.entries({ section: 'blocks', relatedTo: craft.tags.search('about').first(), with: 'image' }), compact: true } %}
+        {% endblock %}
+    {% endembed %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Staff
+    |--------------------------------------------------------------------------
+    |
+    | Blocks for worship, kids, stucents, etc
+    |
+    #}
+
+    {% set staff = craft.entries({ section: 'staff', relatedTo: entry, with: 'staffPhoto' }) %}
+
+    {% if staff | length %}
+        {% embed '_layout/section.twig' with { title: 'Meet the ' ~ entry.title ~ ' Staff', stripedBackground: false } %}
+            {% block text %}
+                <p>We couldn't do what we do without an amazing team of staff and volunteers. If you see a staff member while visiting the {{ entry.title }} Campus this weekend, be sure and introduce yourself. We'd love to meet you.</p>
+            {% endblock %}
+            {% block body %}
+                {% include '_items/_person_list.twig' with { 'items': staff } %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+
 
 {% endblock %}

@@ -23,7 +23,10 @@
 
             <h2 class="Section-title">{{ title }}</h2>
 
-            <div class="Section-text">{{ text | markdown }}</div>
+            <div class="Section-text">
+                {% block text %}{% endblock %} {# text block #}
+                {{ text | markdown }} {# text passed as param #}
+            </div>
 
             <div class="TextSection-actions">
                 {% if linkUrl_1 and linkText_1 %}

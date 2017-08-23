@@ -74,7 +74,10 @@
 
         <div class="TextSection-copy">
             <h2 class="TextSection-title">{{ title }}</h2>
-            <div class="TextSection-text">{{ text | markdown }}</div>
+            <div class="TextSection-text">
+                {% block text %}{% endblock %} {# text block #}
+                {{ text | markdown }} {# text passed as param #}
+            </div>
             <div class="TextSection-actions">
                 {% if linkUrl_1 and linkText_1 %}
                     <a class="Button" href="{{ linkUrl_1 }}">{{ linkText_1 }}</a>{% endif %}

@@ -16,3 +16,10 @@
 .body_text {
   @include fluid-type(320px, 18px, 1000px, 22px);
 }
+
+.InlineIcon {
+  height:         1.2em;
+  width:          1.2em;
+  fill:           currentColor;
+  vertical-align: middle;
+}

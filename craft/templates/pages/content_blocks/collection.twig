@@ -13,8 +13,4 @@
 {#
  # Wrap the collection in a page section
 #}
-{% embed '_layout/section.twig' with params %}
-    {% block body %}
-        {% include collection_template ignore missing %}
-    {% endblock %}
-{% endembed %}
+{% include collection_template ignore missing %}

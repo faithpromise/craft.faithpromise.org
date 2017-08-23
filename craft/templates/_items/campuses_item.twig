@@ -22,7 +22,7 @@
             {% endif %}
 
             {% if time.hasSignLanguage %}
-                {% set text = text ~ ' <svg><use xlink:href="/assets/icons.svg#asl"></use></svg> - ASL available' %}
+                {% set text = text ~ ' <svg class="InlineIcon"><use xlink:href="/assets/icons.svg#asl"></use></svg> - ASL available' %}
             {% endif %}
 
         {% endfor %}
@@ -30,7 +30,7 @@
     {% endfor %}
 
     {% set params = {
-    'image': item.campusPhoto[0],
+    'image': item.campusPhoto[0] ?? null,
     'title': item.area,
     'subtitle': item.title ~ ' Campus',
     'text': text,
