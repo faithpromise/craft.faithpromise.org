@@ -1,16 +1,6 @@
 {% extends "_layout/layout.twig" %}
 
-{% set page_image = entry.pageImage[0] ?? null %}
-
 {% block content %}
-
-    {# Hero
-    ============================== #}
-    {#{% embed '_layout/hero.twig' with { 'image' : page_image } %}#}
-        {#{% block text %}#}
-            {#{{ entry.intro }}#}
-        {#{% endblock %}#}
-    {#{% endembed %}#}
 
     {# Templates that extend this one
     can output content here
@@ -24,8 +14,8 @@
     {% for matrix_block in entry.pageContent %}
 
         {% set params = {
-        title: matrix_block.blockTitle,
-        text: matrix_block.text,
+        title: matrix_block['blockTitle'] is defined ? matrix_block.blockTitle : null,
+        text: matrix_block['text'] is defined ? matrix_block.text : null,
         linkUrl_1: matrix_block['linkUrl_1'] is defined ? matrix_block.linkUrl_1 : '',
         linkText_1: matrix_block['linkText_1'] is defined ? matrix_block.linkText_1 : '',
         linkUrl_1: matrix_block['linkUrl_2'] is defined ? matrix_block.linkUrl_2 : '',
