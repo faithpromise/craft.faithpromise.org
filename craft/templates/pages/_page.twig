@@ -1,5 +1,0 @@
-{#Load page specific template if it exists, otherwise load default layout#}
-
-{% set custom_template = 'pages/' ~ entry.slug ~ '.twig' %}
-
-{% include [custom_template, 'pages/_page_default_layout.twig'] %}

@@ -1,9 +1,0 @@
-{% if block.blocks | length %}
-
-    {% embed '_layout/section.twig' with params %}
-        {% block body %}
-            {% include '_items/_cards.twig' with { 'items': block.blocks, 'compact': true } %}
-        {% endblock %}
-    {% endembed %}
-
-{% endif %}

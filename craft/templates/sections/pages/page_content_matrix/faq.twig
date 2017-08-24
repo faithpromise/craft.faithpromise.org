@@ -1,10 +1,10 @@
-{% if block.questions|length %}
+{% if matrix_block.questions|length %}
 
     {% embed '_layout/section.twig' with params %}
         {% block body %}
             <div class="Faq">
                 <div class="Faq-list">
-                    {% for q in block.questions %}
+                    {% for q in matrix_block.questions %}
                         <label class="Faq-wrap">
                             <input class="Faq-control" type="checkbox" checked>
                             <div class="Faq-item">

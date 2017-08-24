@@ -1,7 +1,7 @@
 {% set text = '' %}
 
     {# Build out the service times #}
-    {% for day in item.serviceTimes %}
+    {% for day in entry_item.serviceTimes %}
 
         {% if loop.index > 1 %}
             {% set text = text ~ '<br>' %}
@@ -30,12 +30,12 @@
     {% endfor %}
 
     {% set params = {
-    'image': item.campusPhoto[0] ?? null,
-    'title': item.area,
-    'subtitle': item.title ~ ' Campus',
+    'image': entry_item.campusPhoto[0] ?? null,
+    'title': entry_item.area,
+    'subtitle': entry_item.title ~ ' Campus',
     'text': text,
-    'action_url': item.url,
+    'action_url': entry_item.url,
     'action_text': 'More Details'
     } %}
 
-{% include '_items/_card.twig' with params %}
+{% include '_layout/components/card.twig' with params %}

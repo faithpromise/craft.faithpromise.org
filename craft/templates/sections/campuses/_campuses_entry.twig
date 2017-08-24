@@ -87,7 +87,7 @@
             <p>When you come, the only thing we ask of you is simple... Relax. You're with friends. Whether you've never been to church before or you're a seasoned church veteran, you can anticipate an encouraging and enlightening experience.</p>
         {% endblock %}
         {% block body %}
-            {% include '_items/_cards.twig' with { 'items': craft.entries({ section: 'blocks', relatedTo: craft.tags.search('about').first(), with: 'image' }), compact: true } %}
+            {% include '_layout/components/entry_cards.twig' with { 'items': craft.entries({ section: 'blocks', relatedTo: craft.tags.search('about').first(), with: 'image' }), compact: true } %}
         {% endblock %}
     {% endembed %}
 
@@ -103,12 +103,12 @@
     {% set staff = craft.entries({ section: 'staff', relatedTo: entry, with: 'staffPhoto' }) %}
 
     {% if staff | length %}
-        {% embed '_layout/section.twig' with { title: 'Meet the ' ~ entry.title ~ ' Staff', stripedBackground: false } %}
+        {% embed '_layout/section.twig' with { title: entry.title ~ ' Staff', stripedBackground: false } %}
             {% block text %}
-                <p>We couldn't do what we do without an amazing team of staff and volunteers. If you see a staff member while visiting the {{ entry.title }} Campus this weekend, be sure and introduce yourself. We'd love to meet you.</p>
+                <p>If you see a staff member while visiting the {{ entry.title }} Campus, be sure and say, &quot;hi.&quot; We'd love to meet you!</p>
             {% endblock %}
             {% block body %}
-                {% include '_items/_person_list.twig' with { 'items': staff } %}
+                {% include '_layout/components/person_list.twig' with { 'items': staff } %}
             {% endblock %}
         {% endembed %}
     {% endif %}

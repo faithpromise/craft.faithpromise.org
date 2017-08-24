@@ -1,0 +1,9 @@
+{% if matrix_block.blocks | length %}
+
+    {% embed '_layout/section.twig' with params %}
+        {% block body %}
+            {% include '_layout/components/entry_cards.twig' with { 'entries': matrix_block.blocks, 'compact': true } %}
+        {% endblock %}
+    {% endembed %}
+
+{% endif %}

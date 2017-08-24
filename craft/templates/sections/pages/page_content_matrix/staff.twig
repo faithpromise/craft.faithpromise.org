@@ -1,0 +1,11 @@
+{% set entries = craft.entries({ section: 'staff', relatedTo: matrix_block.team }) %}
+
+{% if entries | length %}
+
+    {% embed '_layout/section.twig' with params %}
+        {% block body %}
+            {% include '_layout/components/person_list.twig' with { 'entries': entries } %}
+        {% endblock %}
+    {% endembed %}
+
+{% endif %}

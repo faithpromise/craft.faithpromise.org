@@ -1,0 +1,10 @@
+{% set params = {
+'image': entry_item.image[0] ?? null,
+'title': entry_item.title,
+'subtitle': entry_item.dateRange,
+'text': entry_item.excerpt,
+'action_url': entry_item['theUrl'] is defined and entry_item.theUrl | length ? entry_item.theUrl : entry_item.getUrl(),
+'action_text': entry_item.linkText | length ? entry_item.linkText : 'More Details'
+} %}
+
+{% include '_layout/components/card.twig' with params %}

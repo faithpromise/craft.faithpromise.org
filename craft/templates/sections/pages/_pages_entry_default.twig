@@ -1,0 +1,45 @@
+{% extends "_layout/layout.twig" %}
+
+{% set page_image = entry.pageImage[0] ?? null %}
+
+{% block content %}
+
+    {# Hero
+    ============================== #}
+    {% embed '_layout/hero.twig' with { 'image' : page_image } %}
+        {% block text %}
+            {{ entry.intro }}
+        {% endblock %}
+    {% endembed %}
+
+    {# Templates that extend this one
+    can output content here
+    ============================== #}
+
+    {% block page_content %}{% endblock %}
+
+    {# CMS Content
+    ============================== #}
+
+    {% for matrix_block in entry.pageContent %}
+
+        {% set params = {
+        title: matrix_block.blockTitle,
+        text: matrix_block.text,
+        linkUrl_1: matrix_block['linkUrl_1'] is defined ? matrix_block.linkUrl_1 : '',
+        linkText_1: matrix_block['linkText_1'] is defined ? matrix_block.linkText_1 : '',
+        linkUrl_1: matrix_block['linkUrl_2'] is defined ? matrix_block.linkUrl_2 : '',
+        linkText_1: matrix_block['linkText_2'] is defined ? matrix_block.linkText_2 : '',
+        align: matrix_block['align'] is defined ? matrix_block.align : 'left',
+        background: matrix_block['background'] is defined ? matrix_block.background : 'default',
+        videoUrl: matrix_block['videoUrl'] is defined and matrix_block.videoUrl | length ? matrix_block.videoUrl : false,
+        image: matrix_block['image'] is defined and matrix_block.image | length ? matrix_block.image[0] : false,
+        imageLayout: matrix_block['imageLayout'] is defined ? matrix_block.imageLayout : 'default',
+        id: 'matrix-block-' ~ matrix_block['id'],
+        } %}
+
+        {% include 'sections/pages/page_content_matrix/' ~ matrix_block.type ~ '.twig' ignore missing %}
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% if entries is defined and entries|length %}
+    <ul class="PersonList">
+        {% for entry_item in entries %}
+
+            {% set template = 'sections/' ~ entry_item.section.handle  ~ '/_' ~ entry_item.section.handle ~ '_item.twig' %}
+
+            <li class="PersonList-item">
+                {# TODO: Backup template generic_item.twig #}
+                {% include template ignore missing %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

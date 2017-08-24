@@ -1,14 +1,14 @@
 {% set klass = (compact is defined and compact) ? 'Cards Cards--compact' : 'Cards' %}
 
-{% if items is defined and items|length %}
+{% if entries is defined and entries|length %}
     <ul class="{{ klass }}">
-        {% for item in items %}
+        {% for entry_item in entries %}
 
-            {% set template = '_items/' ~ item.section.handle  ~ '_item.twig' %}
+            {% set template = 'sections/' ~ entry_item.section.handle  ~ '/_' ~ entry_item.section.handle  ~ '_item.twig' %}
 
             <li class="Cards-item">
                 {#TODO: Backup template generic_item.twig#}
-                {% include template with { 'item' : item } %}
+                {% include template ignore missing %}
             </li>
         {% endfor %}
     </ul>
