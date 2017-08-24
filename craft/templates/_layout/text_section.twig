@@ -5,7 +5,7 @@
 {% set linkText_2           = linkText_2 is defined ? linkText_2 : false %}
 
 {% set align                = align is defined ? align : 'left' %}
-{% set stripedBackground    = stripedBackground is defined ? stripedBackground : false %}
+{% set background           = background is defined ? background : 'default' %}
 
 {% set title                = title is defined ? title : '' %}
 {% set text                 = text is defined ? text : '' %}
@@ -18,10 +18,9 @@
 {% set sectionId            = id is defined ? id : '' %}
 
 {# Build the CSS class #}
-{% set klass = 'TextSection TextSection--' ~ align %}
+{% set klass = 'TextSection TextSection--' ~ align ~ ' TextSection--' ~ background %}
 {% set klass = klass ~ (videoUrl or hasFloatingImage ? ' has-media') %}
 {% set klass = klass ~ (hasBgImage ? ' has-bg') %}
-{% set klass = klass ~ (stripedBackground ? ' TextSection--striped') %}
 
 <section class="{{ klass }} {{ sectionId }}">
 

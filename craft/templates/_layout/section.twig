@@ -1,19 +1,19 @@
-{% set linkUrl_1            = linkUrl_1 is defined ? linkUrl_1 : false %}
-{% set linkText_1           = linkText_1 is defined ? linkText_1 : false %}
+{% set linkUrl_1     = linkUrl_1 is defined ? linkUrl_1 : false %}
+{% set linkText_1    = linkText_1 is defined ? linkText_1 : false %}
 
-{% set linkUrl_2            = linkUrl_2 is defined ? linkUrl_2 : false %}
-{% set linkText_2           = linkText_2 is defined ? linkText_2 : false %}
+{% set linkUrl_2     = linkUrl_2 is defined ? linkUrl_2 : false %}
+{% set linkText_2    = linkText_2 is defined ? linkText_2 : false %}
 
-{% set stripedBackground    = stripedBackground is defined ? stripedBackground : false %}
+{% set background    = background is defined ? background : 'default' %}
 
-{% set title                = title is defined ? title : '' %}
-{% set text                 = text is defined ? text : '' %}
+{% set title         = title is defined ? title : '' %}
+{% set text          = text is defined ? text : '' %}
 
-{% set sectionId            = id is defined ? id : '' %}
+{% set sectionId     = id is defined ? id : '' %}
 
 {# Build the CSS class #}
 {% set klass = 'Section' %}
-{% set klass = klass ~ (stripedBackground ? ' TextSection--striped') %}
+{% set klass = klass ~ (background ? ' Section--' ~ background) %}
 
 <section class="{{ klass }} {{ sectionId }}">
 

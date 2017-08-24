@@ -1,0 +1,35 @@
+{% set entries = craft.entries({ section: 'staff', with: 'staffPhoto' }) | group( 'ministries.first().slug' ) %}
+
+{% set teams = craft.categories.group('ministries').titles %}
+
+{% set is_odd = false %}
+
+{#{% include '_layout/text_section.twig' with params %}#}
+
+{% if entries | length %}
+
+    {% for team in teams %}
+
+        {% set members = entries['' ~ team.slug] | default([]) %}
+
+        {% if members | length %}
+
+            {% set team_params = {
+            title: team.title,
+            text: team.text,
+            background: is_odd ? 'gray' : 'default',
+            } %}
+
+            {% embed '_layout/section.twig' with team_params %}
+                {% block body %}
+                    {% include '_layout/components/person_list.twig' with { 'entries': members } %}
+                {% endblock %}
+            {% endembed %}
+
+            {% set is_odd = (not is_odd) %}
+
+        {% endif %}
+
+    {% endfor %}
+
+{% endif %}
