@@ -117,6 +117,12 @@ $z-index-section-container: 4;
 |
 */
 
+// Two media sections back to back - reduce vertical space between them.
+.TextSection--default.has-media + .TextSection--default.has-media,
+.TextSection--gray.has-media + .TextSection--gray.has-media {
+  padding-top: 0;
+}
+
 .TextSection.has-media {
 
   // Copy/text is centered by default
