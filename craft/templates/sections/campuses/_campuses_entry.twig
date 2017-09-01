@@ -2,41 +2,56 @@
 
 {#
 |--------------------------------------------------------------------------
-| Build out the service times
+| Regular service times
 |--------------------------------------------------------------------------
 #}
 
-{% set service_times = '' %}
+{#{% set service_time_entries = craft.entries.section('serviceSchedules').order('serviceScheduleEffectiveAt desc').relatedTo(entry) %}#}
+{% set regular_service_schedule = craft.entries({
+section: 'serviceSchedules',
+relatedTo: entry,
+serviceScheduleEffectiveAt: '<= ' ~ now,
+order: 'serviceScheduleEffectiveAt desc',
+}).first() %}
 
-{% for day in entry.serviceTimes %}
 
-    {% if loop.index > 1 %}
-        {% set service_times = service_times ~ '<br>' %}
-    {% endif %}
+{#
+|--------------------------------------------------------------------------
+| Future changes in service times
+|--------------------------------------------------------------------------
+#}
 
-    {% set service_times = service_times ~ day.dayOfWeek.label ~ ' at ' %}
+{% set future_service_schedule = craft.entries({
+section: 'serviceSchedules',
+relatedTo: entry,
+serviceScheduleEffectiveAt: '>= ' ~ now|date_modify('+5 days'),
+order: 'serviceScheduleEffectiveAt asc',
+}).first() %}
 
-    {% for time in day.times %}
 
-        {% if loop.index == 1 %}
-            {% set service_times = service_times ~ time.startTime|lower %}
-        {% elseif day.times|length == 2 %}
-            {% set service_times = service_times ~ ' & ' ~ time.startTime|lower %}
-        {% elseif day.times|length > 2 and loop.index == day.times|length %}
-            {% set service_times = service_times ~ ', & ' ~ time.startTime|lower %}
-        {% elseif day.times|length > 2 and loop.index < day.times|length %}
-            {% set service_times = service_times ~ ', ' ~ time.startTime|lower %}
-        {% endif %}
+{#
+|--------------------------------------------------------------------------
+| Global event
+|--------------------------------------------------------------------------
+#}
 
-        {% if time.hasSignLanguage %}
-            {% set service_times = service_times ~ ' <svg class="InlineIcon"><use xlink:href="/assets/icons.svg#asl"></use></svg> - ASL available' %}
-        {% endif %}
+{% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
-    {% endfor %}
 
-{% endfor %}
+{#
+|--------------------------------------------------------------------------
+| Regular events that have special service times
+|--------------------------------------------------------------------------
+|
+| https://craftcms.stackexchange.com/questions/12598/reverse-related-entries-with-matrix-field
+|
+#}
+
+{% set events = craft.entries({ type: 'event', relatedTo: { targetElement: entry, field: 'specialServiceTimes.campus' } }).order('expiryDate').find() %}
+
 
 {% block content %}
+
 
     {#
     |--------------------------------------------------------------------------
@@ -44,11 +59,110 @@
     |--------------------------------------------------------------------------
     #}
 
-    {% embed '_layout/hero.twig' with { title: entry.title, image: entry.campusPhoto[0] } %}
+    {% embed '_layout/hero.twig' with { title: entry.title ~ ' Campus', style: 'textOverlay', image: entry.campusImage[0] } %}
         {% block text %}
             {{ entry.intro }}
         {% endblock %}
     {% endembed %}
+
+
+    {#
+    |--------------------------------------------------------------------------
+    | Special Event
+    |--------------------------------------------------------------------------
+    #}
+
+    {% if (global_event and 1 == 2) %}
+
+        {% set global_event_days = global_event.specialServiceTimes.relatedTo(entry).find() %}
+        {% set global_event_title = global_event_days ? 'Special Service Times' : global_event.title %}
+
+        {% embed '_layout/text_section.twig' with {
+        title: global_event_title,
+        align: 'right',
+        image: global_event.featuredEventImage|length ? global_event.featuredEventImage[0] : null,
+        imageLayout: 'floating',
+        background: 'gray',
+        } %}
+            {% block text %}
+
+                {% if global_event_days|length == 0 %}
+                    <p>The {{ entry.title }} Campus will meet during our regular service times (see below).</p>
+                    {#<p>We will meet during our regular service times at the {{ entry.title }} Campus.</p>#}
+                    {#<p>During &quot;{{ global_event.title }}&quot; our {{ entry.title }} Campus will meet during our regular service times.</p>#}
+                {% else %}
+                    <p>The {{ entry.title }} Campus will have special service times on the following dates.</p>
+                    {#<p>During &quot;{{ global_event.title }}&quot; our {{ entry.title }} Campus will meet during the following service times.</p>#}
+                {% endif %}
+
+                {% include 'sections/campuses/special_service_times.twig' with { days: global_event_days } %}
+
+            {% endblock %}
+        {% endembed %}
+
+    {% endif %}
+
+
+    {#
+    |--------------------------------------------------------------------------
+    | Events
+    |--------------------------------------------------------------------------
+    #}
+
+    {% if (events|length) %}
+
+        {% set event = events[0] %}
+
+        {% set event_days = event.specialServiceTimes.relatedTo(entry).find() %}
+        {% set event_title = event_days ? 'Special Service Times' : event.title %}
+
+        {% embed '_layout/text_section.twig' with {
+        title: event.title,
+        subtitle: event.dateRange,
+        align: 'right',
+        image: event.eventImage|length ? event.eventImage[0] : null,
+        imageLayout: 'floating',
+        background: 'gray',
+        } %}
+            {% block text %}
+
+                {% if event_days|length == 0 %}
+                    <p>The {{ entry.title }} Campus will meet during our regular service times (see below).</p>
+                {% else %}
+                    <p>The {{ entry.title }} Campus will have special service times on the following dates.</p>
+                {% endif %}
+
+                {% include 'sections/campuses/special_service_times.twig' with { days: event_days } %}
+
+            {% endblock %}
+        {% endembed %}
+
+    {% endif %}
+
+
+    {#
+    |--------------------------------------------------------------------------
+    | Upcoming Service Time Changes
+    |--------------------------------------------------------------------------
+    #}
+
+    {% if (future_service_schedule) %}
+
+        {% embed '_layout/text_section.twig' with {
+        title: 'Beginning ' ~ future_service_schedule.serviceScheduleEffectiveAt|date('M j'),
+        align: 'right',
+        image: entry.campusImage|length ? entry.campusImage[0] : null,
+        imageLayout: 'floating',
+        background: 'gray',
+        } %}
+            {% block text %}
+                <p>Beginning {{ future_service_schedule.serviceScheduleEffectiveAt|date('M. j') }}, our weekly service times are changing at the {{ entry.title }} Campus to the following times. Please see below for current times.</p>
+                {% include 'sections/campuses/schedule.twig' with { schedule: future_service_schedule } %}
+            {% endblock %}
+        {% endembed %}
+
+    {% endif %}
+
 
     {#
     |--------------------------------------------------------------------------
@@ -56,22 +170,30 @@
     |--------------------------------------------------------------------------
     #}
 
-    {% embed '_layout/text_section.twig' with { title: entry.title ~ ' Campus', align: 'center', linkUrl_1: entry.mapUrl, linkText_1: 'Get Directions' } %}
+    {% set days_effective = date(now|date()).diff(date(regular_service_schedule.serviceScheduleEffectiveAt)).days %}
+
+    {% embed '_layout/text_section.twig' with {
+    title: (days_effective < 14 ? 'New' : 'Regular') ~ ' Service Times',
+    align: 'left',
+    image: entry.campusImage|length ? entry.campusImage[0] : null,
+    imageLayout: 'floating'
+    } %}
         {% block text %}
-            <p>We'd love to see you this weekend at our {{ entry.title }} Campus. You'll experience contemporary worship and an engaging message from our Senior Pastor,
-                <span class="nowrap">Chris Stephens</span>.
-            </p>
             <p>
-                <strong>Regular service times are:</strong><br>
-                {{ service_times | raw }}
+                Our
+                <span class="nowrap">{{ entry.title }} Campus</span> is located in {{ entry.area }} at {% if entry.mapUrl %}
+                <span class="nowrap"><a href="{{ entry.mapUrl }}">{{ entry.address }}</a></span>{% else %}
+                <span class="nowrap">{{ entry.address }}</span>{% endif %},
+                <span class="nowrap">{{ entry.city }}, {{ entry.state }} {{ entry.zip }}</span>. We'd love to see you this weekend!
             </p>
-            <p>
-                Our {{ entry.title }} Campus is located at <span class="nowrap">{{ entry.address }}</span>,
-                <span class="nowrap">{{ entry.city }}, {{ entry.state }} {{ entry.zip }}</span>.
-            </p>
-            <p>Central office: (865) 251-2590</p>
+
+            {% if regular_service_schedule %}
+                {% include 'sections/campuses/schedule.twig' with { schedule: regular_service_schedule } %}
+            {% endif %}
+
         {% endblock %}
     {% endembed %}
+
 
     {#
     |--------------------------------------------------------------------------
@@ -82,12 +204,12 @@
     |
     #}
 
-    {% embed '_layout/section.twig' with { title: 'What to Expect', stripedBackground: true } %}
+    {% embed '_layout/section.twig' with { title: 'What to Expect', background: 'gray' } %}
         {% block text %}
             <p>When you come, the only thing we ask of you is simple... Relax. You're with friends. Whether you've never been to church before or you're a seasoned church veteran, you can anticipate an encouraging and enlightening experience.</p>
         {% endblock %}
         {% block body %}
-            {% include '_layout/components/entry_cards.twig' with { 'items': craft.entries({ section: 'blocks', relatedTo: craft.tags.search('about').first(), with: 'image' }), compact: true } %}
+            {% include '_layout/components/entry_cards.twig' with { 'entries': craft.entries({ section: 'blocks', relatedTo: craft.tags.search('about').first(), with: 'image' }), compact: true } %}
         {% endblock %}
     {% endembed %}
 
@@ -103,12 +225,12 @@
     {% set staff = craft.entries({ section: 'staff', relatedTo: entry, with: 'staffPhoto' }) %}
 
     {% if staff | length %}
-        {% embed '_layout/section.twig' with { title: entry.title ~ ' Staff', stripedBackground: false } %}
+        {% embed '_layout/section.twig' with { title: entry.title ~ ' Staff', background: null } %}
             {% block text %}
                 <p>If you see a staff member while visiting the {{ entry.title }} Campus, be sure and say, &quot;hi.&quot; We'd love to meet you!</p>
             {% endblock %}
             {% block body %}
-                {% include '_layout/components/person_list.twig' with { 'items': staff } %}
+                {% include '_layout/components/person_list.twig' with { 'entries': staff } %}
             {% endblock %}
         {% endembed %}
     {% endif %}

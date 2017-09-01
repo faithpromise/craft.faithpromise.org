@@ -1,9 +1,11 @@
-{% set image       = image is defined ? image : null %}
-{% set title       = title is defined ? title : '' %}
-{% set subtitle    = subtitle is defined ? subtitle : '' %}
-{% set text        = text is defined ? text : '' %}
-{% set action_url  = action_url is defined ? action_url : '' %}
-{% set action_text = action_text is defined ? action_text : 'More Details' %}
+{% set image                    = image is defined ? image : null %}
+{% set secondary_image          = secondary_image is defined ? secondary_image : null %}
+{% set secondary_image_caption  = secondary_image_caption is defined ? secondary_image_caption : '' %}
+{% set title                    = title is defined ? title : '' %}
+{% set subtitle                 = subtitle is defined ? subtitle : '' %}
+{% set text                     = text is defined ? text : '' %}
+{% set action_url               = action_url is defined ? action_url : '' %}
+{% set action_text              = action_text is defined ? action_text : 'More Details' %}
 
 {% if action_url %}
     {% set start_tag = '<a class="Card" href="' ~ action_url ~ '">' %}
@@ -14,11 +16,19 @@
 {% endif %}
 
 {{ start_tag|raw }}
-{% if image %}
-    <div class="Card-image">
-        <img src="{{ image.getUrl() }}">
-    </div>
-{% endif %}
+
+<div class="Card-header">
+    {% if image %}
+        <img class="Card-image" src="{{ image.getUrl() }}">
+    {% endif %}
+    {% if secondary_image %}
+        <div class="Card-secondaryOverlay"></div>
+        <div class="Card-secondary">
+            <div class="Card-caption">{{ secondary_image_caption }}</div>
+            <img class="Card-secondaryImage" src="{{ secondary_image.getUrl() }}">
+        </div>
+    {% endif %}
+</div>
 <div class="Card-body">
     <h3 class="Card-title">{{ title }}</h3>
     <h4 class="Card-subtitle">{{ subtitle }}</h4>

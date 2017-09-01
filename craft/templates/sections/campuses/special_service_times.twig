@@ -1,0 +1,20 @@
+{% if days|length %}
+    <table class="ServiceTimes">
+        {% for block in days %}
+            <tr>
+                <td class="ServiceTimes-date">{{ block.date|date("l M. j") }}</td>
+                <td>
+                    {% for time in block.times %}
+                        <span class="ServiceTimes-time">{{ time.startTime|lower }}</span>
+                    {% endfor %}
+                    {% if block.times|length == 0 %}
+                        <span class="ServiceTimes-none">No Services</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        {% if days|length == 0 %}
+            <li>During each of our regular service times.</li>
+        {% endif %}
+    </table>
+{% endif %}

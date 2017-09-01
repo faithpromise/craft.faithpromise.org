@@ -1,0 +1,18 @@
+{#
+|--------------------------------------------------------------------------
+| Build out service times
+|--------------------------------------------------------------------------
+#}
+
+<table class="ServiceTimes">
+    {% for day in schedule.serviceTimes %}
+        <tr>
+            <td class="ServiceTimes-date">{{ day.dayOfWeek.label }}</td>
+            <td>
+                {% for time in day.times %}
+                    <span class="ServiceTimes-time">{{ time.startTime|date('g:i a') }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

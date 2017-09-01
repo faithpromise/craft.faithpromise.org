@@ -42,6 +42,12 @@ $z-index-section-container: 4;
   line-height: 1;
 }
 
+.TextSection-subtitle {
+  @include fluid-type(320px, 18px, 1000px, 24px);
+  margin:      .3em 0 0;
+  line-height: 1;
+}
+
 .TextSection-text {
   @include fluid-type(320px, 18px, 1000px, 24px);
   margin: 1em 0 0;

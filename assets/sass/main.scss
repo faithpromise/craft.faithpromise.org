@@ -1,18 +1,123 @@
 //@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto');
-
 // Variables & Mixins
 @import "variables/variables";
 @import "functions/functions";
 @import "mixins/mixins";
 @import "utilities/utilities";
-
 // Reset & Base Styles
 @import "normalize";
 @import "base/base";
-
 // Components
 @import "components/components";
 
 .body_text {
   @include fluid-type(320px, 18px, 1000px, 22px);
+}
+
+.ServiceTimes {
+
+  font-size:       1rem; // Who knows what context we're in
+
+  border-spacing:  0;
+  border-collapse: collapse;
+
+  td:first-child {
+    padding-right: calc-em(8px);
+  }
+
+}
+
+.ServiceTimes-date {
+  font-size:   calc-em(20px);
+  font-weight: 600;
+  line-height: 2.5em;
+}
+
+.ServiceTimes-time {
+  white-space:      nowrap;
+  display:          inline-block;
+  margin:           calc-em(4px) calc-em(8px) calc-em(4px) 0;
+  border:           2px solid #b9b9b9;
+  padding:          calc-em(8px) calc-em(12px);
+  border-radius:    4px;
+  background-color: #fff;
+}
+
+.ServiceTimes-none {
+  font-size: calc-em(20px);
+}
+
+.ServiceTimes--condensed {
+
+  .ServiceTimes-date {
+    font-size: calc-em(18px);
+  }
+
+  .ServiceTimes-time {
+    border-width: 1px;
+    font-size:    calc-em(14px);
+  }
+}
+
+$SpecialAd-height: 100px;
+
+.SpecialAd {
+  //height:        0;
+  padding-right: 2em;
+  color:         #fff;
+  opacity:       .5;
+  transition:    all .4s ease-in;
+
+  .show_global_event & {
+    right:   1em;
+    opacity: 1;
+  }
+}
+
+.SpecialAd--fixed {
+  position: fixed;
+  left:     1em;
+  right:    calc-em(-580px);
+  bottom:   1em;
+  z-index:  2;
+
+  > .SpecialAd-container {
+    position: absolute;
+    right:    0;
+    bottom:   0;
+  }
+}
+
+.SpecialAd-container {
+  @extend .link-unstyled;
+  display:          inline-flex;
+  max-width:        calc-em(580px);
+  //align-items:      center;
+  background-color: $color-gray-darkest;
+}
+
+.SpecialAd-image {
+  flex-shrink:         0;
+  width:               calc-em(200px);
+  background-size:     cover;
+  background-position: center;
+  > img {
+    font-size: $font-size;
+    height:    calc-em($SpecialAd-height);
+  }
+}
+
+.SpecialAd-content {
+  padding: 1.5em;
+}
+
+.SpecialAd-title {
+  margin:      0;
+  font-size:   calc-em(36px);
+  font-family: "bebas-neue", #{$font-family-titles};
+  font-weight: normal;
+}
+
+.SpecialAd-text {
+  margin: 0;
 }

@@ -1,41 +1,37 @@
-{% set text = '' %}
+{% set schedule = craft.entries({
+section: 'serviceSchedules',
+relatedTo: entry_item,
+serviceScheduleEffectiveAt: '<= ' ~ now,
+order: 'serviceScheduleEffectiveAt desc',
+}).first() %}
 
-    {# Build out the service times #}
-    {% for day in entry_item.serviceTimes %}
+{% set pastor = entry_item.campusPastor[0] ?? null %}
 
-        {% if loop.index > 1 %}
-            {% set text = text ~ '<br>' %}
-        {% endif %}
-
-        {% set text = text ~ day.dayOfWeek.label|slice(0, 3) ~ ' at ' %}
-
-        {% for time in day.times %}
-
-            {% if loop.index == 1 %}
-                {% set text = text ~ time.startTime|lower %}
-            {% elseif day.times|length == 2 %}
-                {% set text = text ~ ' & ' ~ time.startTime|lower %}
-            {% elseif day.times|length > 2 and loop.index == day.times|length %}
-                {% set text = text ~ ', & ' ~ time.startTime|lower %}
-            {% elseif day.times|length > 2 and loop.index < day.times|length %}
-                {% set text = text ~ ', ' ~ time.startTime|lower %}
-            {% endif %}
-
-            {% if time.hasSignLanguage %}
-                {% set text = text ~ ' <svg class="InlineIcon"><use xlink:href="/assets/icons.svg#asl"></use></svg> - ASL available' %}
-            {% endif %}
-
+{% set text %}
+    <p>The {{ entry_item.title }} Campus is located at {{ entry_item.address }} and meets weekly during the following times.</p>
+    <table class="ServiceTimes ServiceTimes--condensed" style="margin-bottom: 2em;">
+        {% for day in schedule.serviceTimes %}
+            <tr>
+                <td class="ServiceTimes-date">{{ day.dayOfWeek.label|slice(0, 3) }}</td>
+                <td>
+                    {% for time in day.times %}
+                        <span class="ServiceTimes-time">{{ time.startTime|date('g:i a') }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
         {% endfor %}
+    </table>
+{% endset %}
 
-    {% endfor %}
-
-    {% set params = {
-    'image': entry_item.campusPhoto[0] ?? null,
-    'title': entry_item.area,
-    'subtitle': entry_item.title ~ ' Campus',
-    'text': text,
-    'action_url': entry_item.url,
-    'action_text': 'More Details'
-    } %}
+{% set params = {
+'image': entry_item.campusImage[0] ?? null,
+'secondary_image': pastor and pastor.staffPhoto[0] ? pastor.staffPhoto[0] : null,
+'secondary_image_caption': pastor ? pastor.title ~ ', Campus Pastor' : null,
+'title': entry_item.area,
+'subtitle': entry_item.title ~ ' Campus',
+'text': text,
+'action_url': entry_item.url,
+'action_text': 'More Details'
+} %}
 
 {% include '_layout/components/card.twig' with params %}

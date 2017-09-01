@@ -17,31 +17,62 @@
  # http://craftcms.com/docs/routing
  #}
 
+{#
+|--------------------------------------------------------------------------
+| Get global event
+|--------------------------------------------------------------------------
+#}
+
+{% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
+
 {% extends "_layout/layout.twig" %}
 
 {% block content %}
 
-    <div id="Special" class="EventHero" style="background-image: url(/assets/temp.jpg)">
-        <div class="EventHero-fadeup"></div>
-        <div class="EventHero-container">
-            <div class="EventHero-content">
-                <h2 class="EventHero-title">&quot;At The Movies&quot;</h2>
-                <p class="EventHero-text">
-                    During our upcoming series, we’ll look at several popular movies, including Star Wars, Moana, and The Lion King. Drawing biblical principles out of each story, we'll see these movies in a whole new light.
-                </p>
-                <div class="EventHero-actions">
-                    <a class="Button EventHero-action" href="/"><span class="u-hide-lt-480">Times &amp; Locations</span><span class="u-hide-gte-480">Locations</span></a>
-                    <a class="Button EventHero-action" href="/">Watch Online</a>
+    {% if global_event %}
+
+        <div id="Special" class="EventHero" style="background-image: url(/assets/temp.jpg)">
+            <div class="EventHero-fadeup"></div>
+            <div class="EventHero-container">
+                <div class="EventHero-content">
+                    <h2 class="EventHero-title">&quot;{{ global_event.title }}&quot;</h2>
+                    <p class="EventHero-text">
+                        {{ global_event.excerpt }}
+                    </p>
+                    <div class="EventHero-actions">
+                        {% for action in global_event.actions %}
+                        <a class="Button EventHero-action" href="{{ action.theUrl }}"><span class="u-hide-lt-480">{{ action.text }}</span><span class="u-hide-gte-480">{{ action.text }}</span></a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    {% else %}
+
+        <div class="HeaderVideo">
+            <video autoplay loop muted preload>
+                <source src="http://elevationchurch.org/wp-content/uploads/2017/08/2017_Aug20_CuttingCorners_ECdotOrg_2.mp4" type="video/mp4">
+            </video>
+            <div class="TextSection-overlay"></div>
+
+            <div class="HeaderVideo-container">
+                <div class="HeaderVideo-title">Real People. Real Problems. Real Love.</div>
+                <div class="HeaderVideo-actions">
+                    <a class="Button" href="/locations">Find a Location</a>
+                    <a class="Button" href="http://online.faithpromise.org">Watch Online</a>
+                </div>
+            </div>
+
+        </div>
+
+    {% endif %}
 
     <div class="ImageCards">
         <div class="ImageCards-container">
             <ul class="ImageCards-list">
                 <li class="ImageCards-row">
-                    <a class="ImageCards-item">
+                    <a class="ImageCards-item" href="/sermons">
                         <img class="ImageCards-image" src="http://faithpromise.192.168.10.10.xip.io/images/series/at-the-movies-tall.jpg">
                         <span class="ImageCards-link" href="/">
                     Latest Sermon
@@ -49,7 +80,7 @@
                     </a>
                 </li>
                 <li class="ImageCards-row">
-                    <a class="ImageCards-item">
+                    <a class="ImageCards-item" href="/events">
                         <img class="ImageCards-image" src="http://faithpromise.192.168.10.10.xip.io/images/pages/events-tall.jpg">
                         <span class="ImageCards-link" href="/">
                     News &amp; Events

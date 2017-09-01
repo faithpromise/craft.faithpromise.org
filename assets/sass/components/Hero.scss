@@ -1,5 +1,6 @@
 
 .Hero {
+  position:            relative;
   height:              56.25vw;
   background-position: center;
   background-size:     cover;
@@ -7,6 +8,38 @@
   @media (min-width: calc-em(1200px)) {
     height: 36.4583333vw;
   }
+
+}
+
+.Hero--textOverlay {
+  padding-top:      84px; // TODO: Same height as nav
+  background-color: $color-gray-darker;
+  color:            #fff;
+}
+
+.Hero--textOverlay > .Hero-overlay {
+  position:         absolute;
+  z-index:          1;
+  top:              0;
+  bottom:           0;
+  width:            100%;
+  height:           100%;
+  opacity:          .6;
+  background-color: #000;
+}
+
+.Hero-container {
+  position:        relative;
+  z-index:         2;
+  display:         flex;
+  flex-direction:  column;
+  justify-content: center;
+  align-items:     center;
+  height:          100%;
+}
+
+.Hero-title {
+  font-family: "bebas-neue", #{$font-family-titles};
 }
 
 /* ======================================================================== */

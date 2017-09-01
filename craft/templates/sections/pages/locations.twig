@@ -1,0 +1,3 @@
+{% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
+
+{% include 'sections/pages/_pages_entry_default.twig' %}

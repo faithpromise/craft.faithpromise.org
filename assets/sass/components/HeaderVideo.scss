@@ -1,19 +1,57 @@
 .HeaderVideo {
 
   position:       relative;
+  z-index:        1;
   height:         0;
   padding-bottom: 36.4583333%;
   //padding-bottom: 56.25%;
   overflow:       hidden;
+  color:          #fff;
+}
 
-  > video {
-    position:   absolute;
-    top:        0;
-    right:      0;
-    bottom:     0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    object-fit: cover;
-  }
+.HeaderVideo .Button {
+  @extend .Button--light;
+}
+
+.HeaderVideo-actions > .Button + .Button {
+  margin-left: .5em;
+}
+
+.HeaderVideo-container {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  height:          100%;
+}
+
+.HeaderVideo > video,
+.HeaderVideo > .HeaderVideo-overlay,
+.HeaderVideo > .HeaderVideo-container {
+  position: absolute;
+  z-index:  2;
+  top:      0;
+  right:    0;
+  bottom:   0;
+  left:     0;
+  height:   100%;
+  width:    100%;
+}
+
+.HeaderVideo > video {
+  object-fit:      cover;
+  object-position: top center;
+}
+
+.HeaderVideo-overlay {
+  opacity:          .6;
+  background-color: #000;
+}
+
+.HeaderVideo-title {
+  font-size: calc-em(40px);
+}
+
+.HeaderVideo-actions {
+  margin-top: 3em;
 }
