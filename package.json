@@ -1,21 +1,20 @@
 {
-  "name": "faithpromise.org",
+  "name": "craft2.faithpromise.org",
   "version": "1.0.0",
-  "description": "Website for Faith Promise Church",
-  "main": "index.js",
+  "description": "Welcome to Craft CMS!",
+  "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.0.3",
-    "gulp-rev": "^7.1.2",
-    "gulp-sourcemaps": "^2.4.1",
-    "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.8",
-    "gulp-watch": "^4.3.11",
-    "yargs": "^7.0.1"
+    "axios": "^0.16.2",
+    "laravel-mix": "^1.4.2",
+    "vue": "^2.4.2"
   }
 }
