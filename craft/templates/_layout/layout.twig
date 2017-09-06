@@ -10,7 +10,15 @@
         <!-- TODO: Canonical URL -->
 
         <link rel="canonical" href="">
+
         <!-- TODO: Apple icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
+        <meta name="application-name" content="Faith Promise Church">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/assets/favicons/mstile-144x144.png">
 
         <!-- TODO: Social tags (see old site) -->
 
@@ -19,7 +27,7 @@
         <script>try {Typekit.load({ async: false });} catch (e) {}</script>
 
         <!-- TODO: Stylesheet -->
-        <link rel="stylesheet" href="/build/main.css">
+        <link rel="stylesheet" href="{{ '/build/main.css' | cacheBuster }}">
         {{ getHeadHtml() }}
 
         <link rel="home" href="{{ siteUrl }}">
