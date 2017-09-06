@@ -5,6 +5,12 @@ use Cake\Utility\Hash as Hash;
 
 class EntryFeedMeElementType extends BaseFeedMeElementType
 {
+    // Properties
+    // =========================================================================
+
+    private $_requiredFields = array();
+
+
     // Templates
     // =========================================================================
 
@@ -16,6 +22,11 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
     public function getColumnTemplate()
     {
         return 'feedme/_includes/elements/entry/column';
+    }
+
+    public function getMappingTemplate()
+    {
+        return 'feedme/_includes/elements/entry/map';
     }
 
 
@@ -48,6 +59,18 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
             $element->locale = $settings['locale'];
         }
 
+        // While we're at it - save a list of required fields for later. We only want to do this once
+        // per import, and its vital when importing into specific locales
+        $entryType = craft()->sections->getEntryTypeById($element->typeId);
+
+        $this->_requiredFields = craft()->db->createCommand()
+            ->select('f.id, f.handle')
+            ->from('fieldlayoutfields flf')
+            ->join('fields f', 'flf.fieldId = f.id')
+            ->where('flf.layoutId = :layoutId', array(':layoutId' => $entryType->fieldLayoutId))
+            ->andWhere('flf.required = 1')
+            ->queryAll();
+
         return $element;
     }
 
@@ -72,7 +95,8 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
     {
         foreach ($settings['fieldUnique'] as $handle => $value) {
             if ((int)$value === 1) {
-                $feedValue = Hash::get($data, $handle . '.data', $data[$handle]);
+                $feedValue = Hash::get($data, $handle);
+                $feedValue = Hash::get($data, $handle . '.data', $feedValue);
 
                 // Special-case for Title which can be dynamic
                 if ($handle == 'title') {
@@ -85,14 +109,27 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
                     }
                 }
 
+                if ($handle == 'postDate' || $handle == 'expiryDate') {
+                    $feedValue = FeedMeDateHelper::getDateTimeString($feedValue);
+                }
+
                 if ($feedValue) {
                     $criteria->$handle = DbHelper::escapeParam($feedValue);
+                } else {
+                    FeedMePlugin::log('Entry: no data for `' . $handle . '` to match an existing element on. Is data present for this in your feed?', LogLevel::Error, true);
+                    return false;
                 }
             }
         }
 
         // Check to see if an element already exists - interestingly, find()[0] is faster than first()
-        return $criteria->find();
+        $elements = $criteria->find();
+
+        if (count($elements)) {
+            return $elements[0];
+        }
+
+        return null;
     }
 
     public function delete(array $elements)
@@ -100,36 +137,56 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
         return craft()->entries->deleteEntry($elements);
     }
 
+    public function disable(array $elements)
+    {
+        // Mark all as false
+        $elementIds = array();
+
+        foreach ($elements as $element) {
+            $elementIds[] = $element->id;
+        }
+
+        return craft()->db->createCommand()->update('elements', array('enabled' => 0), array('in', 'id', $elementIds));
+    }
+
     public function prepForElementModel(BaseElementModel $element, array &$data, $settings)
     {
         $checkAncestors = !isset($data['parentId']);
-
-        if (isset($settings['locale'])) {
-            $element->localeEnabled = true;
-        }
 
         foreach ($data as $handle => $value) {
             if (is_null($value)) {
                 continue;
             }
 
-            if (isset($value['data']) && $value['data'] === '') {
+            if (isset($value['data']) && $value['data'] === null) {
                 continue;
+            }
+
+            if (is_array($value)) {
+                $dataValue = Hash::get($value, 'data', null);
+            } else {
+                $dataValue = $value;
+            }
+
+            // Check for any Twig shorthand used
+            if (is_string($dataValue)) {
+                $objectModel = $this->getObjectModel($data);
+                $dataValue = craft()->templates->renderObjectTemplate($dataValue, $objectModel);
             }
 
             switch ($handle) {
                 case 'id';
-                    $element->$handle = $value['data'];
+                    $element->$handle = $dataValue;
                     break;
                 case 'authorId';
-                    $element->$handle = $this->_prepareAuthorForElement($value['data']);
+                    $element->$handle = $this->prepareAuthorForElement($dataValue);
                     break;
                 case 'slug';
-                    $element->$handle = ElementHelper::createSlug($value['data']);
+                    $element->$handle = ElementHelper::createSlug($dataValue);
                     break;
                 case 'postDate':
                 case 'expiryDate';
-                    $dateValue = $this->_prepareDateForElement($value['data']);
+                    $dateValue = FeedMeDateHelper::parseString($dataValue);
 
                     // Ensure there's a parsed data - null will auto-generate a new date
                     if ($dateValue) {
@@ -138,10 +195,11 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
 
                     break;
                 case 'enabled':
-                    $element->$handle = (bool)$value['data'];
+                case 'localeEnabled':
+                    $element->$handle = (bool)$dataValue;
                     break;
                 case 'title':
-                    $element->getContent()->$handle = $value['data'];
+                    $element->getContent()->$handle = $dataValue;
                     break;
                 case 'parent':
                     $element->parentId = $this->_prepareParentForElement($value, $element->sectionId);
@@ -170,7 +228,10 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
     {
         // Are we targeting a specific locale here? If so, we create an essentially blank element
         // for the primary locale, and instead create a locale for the targeted locale
-        if (isset($settings['locale'])) {
+        if (isset($settings['locale']) && $settings['locale']) {
+            // While we want to create a blank primary locale, we need to check for required fields..
+            $this->_populateRequiredFields($element, $data);
+
             // Save the default locale element empty
             if (craft()->entries->saveEntry($element)) {
                 // Now get the successfully saved (empty) element, and set content on that instead
@@ -178,7 +239,15 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
                 $elementLocale->setContentFromPost($data);
 
                 // Save the locale entry
-                return craft()->entries->saveEntry($elementLocale);
+                if (craft()->entries->saveEntry($elementLocale)) {
+                    return true;
+                } else {
+                    if ($elementLocale->getErrors()) {
+                        throw new Exception(json_encode($elementLocale->getErrors()));
+                    } else {
+                        throw new Exception(Craft::t('Unknown Element error occurred.'));
+                    }
+                }
             } else {
                 if ($element->getErrors()) {
                     throw new Exception(json_encode($element->getErrors()));
@@ -202,37 +271,37 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
     // Private Methods
     // =========================================================================
 
-    private function _prepareDateForElement($date)
+    private function _populateRequiredFields($element, $feedData)
     {
-        $craftDate = null;
+        $requiredContent = array();
 
-        if (!is_array($date)) {
-            $d = date_parse($date);
-            $date_string = date('Y-m-d H:i:s', mktime($d['hour'], $d['minute'], $d['second'], $d['month'], $d['day'], $d['year']));
+        // This is called when importing into a specific locale. We first save the primary element - but, we need to
+        // populate any required fields for the original locale, otherwise it'll fail to save at all...
+        foreach ($this->_requiredFields as $row) {
+            $handle = $row['handle'];
 
-            $craftDate = DateTime::createFromString($date_string, craft()->timezone);
-        }
+            $data = Hash::get($feedData, $handle);
 
-        return $craftDate;
-    }
+            // Check if this element already has content for this field - no need to add otherwise
+            $existingData = $element->getFieldValue($handle);
 
-    private function _prepareAuthorForElement($author)
-    {
-        if (!is_numeric($author)) {
-            $criteria = craft()->elements->getCriteria(ElementType::User);
-            $criteria->search = $author;
-            $authorUser = $criteria->first();
-            
-            if ($authorUser) {
-                $author = $authorUser->id;
+            // Some special cases for element fields
+            if ($existingData instanceof ElementCriteriaModel) {
+                $existingData = $existingData->ids();
+            }
+
+            // If there's existing data, don't overwrite from our feed, priority is existing content
+            if (is_null($existingData) || count($existingData) == 0) {
+                $requiredContent[$handle] = $data;
             } else {
-                $user = craft()->users->getUserByUsernameOrEmail($author);
-                $author = $user ? $user->id : 1;
+                $requiredContent[$handle] = $existingData;
             }
         }
 
-        return $author;
-    }
+        if (count($requiredContent)) {
+            $element->setContentFromPost($requiredContent);
+        }
+    }    
 
     private function _prepareParentForElement($fieldData, $sectionId)
     {

@@ -18,6 +18,11 @@ class CategoryFeedMeElementType extends BaseFeedMeElementType
         return 'feedme/_includes/elements/category/column';
     }
 
+    public function getMappingTemplate()
+    {
+        return 'feedme/_includes/elements/category/map';
+    }
+
 
     // Public Methods
     // =========================================================================
@@ -57,16 +62,26 @@ class CategoryFeedMeElementType extends BaseFeedMeElementType
     {
         foreach ($settings['fieldUnique'] as $handle => $value) {
             if ((int)$value === 1) {
-                $feedValue = Hash::get($data, $handle . '.data', $data[$handle]);
+                $feedValue = Hash::get($data, $handle);
+                $feedValue = Hash::get($data, $handle . '.data', $feedValue);
 
                 if ($feedValue) {
                     $criteria->$handle = DbHelper::escapeParam($feedValue);
+                } else {
+                    FeedMePlugin::log('Category: no data for `' . $handle . '` to match an existing element on. Is data present for this in your feed?', LogLevel::Error, true);
+                    return false;
                 }
             }
         }
 
         // Check to see if an element already exists - interestingly, find()[0] is faster than first()
-        return $criteria->find();
+        $elements = $criteria->find();
+
+        if (count($elements)) {
+            return $elements[0];
+        }
+
+        return null;
     }
 
     public function delete(array $elements)
@@ -76,23 +91,40 @@ class CategoryFeedMeElementType extends BaseFeedMeElementType
     
     public function prepForElementModel(BaseElementModel $element, array &$data, $settings)
     {
-        if (isset($settings['locale'])) {
-            $element->localeEnabled = true;
-        }
-
         foreach ($data as $handle => $value) {
+            if (is_null($value)) {
+                continue;
+            }
+
+            if (isset($value['data']) && $value['data'] === null) {
+                continue;
+            }
+
+            if (is_array($value)) {
+                $dataValue = Hash::get($value, 'data', null);
+            } else {
+                $dataValue = $value;
+            }
+
+            // Check for any Twig shorthand used
+            if (is_string($dataValue)) {
+                $objectModel = $this->getObjectModel($data);
+                $dataValue = craft()->templates->renderObjectTemplate($dataValue, $objectModel);
+            }
+
             switch ($handle) {
                 case 'id';
-                    $element->$handle = $value['data'];
+                    $element->$handle = $dataValue;
                     break;
                 case 'slug':
-                    $element->$handle = ElementHelper::createSlug($value['data']);
+                    $element->$handle = ElementHelper::createSlug($dataValue);
                     break;
-                //case 'parent':
-                    //$element->parent = $this->_findParent($value);
-                    //break;
                 case 'title':
-                    $element->getContent()->$handle = $value['data'];
+                    $element->getContent()->$handle = $dataValue;
+                    break;
+                case 'enabled':
+                case 'localeEnabled':
+                    $element->$handle = (bool)$dataValue;
                     break;
                 default:
                     continue 2;
@@ -109,7 +141,7 @@ class CategoryFeedMeElementType extends BaseFeedMeElementType
     {
         // Are we targeting a specific locale here? If so, we create an essentially blank element
         // for the primary locale, and instead create a locale for the targeted locale
-        if (isset($settings['locale'])) {
+        if (isset($settings['locale']) && $settings['locale']) {
             // Save the default locale element empty
             if (craft()->categories->saveCategory($element)) {
                 // Now get the successfully saved (empty) element, and set content on that instead
@@ -117,7 +149,15 @@ class CategoryFeedMeElementType extends BaseFeedMeElementType
                 $elementLocale->setContentFromPost($data);
 
                 // Save the locale entry
-                return craft()->categories->saveCategory($elementLocale);
+                if (craft()->categories->saveCategory($elementLocale)) {
+                    return true;
+                } else {
+                    if ($elementLocale->getErrors()) {
+                        throw new Exception(json_encode($elementLocale->getErrors()));
+                    } else {
+                        throw new Exception(Craft::t('Unknown Element error occurred.'));
+                    }
+                }
             } else {
                 if ($element->getErrors()) {
                     throw new Exception(json_encode($element->getErrors()));

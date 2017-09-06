@@ -17,15 +17,13 @@ class FeedMe_License
     private $_model;
     private $_allowRedirects = true;
     private $_userAgent;
-    private $_connectTimeout = 2;
+    private $_connectTimeout = 30;
 
     // Public Methods
     // =========================================================================
 
     public function __construct($endpoint, $product, $productVersion, $licenseKey = '')
     {
-        $timeout = 30;
-        $connectTimeout = 2;
         $this->requestProduct = $product;
         $this->requestVersion = $productVersion;
 
@@ -60,79 +58,41 @@ class FeedMe_License
         $this->_userAgent = 'Craft/' . $version;
     }
 
-    /**
-     * The maximum number of seconds to allow for an entire transfer to take place before timing out.  Set 0 to wait
-     * indefinitely.
-     *
-     * @return int
-     */
     public function getTimeout()
     {
         return $this->_timeout;
     }
 
-    /**
-     * The maximum number of seconds to wait while trying to connect. Set to 0 to wait indefinitely.
-     *
-     * @return int
-     */
     public function getConnectTimeout()
     {
         return $this->_connectTimeout;
     }
 
-    /**
-     * Whether or not to follow redirects on the request.  Defaults to true.
-     *
-     * @param $allowRedirects
-     *
-     * @return null
-     */
     public function setAllowRedirects($allowRedirects)
     {
         $this->_allowRedirects = $allowRedirects;
     }
 
-    /**
-     * @return bool
-     */
     public function getAllowRedirects()
     {
         return $this->_allowRedirects;
     }
 
-    /**
-     * @return EtModel
-     */
     public function getModel()
     {
         return $this->_model;
     }
 
-    /**
-     * Sets custom data on the EtModel.
-     *
-     * @param $data
-     *
-     * @return null
-     */
     public function setData($data)
     {
         $this->_model->data = $data;
     }
 
-    /**
-     * @param $handle
-     */
     public function setHandle($handle)
     {
         $this->_model->handle = $handle;
     }
 
-    /**
-     * @throws EtException|\Exception
-     * @return EtModel|null
-     */
     public function phoneHome($force = false)
     {
         if ($force) {
@@ -147,7 +107,7 @@ class FeedMe_License
         try {
 
             if (!craft()->cache->get($this->etConnectFailureKey)) {
-                $data = JsonHelper::encode($this->_model->getAttributes(null, true));
+                $data = $this->_model->getAttributes(null, true);
 
                 $client = new \Guzzle\Http\Client();
                 $client->setUserAgent($this->_userAgent, true);
@@ -158,8 +118,7 @@ class FeedMe_License
                     'allow_redirects' => $this->getAllowRedirects(),
                 );
 
-                $request = $client->post($this->_endpoint, null, null, $options);
-                $request->setBody($data, 'application/json');
+                $request = $client->post($this->_endpoint, null, $data, $options);
 
                 // Potentially long-running request, so close session to prevent session blocking on subsequent requests.
                 craft()->session->close();

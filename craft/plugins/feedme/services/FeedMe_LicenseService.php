@@ -41,14 +41,7 @@ class FeedMe_LicenseService extends BaseApplicationComponent
                 $etResponse = $et->phoneHome();
                 craft()->cache->set($this->pingStateKey, true, $this->pingCacheTime);
 
-                return $this->_handleEtResponse($etResponse);
-            } else {
-                $requestIp = craft()->request->getIpAddress();
-
-                // Local requests get full access when unable to ping - but not a license
-                if ($requestIp == '::1') {
-                    $this->setEdition('1');
-                }
+                return $this->_handleEtResponse($etResponse, false);
             }
         }
 
@@ -132,13 +125,13 @@ class FeedMe_LicenseService extends BaseApplicationComponent
     public function unregisterLicenseKey()
     {
         $et = new FeedMe_License(static::UnregisterPlugin, $this->pluginHandle, $this->pluginVersion, $this->licenseKey);
-        $etResponse = $et->phoneHome(true);
+        $et->phoneHome(true);
 
         $this->setLicenseKey(null);
         $this->setLicenseKeyStatus(LicenseKeyStatus::Unknown);
         $this->setEdition('0');
 
-        return $etResponse;
+        return true;
     }
 
     public function transferLicenseKey()
@@ -146,7 +139,7 @@ class FeedMe_LicenseService extends BaseApplicationComponent
         $et = new FeedMe_License(static::TransferPlugin, $this->pluginHandle, $this->pluginVersion, $this->licenseKey);
         $etResponse = $et->phoneHome(true);
 
-        return $etResponse;
+        return $this->_handleEtResponse($etResponse);
     }
 
     public function registerPlugin($licenseKey)
@@ -154,7 +147,6 @@ class FeedMe_LicenseService extends BaseApplicationComponent
         $et = new FeedMe_License(static::RegisterPlugin, $this->pluginHandle, $this->pluginVersion, $licenseKey);
         $etResponse = $et->phoneHome(true);
 
-        // Handle the response
         return $this->_handleEtResponse($etResponse);
     }
 
@@ -163,7 +155,7 @@ class FeedMe_LicenseService extends BaseApplicationComponent
     // Private Methods
     // =========================================================================
 
-    private function _handleEtResponse($etResponse)
+    private function _handleEtResponse($etResponse, $log = true)
     {
         if (!empty($etResponse->data['success'])) {
             // Set the local details
@@ -183,6 +175,10 @@ class FeedMe_LicenseService extends BaseApplicationComponent
                         break;
                     default:
                         $this->setLicenseKeyStatus(LicenseKeyStatus::Unknown);
+                }
+
+                if ($log) {
+                    FeedMePlugin::log('License error: ' . $etResponse->errors[0], LogLevel::Error, true);
                 }
             } else {
                 return false;

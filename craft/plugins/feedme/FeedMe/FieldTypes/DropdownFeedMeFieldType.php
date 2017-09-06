@@ -8,7 +8,10 @@ class DropdownFeedMeFieldType extends BaseFeedMeFieldType
     // Templates
     // =========================================================================
 
-
+    public function getMappingTemplate()
+    {
+        return 'feedme/_includes/fields/option-select';
+    }
     
 
 
@@ -17,7 +20,7 @@ class DropdownFeedMeFieldType extends BaseFeedMeFieldType
 
     public function prepFieldData($element, $field, $fieldData, $handle, $options)
     {
-        $preppedData = array();
+        $preppedData = null;
 
         $data = Hash::get($fieldData, 'data');
 
@@ -28,9 +31,10 @@ class DropdownFeedMeFieldType extends BaseFeedMeFieldType
         $settings = $field->getFieldType()->getSettings();
         $options = $settings->getAttribute('options');
 
-        // find matching option label
+        $attribute = Hash::get($fieldData, 'options.match', 'value');
+
         foreach ($options as $option) {
-            if ($data == $option['value']) {
+            if ($data == $option[$attribute]) {
                 $preppedData = $option['value'];
                 break;
             }
