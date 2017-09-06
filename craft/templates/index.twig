@@ -25,6 +25,10 @@
 
 {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
+{# TODO: Has to be official series #}
+{% set latest_series = craft.entries({ type: 'series' }).seriesImageTall(':notempty:').order('seriesStartsAt DESC').first() %}
+{% set events_image = craft.entries.section('pages').slug('events').first().pageContent.type('header').first().image[0] %}
+
 {% extends "_layout/layout.twig" %}
 
 {% block content %}
@@ -41,7 +45,7 @@
                     </p>
                     <div class="EventHero-actions">
                         {% for action in global_event.actions %}
-                        <a class="Button EventHero-action" href="{{ action.theUrl }}"><span class="u-hide-lt-480">{{ action.text }}</span><span class="u-hide-gte-480">{{ action.text }}</span></a>
+                            <a class="Button EventHero-action" href="{{ action.theUrl }}"><span class="u-hide-lt-480">{{ action.text }}</span><span class="u-hide-gte-480">{{ action.text }}</span></a>
                         {% endfor %}
                     </div>
                 </div>
@@ -73,18 +77,36 @@
             <ul class="ImageCards-list">
                 <li class="ImageCards-row">
                     <a class="ImageCards-item" href="/sermons">
-                        <img class="ImageCards-image" src="http://faithpromise.192.168.10.10.xip.io/images/series/at-the-movies-tall.jpg">
-                        <span class="ImageCards-link" href="/">
-                    Latest Sermon
-                </span>
+                        <img
+                                class="ImageCards-image"
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                sizes="50vw"
+                                srcset="
+                                    {{ latest_series.seriesImageTall[0].url({ width: 1920 }) }} 1920w,
+                                    {{ latest_series.seriesImageTall[0].url({ width: 1680 }) }} 1680w,
+                                    {{ latest_series.seriesImageTall[0].url({ width: 1280 }) }} 1280w,
+                                    {{ latest_series.seriesImageTall[0].url({ width: 800 }) }} 800w,
+                                    {{ latest_series.seriesImageTall[0].url({ width: 480 }) }} 480w,
+                                    {{ latest_series.seriesImageTall[0].url({ width: 320 }) }} 320w,
+                                ">
+                        <span class="ImageCards-link" href="/">Latest Sermon</span>
                     </a>
                 </li>
                 <li class="ImageCards-row">
                     <a class="ImageCards-item" href="/events">
-                        <img class="ImageCards-image" src="http://faithpromise.192.168.10.10.xip.io/images/pages/events-tall.jpg">
-                        <span class="ImageCards-link" href="/">
-                    News &amp; Events
-                </span>
+                        <img
+                                class="ImageCards-image"
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                sizes="50vw"
+                                srcset="
+                                    {{ events_image.url({ width: 1920 }) }} 1920w,
+                                    {{ events_image.url({ width: 1680 }) }} 1680w,
+                                    {{ events_image.url({ width: 1280 }) }} 1280w,
+                                    {{ events_image.url({ width: 800 }) }} 800w,
+                                    {{ events_image.url({ width: 480 }) }} 480w,
+                                    {{ events_image.url({ width: 320 }) }} 320w,
+                                ">
+                        <span class="ImageCards-link" href="/">News &amp; Events</span>
                     </a>
                 </li>
             </ul>
