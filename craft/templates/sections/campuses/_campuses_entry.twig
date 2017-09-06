@@ -59,7 +59,9 @@ order: 'serviceScheduleEffectiveAt asc',
     |--------------------------------------------------------------------------
     #}
 
-    {% embed '_layout/hero.twig' with { title: entry.title ~ ' Campus', style: 'textOverlay', image: entry.campusImage[0] } %}
+    {% set hero_image = entry.campusHeaderImage|length ? entry.campusHeaderImage[0] : (entry.campusImage|length ? entry.campusImage[0] : null) %}
+
+    {% embed '_layout/hero.twig' with { title: entry.title ~ ' Campus', style: 'textOverlay', image: hero_image } %}
         {% block text %}
             {{ entry.intro }}
         {% endblock %}

@@ -1,0 +1,25 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {# Make sure we have a header #}
+
+    {% if entry.pageContent|length == 0 or entry.pageContent[0].type != 'header' %}
+
+        {% include '_layout/hero.twig' with {
+        image: entry.eventImage ? entry.eventImage[0] : null,
+        } %}
+
+    {% endif %}
+
+    {% include 'sections/paes/page_content_matrix/_page_content_matrix.twig' %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Additional events
+    |--------------------------------------------------------------------------
+    #}
+
+
+
+{% endblock %}
