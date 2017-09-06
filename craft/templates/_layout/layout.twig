@@ -274,7 +274,7 @@
 
         {{ getFootHtml() }}
 
-        <script src="/build/main.js"></script>
+        <script src="{{ '/build/main.js' | cacheBuster }}"></script>
 
         {{ craft.querylog is defined ? (craft.querylog | raw) : '' }}
 
