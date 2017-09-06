@@ -7,8 +7,9 @@ const rev          = require('gulp-rev');
 const watch        = require('gulp-watch');
 const sourcemaps   = require('gulp-sourcemaps');
 const util         = require('gulp-util');
+const uglify       = require('gulp-uglify');
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'js']);
 
 gulp.task('sass', function () {
     return gulp.src('assets/sass/main.scss')
@@ -16,15 +17,17 @@ gulp.task('sass', function () {
         .pipe(sass(config.sass).on('error', sass.logError))
         .pipe(autoprefixer(config.autoprefixer))
         .pipe(config.is_production ? clean() : util.noop())
-        // .pipe(clean())
-        // .pipe(rev())
+        .pipe(config.is_production ? rev() : util.noop())
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('public/build'))
-        .pipe(rev.manifest());
+        .pipe(rev.manifest({ base: 'public/build', merge: true }))
+        .pipe(gulp.dest('public/build'));
 });
 
 gulp.task('js', function () {
     return gulp.src('assets/js/main.js')
+        .pipe(gulp.dest('public/build'))
+        .pipe(rev.manifest({ base: 'public/build', merge: true }))
         .pipe(gulp.dest('public/build'))
 });
 
