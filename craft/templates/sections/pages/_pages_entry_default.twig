@@ -8,6 +8,10 @@
 
     {% block page_content %}{% endblock %}
 
+    {% cache globally %}
+
     {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+    {% endcache %}
 
 {% endblock %}

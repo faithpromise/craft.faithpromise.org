@@ -4,18 +4,22 @@
 {% set image = image is defined ? image : null %}
 {% set style = style is defined ? style : 'imageOnly' %}
 
-{% if image %}
-    {% set heroCss %}
-        .{{ css_class }} {
-        background-image: url({{ image.getUrl() }});
-        }
-    {% endset %}
-    {% includeCss heroCss %}
-{% endif %}
-
 {% set css_class = css_class ~ ' Hero--' ~ style %}
 
 <header class="Hero {{ css_class }}">
+    {% if image %}
+        <img class="Hero-image"
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            sizes="100vw"
+            srcset="
+                        {{ image.url({ width: 1920 }) }} 1920w,
+                        {{ image.url({ width: 1680 }) }} 1680w,
+                        {{ image.url({ width: 1280 }) }} 1280w,
+                        {{ image.url({ width: 800 }) }} 800w,
+                        {{ image.url({ width: 480 }) }} 480w,
+                        {{ image.url({ width: 320 }) }} 320w,
+                ">
+    {% endif %}
     <div class="Hero-overlay"></div>
     <div class="Hero-container">
         <div class="Hero-content">

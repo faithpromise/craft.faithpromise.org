@@ -1,3 +1,13 @@
-{% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
+{% extends "_layout/layout.twig" %}
 
-{% include 'sections/pages/_pages_entry_default.twig' %}
+{% block content %}
+
+    {% cache globally using key 'locations-page' %}
+
+    {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
+
+    {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+    {% endcache %}
+
+{% endblock %}

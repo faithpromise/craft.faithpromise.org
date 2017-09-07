@@ -23,15 +23,17 @@
 |--------------------------------------------------------------------------
 #}
 
-{% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
-
-{# TODO: Has to be official series #}
-{% set latest_series = craft.entries({ type: 'series' }).seriesImageTall(':notempty:').order('seriesStartsAt DESC').first() %}
-{% set events_image = craft.entries.section('pages').slug('events').first().pageContent.type('header').first().image[0] %}
-
 {% extends "_layout/layout.twig" %}
 
 {% block content %}
+
+    {% cache globally using key 'home-page' %}
+
+    {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
+
+    {# TODO: Has to be official series #}
+    {% set latest_series = craft.entries({ type: 'series' }).seriesImageTall(':notempty:').order('seriesStartsAt DESC').first() %}
+    {% set events_image = craft.entries.section('pages').slug('events').first().pageContent.type('header').first().image[0] %}
 
     {% if global_event %}
 
@@ -82,13 +84,13 @@
                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                                 sizes="50vw"
                                 srcset="
-                                    {{ latest_series.seriesImageTall[0].url({ width: 1920 }) }} 1920w,
-                                    {{ latest_series.seriesImageTall[0].url({ width: 1680 }) }} 1680w,
-                                    {{ latest_series.seriesImageTall[0].url({ width: 1280 }) }} 1280w,
-                                    {{ latest_series.seriesImageTall[0].url({ width: 800 }) }} 800w,
-                                    {{ latest_series.seriesImageTall[0].url({ width: 480 }) }} 480w,
-                                    {{ latest_series.seriesImageTall[0].url({ width: 320 }) }} 320w,
-                                ">
+                                        {{ latest_series.seriesImageTall[0].url({ width: 1920 }) }} 1920w,
+                                        {{ latest_series.seriesImageTall[0].url({ width: 1680 }) }} 1680w,
+                                        {{ latest_series.seriesImageTall[0].url({ width: 1280 }) }} 1280w,
+                                        {{ latest_series.seriesImageTall[0].url({ width: 800 }) }} 800w,
+                                        {{ latest_series.seriesImageTall[0].url({ width: 480 }) }} 480w,
+                                        {{ latest_series.seriesImageTall[0].url({ width: 320 }) }} 320w,
+                                    ">
                         <span class="ImageCards-link" href="/">Latest Sermon</span>
                     </a>
                 </li>
@@ -99,19 +101,21 @@
                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                                 sizes="50vw"
                                 srcset="
-                                    {{ events_image.url({ width: 1920 }) }} 1920w,
-                                    {{ events_image.url({ width: 1680 }) }} 1680w,
-                                    {{ events_image.url({ width: 1280 }) }} 1280w,
-                                    {{ events_image.url({ width: 800 }) }} 800w,
-                                    {{ events_image.url({ width: 480 }) }} 480w,
-                                    {{ events_image.url({ width: 320 }) }} 320w,
-                                ">
+                                        {{ events_image.url({ width: 1920 }) }} 1920w,
+                                        {{ events_image.url({ width: 1680 }) }} 1680w,
+                                        {{ events_image.url({ width: 1280 }) }} 1280w,
+                                        {{ events_image.url({ width: 800 }) }} 800w,
+                                        {{ events_image.url({ width: 480 }) }} 480w,
+                                        {{ events_image.url({ width: 320 }) }} 320w,
+                                    ">
                         <span class="ImageCards-link" href="/">News &amp; Events</span>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
+
+    {% endcache %}
 
     {#{{ entry.body }}#}
 
