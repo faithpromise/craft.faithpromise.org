@@ -1,14 +1,18 @@
 
 .Hero {
-  position:            relative;
-  height:              56.25vw;
-  background-position: center;
-  background-size:     cover;
+  position: relative;
+  height:   56.25vw;
 
   @media (min-width: calc-em(1200px)) {
     height: 36.4583333vw;
   }
 
+}
+
+.Hero-image {
+  height:     100%;
+  width:      100%;
+  object-fit: cover;
 }
 
 .Hero--textOverlay {
