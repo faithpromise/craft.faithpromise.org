@@ -31,8 +31,8 @@
 
     {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
-    {# TODO: Has to be official series #}
-    {% set latest_series = craft.entries({ type: 'series' }).seriesImageTall(':notempty:').order('seriesStartsAt DESC').first() %}
+    {% set latest_sermon = craft.entries({ type: 'sermon', with: 'series' }).order('sermonDate DESC').first() %}
+    {% set latest_sermon_image = latest_sermon.series[0].seriesImageTall[0] %}
     {% set events_image = craft.entries.section('pages').slug('events').first().pageContent.type('header').first().image[0] %}
 
     {% if global_event %}
@@ -78,18 +78,18 @@
         <div class="ImageCards-container">
             <ul class="ImageCards-list">
                 <li class="ImageCards-row">
-                    <a class="ImageCards-item" href="/sermons">
+                    <a class="ImageCards-item" href="{{ latest_sermon.url }}">
                         <img
                                 class="ImageCards-image"
                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                                 sizes="50vw"
                                 srcset="
-                                        {{ latest_series.seriesImageTall[0].url({ width: 1920 }) }} 1920w,
-                                        {{ latest_series.seriesImageTall[0].url({ width: 1680 }) }} 1680w,
-                                        {{ latest_series.seriesImageTall[0].url({ width: 1280 }) }} 1280w,
-                                        {{ latest_series.seriesImageTall[0].url({ width: 800 }) }} 800w,
-                                        {{ latest_series.seriesImageTall[0].url({ width: 480 }) }} 480w,
-                                        {{ latest_series.seriesImageTall[0].url({ width: 320 }) }} 320w,
+                                        {{ latest_sermon_image.url({ width: 1920 }) }} 1920w,
+                                        {{ latest_sermon_image.url({ width: 1680 }) }} 1680w,
+                                        {{ latest_sermon_image.url({ width: 1280 }) }} 1280w,
+                                        {{ latest_sermon_image.url({ width: 800 }) }} 800w,
+                                        {{ latest_sermon_image.url({ width: 480 }) }} 480w,
+                                        {{ latest_sermon_image.url({ width: 320 }) }} 320w,
                                     ">
                         <span class="ImageCards-link" href="/">Latest Sermon</span>
                     </a>
