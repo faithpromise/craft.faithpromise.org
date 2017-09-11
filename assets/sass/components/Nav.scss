@@ -1,4 +1,4 @@
-$Nav-font-size: 18px;
+$Nav-font-size: 16px;
 $Nav-link-padding-h: 8px;
 
 $Nav-desktop-start: 720px;
@@ -64,9 +64,9 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
 .Nav-link {
   @extend .unlink;
   display:        inline-block;
-  padding:        calc-em(20px, $Nav-font-size) calc-em($Nav-link-padding-h, $Nav-font-size);
+  padding:        calc-em(20px, $Nav-font-size) calc-em(16px, $Nav-font-size);
   text-transform: uppercase;
-  font-size:      .875em;
+  //font-size:      .875em;
 
   &:hover {
     text-decoration: underline;

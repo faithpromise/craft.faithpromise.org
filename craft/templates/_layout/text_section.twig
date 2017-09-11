@@ -74,7 +74,7 @@
 
         <div class="TextSection-copy">
             <h2 class="TextSection-title">{{ title }}</h2>
-            <h3 class="TextSection-subtitle">{{ subtitle }}</h3>
+            <h3 class="TextSection-subtitle">{{ subtitle | raw }}</h3>
             <div class="TextSection-text">
                 {% block text %}{% endblock %} {# text block #}
                 {{ text | markdown }} {# text passed as param #}

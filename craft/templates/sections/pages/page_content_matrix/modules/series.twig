@@ -1,0 +1,12 @@
+{% set entries = craft.entries({ section: 'series', with: 'seriesImageTall' }).seriesImageTall(':notempty:').limit(9).order('seriesStartsAt DESC') %}
+
+{% if entries | length %}
+
+    {% embed '_layout/section.twig' with params %}
+        {% block body %}
+            {% include '_layout/components/entry_cards.twig' with { entries: entries, compact: true } %}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endif %}

@@ -1,0 +1,10 @@
+{% set entry_params = {
+'image': entry_item.seriesImageTall[0] ?? null,
+'title': entry_item.title,
+'subtitle': entry_item.seriesStartsAt | date('M Y'),
+'text': null,
+'action_url': entry_item.url,
+'action_text': 'View Sermons'
+} %}
+
+{% include '_layout/components/card.twig' with entry_params %}
