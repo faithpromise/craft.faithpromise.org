@@ -1,0 +1,23 @@
+{% set isAjax = not not craft.request.getParam('page') %}
+
+{% extends isAjax ? '_layout/blank.twig' : '_layout/layout.twig' %}
+
+{% block content %}
+
+    {% cache globally %}
+
+    {% if isAjax %}
+
+        {% set params = { page: craft.request.getParam('page') ?? 1 } %}
+        {% include '_layout/components/series_list.twig' with params %}
+
+    {% else %}
+
+        {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
+        {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+    {% endif %}
+
+    {% endcache %}
+
+{% endblock %}

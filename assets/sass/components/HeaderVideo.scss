@@ -1,12 +1,11 @@
 .HeaderVideo {
-
-  position:       relative;
-  z-index:        1;
-  height:         0;
-  padding-bottom: 36.4583333%;
+  @include fluid-size(padding-top, 320px, 400px, 1400px, 520px);
+  position: relative;
+  z-index:  1;
+  height:   0;
   //padding-bottom: 56.25%;
-  overflow:       hidden;
-  color:          #fff;
+  overflow: hidden;
+  color:    #fff;
 }
 
 .HeaderVideo .Button {
@@ -44,11 +43,12 @@
 }
 
 .HeaderVideo-overlay {
-  opacity:          .6;
+  opacity:          .15;
   background-color: #000;
 }
 
 .HeaderVideo-title {
+  padding:   0 2em;
   font-size: calc-em(40px);
 }
 

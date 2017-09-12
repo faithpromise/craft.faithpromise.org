@@ -23,7 +23,9 @@
 |--------------------------------------------------------------------------
 #}
 
-{% extends "_layout/layout.twig" %}
+{% set nav_overlay = true %}
+
+{% extends '_layout/layout.twig' %}
 
 {% block content %}
 
@@ -58,10 +60,10 @@
 
         <div class="HeaderVideo">
             <video autoplay loop muted preload>
-                <source src="http://elevationchurch.org/wp-content/uploads/2017/08/2017_Aug20_CuttingCorners_ECdotOrg_2.mp4" type="video/mp4">
+                {#<source src="http://elevationchurch.org/wp-content/uploads/2017/08/2017_Aug20_CuttingCorners_ECdotOrg_2.mp4" type="video/mp4">#}
+                <source src="/video.mp4" type="video/mp4">
             </video>
-            <div class="TextSection-overlay"></div>
-
+            <div class="HeaderVideo-overlay"></div>
             <div class="HeaderVideo-container">
                 <div class="HeaderVideo-title">Real People. Real Problems. Real Love.</div>
                 <div class="HeaderVideo-actions">

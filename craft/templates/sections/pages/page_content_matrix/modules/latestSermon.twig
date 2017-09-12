@@ -3,7 +3,7 @@
 {% set sermon_speaker = sermon.speaker ? sermon.speaker[0].title : sermon.guestSpeaker %}
 {% set sermon_speaker_title = sermon.speaker ? sermon.speaker[0].jobTitle : 'guest speaker' %}
 {% set sermon_subtitle = sermon.sermonDate|date('F j') ~ ' &middot; ' ~ (sermon.speaker ? sermon.speaker[0].title : sermon.guestSpeaker) %}
-{% set sermon_text = 'Check out our latest sermon from ' ~ sermon_speaker_title ~ ', <span class="nowrap">' ~ sermon_speaker ~ '</span> on ' ~ sermon.sermonDate|date('F j') ~ ' titled, "' ~ sermon.title ~ '."' %}
+{% set sermon_text = 'Check out our latest sermon from ' ~ sermon_speaker_title ~ ', <span class="nowrap">' ~ sermon_speaker ~ '</span> on ' ~ sermon.sermonDate|date('F jS') ~ ' titled, "' ~ sermon.title ~ '."' %}
 
 {#videoUrl: sermon.videoUrl,#}
 

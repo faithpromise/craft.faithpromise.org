@@ -57,7 +57,7 @@
 
 .EventHero {
   position:            relative;
-  height:              85vh;
+  height:              calc-em(530px);
   background-position: center;
   background-size:     cover;
   color:               #fff;

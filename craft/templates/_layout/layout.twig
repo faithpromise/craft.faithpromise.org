@@ -40,7 +40,9 @@
 
         <div id="app" class="Layout">
 
-            <nav class="Nav">
+            {% set nav_class = nav_overlay is defined and nav_overlay ? 'Nav Nav--overlay' : 'Nav' %}
+
+            <nav class="{{ nav_class }}">
                 <div class="Nav-bg"></div>
                 <div class="Nav-container">
                     <a id="to_home_from_headerLogo" class="Nav-logo" href="/" title="Return to Home Page">
@@ -270,6 +272,7 @@
         </div>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+        <script src="//unpkg.com/axios@0.16.1/dist/axios.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
 
         {{ getFootHtml() }}

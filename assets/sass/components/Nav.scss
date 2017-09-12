@@ -5,26 +5,14 @@ $Nav-desktop-start: 720px;
 $Nav-mobile-end: $Nav-desktop-start - 1px;
 
 .Nav {
-  position:  absolute;
-  z-index:   $z-index-nav;
-  width:     100%;
   font-size: calc-em($Nav-font-size);
-}
-
-.Nav-bg {
-  position:   absolute;
-  z-index:    $z-index-nav;
-  top:        -20%;
-  height:     200%;
-  width:      100%;
-  background: linear-gradient(to bottom, #000 0, transparent 100%);
-  opacity:    .75;
+  background-color: $color-gray-darkest;
+  color:            #fff;
 }
 
 .Nav-container {
   position: relative;
   z-index:  $z-index-nav;
-  color:    #fff;
 }
 
 /* End transparent nav */
@@ -85,6 +73,25 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
     height: calc-em(32px, $Nav-font-size);
     width:  calc-em(32px, $Nav-font-size);
     fill:   currentColor;
+  }
+
+}
+
+.Nav--overlay {
+  position:         absolute;
+  z-index:          $z-index-nav;
+  width:            100%;
+  background-color: transparent;
+  color:            #fff;
+
+  .Nav-bg {
+    position:   absolute;
+    z-index:    $z-index-nav;
+    top:        -20%;
+    height:     200%;
+    width:      100%;
+    background: linear-gradient(to bottom, #000 0, transparent 100%);
+    opacity:    .75;
   }
 
 }
