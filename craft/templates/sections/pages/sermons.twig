@@ -1,15 +1,16 @@
-{% set isAjax = not not craft.request.getParam('page') %}
+{% set page = craft.request.getParam('page') ?? 1 %}
+
+{% set isAjax = page != 1 %}
 
 {% extends isAjax ? '_layout/blank.twig' : '_layout/layout.twig' %}
 
 {% block content %}
 
-    {% cache globally %}
+    {% cache globally using key 'sermons_' ~ page %}
 
     {% if isAjax %}
 
-        {% set params = { page: craft.request.getParam('page') ?? 1 } %}
-        {% include '_layout/components/series_list.twig' with params %}
+        {% include '_layout/components/series_list.twig' with { page: page } %}
 
     {% else %}
 
