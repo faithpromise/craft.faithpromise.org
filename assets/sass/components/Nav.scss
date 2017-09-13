@@ -18,6 +18,11 @@ $Nav-logo-width: $Nav-logo-height * 4.619047619;
   color:            #fff;
 }
 
+.Nav--fixed {
+  position: fixed;
+  width:    100%;
+}
+
 .Nav-container {
   position: relative;
   z-index:  $z-index-nav;

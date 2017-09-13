@@ -3,27 +3,28 @@ body {
   overflow: scroll;
 }
 
-html.nav-open {
+/*
+|--------------------------------------------------------------------------
+| Other elements that change when nav is opened
+|--------------------------------------------------------------------------
+*/
 
-  .Layout-content,
-  .Footer {
-    display: none;
+// Content transitions when nav is open
+
+.Layout-content {
+  transition: opacity .25s ease-in-out;
+
+  &.transition-enter,
+  &.transition-leave-to {
+    opacity: 0;
   }
-
-  .Nav {
-    position: fixed;
-    width:    100%;
-  }
-
-  //height:   100vh;
-  //overflow: hidden;
-  //
-  //> body,
-  //.Nav {
-  //  padding-right: 15px;
-  //}
-
 }
+
+/*
+|--------------------------------------------------------------------------
+| Full nav
+|--------------------------------------------------------------------------
+*/
 
 .FullNav {
   padding-top:                $Nav-height-total;
@@ -41,20 +42,6 @@ html.nav-open {
   }
 
   &.transition-enter {
-    opacity: 0;
-  }
-
-  body.nav-open & {
-    overflow-y: auto;
-  }
-
-}
-
-.Layout-content {
-  transition: opacity .25s ease-in-out;
-
-  &.transition-enter,
-  &.transition-leave-to {
     opacity: 0;
   }
 
