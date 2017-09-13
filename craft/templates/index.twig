@@ -58,13 +58,17 @@
 
     {% else %}
 
-        {% set home_page_video = craft.assets.id(1580).first() %}
-
         <div class="HeaderVideo">
-            <video autoplay loop muted preload>
-                {#<source src="http://elevationchurch.org/wp-content/uploads/2017/08/2017_Aug20_CuttingCorners_ECdotOrg_2.mp4" type="video/mp4">#}
-                <source src="{{ home_page_video.url }}" type="video/mp4">
-            </video>
+            {% if craft.request.isMobileBrowser() %}
+                {#TODO: Get gif / mobile image#}
+                <img src="https://placeimg.com/640/480/any/sepia?t=1505305979703">
+            {% else %}
+                {% set home_page_video = craft.assets.id(1580).first() %}
+                <video autoplay loop muted preload>
+                    {#<source src="http://elevationchurch.org/wp-content/uploads/2017/08/2017_Aug20_CuttingCorners_ECdotOrg_2.mp4" type="video/mp4">#}
+                    <source src="{{ home_page_video.url }}" type="video/mp4">
+                </video>
+            {% endif %}
             <div class="HeaderVideo-overlay"></div>
             <div class="HeaderVideo-container">
                 <div class="HeaderVideo-title">Real People. Real Problems. Real Love.</div>
