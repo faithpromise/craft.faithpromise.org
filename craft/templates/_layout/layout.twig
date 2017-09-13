@@ -50,15 +50,17 @@
                             <use xlink:href="/assets/logos.svg#logo"></use>
                         </svg>
                     </a>
-                    <ul class="Nav-menu">
-                        <li class="Nav-item"><a class="Nav-link" href="/about">About</a></li>
-                        <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
-                        <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
-                        <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
-                    </ul>
+                    <transition name="transition">
+                        <ul class="Nav-menu" v-show="!is_nav_open">
+                            <li class="Nav-item"><a class="Nav-link" href="/about">About</a></li>
+                            <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
+                            <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
+                            <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
+                        </ul>
+                    </transition>
                     <span class="Nav-toggle" @click="nav_toggle">
                         <svg>
-                            <use xlink:href="/assets/icons.svg#menu"></use>
+                            <use xlink:href="/assets/icons.svg#menu" :xlink:href="'/assets/icons.svg#' + toggle_icon"></use>
                         </svg>
                     </span>
                 </div>
@@ -66,12 +68,6 @@
 
             <transition name="transition">
                 <div class="FullNav" v-show="is_nav_open">
-
-                    <span class="FullNav-close" @click="nav_close">
-                        <svg>
-                            <use xlink:href="/assets/icons.svg#close"></use>
-                        </svg>
-                    </span>
                     <div class="FullNav-container">
                         <div class="FullNav-category">
                             <h5 class="FullNav-heading">Locations</h5>
@@ -134,15 +130,17 @@
                 </div>
             </transition>
 
-            <div class="Layout-content">
+            <transition name="transition">
+                <div class="Layout-content" v-show="!is_nav_open">
 
-                {% block content %}{% endblock %}
+                    {% block content %}{% endblock %}
 
-                <footer class="Layout-footer">
+                    <footer class="Layout-footer">
 
-                </footer>
+                    </footer>
 
-            </div>
+                </div>
+            </transition>
 
             <div class="Footer">
                 <div class="Footer-container">

@@ -24,6 +24,7 @@
   height:          100%;
 }
 
+.HeaderVideo > img, // gif for mobile
 .HeaderVideo > video,
 .HeaderVideo > .HeaderVideo-overlay,
 .HeaderVideo > .HeaderVideo-container {
@@ -37,6 +38,7 @@
   width:    100%;
 }
 
+.HeaderVideo > img,
 .HeaderVideo > video {
   object-fit:      cover;
   object-position: top center;

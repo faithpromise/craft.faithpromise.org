@@ -10,6 +10,8 @@
 // Components
 @import "components/components";
 
+[v-cloak] { display: none }
+
 .body_text {
   @include fluid-type(320px, 18px, 1000px, 22px);
 }

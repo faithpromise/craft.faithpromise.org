@@ -1,12 +1,20 @@
-$Nav-font-size: 16px;
 $Nav-link-padding-h: 8px;
 
 $Nav-desktop-start: 720px;
 $Nav-mobile-end: $Nav-desktop-start - 1px;
 
+$Nav-logo-height: 42px;
+$Nav-padding-v: 20px;
+
+$Nav-bg-color: $color-gray-darkest;
+
+// Calculated
+
+$Nav-height-total: $Nav-logo-height + $Nav-padding-v + $Nav-padding-v;
+$Nav-logo-width: $Nav-logo-height * 4.619047619;
+
 .Nav {
-  font-size: calc-em($Nav-font-size);
-  background-color: $color-gray-darkest;
+  background-color: $Nav-bg-color;
   color:            #fff;
 }
 
@@ -22,19 +30,22 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
   display:         flex;
   align-items:     center;
   justify-content: space-between;
-  padding-top:     calc-em(12px);
-  padding-bottom:  calc-em(12px);
+  height:          calc-em($Nav-height-total);
+  //padding-top:     calc-em(20px);
+  //padding-bottom:  calc-em(20px);
   //height:          4.5em;
 }
 
 .Nav-logo {
 
   @extend %link-color-inherit-all;
+  height:       calc-em($Nav-logo-height);
   margin-right: auto;
+  overflow:     hidden;
 
   > svg {
-    height: calc-em(42px, $Nav-font-size);
-    width:  calc-em(194px, $Nav-font-size);
+    height: calc-em($Nav-logo-height);
+    width:  calc-em($Nav-logo-width);
     fill:   currentColor;
   }
 }
@@ -43,6 +54,12 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
   margin:     0;
   padding:    0;
   list-style: none;
+  transition: opacity .25s ease-in-out;
+
+  &.transition-enter,
+  &.transition-leave-to {
+    opacity: 0;
+  }
 }
 
 .Nav-item {
@@ -52,7 +69,8 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
 .Nav-link {
   @extend .unlink;
   display:        inline-block;
-  padding:        calc-em(20px, $Nav-font-size) calc-em(16px, $Nav-font-size);
+  padding:        0 calc-em(16px);
+  line-height:    calc-em($Nav-logo-height);
   text-transform: uppercase;
   //font-size:      .875em;
 
@@ -64,14 +82,14 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
 .Nav-toggle {
 
   display:     block;
-  height:      calc-em(32px, $Nav-font-size);
-  width:       calc-em(32px, $Nav-font-size);
-  margin-left: calc-em($Nav-link-padding-h * 2, $Nav-font-size);
+  height:      calc-em(32px);
+  width:       calc-em(32px);
+  margin-left: calc-em($Nav-link-padding-h * 2);
   cursor:      pointer;
 
   > svg {
-    height: calc-em(32px, $Nav-font-size);
-    width:  calc-em(32px, $Nav-font-size);
+    height: calc-em(32px);
+    width:  calc-em(32px);
     fill:   currentColor;
   }
 

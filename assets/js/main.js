@@ -7,7 +7,7 @@ Vue.prototype.$http = axios;
 
 const app = new Vue({
 
-    el:         '#app',
+    el: '#app',
 
     components: {
         seriesList,
@@ -19,6 +19,12 @@ const app = new Vue({
         }
     },
 
+    computed: {
+        toggle_icon() {
+            return this.is_nav_open ? 'close' : 'menu';
+        },
+    },
+
     watch: {
         is_nav_open: function (value) {
             document.documentElement.classList[value ? 'add' : 'remove']('nav-open');
@@ -28,15 +34,17 @@ const app = new Vue({
     methods: {
 
         nav_open: function () {
+            window.scrollTo(0, 0);
             this.is_nav_open = true;
         },
 
         nav_close: function () {
+            window.scrollTo(0, 0);
             this.is_nav_open = false;
         },
 
         nav_toggle: function () {
-            this.is_nav_open = !this.is_nav_open;
+            this.is_nav_open ? this.nav_close() : this.nav_open();
         }
 
     },

@@ -1,32 +1,46 @@
+// Prevents scrollbar from disappearing for a millisecond
+body {
+  overflow: scroll;
+}
+
 html.nav-open {
 
-  height:   100vh;
-  overflow: hidden;
-
-  > body,
-  .Nav {
-    padding-right: 15px;
+  .Layout-content,
+  .Footer {
+    display: none;
   }
+
+  .Nav {
+    position: fixed;
+    width:    100%;
+  }
+
+  //height:   100vh;
+  //overflow: hidden;
+  //
+  //> body,
+  //.Nav {
+  //  padding-right: 15px;
+  //}
 
 }
 
 .FullNav {
-  position:                   fixed;
-  z-index:                    $z-full-nav;
-  top:                        0;
-  right:                      0;
-  bottom:                     0;
-  left:                       0;
-  background-color:           rgba(0, 0, 0, .9);
-  color:                      #fff;
+  padding-top:                $Nav-height-total;
   overflow-x:                 hidden;
   overflow-y:                 hidden;
   -webkit-overflow-scrolling: touch;
   user-select:                none;
-  transition:                 opacity .25s ease-in-out;
 
-  &.transition-enter,
-  &.transition-leave-to {
+  &.transition-leave-active {
+    display: none;
+  }
+
+  &.transition-enter-active {
+    transition: opacity .25s ease-in-out;
+  }
+
+  &.transition-enter {
     opacity: 0;
   }
 
@@ -36,16 +50,27 @@ html.nav-open {
 
 }
 
+.Layout-content {
+  transition: opacity .25s ease-in-out;
+
+  &.transition-enter,
+  &.transition-leave-to {
+    opacity: 0;
+  }
+
+}
+
 .FullNav-container {
-  display:    flex;
-  flex-wrap:  wrap;
-  padding:    calc-em(80px) calc-em(16px);
-  transition: all .5s ease-in-out;
+  @extend .Container;
+  display:        flex;
+  flex-wrap:      wrap;
+  padding-top:    calc-em(80px);
+  padding-bottom: calc-em(80px);
+  transition:     all .5s ease-in-out;
 
   //.FullNav.transition-leave-to > &,
   .FullNav.transition-enter > & {
     transform: translateX(2em);
-    opacity:   0;
   }
 
 }
@@ -71,23 +96,6 @@ html.nav-open {
   white-space: nowrap;
 }
 
-.FullNav-close {
-  @include fluid-size(right, 320px, 16px, $Container-max-width, $Container-padding-h);
-  position: fixed;
-  z-index:  $z-full-nav-close;
-  top:      1.5em;
-  //left:     calc(100vw - 5.3em);
-  cursor:   pointer;
-  overflow: hidden;
-
-  > svg {
-    height: calc-em(42px);
-    width:  calc-em(42px);
-    fill:   currentColor;
-  }
-
-}
-
 @media (max-width: calc-em(519px)) {
 
   .FullNav-category {
@@ -107,11 +115,6 @@ html.nav-open {
 }
 
 @media (min-width: calc-em(520px)) {
-
-  .FullNav-container {
-    padding-left:  calc-em(32px);
-    padding-right: calc-em(32px);
-  }
 
   .FullNav-category {
     margin-right: 4em;
