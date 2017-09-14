@@ -22,6 +22,7 @@
   position:   absolute;
   top:        0;
   left:       0;
+  width:      100%;
   object-fit: cover;
 }
 
@@ -74,7 +75,8 @@
 
 .Card-subtitle {
   @include fluid-type(320px, 14px, 420px, 17px);
-  margin: 0;
+  margin: .2em 0 0;
+  color:  $color-gray;
 }
 
 .Card-text {

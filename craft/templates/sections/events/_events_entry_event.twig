@@ -1,0 +1,58 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Event
+    |--------------------------------------------------------------------------
+    #}
+
+    {# Hero #}
+
+    {% include '_layout/hero.twig' with {
+    image: entry.eventImage ? entry.eventImage[0] : null,
+    } %}
+
+    {# Intro #}
+
+    {% include '_layout/text_section.twig' with {
+    title: entry.title,
+    subtitle: entry.dateRange,
+    text: entry.eventDescription,
+    videoUrl: entry.videoUrl,
+    linkUrl_1: entry.actions|length > 0 ? entry.actions[0].theUrl : null,
+    linkText_1: entry.actions|length > 0 ? entry.actions[0].text : null,
+    linkUrl_2: entry.actions|length > 1 ? entry.actions[1].theUrl : null,
+    linkText_2: entry.actions|length > 1 ? entry.actions[1].text : null,
+    align: entry.videoUrl ? 'left' : 'center',
+    } %}
+
+    {# Additional content #}
+
+    {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Additional events
+    |--------------------------------------------------------------------------
+    #}
+
+    {# If last content block used a gray background, use default (white) #}
+
+    {% set last_content = entry.pageContent | length ? entry.pageContent.last() : null %}
+    {% set background = last_content and last_content.background ? last_content.background.value : null %}
+    {% set background = background == 'gray' ? 'default' : 'gray' %}
+
+    {# More events link #}
+
+    {% include '_layout/text_section.twig' with {
+    title: 'Looking for Something Else?',
+    text: 'There\'s a lot happening around each of our campuses.',
+    linkText_1: 'View All Events',
+    linkUrl_1: '/events',
+    align: 'center',
+    background: background,
+    } %}
+
+{% endblock %}
