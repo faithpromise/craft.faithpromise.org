@@ -62,13 +62,19 @@
                 {% endif %}
 
                 {% if videoUrl %}
+
                     {% set videoSegments = videoUrl | split('/') %}
-                    {% set vimeoId = videoSegments | last %}
-                    {% set vimeoUrl = 'https://player.vimeo.com/video/' ~ vimeoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=false' %}
+                    {% set videoId = videoSegments | last %}
+                    {% set videoUrl = 'https://www.youtube.com/embed/' ~ videoId ~ '?rel=0&amp;showinfo=0' %}
+                    {% if 'vimeo.com' in videoUrl %}
+                        {% set videoUrl = 'https://player.vimeo.com/video/' ~ videoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=false' %}
+                    {% endif %}
                     <div class="VideoPlayer">
-                        <iframe src="{{ vimeoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe src="{{ videoUrl }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                     </div>
+
                 {% endif %}
+
             </div>
         {% endif %}
 
