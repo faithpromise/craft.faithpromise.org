@@ -1,0 +1,46 @@
+$SermonHero-button-button-size: 160px;
+
+.SermonHero-player {
+  background-color: #000; // Matches Vimeo player bg
+  padding-top:      calc-em(128px);
+}
+
+.SermonHero-video {
+  position:    relative;
+  height:      0;
+  padding-top: 36.458%;
+  font-size:   0;
+
+  > iframe {
+    position: absolute;
+    top:      0;
+    left:     0;
+    width:    100%;
+    height:   100%;
+  }
+
+}
+
+.SermonHero-button {
+  @include fluid-size(height, 320px, 80px, 960px, 160px);
+  @include fluid-size(width, 320px, 80px, 960px, 160px);
+  @include fluid-size(margin-top, 320px, -40px, 960px, -80px);
+  //@include fluid-size(margin-top, 320px 40px, 960px, 80px);
+  position:         relative;
+  margin-right:     auto;
+  margin-left:      auto;
+  border-radius:    80px;
+  font-size:        0;
+  background-color: #fff;
+  cursor:           pointer;
+
+  > svg {
+    width:  100%;
+    height: 100%;
+    fill:   currentColor;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+}

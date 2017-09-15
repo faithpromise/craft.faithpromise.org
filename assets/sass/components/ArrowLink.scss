@@ -1,0 +1,31 @@
+.ArrowLink {
+
+  position:      relative;
+  display:       inline-block;
+  padding-right: .727272727em;
+  line-height:   1.2; // Makes height 26px
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  // Arrow
+  &:after {
+    content:      '';
+    position:     absolute;
+    top:          .363636364em;
+    right:        0;
+    height:       .454545455em;
+    width:        .454545455em;
+    border-width: 3px 3px 0 0;
+    border-style: solid;
+    border-color: currentColor;
+    transform:    rotate(45deg);
+    transition:   right .1s ease-in-out;
+  }
+
+  &:hover:after {
+    right: -8px;
+  }
+
+}

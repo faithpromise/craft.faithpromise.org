@@ -91,31 +91,9 @@
 
 .Card-action {
   @extend .link;
-  position:      relative;
-  display:       inline-block;
-  padding-right: calc-em(16px, 22px);
-  font-size:     calc-em(22px);
-  font-weight:   600;
-  line-height:   1.2; // Makes height 26px
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  // Arrow
-  &:after {
-    content:      '';
-    position:     absolute;
-    top:          calc-em(8px, 22px);
-    right:        0;
-    height:       calc-em(10px, 22px);
-    width:        calc-em(10px, 22px);
-    border-width: 3px 3px 0 0;
-    border-style: solid;
-    border-color: currentColor;
-    transform:    rotate(45deg);
-    transition:   right .1s ease-in-out;
-  }
+  @extend .ArrowLink;
+  font-size:   calc-em(22px);
+  font-weight: 600;
 
   .Card:hover &:after {
     right: -8px;

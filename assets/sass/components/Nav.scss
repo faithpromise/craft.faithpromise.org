@@ -1,6 +1,6 @@
 $Nav-link-padding-h: 8px;
 
-$Nav-desktop-start: 720px;
+$Nav-desktop-start: 768px;
 $Nav-mobile-end: $Nav-desktop-start - 1px;
 
 $Nav-logo-height: 42px;
@@ -100,12 +100,24 @@ $Nav-logo-width: $Nav-logo-height * 4.619047619;
 
 }
 
-.Nav--overlay {
+/*
+|--------------------------------------------------------------------------
+| Variations
+|--------------------------------------------------------------------------
+*/
+
+html.nav_transparent .Nav,
+.Nav--transparent {
   position:         absolute;
   z-index:          $z-index-nav;
   width:            100%;
   background-color: transparent;
   color:            #fff;
+}
+
+html.nav_overlay .Nav,
+.Nav--overlay {
+  @extend .Nav--transparent;
 
   .Nav-bg {
     position:   absolute;
@@ -117,6 +129,16 @@ $Nav-logo-width: $Nav-logo-height * 4.619047619;
     opacity:    .75;
   }
 
+}
+
+html.nav_black .Nav,
+.Nav--black {
+  position: static;
+  background-color: #000;
+
+  .Nav-bg {
+    display: none;
+  }
 }
 
 @media (max-width: $Nav-mobile-end) {

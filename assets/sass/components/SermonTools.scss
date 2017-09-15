@@ -1,0 +1,42 @@
+
+.SermonTools {
+  @include list-unstyled;
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+
+  margin:        2em 0 0;
+  padding:       2em 0;
+  border-top:    1px solid $color-gray-light;
+  border-bottom: 1px solid $color-gray-light;
+
+  li {
+
+    &:nth-child(2) {
+      margin-left:  2em;
+      margin-right: auto;
+    }
+    &:nth-child(3) {
+      margin-right: 2em;
+      margin-left:  auto;
+    }
+  }
+
+  a {
+    @include link-unstyled;
+    color: $color-gray-dark !important;
+
+    &:hover {
+      color: inherit !important;
+    }
+  }
+
+  svg {
+    height:         1.2em;
+    width:          1.2em;
+    margin-right:   .1em;
+    vertical-align: text-bottom;
+    fill:           currentColor;
+  }
+
+}

@@ -1,9 +1,15 @@
 import Vue from 'vue';
 import axios from 'axios';
+import PortalVue from 'portal-vue'
 
 import seriesList from './series/series-list.vue';
+import playlistItem from './series/playlist-item.vue';
+import sermonHero from './series/sermon-hero.vue';
+import sermonTools from './series/sermon-tools.vue';
 
 Vue.prototype.$http = axios;
+
+Vue.use(PortalVue);
 
 const app = new Vue({
 
@@ -11,6 +17,9 @@ const app = new Vue({
 
     components: {
         seriesList,
+        playlistItem,
+        sermonHero,
+        sermonTools,
     },
 
     data: function () {
@@ -45,7 +54,7 @@ const app = new Vue({
 
         nav_toggle: function () {
             this.is_nav_open ? this.nav_close() : this.nav_open();
-        }
+        },
 
     },
 

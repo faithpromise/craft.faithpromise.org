@@ -15,6 +15,7 @@
   "devDependencies": {
     "axios": "^0.16.2",
     "laravel-mix": "^1.4.2",
+    "portal-vue": "^1.1.1",
     "vue": "^2.4.2"
   }
 }

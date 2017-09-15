@@ -2,23 +2,33 @@
 
 {% set title = title is defined ? title : '' %}
 {% set image = image is defined ? image : null %}
+{% set wide_image = wide_image is defined and wide_image ? wide_image : image %}
 {% set style = style is defined ? style : 'imageOnly' %}
 
 {% set css_class = css_class ~ ' Hero--' ~ style %}
 
 <header class="Hero {{ css_class }}">
     {% if image %}
-        <img class="Hero-image"
-            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-            sizes="100vw"
-            srcset="
-                        {{ image.url({ width: 1920 }) }} 1920w,
-                        {{ image.url({ width: 1680 }) }} 1680w,
-                        {{ image.url({ width: 1280 }) }} 1280w,
-                        {{ image.url({ width: 800 }) }} 800w,
-                        {{ image.url({ width: 480 }) }} 480w,
-                        {{ image.url({ width: 320 }) }} 320w,
-                ">
+        <picture>
+            <source
+                    media="(min-width: 1200px)"
+                    sizes="100vw"
+                    srcset="
+                        {{ craft.imageUrl.url(wide_image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(wide_image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(wide_image, { width: 1280 }) }} 1280w
+                    ">
+            <source
+                    sizes="100vw"
+                    srcset="
+                        {{ craft.imageUrl.url(image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(image, { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(image, { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(image, { width: 480 }) }} 480w
+                    ">
+            <img class="Hero-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ entry.title }}">
+        </picture>
     {% endif %}
     <div class="Hero-overlay"></div>
     <div class="Hero-container">

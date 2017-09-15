@@ -40,7 +40,7 @@
 
         <div id="app" class="Layout">
 
-            {% set nav_class = nav_overlay is defined and nav_overlay ? 'Nav Nav--overlay' : 'Nav' %}
+            {% set nav_class = nav_class is defined ? 'Nav ' ~ nav_class : 'Nav' %}
 
             {# Remove 'Nav--overlay' when nav is open #}
             <nav :class="is_nav_open ? 'Nav Nav--fixed' : '{{ nav_class }}'">
@@ -53,9 +53,9 @@
                     </a>
                     <transition name="transition">
                         <ul class="Nav-menu" v-show="!is_nav_open">
-                            <li class="Nav-item"><a class="Nav-link" href="/about">About</a></li>
                             <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
                             <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
+                            <li class="Nav-item"><a class="Nav-link" href="/about">About</a></li>
                             <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
                         </ul>
                     </transition>
@@ -82,6 +82,13 @@
                             <a class="FullNav-link" href="/locations">View All</a>
                         </div>
                         <div class="FullNav-category">
+                            <h5 class="FullNav-heading">Sermons</h5>
+                            <a class="FullNav-link" href="/sermons">Past Sermons</a>
+                            <a class="FullNav-link" href="/sermons/latest">Latest Sermon</a>{#TODO: update#}
+                            <a class="FullNav-link" href="/podcast">Podcast</a>{#TODO: update#}
+                            <a class="FullNav-link" href="/online">Online Campus</a>
+                        </div>
+                        <div class="FullNav-category">
                             <h5 class="FullNav-heading">About</h5>
                             <a class="FullNav-link" href="/what-to-expect">What to Expect</a>
                             <a class="FullNav-link" href="/fpkids">Kids</a>
@@ -100,13 +107,6 @@
                             <a class="FullNav-link" href="/serving">Serving</a>
                             <a class="FullNav-link" href="/giving">Giving</a>
                             <a class="FullNav-link" href="/core">Core Membership</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Sermons</h5>
-                            <a class="FullNav-link" href="/sermons">Past Sermons</a>
-                            <a class="FullNav-link" href="/sermons/latest">Latest Sermon</a>{#TODO: update#}
-                            <a class="FullNav-link" href="/podcast">Podcast</a>{#TODO: update#}
-                            <a class="FullNav-link" href="/online">Online Campus</a>
                         </div>
                         <div class="FullNav-category">
                             <h5 class="FullNav-heading">Events</h5>
@@ -267,6 +267,8 @@
                 </div>
 
             </div>
+
+            <portal-target name="modal"></portal-target>
 
         </div>
 

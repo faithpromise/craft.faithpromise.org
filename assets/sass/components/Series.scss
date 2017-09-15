@@ -1,0 +1,100 @@
+$Series-two-columns-at: 960px;
+$Series-one-columns-to: $Series-two-columns-at - 1;
+
+.Series {
+  @include fluid-size(padding-bottom, 320px, 100px, 720px, $Section-padding);
+  position:         relative;
+  background-color: #444;
+  background-size:  cover;
+  color:            #fff;
+}
+
+.Series-overlay {
+  position:   absolute;
+  z-index:    1;
+  top:        0;
+  right:      0;
+  bottom:     0;
+  left:       0;
+  background: #000;
+  opacity:    .5;
+}
+
+.Series-container {
+  @include container(1200px, $Container-padding-h);
+  position: relative;
+  z-index:  2;
+}
+
+.Series-image img {
+  width: 100%;
+}
+
+.Series-title {
+  @extend .h3;
+  margin-top:    1em;
+  margin-bottom: 0;
+}
+
+.Series-subtitle {
+  margin:      0;
+  font-size:   calc-em(20px);
+  font-weight: 400;
+  opacity:     0.6;
+}
+
+.Series-description {
+  opacity: .75;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Small screens
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: calc-em($Series-one-columns-to)) {
+
+  // Clear the nav
+  .Series {
+    padding-top: $Nav-height-total;
+  }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Medium - large screens
+|--------------------------------------------------------------------------
+*/
+
+@media (min-width: $Series-two-columns-at) {
+
+  // More top padding
+  .Series {
+    @include fluid-size(padding-top, 320px, 100px, 720px, $Section-padding);
+  }
+
+  .Series-container {
+    display: flex;
+    width:   100%;
+  }
+
+  .Series-image,
+  .Series-content {
+    padding: 0 2em;
+  }
+
+  .Series-content {
+    max-width: calc-em(574px);
+  }
+
+  .Series-image {
+    text-align: right;
+
+    > img {
+      width: 100%;
+    }
+  }
+
+}

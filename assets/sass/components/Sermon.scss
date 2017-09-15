@@ -1,0 +1,47 @@
+
+.Sermon {
+  padding-top:    4em;
+  padding-bottom: calc-em($Section-padding);
+}
+
+.Sermon-seriesLink {
+  @extend .ArrowLink;
+  font-size:   calc-em(22px);
+  font-weight: 500;
+}
+
+.Sermon-container {
+  max-width: calc-em(620px);
+  margin:    0 auto;
+  padding:   0 calc-em(40px);
+}
+
+.Sermon-title {
+  @extend .TextSection-title;
+}
+
+.Sermon-subtitle {
+  @extend .TextSection-subtitle;
+  margin-bottom: 1em;
+  //font-size:   calc-em(20px);
+  color:         $color-gray;
+  font-weight:   normal;
+}
+
+.Sermon-text {
+  font-size: calc-em(18px);
+  //color: $color-gray;
+}
+
+//.Sermon-tools {
+//  margin:        2em 0;
+//  padding:       2em 0;
+//  border-top:    1px solid $color-gray-light;
+//  border-bottom: 1px solid $color-gray-light;
+//}
+
+.Sermon-audio {
+  margin-bottom:    2em;
+  padding:          1em;
+  background-color: $color-gray-darker;
+}

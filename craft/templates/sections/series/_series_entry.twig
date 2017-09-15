@@ -1,13 +1,92 @@
-{% extends "_layout" %}
-
-{% set thumb = { width: 800 } %}
+{% set nav_class = 'Nav--transparent' %}
+{% extends "_layout/layout.twig" %}
 
 {% block content %}
 
-<h1>{{ entry.title }}</h1>
+    {#
+    |--------------------------------------------------------------------------
+    | Sermon Series
+    |--------------------------------------------------------------------------
+    #}
 
-{{ dump(entry.seriesImageTall[0].getUrl(thumb)) }}
+    {% set media = craft.entries.section('seriesMedia').relatedTo(entry).order('postDate') %}
 
-<img src="{{ entry.seriesImageTall[0].getUrl(thumb) }}">
+    {% includeCssFile craft.imageUrl.url(entry.seriesImageWide[0], { palette: 'css' }) %}
+
+    <div class="Series" style="background-image: url({{ craft.imageUrl.url(entry.seriesImageSquare[0], { width: 3000, blur: 1800 }) }});">
+        <div class="Series-overlay"></div>
+        <div class="Series-container">
+            <div class="Series-image">
+                <picture>
+                    <source
+                            media="(min-width: 960px)"
+                            sizes="50vw"
+                            srcset="
+                        {{ craft.imageUrl.url(entry.seriesImageSquare[0], { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(entry.seriesImageSquare[0], { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(entry.seriesImageSquare[0], { width: 1280 }) }} 1280w
+                    ">
+                    <source
+                            media="(min-width: 720px)"
+                            sizes="50vw"
+                            srcset="
+                        {{ craft.imageUrl.url(entry.seriesImageWide[0], { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(entry.seriesImageWide[0], { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(entry.seriesImageWide[0], { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(entry.seriesImageWide[0], { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(entry.seriesImageWide[0], { width: 480 }) }} 480w
+                    ">
+                    <source
+                            sizes="100vw"
+                            srcset="
+                        {{ craft.imageUrl.url(entry.seriesImageTall[0], { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(entry.seriesImageTall[0], { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(entry.seriesImageTall[0], { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(entry.seriesImageTall[0], { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(entry.seriesImageTall[0], { width: 480 }) }} 480w
+                    ">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ entry.title }}">
+                </picture>
+            </div>
+            <div class="Series-content">
+                <h1 class="Series-title">{{ entry.title }}</h1>
+                <p class="Series-subtitle">Faith Promise Sermon Series</p>
+                <p class="Series-description">Lorm ipsum means that its really importent for you to stay off drugs and stay in scool. You need to no things that will help you in life. Like MATHS and gym. You don't want to be dum.</p>
+
+                <div class="Series-playlist">
+                    <div class="Playlist image-fg-muted image-fg-1 image-fg-vibrant-dark">
+                        {% for item in media %}
+                            <playlist-item
+                                    id="{{ item.id }}"
+                                    title="{{ item.title }}"
+                                    date="{{ item.sermonDate is defined and item.sermonDate ? item.sermonDate|date('M n, Y') : item.postDate|date('M n, Y') }}"
+                                    url="{{ item.url }}"
+                                    video-url="{{ item.videoUrl }}"
+                            >
+                            </playlist-item>
+                        {% endfor %}
+                        <div class="Playlist-item">
+                            <div class="Playlist-play">
+                                <svg>
+                                    <use xlink:href="/assets/icons.svg#group-study"></use>
+                                </svg>
+                            </div>
+                            <div class="Playlist-title">Group Study</div>
+                            <div class="Playlist-more">View</div>
+                            <div class="Playlist-arrow">
+                                <svg>
+                                    <use xlink:href="/assets/icons.svg#chevron-right"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
 
 {% endblock %}

@@ -1,0 +1,83 @@
+{% set nav_class = 'Nav--overlay' %}
+
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Sermon / Media
+    |--------------------------------------------------------------------------
+    #}
+
+    {# Hero #}
+
+    {% set series = entry.series[0] %}
+    {% set wide_image = series.seriesImageWide[0] %}
+    {% set tall_image = series.seriesImageTall[0] %}
+
+    {% set sermon_speaker = entry.speaker | length ? entry.speaker[0].title : entry.guestSpeaker %}
+    {% set sermon_speaker_title = entry.speaker | length ? entry.speaker[0].jobTitle : null %}
+
+    {% includeCssFile craft.imageUrl.url(wide_image, { palette: 'css' }) %}
+
+    {% set videoSegments = entry.videoUrl | split('/') %}
+    {% set videoId = videoSegments | last %}
+    {# TODO: set autoplay true for Youtube #}
+    {% set videoUrl = 'https://www.youtube.com/embed/' ~ videoId ~ '?rel=0&amp;showinfo=0' %}
+    {% if 'vimeo.com' in entry.videoUrl %}
+        {% set videoUrl = 'https://player.vimeo.com/video/' ~ videoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=true' %}
+    {% endif %}
+
+    <sermon-hero video-url="{{ videoUrl }}">
+
+        <picture>
+            <source
+                    media="(min-width: 1200px)"
+                    sizes="100vw"
+                    srcset="
+                        {{ craft.imageUrl.url(wide_image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(wide_image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(wide_image, { width: 1280 }) }} 1280w
+                    ">
+            <source
+                    sizes="100vw"
+                    srcset="
+                        {{ craft.imageUrl.url(tall_image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(tall_image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(tall_image, { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(tall_image, { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(tall_image, { width: 480 }) }} 480w
+                    ">
+            <img class="SermonHero-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ entry.title }}">
+        </picture>
+
+    </sermon-hero>
+
+    <div class="Sermon">
+
+        {# image-bg-vibrant-dark from Imgix palette #}
+
+        <div class="Sermon-container">
+
+            <h2 class="Sermon-title">{{ entry.title }}</h2>
+            <div class="Sermon-subtitle">{{ entry.guestSpeaker ? 'Guest Speaker, ' }}{{ sermon_speaker }}{{ sermon_speaker_title ? (', ' ~ sermon_speaker_title) : '' }}{% if entry.sermonDate %}{% endif %}</div>
+            <p class="Sermon-text">
+                Lorm ipsum means that its really importent for you to stay off drugs and stay in scool. You need to no things that will help you in life. Like MATHS and gym. You don't want to be dum.
+            </p>
+
+            <sermon-tools
+                    url="{{ entry.url }}"
+                    audioUrl="{{ entry.audioUrl }}"
+                    title-encoded="{{ entry.title|url_encode }}"
+                    soundcloud-id="{{ entry.soundcloudId }}"
+            ></sermon-tools>
+
+            <p>
+                <a class="Sermon-seriesLink image-fg-muted image-fg-1 image-fg-vibrant-dark" href="{{ series.url }}">View more from this series</a>
+            </p>
+
+        </div>
+    </div>
+
+{% endblock %}
