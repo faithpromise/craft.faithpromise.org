@@ -1,5 +1,6 @@
 $Section-padding: 140px;
-$Section-text-max-width: $Container-max-width / 2 - $Container-padding-h;
+$Section-text-max-width: 760px;
+$Section-text-with-bg-max-width: 620px;
 $Section-align-at: 860px;
 
 $Section-stack-float-to: 1199px;
@@ -174,8 +175,8 @@ $z-index-section-container: 4;
 
 @media (min-width: calc-em($Section-media-float-from)) {
 
-  .TextSection-copy,
-  .TextSection-media {
+  .TextSection.has-media .TextSection-copy,
+  .TextSection.has-media .TextSection-media {
     width:         50%;
     padding-left:  2em;
     padding-right: 2em;
@@ -253,6 +254,10 @@ $z-index-section-container: 4;
 
   .Button {
     @extend .Button--light;
+  }
+
+  .TextSection-copy {
+    max-width: calc-em($Section-text-with-bg-max-width);
   }
 
 }
