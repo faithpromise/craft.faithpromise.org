@@ -50,7 +50,7 @@
                 {% if hasFloatingImage %}
                     <img
                             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                            sizes="50vw"
+                            sizes="(min-width:1200px) 50vw, 100vw"
                             srcset="
                         {{ image.url({ width: 1920 }) }} 1920w,
                         {{ image.url({ width: 1680 }) }} 1680w,
