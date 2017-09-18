@@ -24,12 +24,13 @@
 #}
 
 {% set nav_class = 'Nav--overlay' %}
+{% set cache_key = 'home_page_' ~ (craft.request.isMobileBrowser() ? 'mobile' : 'desktop') %}
 
 {% extends '_layout/layout.twig' %}
 
 {% block content %}
 
-    {% cache globally using key 'home-page' %}
+    {% cache globally using key cache_key %}
 
     {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
@@ -60,7 +61,7 @@
 
         <div class="HeaderVideo">
             {% if craft.request.isMobileBrowser() %}
-                {#TODO: Get gif / mobile image#}
+                {# TODO: Get gif / mobile image #}
                 <img src="https://placeimg.com/640/480/any/sepia?t=1505305979703">
             {% else %}
                 {% set home_page_video = craft.assets.id(1580).first() %}

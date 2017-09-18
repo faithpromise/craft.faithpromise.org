@@ -1,6 +1,7 @@
 $SermonHero-button-button-size: 160px;
 
 .SermonHero-player {
+  @include fluid-size(padding-top, 320px, 100px, 720px, 128px);
   background-color: #000; // Matches Vimeo player bg
   padding-top:      calc-em(128px);
 }
@@ -8,7 +9,7 @@ $SermonHero-button-button-size: 160px;
 .SermonHero-video {
   position:    relative;
   height:      0;
-  padding-top: 36.458%;
+  padding-top: 56.25%;
   font-size:   0;
 
   > iframe {
@@ -17,6 +18,12 @@ $SermonHero-button-button-size: 160px;
     left:     0;
     width:    100%;
     height:   100%;
+  }
+
+  @media (min-width: calc-em(1200px)) {
+
+    padding-top: 36.458%;
+
   }
 
 }

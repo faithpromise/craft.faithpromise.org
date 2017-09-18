@@ -12,11 +12,12 @@
 
     {# Hero #}
 
-    {% set series = entry.series[0] %}
-    {% set wide_image = series.seriesImageWide[0] %}
-    {% set tall_image = series.seriesImageTall[0] %}
+    {% set series               = entry.series[0] %}
+    {% set tall_image           = series.seriesImageTall[0] %}
+    {% set wide_image           = series.seriesImageWide[0] %}
+    {% set square_image         = series.seriesImageSquare[0] %}
 
-    {% set sermon_speaker = entry.speaker | length ? entry.speaker[0].title : entry.guestSpeaker %}
+    {% set sermon_speaker       = entry.speaker | length ? entry.speaker[0].title : entry.guestSpeaker %}
     {% set sermon_speaker_title = entry.speaker | length ? entry.speaker[0].jobTitle : null %}
 
     {% includeCssFile craft.imageUrl.url(wide_image, { palette: 'css' }) %}
@@ -41,6 +42,7 @@
                         {{ craft.imageUrl.url(wide_image, { width: 1280 }) }} 1280w
                     ">
             <source
+                    media="(min-width: 480px)"
                     sizes="100vw"
                     srcset="
                         {{ craft.imageUrl.url(tall_image, { width: 1920 }) }} 1920w,
@@ -48,6 +50,15 @@
                         {{ craft.imageUrl.url(tall_image, { width: 1280 }) }} 1280w,
                         {{ craft.imageUrl.url(tall_image, { width: 800 }) }} 800w,
                         {{ craft.imageUrl.url(tall_image, { width: 480 }) }} 480w
+                    ">
+            <source
+                    sizes="100vw"
+                    srcset="
+                        {{ craft.imageUrl.url(square_image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(square_image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(square_image, { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(square_image, { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(square_image, { width: 480 }) }} 480w
                     ">
             <img class="SermonHero-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ entry.title }}">
         </picture>
@@ -74,7 +85,7 @@
             ></sermon-tools>
 
             <p>
-                <a class="Sermon-seriesLink image-fg-muted image-fg-1 image-fg-vibrant-dark" href="{{ series.url }}">View more from this series</a>
+                <a class="Sermon-seriesLink image-fg-muted image-fg-1 image-fg-vibrant-dark" href="{{ series.url }}">More from this series</a>
             </p>
 
         </div>

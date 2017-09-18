@@ -7,7 +7,7 @@
           <svg>
             <use xlink:href="/assets/icons.svg#audio"></use>
           </svg>
-          Audio
+          <span class="SermonTools-label">Audio</span>
         </a>
       </li>
       <li>
@@ -16,7 +16,7 @@
           <svg>
             <use xlink:href="/assets/icons.svg#group-study"></use>
           </svg>
-          Group Study
+          <span class="SermonTools-label"><span class="sm-hidden">Group </span>Study</span>
         </a>
       </li>
       <li>
@@ -24,7 +24,7 @@
           <svg>
             <use xlink:href="/assets/icons.svg#facebook"></use>
           </svg>
-          Share
+          <span class="SermonTools-label">Share</span>
         </a>
         </a>
       </li>
@@ -33,7 +33,7 @@
           <svg>
             <use xlink:href="/assets/icons.svg#twitter"></use>
           </svg>
-          Tweet
+          <span class="SermonTools-label">Tweet</span>
         </a>
       </li>
     </ul>
@@ -69,8 +69,9 @@
                 // TODO: Shorten URL
                 return 'https://twitter.com/intent/tweet?text=Check%20out%20this%20%40faithpromise+sermon,%20%27' + this.titleEncoded + '%27&url=' + this.url;
             },
+            // TODO: We need to change the color of the play button to match the series
             soundcloud_url() {
-                return 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + this.soundcloudId + '&amp;color=%23df4f92&amp;inverse=true&amp;auto_play=true&amp;show_user=true';
+                return 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + this.soundcloudId + '&amp;color=c5c5c5&amp;inverse=true&amp;auto_play=true&amp;show_user=true';
             },
         },
 

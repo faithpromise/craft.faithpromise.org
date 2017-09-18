@@ -7,11 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="google-site-verification" content="hbqvrQMid1Tpy4mlqi-wtEVGpcZ-tlZ5P_28dOhUgQU">
-        <!-- TODO: Canonical URL -->
 
+        {# TODO: Canonical URL #}
         <link rel="canonical" href="">
 
-        <!-- TODO: Apple icons -->
+        {# TODO: Apple icons #}
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/apple-touch-icon-144x144.png">
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/apple-touch-icon-152x152.png">
         <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
@@ -20,14 +20,15 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/assets/favicons/mstile-144x144.png">
 
-        <!-- TODO: Social tags (see old site) -->
+        {# TODO: Social tags (see old site) #}
 
         <!-- Fonts -->
         <script src="https://use.typekit.net/vyb6fjv.js"></script>
         <script>try {Typekit.load({ async: false });} catch (e) {}</script>
 
-        <!-- TODO: Stylesheet -->
-        <link rel="stylesheet" href="{{ '/build/main.css' | cacheBuster }}">
+        {# Prefix with CDN url when in production #}
+        {% set cdn_url = craft.config.devMode ? '' : '' %}
+        <link rel="stylesheet" href="{{ cdn_url }}{{ '/build/main.css' | cacheBuster }}">
         {{ getHeadHtml() }}
 
         <link rel="home" href="{{ siteUrl }}">
@@ -35,8 +36,8 @@
 
     <body>
 
-        <!-- TODO: Include Google Analytics -->
-        <!-- TODO: Facebook SDK -->
+        {# TODO: Include Google Analytics #}
+        {# TODO: Facebook SDK #}
 
         <div id="app" class="Layout">
 
@@ -67,7 +68,9 @@
                 </div>
             </nav>
 
-            <transition name="transition">
+            {% cache globally using key 'full_nav' %}
+                {% set latest_sermon = craft.entries({ type: 'sermon', with: 'series' }).order('sermonDate DESC').first() %}
+                <transition name="transition">
                 <div class="FullNav" v-show="is_nav_open">
                     <div class="FullNav-container">
                         <div class="FullNav-category">
@@ -84,8 +87,8 @@
                         <div class="FullNav-category">
                             <h5 class="FullNav-heading">Sermons</h5>
                             <a class="FullNav-link" href="/sermons">Past Sermons</a>
-                            <a class="FullNav-link" href="/sermons/latest">Latest Sermon</a>{#TODO: update#}
-                            <a class="FullNav-link" href="/podcast">Podcast</a>{#TODO: update#}
+                            <a class="FullNav-link" href="{{ latest_sermon.url }}">Latest Sermon</a>
+                            <a class="FullNav-link" href="https://itun.es/us/tfmeeb.c">Podcast</a>
                             <a class="FullNav-link" href="/online">Online Campus</a>
                         </div>
                         <div class="FullNav-category">
@@ -130,6 +133,7 @@
                     </div>
                 </div>
             </transition>
+            {% endcache %}
 
             <transition name="transition">
                 <div class="Layout-content" v-show="!is_nav_open">
