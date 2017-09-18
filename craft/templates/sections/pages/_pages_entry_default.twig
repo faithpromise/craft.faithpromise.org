@@ -8,7 +8,7 @@
 
     {% block page_content %}{% endblock %}
 
-    {% cache globally %}
+    {% cache globally using key craft.request.path %}
 
     {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
 
