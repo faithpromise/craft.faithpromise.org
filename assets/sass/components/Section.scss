@@ -32,7 +32,7 @@ $Section-text-max-width: 600px;
 }
 
 .Section-title {
-  @extend .h2;
+  @extend .h3;
   margin:      0;
   line-height: 1;
   text-align:  center;

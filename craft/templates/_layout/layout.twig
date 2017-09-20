@@ -57,7 +57,7 @@
                         <ul class="Nav-menu" v-show="!is_nav_open">
                             <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
                             <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
-                            <li class="Nav-item"><a class="Nav-link" href="/about">About</a></li>
+                            <li class="Nav-item"><a class="Nav-link" href="/what-to-expect">About</a></li>
                             <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
                         </ul>
                     </transition>
@@ -93,6 +93,11 @@
                             <a class="FullNav-link" href="/online">Online Campus</a>
                         </div>
                         <div class="FullNav-category">
+                            <h5 class="FullNav-heading">Events</h5>
+                            <a class="FullNav-link" href="/events">Upcoming Events</a>
+                            <a class="FullNav-link" href="/missions">Mission Trips</a>
+                        </div>
+                        <div class="FullNav-category">
                             <h5 class="FullNav-heading">About</h5>
                             <a class="FullNav-link" href="/what-to-expect">What to Expect</a>
                             <a class="FullNav-link" href="/fpkids">Kids</a>
@@ -111,11 +116,6 @@
                             <a class="FullNav-link" href="/serving">Serving</a>
                             <a class="FullNav-link" href="/giving">Giving</a>
                             <a class="FullNav-link" href="/core">Core Membership</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Events</h5>
-                            <a class="FullNav-link" href="/events">Upcoming Events</a>
-                            <a class="FullNav-link" href="/missions">Mission Trips</a>
                         </div>
                         <div class="FullNav-category">
                             <h5 class="FullNav-heading">Care</h5>
@@ -138,13 +138,7 @@
 
             <transition name="transition">
                 <div class="Layout-content" v-show="!is_nav_open">
-
                     {% block content %}{% endblock %}
-
-                    <footer class="Layout-footer">
-
-                    </footer>
-
                 </div>
             </transition>
 
@@ -154,14 +148,6 @@
                     <div class="Footer-section">
                         <h5 class="Footer-heading">Times &amp; Locations</h5>
                         <ul class="Footer-nav">
-                            {#<li><a class="Footer-link" href="/locations/anderson">Anderson</a></li>#}
-                            {#<li><a class="Footer-link" href="/locations/campbell">Campbell</a></li>#}
-                            {#<li><a class="Footer-link" href="/locations/blount">Blount</a></li>#}
-                            {#<li><a class="Footer-link" href="/locations/farragut">Farragut</a></li>#}
-                            {#<li><a class="Footer-link" href="/locations/north">North Knox</a></li>#}
-                            {#<li><a class="Footer-link" href="/locations/pellissippi">Pellissippi</a></li>#}
-                            {#<li><a class="Footer-link" href="/online">Online Campus</a></li>#}
-                            {#<li><a class="Footer-link" href="/locations">View All</a></li>#}
                             <li><a class="Footer-link" href="/locations/pellissippi">Pellissippi</a></li>
                             <li><a class="Footer-link" href="/locations/blount">Blount</a></li>
                             <li><a class="Footer-link" href="/locations/north">North Knox</a></li>
