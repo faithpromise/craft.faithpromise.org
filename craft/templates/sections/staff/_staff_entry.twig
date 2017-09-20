@@ -1,17 +1,114 @@
-{% extends "_layout" %}
+{% extends "_layout/layout.twig" %}
 
-{% set thumb = { width: 800 } %}
+{% set nav_class = 'Nav--transparent' %}
 
 {% block content %}
 
-    {% embed '_layout/hero.twig' with { 'title' : entry.title, 'class' : '' } %}
-        {% block text %}
-            We'd love for you to get to know the people who lead our church on the weekends and throughout the week. We're passionate about serving our city and surrounding areas for the glory of God's Kingdom.
-        {% endblock %}
-    {% endembed %}
+    {#
+    |--------------------------------------------------------------------------
+    | Hero
+    |--------------------------------------------------------------------------
+    #}
 
-    <img src="{{ entry.staffPhoto[0].getUrl({ width: 200 }) }}">
+    {% set image = entry.staffPhoto | length ? entry.staffPhoto[0] : null %}
+    {% set hero_styles = image ? 'background-image: url(' ~ craft.imageUrl.url(image, { width: 1500, px: 100, fm: 'gif' }) ~ ');' : '' %}
 
-    {{ entry.bio }}
+    {% if entry.campus | length %}
+        {% set team_title = 'Meet the ' ~ entry.campus[0].title ~ ' Campus Team' %}
+        {% set more_staff = craft.entries.section('staff').relatedTo({ targetElement: entry.campus[0], field: 'campus' }).find() %}
+    {% elseif entry.ministries | length %}
+        {% set ministry = entry.ministries[0] %}
+        {% set team_title = 'Meet the ' ~ ministry.title ~ ' Team' %}
+        {% set more_staff = craft.entries.section('staff').relatedTo({ targetElement: ministry, field: 'ministries' }).find() %}
+    {% endif %}
+
+    <div class="StaffHero" style="{{ hero_styles }}">
+        {% if image %}
+            <div class="Series-overlay"></div>
+            <div class="StaffHero-image">
+                <img
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                        sizes="250px"
+                        srcset="
+                    {{ craft.imageUrl.url(image, { width: 1080, height: 1080, crop: 'faces', fit: 'crop' }) }} 1080w,
+                    {{ craft.imageUrl.url(image, { width: 800, height: 800, crop: 'faces', fit: 'crop' }) }} 800w,
+                    {{ craft.imageUrl.url(image, { width: 480, height: 480, crop: 'faces', fit: 'crop' }) }} 480w,
+                    {{ craft.imageUrl.url(image, { width: 320, height: 320, crop: 'faces', fit: 'crop' }) }} 320w,
+                ">
+            </div>
+        {% endif %}
+        <div class="StaffHero-text">
+            <h1 class="StaffHero-title">{{ entry.title }}</h1>
+            <div class="StaffHero-subtitle">{{ entry.jobTitle }}</div>
+            {% if entry.phoneExtension %}
+                <p class="StaffHero-phone">(865) 251-2590 x {{ entry.phoneExtension }}</p>
+            {% endif %}
+            <div class="StaffHero-social">
+                {% if entry.facebook %}
+                    <a class="StaffHero-icon" href="https://www.facebook.com/{{ entry.facebook }}">
+                        <svg class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#facebook"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+                {% if entry.instagram %}
+                    <a class="StaffHero-icon" href="https://instagram.com/{{ entry.instagram }}">
+                        <svg class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#instagram"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+                {% if entry.twitter %}
+                    <a class="StaffHero-icon" href="{{ entry.twitter }}">
+                        <svg class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#twitter"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+                {% if entry.email %}
+                    <a class="StaffHero-icon" href="https://twitter.com/{{ entry.email }}">
+                        <svg class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#mail"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    {#
+    |--------------------------------------------------------------------------
+    | Bio
+    |--------------------------------------------------------------------------
+    #}
+
+    {% if entry.bio %}
+        {% include '_layout/text_section.twig' with {
+        title: 'About Me',
+        text: entry.bio,
+        align: 'center'
+        } %}
+    {% endif %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Meet additional staff
+    |--------------------------------------------------------------------------
+    #}
+
+    {% if more_staff is defined %}
+        {% embed '_layout/section.twig' with {
+        title: team_title,
+        background: 'gray',
+        linkUrl_1: '/staff',
+        linkText_1: 'Meet the Full Staff'
+        } %}
+            {% block body %}
+                {% include '_layout/components/person_list.twig' with { 'entries': more_staff } %}
+            {% endblock %}
+        {% endembed %}
+    {% endif %}
+
 
 {% endblock %}

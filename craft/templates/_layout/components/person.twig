@@ -14,15 +14,23 @@
 {{ start_tag|raw }}
 <div class="Person-photo">
     {% if image %}
-        <img src="{{ image.getUrl() }}">
+        <img
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                sizes="250px"
+                srcset="
+                    {{ craft.imageUrl.url(image, { width: 1080, height: 1080, crop: 'faces', fit: 'crop' }) }} 1080w,
+                    {{ craft.imageUrl.url(image, { width: 800, height: 800, crop: 'faces', fit: 'crop' }) }} 800w,
+                    {{ craft.imageUrl.url(image, { width: 480, height: 480, crop: 'faces', fit: 'crop' }) }} 480w,
+                    {{ craft.imageUrl.url(image, { width: 320, height: 320, crop: 'faces', fit: 'crop' }) }} 320w,
+                ">
     {% else %}
         <img src="http://s3-us-west-2.amazonaws.com/faithpromise.org/common/profile-photo-female-1.jpg">
         {#{% cache globally using key 'profile_photo_female_1' for 10 secs %}#}
         {#{% set default_image = craft.assets({ filename: 'profile-photo-female-1.jpg' }) %}#}
         {#{% if default_image | length %}#}
-            {#<img src="{{ default_image[0].getUrl() }}">#}
+        {#<img src="{{ default_image[0].getUrl() }}">#}
         {#{% else %}#}
-            {#<span class="Person-photoPlaceholder"></span>#}
+        {#<span class="Person-photoPlaceholder"></span>#}
         {#{% endif %}#}
         {#{% endcache %}#}
     {% endif %}

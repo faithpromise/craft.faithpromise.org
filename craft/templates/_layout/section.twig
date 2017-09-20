@@ -28,16 +28,16 @@
                 {{ text | markdown }} {# text passed as param #}
             </div>
 
-            <div class="TextSection-actions">
-                {% if linkUrl_1 and linkText_1 %}
-                    <a class="Button" href="{{ block.linkUrl_1 }}">{{ block.linkText_1 }}</a>{% endif %}
-                {% if linkUrl_2 and linkText_2 %}
-                    <a class="Button" href="{{ block.linkUrl_2 }}">{{ block.linkText_2 }}</a>{% endif %}
-            </div>
-
         </div>
 
         <div class="Section-content">{% block body %}{% endblock %}</div>
+
+        <div class="Section-actions">
+            {% if linkUrl_1 and linkText_1 %}
+                <a class="Button" href="{{ linkUrl_1 }}">{{ linkText_1 }}</a>{% endif %}
+            {% if linkUrl_2 and linkText_2 %}
+                <a class="Button" href="{{ linkUrl_2 }}">{{ linkText_2 }}</a>{% endif %}
+        </div>
 
     </div>
 

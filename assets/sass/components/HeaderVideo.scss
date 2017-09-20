@@ -8,8 +8,21 @@
   color:    #fff;
 }
 
+//.HeaderVideo .Button {
+//  @extend .Button--light;
+//}
+
 .HeaderVideo .Button {
-  @extend .Button--light;
+  border-color:     #fff;
+  background-color: #fff;
+  //background-color: rgba(0, 0, 0, 0.35);
+  color:            $color-gray-darker;
+
+  &:hover {
+    //background-color: rgba(255, 255, 255, 0.75);
+    //color:            #fff;
+  }
+
 }
 
 .HeaderVideo-actions > .Button + .Button {
