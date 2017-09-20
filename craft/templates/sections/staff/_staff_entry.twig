@@ -15,11 +15,11 @@
 
     {% if entry.campus | length %}
         {% set team_title = 'Meet the ' ~ entry.campus[0].title ~ ' Campus Team' %}
-        {% set more_staff = craft.entries.section('staff').relatedTo({ targetElement: entry.campus[0], field: 'campus' }).find() %}
+        {% set more_staff = craft.entries.section('staff').relatedTo({ targetElement: entry.campus[0], field: 'campus' }).id('not ' ~ entry.id).find() %}
     {% elseif entry.ministries | length %}
         {% set ministry = entry.ministries[0] %}
         {% set team_title = 'Meet the ' ~ ministry.title ~ ' Team' %}
-        {% set more_staff = craft.entries.section('staff').relatedTo({ targetElement: ministry, field: 'ministries' }).find() %}
+        {% set more_staff = craft.entries.section('staff').relatedTo({ targetElement: ministry, field: 'ministries' }).id('not ' ~ entry.id).find() %}
     {% endif %}
 
     <div class="StaffHero" style="{{ hero_styles }}">
