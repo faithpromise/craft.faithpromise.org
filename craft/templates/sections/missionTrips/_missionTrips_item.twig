@@ -1,0 +1,12 @@
+{% set params = {
+'image': entry_item.missionLocation[0] ?? null,
+'secondary_image': pastor and pastor.staffPhoto[0] ? pastor.staffPhoto[0] : null,
+'secondary_image_caption': pastor ? pastor.title ~ ', Campus Pastor' : null,
+'title': entry_item.area,
+'subtitle': entry_item.title ~ ' Campus',
+'text': text,
+'action_url': entry_item.url,
+'action_text': 'More Details'
+} %}
+
+{% include '_layout/components/card.twig' with params %}

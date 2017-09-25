@@ -4,11 +4,12 @@
     <ul class="{{ klass }}">
         {% for entry_item in entries %}
 
-            {% set template = 'sections/' ~ entry_item.section.handle  ~ '/_' ~ entry_item.section.handle  ~ '_item.twig' %}
+            {% set type_template = 'sections/' ~ entry_item.section.handle  ~ '/_' ~ entry_item.type.handle  ~ '_item.twig' %}
+            {% set section_template = 'sections/' ~ entry_item.section.handle  ~ '/_' ~ entry_item.section.handle  ~ '_item.twig' %}
+            {#TODO: Backup template generic_item.twig#}
 
             <li class="Cards-item">
-                {#TODO: Backup template generic_item.twig#}
-                {% include template ignore missing %}
+                {% include [type_template, section_template] ignore missing %}
             </li>
         {% endfor %}
     </ul>
