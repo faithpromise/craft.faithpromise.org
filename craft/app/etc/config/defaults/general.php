@@ -383,7 +383,7 @@ return array(
 	/**
 	 * The maximum upload file size allowed in bytes.
 	 */
-	'maxUploadFileSize' => 16777216,
+	'maxUploadFileSize' => 104857600,
 
 	/**
 	 * Whether generated URLs should omit 'index.php', e.g. http://domain.com/path as opposed to showing it,
