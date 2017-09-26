@@ -38,7 +38,7 @@ $z-index-section-container: 4;
 }
 
 .TextSection-title {
-  @extend .h3;
+  @extend .h2;
   margin:      0;
   line-height: 1.1;
 }
@@ -337,6 +337,31 @@ $z-index-section-container: 4;
       background: linear-gradient(to left, rgba(0, 0, 0, .75) 35%, transparent 100%);
     }
 
+  }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| User / CMS content
+|--------------------------------------------------------------------------
+*/
+
+.TextSection-text {
+
+  h1 {
+    //@include fluid-type(320px, 18px, 1000px, 24px);
+    font-size: calc-em($font-size-heading-3-desktop, 24px);
+  }
+
+  h2 {
+    //@include fluid-type(320px, 18px, 1000px, 24px);
+    font-size: calc-em($font-size-heading-4-desktop, 24px);
+  }
+
+  h3 {
+    //@include fluid-type(320px, 18px, 1000px, 24px);
+    font-size: calc-em($font-size-heading-5-desktop, 24px);
   }
 
 }
