@@ -1,0 +1,71 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Hero
+    |--------------------------------------------------------------------------
+    #}
+
+    {% set hero_image = category.missionLocationPhoto|length ? category.missionLocationPhoto[0] : null %}
+
+    {% include '_layout/hero.twig' with { title: category.title, image: hero_image, style: 'textOverlay' } %}
+
+
+    {#
+    |--------------------------------------------------------------------------
+    | Trips
+    |--------------------------------------------------------------------------
+    #}
+
+    {% set trips = craft.entries({ section: 'missionTrips', relatedTo: { targetElement: category, field: 'missionLocation' } }).order('expiryDate').find() %}
+    {% set gray = false %}
+
+    {% for trip in trips %}
+
+        {% set trip_contact = trip.firstName ? (trip.firstName ~ ' ' ~ trip.lastName) : trip.email %}
+
+        {% embed '_layout/text_section.twig' with {
+        title: trip.tripDates,
+        image: hero_image,
+        imageLayout: 'floating',
+        align: gray ? 'right' : 'left'
+        } %}
+            {% block text %}
+                {{ trip.markdown | markdown }}
+                {% if trip.cost %}
+                    <p>The approximate cost is: {{ trip.cost }}.</p>
+                {% endif %}
+                {% if trip_contact %}
+                    <p>
+                        If you're interested in going or need more information, please contact
+                        {% if trip.email %}
+                            <a href="mailto:{{ trip.email }}">{{ trip_contact }}</a>
+                        {% else %}
+                            {{ trip_contact }}
+                        {% endif %}
+                        {% if trip.phone %}at {{ trip.phone }}{% endif %}
+                    </p>
+                {% else %}
+                    <p>If you're interested in going or need more information, please contact
+                        <a href="mailto:missions@faithpromise.org">missions@faithpromise.org</a>.</p>
+                {% endif %}
+            {% endblock %}
+        {% endembed %}
+        {% set gray = true %}
+    {% endfor %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Additional trips
+    |--------------------------------------------------------------------------
+    #}
+
+    {% include 'sections/missionTrips/locations.twig' with {
+    params: { title: 'Other Trips', background: 'gray', linkUrl_1: '/missions', linkText_1: 'View More' },
+    exclude: category.id,
+    limit: 3
+    } %}
+
+{% endblock %}
