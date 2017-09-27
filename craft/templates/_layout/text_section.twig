@@ -31,12 +31,12 @@
                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                     sizes="100vw"
                     srcset="
-                        {{ image.url({ width: 1920 }) }} 1920w,
-                        {{ image.url({ width: 1680 }) }} 1680w,
-                        {{ image.url({ width: 1280 }) }} 1280w,
-                        {{ image.url({ width: 800 }) }} 800w,
-                        {{ image.url({ width: 480 }) }} 480w,
-                        {{ image.url({ width: 320 }) }} 320w,
+                        {{ craft.imageUrl.url(image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(image, { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(image, { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(image, { width: 480 }) }} 480w,
+                        {{ craft.imageUrl.url(image, { width: 320 }) }} 320w,
                 ">
         </div>
         <div class="TextSection-overlay"></div>
@@ -52,12 +52,12 @@
                             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                             sizes="(min-width:1200px) 50vw, 100vw"
                             srcset="
-                        {{ image.url({ width: 1920 }) }} 1920w,
-                        {{ image.url({ width: 1680 }) }} 1680w,
-                        {{ image.url({ width: 1280 }) }} 1280w,
-                        {{ image.url({ width: 800 }) }} 800w,
-                        {{ image.url({ width: 480 }) }} 480w,
-                        {{ image.url({ width: 320 }) }} 320w,
+                        {{ craft.imageUrl.url(image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(image, { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(image, { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(image, { width: 480 }) }} 480w,
+                        {{ craft.imageUrl.url(image, { width: 320 }) }} 320w,
                 ">
                 {% endif %}
 
