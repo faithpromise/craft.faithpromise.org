@@ -1,0 +1,10 @@
+{% set entry_params = {
+'image': entry_item.alignmentImage[0] ?? null,
+'title': entry_item.title,
+'text': null,
+'action_url': entry_item.url,
+'action_text': 'View Study',
+'is_book': true
+} %}
+
+{% include '_layout/components/card.twig' with entry_params %}

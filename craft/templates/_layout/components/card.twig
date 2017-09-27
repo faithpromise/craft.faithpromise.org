@@ -6,6 +6,7 @@
 {% set text                     = text is defined ? text : '' %}
 {% set action_url               = action_url is defined ? action_url : '' %}
 {% set action_text              = action_text is defined ? action_text : 'More Details' %}
+{% set is_book                  = is_book ?? false %}
 
 {% if action_url %}
     {% set start_tag = '<a class="Card" href="' ~ action_url ~ '">' %}
@@ -18,7 +19,10 @@
 {{ start_tag|raw }}
 
 <div class="Card-header">
-    {% if image %}
+
+    {% if is_book %}
+        {% include '_layout/components/book_header.twig' with { image: image } %}
+    {% elseif image %}
 
         {#TODO: fix sizes#}
         <img

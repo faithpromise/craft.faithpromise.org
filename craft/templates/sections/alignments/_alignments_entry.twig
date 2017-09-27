@@ -1,0 +1,9 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {% include '_layout/components/book_header.twig' with { image: entry.alignmentImage ? entry.alignmentImage[0] : null } %}
+
+    {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+{% endblock %}

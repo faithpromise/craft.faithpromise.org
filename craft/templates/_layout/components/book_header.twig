@@ -1,0 +1,24 @@
+{% set image = image ?? null %}
+
+{% if image %}
+
+    <div class="BookHeader">
+        <div class="BookHeader-container" style="background-image: url({{ craft.imageUrl.url(image, { width: 1920, height: 1080, fit: 'crop', blur: 200 }) }});">
+            <div class="BookHeader-overlay"></div>
+            <img class="BookHeader-mask" src="/assets/images/book-header-mask.png">
+            <img
+                    class="BookHeader-image"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    sizes="33vw"
+                    srcset="
+                    {{ craft.imageUrl.url(image, { width: 1920 }) }} 1920w,
+                    {{ craft.imageUrl.url(image, { width: 1680 }) }} 1680w,
+                    {{ craft.imageUrl.url(image, { width: 1280 }) }} 1280w,
+                    {{ craft.imageUrl.url(image, { width: 800 }) }} 800w,
+                    {{ craft.imageUrl.url(image, { width: 480 }) }} 480w,
+                    {{ craft.imageUrl.url(image, { width: 320 }) }} 320w,
+                ">
+        </div>
+    </div>
+
+{% endif %}
