@@ -14,7 +14,7 @@
     |--------------------------------------------------------------------------
     #}
 
-    {% set alignments = craft.entries({ section: 'alignments', with: ['alignmentImage'] }).id('not ' ~ entry.id) %}
+    {% set alignments = craft.entries({ section: 'alignments', with: ['alignmentImage'] }).id('not ' ~ entry.id).limit(3) %}
 
     {% set last_content = entry.pageContent | length ? entry.pageContent.last() : null %}
     {% set background = last_content and last_content.background ? last_content.background.value : null %}
