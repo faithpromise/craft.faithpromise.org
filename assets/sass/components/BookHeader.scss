@@ -53,3 +53,22 @@
   left:     12%;
   height:   75%;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Small screens
+|--------------------------------------------------------------------------
+*/
+
+@media (max-width: calc-em(639px)) {
+
+  // Clear the nav
+  .BookHeader-container {
+    padding-bottom: $Nav-height-total;
+  }
+
+  .BookHeader-image {
+    height: 60%;
+  }
+
+}

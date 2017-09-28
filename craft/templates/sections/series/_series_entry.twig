@@ -1,4 +1,5 @@
 {% set nav_class = 'Nav--transparent' %}
+
 {% extends "_layout/layout.twig" %}
 
 {% block content %}
@@ -10,6 +11,7 @@
     #}
 
     {% set media = craft.entries.section('seriesMedia').relatedTo(entry).order('postDate') %}
+    {% set alignment = craft.entries.section('alignments').relatedTo(entry).first() %}
 
     {% includeCssFile craft.imageUrl.url(entry.seriesImageWide[0], { palette: 'css' }) %}
 
@@ -65,20 +67,22 @@
                             >
                             </playlist-item>
                         {% endfor %}
-                        <div class="Playlist-item">
-                            <div class="Playlist-play">
-                                <svg>
-                                    <use xlink:href="/assets/icons.svg#group-study"></use>
-                                </svg>
-                            </div>
-                            <div class="Playlist-title">Group Study</div>
-                            <div class="Playlist-more">View</div>
-                            <div class="Playlist-arrow">
-                                <svg>
-                                    <use xlink:href="/assets/icons.svg#chevron-right"></use>
-                                </svg>
-                            </div>
-                        </div>
+                        {% if alignment %}
+                            <a class="Playlist-item" href="{{ alignment.url }}">
+                                <div class="Playlist-play">
+                                    <svg>
+                                        <use xlink:href="/assets/icons.svg#group-study"></use>
+                                    </svg>
+                                </div>
+                                <div class="Playlist-title">Group Study</div>
+                                <div class="Playlist-more">View</div>
+                                <div class="Playlist-arrow">
+                                    <svg>
+                                        <use xlink:href="/assets/icons.svg#chevron-right"></use>
+                                    </svg>
+                                </div>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
 

@@ -11,11 +11,18 @@ $Playlist-icon-size: 24px;
   width:         100%;
   padding:       1em .5em;
   border-bottom: 1px solid rgba(255, 255, 255, .1);
-  color:         #fff;
   cursor:        pointer;
 
+  &, &:link, &:visited, &:active {
+    color: #fff;
+  }
+
+  &, &:hover {
+    text-decoration: none;
+  }
+
   &:hover {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: #fff;
     color:            inherit;
   }
 

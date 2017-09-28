@@ -1,3 +1,5 @@
+{% set nav_class = 'Nav--transparent' %}
+
 {% extends "_layout/layout.twig" %}
 
 {% block content %}
@@ -5,5 +7,23 @@
     {% include '_layout/components/book_header.twig' with { image: entry.alignmentImage ? entry.alignmentImage[0] : null } %}
 
     {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Additional alignments
+    |--------------------------------------------------------------------------
+    #}
+
+    {% set alignments = craft.entries({ section: 'alignments', with: ['alignmentImage'] }).id('not ' ~ entry.id) %}
+
+    {% set last_content = entry.pageContent | length ? entry.pageContent.last() : null %}
+    {% set background = last_content and last_content.background ? last_content.background.value : null %}
+    {% set background = background == 'gray' ? 'default' : 'gray' %}
+
+    {% embed '_layout/section.twig' with { title: 'More Group Alignments', background: background, linkUrl_1: '/groups/alignments', linkText_1: 'View All' } %}
+        {% block body %}
+            {% include '_layout/components/entry_cards.twig' with { entries: alignments } %}
+        {% endblock %}
+    {% endembed %}
 
 {% endblock %}
