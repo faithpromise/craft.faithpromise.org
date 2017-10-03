@@ -1,0 +1,44 @@
+{% set short_term_groups = craft.entries({ section: 'shortTermGroups' }) %}
+{% set groups_by_study = short_term_groups | group('study.first().slug') %}
+{% set studies = craft.categories.group('studies').relatedTo(short_term_groups).titles %}
+
+{% if short_term_groups | length %}
+
+    {% embed '_layout/section.twig' with params %}
+        {% block body %}
+
+            <div class="Cards">
+                {% for study in studies %}
+
+                    {% set groups = groups_by_study['' ~ study.slug] | default([]) %}
+
+                    {% if groups | length %}
+
+                        {% set campuses = groups | group('campus.first().title') %}
+                        {% set campus_list %}
+                            Available at the
+                            {% for title, campus in campuses %}{% if loop.length > 2 and not loop.first %}, {% endif %}{% if loop.last %} and {% endif %}{{ title }}{% if campuses|length == 1 %} Campus{% endif %}{% endfor %}{% if campuses|length > 1 %} campuses{% endif %}.
+                        {% endset %}
+
+                        {% set params = {
+                        title: study.title,
+                        text: campus_list,
+                        image: study.studyImage[0],
+                        action_url: study.url,
+                        action_text: 'Times & Registration',
+                        is_book: true,
+                        } %}
+
+                        <li class="Cards-item">
+                            {% include '_layout/components/card.twig' with params %}
+                        </li>
+
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+
+        {% endblock %}
+    {% endembed %}
+
+{% endif %}
