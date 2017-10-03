@@ -17,7 +17,7 @@
 
         props: {
             url:      { required: true },
-            autoPlay: { default: true },
+            autoPlay: { default: false },
         },
 
         computed: {

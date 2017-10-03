@@ -2,7 +2,7 @@
   <div class="SermonHero">
     <div class="SermonHero-player" v-if="is_playing">
       <div class="SermonHero-video">
-        <video-embed :url="videoUrl"></video-embed>
+        <video-embed :url="videoUrl" :auto-play="true"></video-embed>
       </div>
     </div>
 
