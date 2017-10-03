@@ -62,15 +62,8 @@
                 {% endif %}
 
                 {% if videoUrl %}
-
-                    {% set video_segments = videoUrl | split('/') %}
-                    {% set video_id = video_segments | last %}
-                    {% set video_embed_url = 'https://www.youtube.com/embed/' ~ video_id ~ '?rel=0&amp;showinfo=0' %}
-                    {% if 'vimeo.com' in videoUrl %}
-                        {% set video_embed_url = 'https://player.vimeo.com/video/' ~ video_id ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=false' %}
-                    {% endif %}
                     <div class="VideoPlayer">
-                        <iframe src="{{ video_embed_url }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <video-embed url="{{ videoUrl }}"></video-embed>
                     </div>
 
                 {% endif %}

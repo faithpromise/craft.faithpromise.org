@@ -2,7 +2,7 @@
   <div class="SermonHero">
     <div class="SermonHero-player" v-if="is_playing">
       <div class="SermonHero-video">
-        <iframe :src="videoUrl" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <video-embed :url="videoUrl"></video-embed>
       </div>
     </div>
 
@@ -20,7 +20,13 @@
 </template>
 <script>
 
+    import videoEmbed from '../common/video-embed.vue';
+
     export default {
+
+        components: {
+            videoEmbed,
+        },
 
         props: {
             videoUrl: { default: null }

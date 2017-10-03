@@ -22,15 +22,7 @@
 
     {% includeCssFile craft.imageUrl.url(wide_image, { palette: 'css' }) %}
 
-    {% set videoSegments = entry.videoUrl | split('/') %}
-    {% set videoId = videoSegments | last %}
-    {# TODO: set autoplay true for Youtube #}
-    {% set videoUrl = 'https://www.youtube.com/embed/' ~ videoId ~ '?rel=0&amp;showinfo=0' %}
-    {% if 'vimeo.com' in entry.videoUrl %}
-        {% set videoUrl = 'https://player.vimeo.com/video/' ~ videoId ~ '?title=0&byline=0&portrait=0&badge=0&autoplay=true' %}
-    {% endif %}
-
-    <sermon-hero video-url="{{ videoUrl }}">
+    <sermon-hero video-url="{{ entry.videoUrl }}">
 
         <picture>
             <source
