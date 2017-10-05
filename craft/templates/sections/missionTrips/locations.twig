@@ -5,7 +5,7 @@
 {% set mission_trips_by_location = mission_trips | group('missionLocation.first().slug') %}
 {% set mission_locations = craft.categories.group('missionLocations').relatedTo(mission_trips).id('not ' ~ exclude).limit(limit).titles %}
 
-{% if mission_trips | length %}
+{% if mission_locations | length %}
 
     {% embed '_layout/section.twig' with params %}
         {% block body %}
