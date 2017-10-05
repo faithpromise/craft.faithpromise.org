@@ -12,7 +12,11 @@
 
     {% include '_layout/components/book_header.twig' with { title: category.title, image: header_image } %}
 
-    {% set subtitle = category.audience_type.label %}
+    {% set subtitle = category.studyAudience.label %}
+
+    {% if category.weeks %}
+        {% set subtitle = subtitle ~ ' | ' ~ category.weeks ~ ' weeks' %}
+    {% endif %}
 
     {% if category.cost %}
         {% set subtitle = subtitle ~ ' | ' ~ category.cost %}
@@ -25,7 +29,7 @@
     } %}
         {% block text %}
             {{ category.html }}
-            <p>Check individual times for childcare info.</p>
+            <p>{% if category.studyLength %}Each group time will be approximately {{ category.studyLength }} hours. {% endif %}Check individual times for childcare info.</p>
         {% endblock %}
     {% endembed %}
 
