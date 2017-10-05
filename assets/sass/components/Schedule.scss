@@ -1,0 +1,52 @@
+.Schedule {
+  @include fluid-type(320px, 16px, 1000px, 22px);
+
+  width:           100%;
+  max-width:       calc-em($Section-text-with-bg-max-width);
+  margin:          0 auto;
+  border-collapse: collapse;
+  border-spacing:  0;
+
+  th, td {
+    padding:     10px;
+    cursor:      default;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  th {
+    font-size:      .7em;
+    text-transform: uppercase;
+    text-align:     left;
+    color:          #a7a7a7;
+  }
+
+  td {
+    padding:        .5em;
+    transition:     .3s background-color ease-in-out;
+    border-top:     1px solid #d8d8d8;
+    vertical-align: top;
+  }
+
+  tr:hover td {
+    background-color: #d2d2d2;
+  }
+
+}
+
+.Schedule-meta {
+  display:   block;
+  font-size: .68em;
+}
+
+.Schedule-leader {
+  max-width:     260px;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 63.6875em) {
+  .Schedule-leader {
+    display: none;
+  }
+}

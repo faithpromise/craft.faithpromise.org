@@ -47,6 +47,8 @@ $z-index-section-container: 4;
   @include fluid-type(320px, 18px, 1000px, 24px);
   margin:      .3em 0 0;
   line-height: 1;
+  font-weight: normal;
+  color:       $color-gray;
 }
 
 .TextSection-text {
