@@ -1,0 +1,105 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Hero
+    |--------------------------------------------------------------------------
+    #}
+
+    {% set header_image = category.studyImage|length ? category.studyImage[0] : null %}
+
+    {% include '_layout/components/book_header.twig' with { title: category.title, image: header_image } %}
+
+    {% set subtitle = category.audience_type.label %}
+
+    {% if category.cost %}
+        {% set subtitle = subtitle ~ ' | ' ~ category.cost %}
+    {% endif %}
+
+    {% embed '_layout/text_section.twig' with {
+    title: 'About This Study',
+    subtitle: subtitle,
+    align: 'center',
+    } %}
+        {% block text %}
+            {{ category.html }}
+            <p>Check individual times for childcare info.</p>
+        {% endblock %}
+    {% endembed %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Groups
+    |--------------------------------------------------------------------------
+    #}
+
+    {% set groups = craft.entries({ section: 'shortTermGroups', with: 'campuses', relatedTo: { targetElement: category, field: 'study' } }).find() %}
+
+    {% embed '_layout/section.twig' with {
+    title: 'Times & Registration',
+    background: 'gray',
+    } %}
+
+        {% block body %}
+            <table class="Schedule">
+                <thead>
+                    <tr>
+                        <th>Campus</th>
+                        <th>Time</th>
+                        <th>Childcare</th>
+                        <th>Register</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for group in groups %}
+                        <tr>
+                            <td>
+                                {{ group.campus[0].title }}
+                                <span class="Schedule-meta">Room 217</span>
+                            </td>
+                            <td>
+                                {{ group.startsAt|date('D g:i A') }}
+                                <span class="Schedule-meta">Starts {{ group.startsAt|date('M j') }}</span>
+                            </td>
+                            <td>
+                                {{ group.isChildcareProvided ? 'Provided' : 'None' }}
+                            </td>
+                            <td>
+                                {% if group.isSoldOut %}
+                                    Group is full
+                                {% elseif group.registrationUrl %}
+                                    <a href="{{ group.registrationUrl }}">Register</a>
+                                {% else %}
+                                    Temp Unavailable
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endblock %}
+
+    {% endembed %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Additional studies
+    |--------------------------------------------------------------------------
+    #}
+
+    {% set section_params = {
+    title: 'Looking for something else?',
+    text: 'Check out these other opportunities to plug into a short term group!',
+    linkUrl_1: '/groups/short-term',
+    linkText_1: 'View All',
+    } %}
+
+    {% include 'sections/shortTermGroups/studies.twig' with {
+    exclude: category.id,
+    show_empty_message: false,
+    params: section_params,
+    } %}
+
+{% endblock %}

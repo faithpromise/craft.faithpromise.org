@@ -1,8 +1,13 @@
+{% set limit = limit ?? 0 %}
+{% set exclude = exclude ?? 0 %}
+
 {% set short_term_groups = craft.entries({ section: 'shortTermGroups' }) %}
 {% set groups_by_study = short_term_groups | group('study.first().slug') %}
-{% set studies = craft.categories.group('studies').relatedTo(short_term_groups).titles %}
+{% set studies = craft.categories.group('studies').relatedTo(short_term_groups).id('not ' ~ exclude).limit(limit).titles %}
 
-{% if short_term_groups | length %}
+{% set show_empty_message = show_empty_message is defined ? show_empty_message : true %}
+
+{% if studies | length %}
 
     {% embed '_layout/section.twig' with params %}
         {% block body %}
@@ -38,6 +43,20 @@
                 {% endfor %}
             </div>
 
+        {% endblock %}
+    {% endembed %}
+
+{% elseif show_empty_message %}
+
+    {% embed '_layout/text_section.twig' with {
+        title: 'No Groups at This Time',
+        subtitle: null,
+        background: 'gray',
+        align: 'center',
+    } %}
+        {% block text %}
+            <p>There currently aren't any short term groups scheduled. However, we plan new short term groups periodically throughout the year.</p>
+            <p>We'd love for you to <a class="no-wrap" href="/groups">find a group</a> that meets on a regular basis or attend our <a class="no-wrap" href="/next-steps-class">Next Steps Class</a>. You're always welcome to contact us if you have questions or need more information about groups at Faith Promise.</p>
         {% endblock %}
     {% endembed %}
 
