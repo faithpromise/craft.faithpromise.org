@@ -1,0 +1,50 @@
+{% embed '_layout/section.twig' with params %}
+
+    {% block body %}
+
+        <ul class="SocialList">
+            <li class="SocialList-item">
+                <a class="SocialList-link" href="https://www.facebook.com/{{ socialHandles.facebook }}">
+                    <svg class="SocialList-icon facebook">
+                        <use xlink:href="/assets/icons.svg#facebook"></use>
+                    </svg>
+                    <span class="SocialList-label">Facebook</span>
+                </a>
+            </li>
+            <li class="SocialList-item">
+                <a class="SocialList-link" href="https://instagram.com/{{ socialHandles.instagram }}">
+                    <svg class="SocialList-icon instagram">
+                        <use xlink:href="/assets/icons.svg#instagram"></use>
+                    </svg>
+                    <span class="SocialList-label">Instagram</span>
+                </a>
+            </li>
+            <li class="SocialList-item">
+                <a class="SocialList-link" href="https://twitter.com/{{ socialHandles.twitter }}">
+                    <svg class="SocialList-icon twitter">
+                        <use xlink:href="/assets/icons.svg#twitter"></use>
+                    </svg>
+                    <span class="SocialList-label">Twitter</span>
+                </a>
+            </li>
+            <li class="SocialList-item">
+                <a class="SocialList-link" href="https://vimeo.com/{{ socialHandles.vimeo }}">
+                    <svg class="SocialList-icon vimeo">
+                        <use xlink:href="/assets/icons.svg#vimeo"></use>
+                    </svg>
+                    <span class="SocialList-label">Vimeo</span>
+                </a>
+            </li>
+            <li class="SocialList-item">
+                <a class="SocialList-link" href="https://soundcloud.com/{{ socialHandles.soundcloud }}">
+                    <svg class="SocialList-icon soundcloud">
+                        <use xlink:href="/assets/icons.svg#soundcloud"></use>
+                    </svg>
+                    <span class="SocialList-label">Soundcloud</span>
+                </a>
+            </li>
+        </ul>
+
+    {% endblock %}
+
+{% endembed %}

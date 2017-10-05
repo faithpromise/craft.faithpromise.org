@@ -1,0 +1,63 @@
+$facebook-color: #3b5998;
+$twitter-color: #00aced;
+$youtube-color: #b00;
+$instagram-color: #c32aa3;
+$pinterest-color: #cb2027;
+$vimeo-color: #45bbff;
+$soundcloud-color: #f50;
+$spotify-color: #1ed760;
+$dribbble-color: #ea4c89;
+
+.facebook {
+  @include link-colors-all($facebook-color);
+  color: $facebook-color;
+  fill:  $facebook-color;
+}
+
+.twitter {
+  @include link-colors-all($twitter-color);
+  color: $twitter-color;
+  fill:  $twitter-color;
+}
+
+.youtube {
+  @include link-colors-all($youtube-color);
+  color: $youtube-color;
+  fill:  $youtube-color;
+}
+
+.instagram {
+  @include link-colors-all($instagram-color);
+  color: $instagram-color;
+  fill:  $instagram-color;
+}
+
+.pinterest {
+  @include link-colors-all($pinterest-color);
+  color: $pinterest-color;
+  fill:  $pinterest-color;
+}
+
+.vimeo {
+  @include link-colors-all($vimeo-color);
+  color: $vimeo-color;
+  fill:  $vimeo-color;
+}
+
+.soundcloud {
+  @include link-colors-all($soundcloud-color);
+  color: $soundcloud-color;
+  fill:  $soundcloud-color;
+}
+
+.spotify {
+  @include link-colors-all($spotify-color);
+  color: $spotify-color;
+  fill:  $spotify-color;
+}
+
+.dribbble {
+  @include link-colors-all($dribbble-color);
+  color: $dribbble-color;
+  fill:  $dribbble-color;
+}
