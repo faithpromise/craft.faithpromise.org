@@ -7,6 +7,7 @@ import playlistItem from './series/playlist-item.vue';
 import sermonHero from './series/sermon-hero.vue';
 import sermonTools from './series/sermon-tools.vue';
 import videoEmbed from './common/video-embed.vue';
+import homePageVideo from './common/home-page-video.vue';
 
 Vue.prototype.$http = axios;
 
@@ -22,6 +23,7 @@ const app = new Vue({
         sermonHero,
         sermonTools,
         videoEmbed,
+        homePageVideo,
     },
 
     data: function () {
