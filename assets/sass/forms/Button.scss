@@ -2,7 +2,7 @@
   @extend .unlink;
   @include fluid-type(320px, 14px, 1280px, 16px);
   display:        inline-block;
-  padding:        .75em 1.8em;
+  padding:        $form-control-padding;
   border:         $form-control-border-width solid currentColor;
   border-radius:  4px;
   background:     none;
@@ -32,4 +32,5 @@
     background-color: #fff;
     color:            $color-gray-darker;
   }
+
 }
