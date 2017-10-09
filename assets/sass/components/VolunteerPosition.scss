@@ -1,0 +1,52 @@
+.VolunteerFilter {
+  display:         flex;
+  justify-content: center;
+  margin-bottom:   6em;
+
+  > div {
+    margin: 0 .25em;
+  }
+}
+
+.VolunteerPosition {
+  margin-bottom: 2em;
+  padding:       2em;
+  border:        1px solid $color-gray-light;
+  border-radius: 4px;
+}
+
+.VolunteerPosition-title {
+  @extend h4;
+  margin: 0 0 .5em;
+}
+
+.VolunteerPosition-description {
+  margin: 0 0 .5em;
+}
+
+.VolunteerPosition-meta {
+  @extend %list-unstyled;
+  display:    flex;
+  margin-top: 1em;
+  font-size:  15px;
+}
+
+.VolunteerPosition-metaItem {
+  margin-right: 2em;
+}
+
+.VolunteerPosition-metaLabel {
+  display:        block;
+  text-transform: uppercase;
+  font-size:      calc-em(13px, 15px);
+  font-weight:    700;
+  color:          #8dc63f;
+}
+
+.VolunteerPosition-skill {
+  text-transform: lowercase;
+  //display:       inline-block;
+  //padding:       calc-em(5px);
+  //border:        1px solid #8dc63f;
+  //border-radius: 2px;
+}

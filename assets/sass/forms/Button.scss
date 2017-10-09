@@ -3,7 +3,7 @@
   @include fluid-type(320px, 14px, 1280px, 16px);
   display:        inline-block;
   padding:        .75em 1.8em;
-  border:         2px solid currentColor;
+  border:         $form-control-border-width solid currentColor;
   border-radius:  4px;
   background:     none;
   font-weight:    800;
@@ -14,6 +14,7 @@
   transition:     all .1s ease-in-out;
 
   &:hover {
+    border-color:     transparent;
     background-color: $root-text-color;
     color:            #fff;
   }
@@ -27,6 +28,7 @@
   color:            #fff;
 
   &:hover {
+    border-color:     transparent;
     background-color: #fff;
     color:            $color-gray-darker;
   }

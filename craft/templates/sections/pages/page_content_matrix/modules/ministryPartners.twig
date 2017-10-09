@@ -1,0 +1,23 @@
+{% set partners = craft.entries({ section: 'ministryPartners' }) %}
+
+{% if partners | length %}
+
+    {% embed '_layout/text_section.twig' with {
+    title: params.title,
+    } %}
+        {% block text %}
+            {{ params.text }}
+            {% for partner in partners %}
+                <h2>{{ partner.title }}</h2>
+                {{ partner.html }}
+                <p>
+                    {% if partner.firstName %}Contact {{ partner.firstName }} {{ partner.lastName }}<br>{% endif %}
+                    {% if partner.phone %}{{ partner.phone }}<br>{% endif %}
+                    {% if partner.theUrl %}<a href="{{ partner.theUrl }}">Visit their website</a><br>{% endif %}
+                </p>
+                <hr>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+
+{% endif %}

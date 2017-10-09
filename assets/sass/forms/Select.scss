@@ -1,0 +1,140 @@
+/*
+|--------------------------------------------------------------------------
+| Structure
+|--------------------------------------------------------------------------
+|
+| Adapted from:
+| https://raw.githubusercontent.com/filamentgroup/select-css/master/src/select-css.css
+|
+*/
+
+/* Container used for styling the custom select, the buttom class below adds the
+ * bg gradient, corners, etc. */
+.Select {
+  position: relative;
+  display: block;
+}
+
+/* This is the native select, we're making everything but the text invisible so
+ * we can see the button styles in the wrapper */
+.Select select {
+  width: 100%;
+  margin: 0;
+  outline: none;
+  //padding: .6em .8em .5em .8em;
+  padding: .75em 1.8em;
+
+  /* Font size must be 16px to prevent iOS page zoom on focus */
+  font-size: 16px;
+}
+
+
+/* Custom arrow sits on top of the select - could be an image, SVG, icon font,
+ * etc. or the arrow could just baked into the bg image on the select. */
+.Select::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  z-index: 2;
+  /* These hacks make the select behind the arrow clickable in some browsers */
+  pointer-events: none;
+  display: none;
+}
+
+/* Firefox <= 34 has a false positive on @supports( -moz-appearance: none )
+ * @supports ( mask-type: alpha ) is Firefox 35+
+ */
+@supports (-webkit-appearance: none) or (appearance: none) or ((-moz-appearance: none) and (mask-type: alpha)) {
+
+  /* Show custom arrow */
+  .Select::after {
+    display: block;
+  }
+
+  /* Remove select styling */
+  .Select select {
+    padding-right: 2em; /* Match-01 */
+    /* inside @supports so that iOS <= 8 display the native arrow */
+    background: none; /* Match-04 */
+    /* inside @supports so that Android <= 4.3 display the native arrow */
+    border: 0px solid transparent; /* Match-05 */
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .Select select:focus {
+    border-color: #aaa; /* Match-03 */
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Theme
+|--------------------------------------------------------------------------
+|
+| Adapted from:
+| https://raw.githubusercontent.com/filamentgroup/select-css/master/src/select-css.css
+|
+*/
+
+/* These are the "theme" styles for our button applied via separate button class, style as you like */
+/* Set the background fallback to solid #fff so Firefox renders the <option> list readably. */
+.Select {
+  border: $form-control-border-width solid #bbb;
+  border-radius: .3em;
+  //box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+}
+
+.Select select {
+  /* General select styles: change as needed */
+  font-family: sans-serif;
+  font-weight: 700;
+  color: #444;
+  //line-height: 1.3;
+  border-radius: .2em;
+}
+
+/* Hover style */
+.Select:hover {
+  border-color: #888;
+}
+
+/* Focus style */
+.Select select:focus {
+  /* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
+  box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #222; /* Match-02 */
+}
+
+@supports ( box-shadow: none ) {
+  .Select select:focus {
+    outline: none;
+  }
+}
+
+/* Set options to normal weight */
+.Select option {
+  font-weight:normal;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Arrow
+|--------------------------------------------------------------------------
+|
+| Adapted from:
+| https://raw.githubusercontent.com/filamentgroup/select-css/master/src/select-css-arrow.css
+|
+*/
+
+.Select::after {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 7px solid #666;
+  margin-top: -3px;
+}
