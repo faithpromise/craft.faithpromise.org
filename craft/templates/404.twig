@@ -20,20 +20,24 @@
 
 {% set entry = craft.entries.slug(craft.request.firstSegment).first() %}
 
-{% if entry %}
+{% if entry and entry.url %}
     {% redirect entry.url 301 %}
+{% endif %}
+
+{% set category = craft.categories.slug(craft.request.firstSegment).first() %}
+
+{% if category and category.url %}
+    {% redirect category.url 301 %}
 {% endif %}
 
 {% set title = "404" %}
 {% set image = craft.assets.id(1617).first() %}
 
 {% block content %}
-
     {% include '_layout/text_section.twig' with {
     image: image,
     imageLayout: 'floating',
     title: 'Page Not Found',
     text: 'The page you requested does not exist. Please try using the navigation above to find the information you need.'
     } %}
-
 {% endblock %}
