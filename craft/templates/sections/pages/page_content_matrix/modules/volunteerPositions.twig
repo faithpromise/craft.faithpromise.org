@@ -1,93 +1,9 @@
-{% set areas = craft.categories.group('volunteerAreas') %}
-{% set skills = craft.categories.group('volunteerSkills') %}
+{% embed '_layout/section.twig' with params %}
+    {% block body %}
 
-{% set area_slug = craft.request.getParam('area') %}
-{% set skill_slug = craft.request.getParam('skill') %}
+        {{ getCsrfInput() }}
 
-{% set area = area_slug ? craft.categories.slug(area_slug) : null %}
-{% set skill = skill_slug ? craft.categories.slug(skill_slug) : null %}
+        <volunteer-positions></volunteer-positions>
 
-{% if area and skill %}
-    {% set positions = craft.entries({ section: 'volunteerPositions', relatedTo: ['and', { targetElement: skill }, { targetElement: area }] }) %}
-{% elseif area %}
-    {% set positions = craft.entries({ section: 'volunteerPositions' }).relatedTo(area) %}
-{% elseif skill %}
-    {% set positions = craft.entries({ section: 'volunteerPositions' }).relatedTo(skill) %}
-{% else %}
-    {% set positions = craft.entries({ section: 'volunteerPositions' }) %}
-{% endif %}
-
-{% if positions | length %}
-
-    <div id="results"></div>
-
-    {% embed '_layout/section.twig' with params %}
-        {% block body %}
-
-            {#Filter by ministry area and/or skill:#}
-
-            <form class="VolunteerFilter" action="{{ entry.url }}#results" method="get">
-                <div>
-                    <div class="Select">
-                        <select name="area">
-                            <option value="">All areas</option>
-                            {% for area in areas %}
-                                <option value="{{ area.slug }}"{% if area.slug == area_slug %} selected{% endif %}>{{ area.title }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <div class="Select">
-                        <select name="skill">
-                            <option value="">Any skill</option>
-                            {% for skill in skills %}
-                                <option value="{{ skill.slug }}"{% if skill.slug == skill_slug %} selected{% endif %}>{{ skill.title }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <button class="Button" type="submit">Filter</button>
-                </div>
-            </form>
-
-            {% for position in positions %}
-
-                <div class="VolunteerPosition">
-                    <h2 class="VolunteerPosition-title">{{ position.volunteerArea[0].title }} // {{ position.title }}</h2>
-                    <p class="VolunteerPosition-description">{{ position.html }}</p>
-                    <ul class="VolunteerPosition-meta">
-                        {#{% if (position.timeCommitment) %}#}
-                        {#<li class="VolunteerPosition-metaItem">#}
-                        {#<span class="VolunteerPosition-metaLabel">Ministry Area</span>#}
-                        {#{{ position.volunteerArea[0].title }}#}
-                        {#</li>#}
-                        {#{% endif %}#}
-                        {% if (position.availability) %}
-                            <li class="VolunteerPosition-metaItem">
-                                <span class="VolunteerPosition-metaLabel">Availability</span>
-                                {{ position.availability }}
-                            </li>
-                        {% endif %}
-                        {% if (position.timeCommitment) %}
-                            <li class="VolunteerPosition-metaItem">
-                                <span class="VolunteerPosition-metaLabel">Commitment</span>
-                                {{ position.timeCommitment }}
-                            </li>
-                        {% endif %}
-                        {% if (position.volunteerSkills | length) %}
-                            <li class="VolunteerPosition-metaItem">
-                                <span class="VolunteerPosition-metaLabel">Skills</span>
-                                {% for skill in position.volunteerSkills %}{% if not loop.first %}, {% endif %}{{ skill.title }}{% endfor %}
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-
-            {% endfor %}
-
-        {% endblock %}
-    {% endembed %}
-
-{% endif %}
+    {% endblock %}
+{% endembed %}

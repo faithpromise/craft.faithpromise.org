@@ -16,6 +16,7 @@
     "axios": "^0.16.2",
     "laravel-mix": "^1.4.2",
     "portal-vue": "^1.1.1",
+    "url-search-params": "^0.10.0",
     "vue": "^2.4.2"
   }
 }

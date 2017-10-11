@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import PortalVue from 'portal-vue'
+import PortalVue from 'portal-vue';
 
 import seriesList from './series/series-list.vue';
 import playlistItem from './series/playlist-item.vue';
@@ -8,6 +8,9 @@ import sermonHero from './series/sermon-hero.vue';
 import sermonTools from './series/sermon-tools.vue';
 import videoEmbed from './common/video-embed.vue';
 import homePageVideo from './common/home-page-video.vue';
+import volunteerPositions from './serving/volunteer-positions.vue';
+
+require('url-search-params/build/url-search-params.max');
 
 Vue.prototype.$http = axios;
 
@@ -24,6 +27,7 @@ const app = new Vue({
         sermonTools,
         videoEmbed,
         homePageVideo,
+        volunteerPositions,
     },
 
     data: function () {
