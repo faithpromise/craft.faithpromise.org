@@ -2,7 +2,7 @@
   @extend .unlink;
   @include fluid-type(320px, 14px, 1280px, 16px);
   display:        inline-block;
-  padding:        $form-control-padding;
+  padding:        $form-control-padding-v 1.8em;
   border:         $form-control-border-width solid currentColor;
   border-radius:  4px;
   background:     none;

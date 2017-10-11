@@ -1,6 +1,30 @@
-
 $form-control-border-width: 2px;
-$form-control-padding: .75em 1.8em;
+$form-control-border-color: $color-gray-light;
+$form-control-border-radius: 4px;
+$form-control-padding-v: .75em;
+$form-control-padding-h: 1em;
+$form-control-color: $color-gray-darker;
 
-@import "Button";
+%control {
+  width:            100%;
+  margin-bottom:    1em;
+  padding:          $form-control-padding-v $form-control-padding-h;
+  border:           $form-control-border-width solid $form-control-border-color;
+  border-radius:    $form-control-border-radius;
+  background-color: transparent;
+
+  color:            $form-control-color;
+  outline:          none !important;
+
+  &:focus {
+    border-color: $anchor-color;
+  }
+
+}
+
+@import "Form";
 @import "Select";
+@import "Input";
+@import "Textarea";
+@import "Button";
+@import "Submit";
