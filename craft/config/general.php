@@ -29,7 +29,7 @@ return [
         'defaultWeekStartDay'              => 0,
 
         // Enable CSRF Protection (recommended, will be enabled by default in Craft 3)
-        'enableCsrfProtection'             => true,
+        'enableCsrfProtection'             => false, // Causing issues where token does not match. Turning off for now until it can be fixed and tested.
 
         // Whether "index.php" should be visible in URLs (true, false, "auto")
         'omitScriptNameInUrls'             => true,
