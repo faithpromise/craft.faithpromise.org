@@ -32,12 +32,13 @@
         data() {
             return {
                 is_sending: false,
+                is_sent:    false,
                 fields:     {
                     first_name: 'Brad',
                     last_name:  'Roberts',
                     email:      'bradr@faithpromise.org',
                     phone:      '865-973-2311',
-                    message:    'Just a test',
+                    message:    '',
                 },
             }
         },
@@ -51,7 +52,7 @@
                 mailer.send(this.fields)
                     .then((result) => {
                             console.log('success');
-                        this.is_sending = false;
+                            this.is_sending = false;
                         }
                     )
                     .catch((error) => {

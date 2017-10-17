@@ -1,0 +1,55 @@
+{% extends "_layout/layout.twig" %}
+
+    {#
+     # We're using routing for individual days, so we won't have the bible-plan page entry.
+     # We will have an entry when the main page is visited (/bible-plan)
+     #}
+    {% if not entry is defined %}
+        {% set entry = craft.entries.slug(craft.request.getFirstSegment()).first() %}
+    {% endif %}
+
+    {#
+     # Break up the month/day segment of the url into month and day 
+     #}
+
+    {% set date_segment = craft.request.getSegment(2) ?? now | date('F') ~ '-' ~ now | date('j') %}
+
+    {% set month_string = date_segment | split('-')[0] %}
+    {% set day_string = date_segment | split('-')[1] %}
+
+    {% set reading_date = date(month_string ~ ' ' ~ day_string ~ ' ' ~ now | date('Y')) %}
+    {% set day_of_year = reading_date | date('z') + 1 %}
+
+    {% set bible_plan_entry = craft.entries.section('biblePlan').slug(day_of_year).first() %}
+
+    {% set title = 'Bible Reading Plan for ' ~ reading_date | date('F') ~ ' ' ~ reading_date | date('j') %}
+
+{% block content %}
+
+    {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+    {% embed '_layout/text_section.twig' with { title: title, align: 'left', background: 'gray' } %}
+        {% block text %}
+            {{ reading_date | date('M j Y') }}
+            <p>
+                Get ready to walk with God and thousands of your church family on a journey through the Bible over the course of a year. Download Pastor Chris' new book,
+                <a href="http://blog.faithpromise.org/wp-content/uploads/2016/12/Called-Out-Book-Full.pdf">"Called Out"</a> (PDF). Also, check out
+                <a href="http://youversion.com">YouVersion</a>, a Bible app for your phone or tablet.
+            </p>
+            <reading-plan-nav :month="{{ reading_date | date('n') }}" :day="{{ reading_date | date('j') }}"></reading-plan-nav>
+        {% endblock %}
+    {% endembed %}
+
+    {% for passage in bible_plan_entry.passages %}
+
+        {% embed '_layout/text_section.twig' with { title: passage.reference, align: 'left', } %}
+            {% block text %}
+                <div class="BiblePassage">
+                    {{ passage.text }}
+                </div>
+            {% endblock %}
+        {% endembed %}
+
+    {% endfor %}
+
+{% endblock %}

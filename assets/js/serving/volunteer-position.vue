@@ -1,7 +1,7 @@
 <template>
   <div class="VolunteerPosition">
     <h2 class="VolunteerPosition-title">{{ position.area.title }} // {{ position.title }}</h2>
-    <p class="VolunteerPosition-description">{{ position.html }}</p>
+    <p class="VolunteerPosition-description" v-html="position.description"></p>
     <ul class="VolunteerPosition-meta">
 
       <li class="VolunteerPosition-metaItem" v-if="position.commitment">

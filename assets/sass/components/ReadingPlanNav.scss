@@ -1,0 +1,11 @@
+.ReadingPlanNav-container {
+  margin-top: 1em;
+
+  > div {
+    margin-right: .25em;
+  }
+
+  @media (min-width: calc-em(480px)) {
+    display:     flex;
+  }
+}

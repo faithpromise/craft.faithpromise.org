@@ -1,10 +1,13 @@
 .VolunteerFilter {
-  display:    flex;
-  //justify-content: center;
-  margin-top: 6em;
+  margin-top:    6em;
 
   > div {
     margin: 0 .25em;
+  }
+
+  @media (min-width: calc-em(480px)) {
+    display:     flex;
+    align-items: center;
   }
 }
 

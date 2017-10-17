@@ -1,6 +1,9 @@
 <template>
   <form class="VolunteerFilter" method="get" v-if="is_loaded">
     <div>
+      <span class="InlineLabel">Filter by</span>
+    </div>
+    <div>
       <select class="Select" name="area" v-if="areas.length" v-model="selected_area">
         <option :value="null" :selected="selected_area === null">All areas</option>
         <option v-for="area in areas" :value="area.slug" :selected="areaSlug === area.slug">{{ area.title }}</option>

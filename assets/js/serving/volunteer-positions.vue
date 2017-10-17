@@ -1,6 +1,8 @@
 <template>
   <div>
 
+    <volunteer-form></volunteer-form>
+
     <positions-filter
             :area-slug="selected_area"
             :skill-slug="selected_skill"
@@ -10,8 +12,6 @@
     </positions-filter>
 
     <volunteer-position v-for="position in filtered_positions" :key="position.id" :position="position"></volunteer-position>
-
-    <volunteer-form></volunteer-form>
 
   </div>
 </template>

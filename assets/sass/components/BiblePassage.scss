@@ -1,0 +1,17 @@
+.BiblePassage {
+  font-size: calc-em(20px);
+
+  .s {
+    font-size:   calc-em(26px, 20px);
+    font-weight: 400;
+    color:       $color-gray;
+  }
+
+  sup.v {
+    font-size: calc-em(20px);
+    margin:    0 6px;
+    display:   inline-block;
+    color:     $color-gray-dark;
+  }
+
+}

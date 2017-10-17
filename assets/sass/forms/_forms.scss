@@ -22,6 +22,11 @@ $form-control-color: $color-gray-darker;
 
 }
 
+.InlineLabel {
+  display:       inline-block;
+  margin-bottom: 1em;
+}
+
 @import "Form";
 @import "Select";
 @import "Input";
