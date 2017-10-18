@@ -117,7 +117,7 @@ class AppFeedController extends BaseController {
                 'actions' => [
                     [
                         'handler' => 'mediaDetail',
-                        'url'     => 'http://faithpromise.org/app-api/series/' . $media->slug . '/' . $media->slug . '.json',
+                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug . '/' . $media->slug . '.json',
                     ],
                 ],
             ];
