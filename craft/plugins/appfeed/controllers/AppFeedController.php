@@ -167,7 +167,7 @@ class AppFeedController extends BaseController {
                 'actions' => [
                     [
                         'handler' => 'list',
-                        'url'     => '/app-api/series/' . $series->slug . '.json',
+                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug . '.json',
                     ],
                 ],
                 'images'  => [
