@@ -10,6 +10,7 @@
 {% set title                = title is defined ? title : '' %}
 {% set subtitle             = subtitle is defined ? subtitle : '' %}
 {% set text                 = text is defined ? text : '' %}
+{% set html                 = html ?? '' %}
 {% set videoUrl             = videoUrl is defined ? videoUrl : false %}
 {% set image                = image is defined ? image : false %}
 {% set imageLayout          = imageLayout is defined ? imageLayout : 'default' %}
@@ -76,6 +77,7 @@
             <div class="TextSection-text">
                 {% block text %}{% endblock %} {# text block #}
                 {{ text | markdown }} {# text passed as param #}
+                {{ html }} {# text passed as param #}
             </div>
             <div class="TextSection-actions">
                 {% if linkUrl_1 and linkText_1 %}

@@ -19,7 +19,7 @@
     {% include '_layout/text_section.twig' with {
     title: entry.title,
     subtitle: entry.dateRange,
-    text: entry.eventDescription,
+    html: entry.html,
     videoUrl: entry.videoUrl,
     linkUrl_1: entry.actions|length > 0 ? entry.actions[0].theUrl : null,
     linkText_1: entry.actions|length > 0 ? entry.actions[0].text : null,
