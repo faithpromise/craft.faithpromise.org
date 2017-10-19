@@ -43,7 +43,15 @@
         <div clss="Card-secondaaryOverlay"></div>
         <div class="Card-secondary">
             <div class="Card-caption">{{ secondary_image_caption }}</div>
-            <img class="Card-secondaryImage" src="{{ secondary_image.getUrl() }}">
+            <img
+                    class="Card-secondaryImage"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    sizes="10vw"
+                    srcset="
+                    {{ craft.imageUrl.url(secondary_image, { width: 800 }) }} 800w,
+                    {{ craft.imageUrl.url(secondary_image, { width: 480 }) }} 480w,
+                    {{ craft.imageUrl.url(secondary_image, { width: 320 }) }} 320w,
+                ">
         </div>
     {% endif %}
 </div>
