@@ -64,7 +64,7 @@
                 <img src="https://placeimg.com/640/480/any/sepia?t=1505305979703">
             {% else %}
                 {% set home_page_video = craft.assets.id(1580).first() %}
-                {#<home-page-video url="{{ home_page_video.url }}" :is-nav-open="is_nav_open"></home-page-video>#}
+                <home-page-video url="{{ home_page_video.url }}" :is-nav-open="is_nav_open"></home-page-video>
             {% endif %}
             <div class="HeaderVideo-overlay"></div>
             <div class="HeaderVideo-container">
