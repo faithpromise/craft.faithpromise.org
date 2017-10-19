@@ -1,0 +1,110 @@
+.Card2 {
+  @include link-colors-all($root-text-color);
+  display:          flex;
+  flex-direction:   column;
+  height:           100%;
+  background-color: #fff;
+  box-shadow:       $Box-shadow;
+  user-select:      none;
+
+  transition:       200ms all ease-in-out;
+
+  &:hover {
+    text-decoration: none;
+    box-shadow:      0 0 18px 0 rgba(0, 0, 0, 0.38);
+    transform:       translateY(-2px);
+  }
+
+}
+
+.Card2-header {
+  @extend %ratio-image-16x9;
+}
+
+.Card2-image {
+  position:   absolute;
+  top:        0;
+  left:       0;
+  width:      100%;
+  object-fit: cover;
+}
+
+.Card2-body {
+  flex-grow: 1;
+  padding:   1.5em;
+}
+
+.Card2-title {
+  @include fluid-type(320px, 18px, 420px, 18px);
+  margin:         0;
+  text-transform: uppercase;
+  line-height:    1.2;
+}
+
+.Card2-text {
+  margin-top: 1em;
+  color:      $color-gray-dark;
+}
+
+.Card2-footer {
+  padding: 0 1.5em 1.5em;
+}
+
+.Card2-action {
+  @include link-colors-all($color-brand-color);
+  font-size:      calc-em(14px);
+  font-weight:    600;
+  text-transform: uppercase;
+
+  .Card2:hover &:after {
+    right: -8px;
+  }
+
+}
+
+@media (max-width: calc-em($Cards-compact-end)) {
+
+  .Card2 {
+    position:         relative;
+    height:           0;
+    padding-top:      56.25%;
+    background-color: transparent;
+  }
+
+  .Card2-text,
+  .Card2-footer {
+    display: none;
+  }
+
+  .Card2-body,
+  .Card2-image {
+    position: absolute;
+    top:      0;
+    left:     0;
+    height:   100%;
+    width:    100%;
+  }
+
+  .Card2-header {
+    position: static;
+    padding:  0;
+  }
+
+  .Card2-image {
+    object-fit: cover;
+  }
+
+  .Card2-body {
+    display:         flex;
+    justify-content: center;
+    align-items:     center;
+    text-align:      center;
+    background:      rgba(0, 0, 0, 0.5);
+    color:           #fff;
+  }
+
+  .Card2-title {
+    @include fluid-type(320px, 30px, $Cards-compact-end, 40px);
+  }
+
+}

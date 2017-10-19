@@ -1,32 +1,25 @@
 {% set image                    = image is defined ? image : null %}
-{% set secondary_image          = secondary_image is defined ? secondary_image : null %}
-{% set secondary_image_caption  = secondary_image_caption is defined ? secondary_image_caption : '' %}
 {% set title                    = title is defined ? title : '' %}
 {% set subtitle                 = subtitle is defined ? subtitle : '' %}
 {% set text                     = text is defined ? text : '' %}
 {% set action_url               = action_url is defined ? action_url : '' %}
 {% set action_text              = action_text is defined ? action_text : 'More Details' %}
-{% set is_book                  = is_book ?? false %}
 
 {% if action_url %}
-    {% set start_tag = '<a class="Card" href="' ~ action_url ~ '">' %}
+    {% set start_tag = '<a class="Card2" href="' ~ action_url ~ '">' %}
     {% set end_tag = '</a>' %}
 {% else %}
-    {% set start_tag = '<div class="Card">' %}
+    {% set start_tag = '<div class="Card2">' %}
     {% set end_tag = '</div>' %}
 {% endif %}
 
 {{ start_tag|raw }}
 
-<div class="Card-header">
-
-    {% if is_book %}
-        {% include '_layout/components/book_header.twig' with { image: image } %}
-    {% elseif image %}
-
+<div class="Card2-header">
+    {% if image %}
         {#TODO: fix sizes#}
         <img
-                class="Card-image"
+                class="Card2-image"
                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                 sizes="33vw"
                 srcset="
@@ -38,23 +31,14 @@
                     {{ craft.imageUrl.url(image, { width: 320 }) }} 320w,
                 ">
     {% endif %}
-
-    {% if secondary_image %}
-        <div clss="Card-secondaaryOverlay"></div>
-        <div class="Card-secondary">
-            <div class="Card-caption">{{ secondary_image_caption }}</div>
-            <img class="Card-secondaryImage" src="{{ secondary_image.getUrl() }}">
-        </div>
-    {% endif %}
 </div>
-<div class="Card-body">
-    <h3 class="Card-title">{{ title }}</h3>
-    <h4 class="Card-subtitle">{{ subtitle }}</h4>
-    <div class="Card-text">{{ text|raw }}</div>{# raw allows html, like svg icons #}
+<div class="Card2-body">
+    <h3 class="Card2-title">{{ title }}</h3>
+    <div class="Card2-text">{{ text|raw }}</div>{# raw allows html, like svg icons #}
 </div>
 {% if action_url %}
-    <div class="Card-footer">
-        <span class="Card-action">{{ action_text }}</span>
+    <div class="Card2-footer">
+        <span class="Card2-action">{{ action_text }}</span>
     </div>
 {% endif %}
 {{ end_tag|raw }}

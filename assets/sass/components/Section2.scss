@@ -1,0 +1,19 @@
+
+.Section2 {
+  //@include container();
+}
+
+.Section2-container {
+  @include container(1080px);
+  padding-top:    calc-em(32px);
+  padding-bottom: calc-em(32px);
+}
+
+.Section2-title {
+  @extend .Title;
+  margin-top: 0;
+
+  @media (max-width: calc-em($Cards-compact-end)) {
+    display: none;
+  }
+}

@@ -53,7 +53,9 @@
             <div class="Series-content">
                 <h1 class="Series-title">{{ entry.title }}</h1>
                 <p class="Series-subtitle">Faith Promise Sermon Series</p>
-                <p class="Series-description">Lorm ipsum means that its really importent for you to stay off drugs and stay in scool. You need to no things that will help you in life. Like MATHS and gym. You don't want to be dum.</p>
+                <div class="Series-description">
+                    {{ entry.markdown | markdown }}
+                </div>
 
                 <div class="Series-playlist">
                     <div class="Playlist image-fg-muted image-fg-1 image-fg-vibrant-dark">

@@ -8,7 +8,7 @@ $Nav-logo-width: 46px;
 $Nav-padding-top: 24px;
 $Nav-padding-bottom: 12px;
 
-$Nav-bg-color: $color-gray-darkest;
+$Nav-bg-color: $color-brand-black;
 
 // Calculated
 
@@ -33,11 +33,6 @@ $Nav-height-total: $Nav-logo-height + $Nav-padding-top + $Nav-padding-bottom;
 
 .Nav-container {
   @extend .Container;
-  //height:          calc-em($Nav-height-total);
-  //margin-top: 12px;
-  //padding-top:     calc-em(20px);
-  //padding-bottom:  calc-em(20px);
-  //height:          4.5em;
 }
 
 .Nav-inner {
@@ -45,7 +40,8 @@ $Nav-height-total: $Nav-logo-height + $Nav-padding-top + $Nav-padding-bottom;
   display:         flex;
   align-items:     center;
   justify-content: space-between;
-  padding-top:     24px;
+  padding-top:     calc-em($Nav-padding-top);
+  padding-bottom:  calc-em($Nav-padding-bottom);
 }
 
 .Nav-logo {

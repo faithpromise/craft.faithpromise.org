@@ -1,0 +1,37 @@
+{% set subtitle     = subtitle ?? '' %}
+{% set title        = title ?? '' %}
+{% set image        = image ?? null %}
+{% set text         = text ?? '' %}
+{% set css_class    = css_class ?? '' %}
+{% set action_url   = action_url ?? '' %}
+{% set action_text  = action_text ?? 'More Details' %}
+
+<div class="RiseOverImage {{ css_class }}">
+    <div class="RiseOverImage-container">
+        <div class="RiseOverImage-content">
+            <div class="RiseOverImage-image">
+                {% if image %}
+                    <img
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="100vw"
+                            srcset="
+                    {{ craft.imageUrl.url(image, { width: 1920 }) }} 1920w,
+                    {{ craft.imageUrl.url(image, { width: 1680 }) }} 1680w,
+                    {{ craft.imageUrl.url(image, { width: 1280 }) }} 1280w,
+                    {{ craft.imageUrl.url(image, { width: 800 }) }} 800w,
+                    {{ craft.imageUrl.url(image, { width: 480 }) }} 480w,
+                    {{ craft.imageUrl.url(image, { width: 320 }) }} 320w,
+                ">
+                {% endif %}
+            </div>
+            <div class="RiseOverImage-body">
+                <div class="Title--pre">{{ subtitle }}</div>
+                <h2 class="Title">{{ title }}</h2>
+                <p class="RiseOverImage-text">{{ text | length > 200 ? text | slice(0, 200) ~ '...' : text }}</p>
+                <div class="RiseOverImage-actions">
+                    <a class="Button" href="{{ action_url }}">{{ action_text }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

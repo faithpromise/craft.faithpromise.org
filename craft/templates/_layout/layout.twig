@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 {% set title = title is defined ? title : (entry is defined ? entry.title: null) %}
+{% set canonical_url = canonical_url is defined ? canonical_url : (entry is defined ? entry.url: null) %}
 {% set dev_cache_bust = craft.config.devMode ? '?' ~ random() : '' %}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
     <head>
+        <!-- We're {{ craft.config.craftEnv }} -->
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>{% if title %}{{ title }} - {% endif %}{{ siteName }}</title>
@@ -10,8 +12,7 @@
 
         <meta name="google-site-verification" content="hbqvrQMid1Tpy4mlqi-wtEVGpcZ-tlZ5P_28dOhUgQU">
 
-        {# TODO: Canonical URL #}
-        <link rel="canonical" href="">
+        <link rel="canonical" href="{{ canonical_url }}">
 
         {# TODO: Apple icons #}
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/apple-touch-icon-144x144.png">
@@ -24,10 +25,6 @@
 
         {# TODO: Social tags (see old site) #}
 
-        <!-- Fonts -->
-        <script src="https://use.typekit.net/vyb6fjv.js"></script>
-        <script>try {Typekit.load({ async: false });} catch (e) {}</script>
-
         {# TODO: Prefix with CDN url when in production #}
         {% set cdn_url = craft.config.devMode ? '' : '' %}
         <link rel="stylesheet" href="{{ cdn_url }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
@@ -38,12 +35,11 @@
 
     <body>
 
-        {# TODO: Include Google Analytics #}
         {# TODO: Facebook SDK #}
 
         <div id="app" class="Layout">
 
-            {% set nav_class = nav_class is defined ? 'Nav ' ~ nav_class : 'Nav' %}
+            {% set nav_class = nav_class is defined ? 'Nav ' ~ nav_class : 'Nav Nav--overlay' %}
 
             {# Remove 'Nav--overlay' when nav is open #}
             <nav :class="is_nav_open ? 'Nav Nav--fixed' : '{{ nav_class }}'">
@@ -122,7 +118,7 @@
                         </div>
                         <div class="FullNav-category">
                             <h5 class="FullNav-heading">Care</h5>
-                            <a class="FullNav-link" href="/counseling">Counseling</a>
+                            <a class="FullNav-link" href="/care">Counseling</a>
                             <a class="FullNav-link" href="/stephen">Stephen Ministry</a>
                             <a class="FullNav-link" href="/celebrate">fpCelebrate</a>
                             <a class="FullNav-link" href="/prayer">Prayer</a>

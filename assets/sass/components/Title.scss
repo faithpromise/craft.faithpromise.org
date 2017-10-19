@@ -1,0 +1,12 @@
+.Title--pre {
+  margin:         0;
+  font-size:      calc-em(14px);
+  text-transform: uppercase;
+  color:          $color-brand-color;
+}
+
+.Title {
+  @include fluid-type(320px, 16px, 1080px, 32px);
+  margin:         .875em 0;
+  text-transform: uppercase;
+}

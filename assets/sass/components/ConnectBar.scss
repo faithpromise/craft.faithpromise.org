@@ -1,0 +1,83 @@
+.ConnectBar {
+  background-color: $color-brand-color;
+  color:            #fff;
+}
+
+.ConnectBar-container {
+  @include container(922px, 16px);
+  padding-top:    calc-em(48px);
+  padding-bottom: calc-em(48px);
+}
+
+// Wide screen
+
+.ConnectBar-container {
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+}
+
+.ConnectBar-title {
+  @include fluid-type(320px, 28px, 960px, 22px);
+  margin:         0 0 calc-em(4px, 22px);
+  font-weight:    400;
+  text-transform: uppercase;
+}
+
+.ConnectBar-text {
+  margin:    0;
+  font-size: calc-em(15px);
+}
+
+.ConnectBar-item {
+  @include link-unstyled;
+  padding:    calc-em(8px) 0 calc-em(16px);
+  //border-left: 1px solid #fff;
+  text-align: center;
+}
+
+.ConnectBar-item > svg {
+  height: calc-em(60px);
+  width:  calc-em(70px);
+  fill:   currentColor;
+}
+
+.ConnectBar-label {
+  margin-top:     calc-em(4px, 13px);
+  font-size:      calc-em(13px);
+  text-transform: uppercase;
+}
+
+@media (max-width: calc-em(959px)) {
+
+  .ConnectBar-container {
+    flex-wrap: wrap;
+  }
+
+  .ConnectBar-header {
+    width:         100%;
+    margin-bottom: 2em;
+    text-align:    center;
+  }
+
+  .ConnectBar-item {
+    padding:    calc-em(8px) calc-em(32px) calc-em(16px);
+  }
+
+}
+
+@media (min-width: calc-em(960px)) {
+
+  .ConnectBar-header {
+    padding-right: calc-em(32px);
+  }
+
+  .ConnectBar-item {
+    flex-shrink: 0;
+    width:       calc-em(205px);
+    border-left: 1px solid #fff;
+  }
+
+}
+
+// 890, 275, 205x3

@@ -34,9 +34,6 @@
 
     {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
-    {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
-    {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
-
     {% if global_event %}
 
         <div id="Special" class="EventHero" style="background-image: url(/assets/temp.jpg)">
@@ -59,9 +56,22 @@
     {% else %}
 
         <div class="HeaderVideo">
-            {% if craft.request.isMobileBrowser() %}
-                {# TODO: Get gif / mobile image #}
-                <img src="https://placeimg.com/640/480/any/sepia?t=1505305979703">
+            {% if craft.request.isMobileBrowser() or craft.config.devMode %}
+                {% set home_page_image = craft.assets.id(3964).first() %}
+                {% if home_page_image %}
+                    <img
+                            class="Hero-image"
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="100vw"
+                            srcset="
+                    {{ craft.imageUrl.url(home_page_image, { width: 1920 }) }} 1920w,
+                    {{ craft.imageUrl.url(home_page_image, { width: 1680 }) }} 1680w,
+                    {{ craft.imageUrl.url(home_page_image, { width: 1280 }) }} 1280w,
+                    {{ craft.imageUrl.url(home_page_image, { width: 800 }) }} 800w,
+                    {{ craft.imageUrl.url(home_page_image, { width: 480 }) }} 480w,
+                    {{ craft.imageUrl.url(home_page_image, { width: 320 }) }} 320w,
+                ">
+                {% endif %}
             {% else %}
                 {% set home_page_video = craft.assets.id(1580).first() %}
                 <home-page-video url="{{ home_page_video.url }}" :is-nav-open="is_nav_open"></home-page-video>
@@ -79,36 +89,98 @@
 
     {% endif %}
 
-    <div class="RiseOverImage RiseOverImage--gray" style="padding-top: 0;">
-        <div class="RiseOverImage-container">
-            <div class="RiseOverImage-content">
-                <div class="RiseOverImage-image">
-                    {# TODO: Media query for mobile when image is about 100% #}
-                    <img
-                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                            sizes="40vw"
-                            srcset="
-                    {{ craft.imageUrl.url(latest_series_image, { width: 1920 }) }} 1920w,
-                    {{ craft.imageUrl.url(latest_series_image, { width: 1680 }) }} 1680w,
-                    {{ craft.imageUrl.url(latest_series_image, { width: 1280 }) }} 1280w,
-                    {{ craft.imageUrl.url(latest_series_image, { width: 800 }) }} 800w,
-                    {{ craft.imageUrl.url(latest_series_image, { width: 480 }) }} 480w,
-                    {{ craft.imageUrl.url(latest_series_image, { width: 320 }) }} 320w,
-                ">
-                </div>
-                <div class="RiseOverImage-body">
-                    <div class="Title--pre">Latest Series</div>
-                    <h2 class="Title">{{ latest_series.title }}</h2>
-                    <p class="RiseOverImage-text">{{ latest_series.markdown | length > 200 ? latest_series.markdown | slice(0, 200) ~ '...' : latest_series.markdown }}</p>
-                    <a class="Button" href="{{ latest_series.url }}">More Info</a>
-                </div>
+    {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
+    {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
+
+    {% include '_layout/components/rise-over-image.twig' with {
+    image: latest_series_image,
+    title: latest_series.title,
+    subtitle: 'Latest Series',
+    text: latest_series.markdown,
+    action_url: latest_series.url,
+    action_text: 'More Info',
+    css_class: 'RiseOverImage--gray RiseOverImage--flushTop',
+    } %}
+
+    <section class="Section2">
+        <div class="Section2-container">
+            <div class="Section2-header">
+                <h2 class="Section2-title">News &amp; Events</h2>
+            </div>
+            <div class="Section2-body">
+                <ul class="Cards2">
+                    <li class="Cards2-item">
+                        {% set new_here_image = craft.assets.id(4113).first() %}
+                        {% include '_layout/components/card2.twig' with {
+                        image: new_here_image,
+                        title: 'New Here?',
+                        text: 'Discover what it\'s like to attend on the weekend, and learn about our students and kids ministries.',
+                        action_url: '/locations',
+                        action_text: 'Times & Locations',
+                        } %}
+                    </li>
+                    <li class="Cards2-item">
+                        {% set events_image = craft.assets.id(4112).first() %}
+                        {% include '_layout/components/card2.twig' with {
+                        image: events_image,
+                        title: 'Events',
+                        text: 'There\'s a lot happening at Faith Promise. Check out these upcoming events.',
+                        action_url: '/events',
+                        action_text: 'View Events',
+                        } %}
+                    </li>
+                    <li class="Cards2-item">
+                        {% set social_image = craft.assets.id(4114).first() %}
+                        {% include '_layout/components/card2.twig' with {
+                        image: social_image,
+                        title: 'Social Media',
+                        text: 'Join the conversation on Facebook, Instagram, and Twitter.',
+                        action_url: '/updates',
+                        action_text: 'Follow Faith Promise',
+                        } %}
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
+    </section>
+
+    {% set map_image = craft.assets.id(4111).first() %}
+
+    {% include '_layout/components/rise-over-image.twig' with {
+    image: map_image,
+    title: 'One Church, Many Locations',
+    subtitle: 'Times & Locations',
+    text: 'Get times & directions to each of our campuses as well as online services. Join us this weekend. We\'d love to see you there!',
+    action_url: '/locations',
+    action_text: 'Find a Location',
+    css_class: 'RiseOverImage--gray',
+    } %}
 
     <div class="ConnectBar">
         <div class="ConnectBar-container">
-
+            <div class="ConnectBar-header">
+                <h5 class="ConnectBar-title">Get the Download</h5>
+                <p class="ConnectBar-text">Connect with Faith Promise throughout the week.</p>
+            </div>
+            <a class="ConnectBar-item" href="/online">
+                <svg>
+                    <use xlink:href="/assets/icons.svg#cb_online"></use>
+                </svg>
+                <div class="ConnectBar-label">Online Campus</div>
+            </a>
+            <a class="ConnectBar-item" href="/updates">
+                <svg>
+                    <use xlink:href="/assets/icons.svg#cb_social"></use>
+                </svg>
+                <div class="ConnectBar-label">Social Media</div>
+            </a>
+            {#TODO: Link to app or maybe switch out bar to show social icons?#}
+            <a class="ConnectBar-item" href="#">
+                <svg>
+                    <use xlink:href="/assets/icons.svg#cb_app"></use>
+                </svg>
+                <div class="ConnectBar-label">Mobile App</div>
+            </a>
         </div>
     </div>
 
