@@ -1,0 +1,65 @@
+.Title--pre {
+  margin:         0;
+  font-size:      calc-em(14px);
+  text-transform: uppercase;
+  color:          $color-brand-color;
+}
+
+.Title {
+  font-size:      calc-em(32px);
+  text-transform: uppercase;
+}
+
+.RiseOverImage {
+
+  padding: calc-em(64px) 0;
+
+  &--gray {
+    background-color: $color-gray-lightest;
+  }
+}
+
+.RiseOverImage-container {
+  @include container(1080px);
+}
+
+.RiseOverImage-content {
+  padding-top:    calc-em(40px);
+  padding-bottom: calc-em(40px);
+}
+
+.RiseOverImage-body {
+  position:         relative;
+  z-index:          1;
+  flex-shrink:      0;
+  width:            50%;
+  padding:          calc-em(48px);
+  background-color: #fff;
+  //box-shadow:       0 0 12px -3px #000;
+  box-shadow:       0 0 18px 0 rgba(0, 0, 0, 0.38);
+}
+
+@media (min-width: calc-em(980px)) {
+
+  .RiseOverImage-content {
+    position: relative;
+    display:  flex;
+  }
+
+  .RiseOverImage-image {
+    position:         absolute;
+    top:              0;
+    right:            0;
+    bottom:           0;
+    width:            56%;
+    background-color: $color-gray-light;
+
+    > img {
+      height:          100%;
+      width:           100%;
+      object-fit:      cover;
+      object-position: 50% 50%;
+    }
+  }
+
+}

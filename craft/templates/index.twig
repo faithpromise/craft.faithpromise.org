@@ -34,9 +34,8 @@
 
     {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
-    {% set latest_sermon = craft.entries({ type: 'sermon', with: 'series' }).order('sermonDate DESC').first() %}
-    {% set latest_sermon_image = latest_sermon.series[0].seriesImageTall[0] %}
-    {% set events_image = craft.entries.section('pages').slug('events').first().pageContent.type('header').first().image[0] %}
+    {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
+    {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
 
     {% if global_event %}
 
@@ -65,61 +64,94 @@
                 <img src="https://placeimg.com/640/480/any/sepia?t=1505305979703">
             {% else %}
                 {% set home_page_video = craft.assets.id(1580).first() %}
-                <home-page-video url="{{ home_page_video.url }}" :is-nav-open="is_nav_open"></home-page-video>
+                {#<home-page-video url="{{ home_page_video.url }}" :is-nav-open="is_nav_open"></home-page-video>#}
             {% endif %}
             <div class="HeaderVideo-overlay"></div>
             <div class="HeaderVideo-container">
-                <div class="HeaderVideo-title">Real People. Real Problems. Real Love.</div>
+                <h1 class="HeaderVideo-title">Welcome to<br>Faith Promise</h1>
                 <div class="HeaderVideo-actions">
                     <a class="Button" href="/locations">Find a Location</a>
                     <a class="Button" href="http://online.faithpromise.org">Watch Online</a>
                 </div>
             </div>
-
+            <div class="HeaderVideo-cut"></div>
         </div>
 
     {% endif %}
 
-    <div class="ImageCards">
-        <div class="ImageCards-container">
-            <ul class="ImageCards-list">
-                <li class="ImageCards-row">
-                    <a class="ImageCards-item" href="{{ latest_sermon.url }}">
-                        <img
-                                class="ImageCards-image"
-                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                sizes="50vw"
-                                srcset="
-                                        {{ latest_sermon_image.url({ width: 1920 }) }} 1920w,
-                                        {{ latest_sermon_image.url({ width: 1680 }) }} 1680w,
-                                        {{ latest_sermon_image.url({ width: 1280 }) }} 1280w,
-                                        {{ latest_sermon_image.url({ width: 800 }) }} 800w,
-                                        {{ latest_sermon_image.url({ width: 480 }) }} 480w,
-                                        {{ latest_sermon_image.url({ width: 320 }) }} 320w,
-                                    ">
-                        <span class="ImageCards-link" href="/">Latest Sermon</span>
-                    </a>
-                </li>
-                <li class="ImageCards-row">
-                    <a class="ImageCards-item" href="/events">
-                        <img
-                                class="ImageCards-image"
-                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                sizes="50vw"
-                                srcset="
-                                        {{ events_image.url({ width: 1920 }) }} 1920w,
-                                        {{ events_image.url({ width: 1680 }) }} 1680w,
-                                        {{ events_image.url({ width: 1280 }) }} 1280w,
-                                        {{ events_image.url({ width: 800 }) }} 800w,
-                                        {{ events_image.url({ width: 480 }) }} 480w,
-                                        {{ events_image.url({ width: 320 }) }} 320w,
-                                    ">
-                        <span class="ImageCards-link" href="/">News &amp; Events</span>
-                    </a>
-                </li>
-            </ul>
+    <div class="RiseOverImage RiseOverImage--gray" style="padding-top: 0;">
+        <div class="RiseOverImage-container">
+            <div class="RiseOverImage-content">
+                <div class="RiseOverImage-image">
+                    {# TODO: Media query for mobile when image is about 100% #}
+                    <img
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="40vw"
+                            srcset="
+                    {{ craft.imageUrl.url(latest_series_image, { width: 1920 }) }} 1920w,
+                    {{ craft.imageUrl.url(latest_series_image, { width: 1680 }) }} 1680w,
+                    {{ craft.imageUrl.url(latest_series_image, { width: 1280 }) }} 1280w,
+                    {{ craft.imageUrl.url(latest_series_image, { width: 800 }) }} 800w,
+                    {{ craft.imageUrl.url(latest_series_image, { width: 480 }) }} 480w,
+                    {{ craft.imageUrl.url(latest_series_image, { width: 320 }) }} 320w,
+                ">
+                </div>
+                <div class="RiseOverImage-body">
+                    <div class="Title--pre">Latest Series</div>
+                    <h2 class="Title">{{ latest_series.title }}</h2>
+                    <p class="RiseOverImage-text">{{ latest_series.markdown | length > 200 ? latest_series.markdown | slice(0, 200) ~ '...' : latest_series.markdown }}</p>
+                    <a class="Button" href="{{ latest_series.url }}">More Info</a>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="ConnectBar">
+        <div class="ConnectBar-container">
+
+        </div>
+    </div>
+
+    {#<div class="ImageCards">#}
+    {#<div class="ImageCards-container">#}
+    {#<ul class="ImageCards-list">#}
+    {#<li class="ImageCards-row">#}
+    {#<a class="ImageCards-item" href="{{ latest_sermon.url }}">#}
+    {#<img#}
+    {#class="ImageCards-image"#}
+    {#src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="#}
+    {#sizes="50vw"#}
+    {#srcset="#}
+    {#{{ latest_sermon_image.url({ width: 1920 }) }} 1920w,#}
+    {#{{ latest_sermon_image.url({ width: 1680 }) }} 1680w,#}
+    {#{{ latest_sermon_image.url({ width: 1280 }) }} 1280w,#}
+    {#{{ latest_sermon_image.url({ width: 800 }) }} 800w,#}
+    {#{{ latest_sermon_image.url({ width: 480 }) }} 480w,#}
+    {#{{ latest_sermon_image.url({ width: 320 }) }} 320w,#}
+    {#">#}
+    {#<span class="ImageCards-link" href="/">Latest Sermon</span>#}
+    {#</a>#}
+    {#</li>#}
+    {#<li class="ImageCards-row">#}
+    {#<a class="ImageCards-item" href="/events">#}
+    {#<img#}
+    {#class="ImageCards-image"#}
+    {#src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="#}
+    {#sizes="50vw"#}
+    {#srcset="#}
+    {#{{ events_image.url({ width: 1920 }) }} 1920w,#}
+    {#{{ events_image.url({ width: 1680 }) }} 1680w,#}
+    {#{{ events_image.url({ width: 1280 }) }} 1280w,#}
+    {#{{ events_image.url({ width: 800 }) }} 800w,#}
+    {#{{ events_image.url({ width: 480 }) }} 480w,#}
+    {#{{ events_image.url({ width: 320 }) }} 320w,#}
+    {#">#}
+    {#<span class="ImageCards-link" href="/">News &amp; Events</span>#}
+    {#</a>#}
+    {#</li>#}
+    {#</ul>#}
+    {#</div>#}
+    {#</div>#}
 
     {% endcache %}
 

@@ -8,32 +8,68 @@
   color:    #fff;
 }
 
-//.HeaderVideo .Button {
-//  @extend .Button--light;
-//}
+.HeaderVideo-cut {
 
-.HeaderVideo .Button {
-  border-color:     #fff;
-  background-color: #fff;
-  //background-color: rgba(0, 0, 0, 0.35);
-  color:            $color-gray-darker;
+  @include fluid-size(bottom, 320px, -470px, 1280px, -395px);
+  z-index: 3;
 
-  &:hover {
-    //background-color: rgba(255, 255, 255, 0.75);
-    //color:            #fff;
+  &, &:before {
+    position:         absolute;
+    height:           500px;
+    width:            150vw;
+    transform:        rotate(-6deg);
+    background-color: $color-brand-color;
+    overflow:         hidden;
+  }
+
+  &:before {
+    @include fluid-size(left, 320px, -80px, 1280px, -240px);
+    content:          '';
+    background-color: $color-gray-lightest;
+    transform:        rotate(13deg);
+  }
+
+  @media (min-width: calc-em(1280px)) {
+
+    transform: rotate(-4deg);
+
+    &:before {
+      @include fluid-size(left, 1280px, -320px, 1920px, -290px);
+      transform: rotate(10deg);
+    }
+
+  }
+
+  @media (min-width: calc-em(1920px)) {
+
+    &:before {
+      left: -290px;
+    }
   }
 
 }
 
-.HeaderVideo-actions > .Button + .Button {
-  margin-left: .5em;
+.HeaderVideo .Button {
+  margin-right:  .5em;
+  margin-bottom: .5em;
+  border-color:  #fff;
+  //background-color: #fff;
+  //background-color: rgba(0, 0, 0, 0.35);
+  color:         #fff;
+
+  &:hover {
+    background-color: #fff;
+    color:            $color-brand-black;
+  }
+
 }
 
 .HeaderVideo-container {
+  @extend .Container;
+  @include fluid-size(padding-bottom, 320px, 60px, 560px, 110px);
   display:         flex;
   flex-direction:  column;
-  align-items:     center;
-  justify-content: center;
+  justify-content: flex-end;
   height:          100%;
 }
 
@@ -63,10 +99,14 @@
 }
 
 .HeaderVideo-title {
-  padding:   0 2em;
-  font-size: calc-em(40px);
+  @include fluid-type(320px, 30px, 800px, 60px);
+
+  padding:        0;
+  margin:         0;
+  line-height:    1;
+  text-transform: uppercase;
 }
 
 .HeaderVideo-actions {
-  margin-top: 3em;
+  margin-top: 1em;
 }

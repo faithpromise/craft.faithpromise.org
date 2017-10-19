@@ -1,6 +1,6 @@
 // Font families
 
-$font-family-titles: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-family-titles: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 
 // Base size
@@ -34,7 +34,8 @@ $font-size-0: 0;
 $heading-modular-scale-mobile: 1.08;
 
 $font-size-heading-6-mobile: $font-size * 1;
-$font-size-heading-5-mobile: $font-size-heading-6-mobile * $heading-modular-scale-mobile;;
+$font-size-heading-5-mobile: $font-size-heading-6-mobile * $heading-modular-scale-mobile;
+;
 $font-size-heading-4-mobile: $font-size-heading-5-mobile * $heading-modular-scale-mobile;
 $font-size-heading-3-mobile: $font-size-heading-4-mobile * $heading-modular-scale-mobile;
 $font-size-heading-2-mobile: $font-size-heading-3-mobile * $heading-modular-scale-mobile;

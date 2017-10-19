@@ -3,15 +3,16 @@ $Nav-link-padding-h: 8px;
 $Nav-desktop-start: 768px;
 $Nav-mobile-end: $Nav-desktop-start - 1px;
 
-$Nav-logo-height: 42px;
-$Nav-padding-v: 20px;
+$Nav-logo-height: 46px;
+$Nav-logo-width: 46px;
+$Nav-padding-top: 24px;
+$Nav-padding-bottom: 12px;
 
 $Nav-bg-color: $color-gray-darkest;
 
 // Calculated
 
-$Nav-height-total: $Nav-logo-height + $Nav-padding-v + $Nav-padding-v;
-$Nav-logo-width: $Nav-logo-height * 4.619047619;
+$Nav-height-total: $Nav-logo-height + $Nav-padding-top + $Nav-padding-bottom;
 
 .Nav {
   background-color: $Nav-bg-color;
@@ -32,27 +33,48 @@ $Nav-logo-width: $Nav-logo-height * 4.619047619;
 
 .Nav-container {
   @extend .Container;
-  display:         flex;
-  align-items:     center;
-  justify-content: space-between;
-  height:          calc-em($Nav-height-total);
+  //height:          calc-em($Nav-height-total);
+  //margin-top: 12px;
   //padding-top:     calc-em(20px);
   //padding-bottom:  calc-em(20px);
   //height:          4.5em;
 }
 
+.Nav-inner {
+  position:        relative;
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding-top:     24px;
+}
+
 .Nav-logo {
 
-  @extend %link-color-inherit-all;
-  height:       calc-em($Nav-logo-height);
+  @include link-colors-all($color-brand-black);
+
+  //background-color: $color-brand-color;
+  padding:      0 calc-em(12px);
   margin-right: auto;
-  overflow:     hidden;
 
   > svg {
-    height: calc-em($Nav-logo-height);
-    width:  calc-em($Nav-logo-width);
-    fill:   currentColor;
+    position: relative;
+    height:   calc-em($Nav-logo-height);
+    width:    calc-em($Nav-logo-width);
+    fill:     currentColor;
   }
+
+  position:     relative;
+
+  &:before {
+    content:          '';
+    position:         absolute;
+    top:              -24px;
+    right:            0;
+    bottom:           -12px;
+    left:             0;
+    background-color: $color-brand-color;
+  }
+
 }
 
 .Nav-menu {
@@ -123,17 +145,17 @@ html.nav_overlay .Nav,
     position:   absolute;
     z-index:    $z-index-nav;
     top:        -20%;
-    height:     200%;
+    height:     230%;
     width:      100%;
     background: linear-gradient(to bottom, #000 0, transparent 100%);
-    opacity:    .75;
+    opacity:    .95;
   }
 
 }
 
 html.nav_black .Nav,
 .Nav--black {
-  position: static;
+  position:         static;
   background-color: #000;
 
   .Nav-bg {

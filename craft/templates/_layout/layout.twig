@@ -49,24 +49,26 @@
             <nav :class="is_nav_open ? 'Nav Nav--fixed' : '{{ nav_class }}'">
                 <div class="Nav-bg"></div>
                 <div class="Nav-container">
-                    <a id="to_home_from_headerLogo" class="Nav-logo" href="/" title="Return to Home Page">
-                        <svg>
-                            <use xlink:href="/assets/logos.svg#logo"></use>
-                        </svg>
-                    </a>
-                    <transition name="transition">
-                        <ul class="Nav-menu" v-show="!is_nav_open">
-                            <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
-                            <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
-                            <li class="Nav-item"><a class="Nav-link" href="/what-to-expect">About</a></li>
-                            <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
-                        </ul>
-                    </transition>
-                    <span class="Nav-toggle" @click="nav_toggle">
+                    <div class="Nav-inner">
+                        <a class="Nav-logo" href="/" title="Return to Home Page">
+                            <svg>
+                                <use xlink:href="/assets/logos.svg#mark"></use>
+                            </svg>
+                        </a>
+                        <transition name="transition">
+                            <ul class="Nav-menu" v-show="!is_nav_open">
+                                <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
+                                <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
+                                <li class="Nav-item"><a class="Nav-link" href="/what-to-expect">About</a></li>
+                                <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
+                            </ul>
+                        </transition>
+                        <span class="Nav-toggle" @click="nav_toggle">
                         <svg>
                             <use xlink:href="/assets/icons.svg#menu" :xlink:href="'/assets/icons.svg#' + toggle_icon"></use>
                         </svg>
                     </span>
+                    </div>
                 </div>
             </nav>
 
@@ -265,7 +267,7 @@
         </div>
 
         <script type="text/javascript">
-            window.csrfTokenName = "{{ craft.config.csrfTokenName|e('js') }}";
+            window.csrfTokenName  = "{{ craft.config.csrfTokenName|e('js') }}";
             window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
         </script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
