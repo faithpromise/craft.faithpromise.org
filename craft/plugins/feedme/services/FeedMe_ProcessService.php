@@ -41,6 +41,10 @@ class FeedMe_ProcessService extends BaseApplicationComponent
 
         craft()->config->maxPowerCaptain();
 
+        // Reset properties to allow an instance of this service to be reused
+        $this->_processedElements = array();
+        $this->_processedElementIds = array();
+
         // Add some additional information to our FeedModel - for ease of use in processing
         $return['fields'] = array();
         $return['existingElements'] = array();
@@ -102,7 +106,7 @@ class FeedMe_ProcessService extends BaseApplicationComponent
         $element = $this->_service->setModel($feed);
 
         // Set criteria according to Element Type 
-        $criteria = $this->_criteria;
+        $criteria = $this->_service->setCriteria($feed);
 
         // From the raw data in our feed, process it ready for mapping (more to do below)
         $data = $this->_data[$step];
@@ -344,7 +348,19 @@ class FeedMe_ProcessService extends BaseApplicationComponent
         if (is_array($fieldDefaults)) {
             foreach ($fieldDefaults as $fieldHandle => $feedHandle) {
                 if (isset($feedHandle) && $feedHandle !== '') {
-                    $parsedData[$fieldHandle]['data'] = $feedHandle;
+                    if (strstr($fieldHandle, '--')) {
+                        $split = FeedMeArrayHelper::multiExplode(array('--', '-'), $fieldHandle);
+
+                        array_splice($split, 1, 0, 'data');
+
+                        $keyPath = implode('.', $split);
+
+                        $parsedData[$keyPath]['data'] = $feedHandle;
+
+                        $parsedData = Hash::expand($parsedData);
+                    } else {
+                        $parsedData[$fieldHandle]['data'] = $feedHandle;
+                    }
                 }
             }
         }
@@ -361,7 +377,7 @@ class FeedMe_ProcessService extends BaseApplicationComponent
         foreach ($contentNode as $j => $nodePath) {
             $feedPath = str_replace('.', '/', $nodePath);
             $feedPath = preg_replace('/(\/\d+\/)/', '/', $feedPath);
-            $feedPath = preg_replace('/(\/\d+)|(\d+\/)/', '', $feedPath);
+            $feedPath = preg_replace('/(\/\d+)|(\/\d+\/)/', '', $feedPath);
             $feedPath = preg_replace('/(\/\d+)|^(\d+\/)/', '', $feedPath);
 
             // Get the feed value using dot-notation (but specifically for a node)

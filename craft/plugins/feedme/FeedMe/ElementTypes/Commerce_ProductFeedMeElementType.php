@@ -160,18 +160,33 @@ class Commerce_ProductFeedMeElementType extends BaseFeedMeElementType
             }
 
             // Check for any Twig shorthand used
-            if (is_string($dataValue)) {
-                $objectModel = $this->getObjectModel($data);
-                $dataValue = craft()->templates->renderObjectTemplate($dataValue, $objectModel);
-            }
+            $this->parseInlineTwig($data, $dataValue);
             
             switch ($handle) {
                 case 'id';
                 case 'taxCategoryId';
+                    // Support getting category by ID, Name or Handle
+                    $taxCategory = $this->_getTaxCategory($dataValue);
+
+                    if ($taxCategory) {
+                        $element->$handle = $taxCategory->id;
+                    }
+
+                    break;
                 case 'shippingCategoryId';
-                    $element->$handle = $dataValue;
+                    // Support getting category by ID, Name or Handle
+                    $shippingCategory = $this->_getShippingCategory($dataValue);
+
+                    if ($shippingCategory) {
+                        $element->$handle = $shippingCategory->id;
+                    }
+
                     break;
                 case 'slug';
+                    if (craft()->config->get('limitAutoSlugsToAscii')) {
+                        $dataValue = StringHelper::asciiString($dataValue);
+                    }
+                    
                     $element->$handle = ElementHelper::createSlug($dataValue);
                     break;
                 case 'postDate':
@@ -187,7 +202,7 @@ class Commerce_ProductFeedMeElementType extends BaseFeedMeElementType
                 case 'enabled':
                 case 'freeShipping':
                 case 'promotable':
-                    $element->$handle = (bool)$dataValue;
+                    $element->$handle = FeedMeHelper::parseBoolean($dataValue);
                     break;
                 case 'title':
                     $element->getContent()->$handle = $dataValue;
@@ -336,7 +351,7 @@ class Commerce_ProductFeedMeElementType extends BaseFeedMeElementType
 
             $variantModel->setContentFromPost($variantContent);
 
-            $variantModel->getContent()->title = Hash::get($variant, 'title.data');
+            $variantModel->getContent()->title = Hash::get($variant, 'title.data', $variantModel->getContent()->title);
 
             $variants[] = $variantModel;
         }
@@ -347,5 +362,49 @@ class Commerce_ProductFeedMeElementType extends BaseFeedMeElementType
     private function _getVariantBySku($sku, $localeId = null)
     {
         return craft()->elements->getCriteria('Commerce_Variant', array('sku' => $sku, 'status' => null, 'locale' => $localeId))->first();
+    }
+
+    private function _getTaxCategory($value)
+    {
+        // Find by ID
+        $result = Commerce_TaxCategoryRecord::model()->findById($value);
+
+        // Find by Name
+        if (!$result) {
+            $result = Commerce_TaxCategoryRecord::model()->findByAttributes(array('name' => $value));
+        }
+
+        // Find by Handle
+        if (!$result) {
+            $result = Commerce_TaxCategoryRecord::model()->findByAttributes(array('handle' => $value));
+        }
+
+        if ($result) {
+            return Commerce_TaxCategoryModel::populateModel($result);
+        }
+
+        return false;
+    }
+
+    private function _getShippingCategory($value)
+    {
+        // Find by ID
+        $result = Commerce_ShippingCategoryRecord::model()->findById($value);
+
+        // Find by Name
+        if (!$result) {
+            $result = Commerce_ShippingCategoryRecord::model()->findByAttributes(array('name' => $value));
+        }
+
+        // Find by Handle
+        if (!$result) {
+            $result = Commerce_ShippingCategoryRecord::model()->findByAttributes(array('handle' => $value));
+        }
+
+        if ($result) {
+            return Commerce_ShippingCategoryModel::populateModel($result);
+        }
+
+        return false;
     }
 }

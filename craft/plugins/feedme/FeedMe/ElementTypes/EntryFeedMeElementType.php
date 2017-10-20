@@ -59,6 +59,13 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
             $element->locale = $settings['locale'];
         }
 
+        $section = craft()->sections->getSectionById($element->sectionId);
+        $locale = craft()->i18n->getPrimarySiteLocale();
+
+        if (isset($section->locales[$locale->id])) {
+            $element->localeEnabled = $section->locales[$locale->id]->enabledByDefault;
+        }
+
         // While we're at it - save a list of required fields for later. We only want to do this once
         // per import, and its vital when importing into specific locales
         $entryType = craft()->sections->getEntryTypeById($element->typeId);
@@ -169,10 +176,7 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
             }
 
             // Check for any Twig shorthand used
-            if (is_string($dataValue)) {
-                $objectModel = $this->getObjectModel($data);
-                $dataValue = craft()->templates->renderObjectTemplate($dataValue, $objectModel);
-            }
+            $this->parseInlineTwig($data, $dataValue);
 
             switch ($handle) {
                 case 'id';
@@ -182,6 +186,10 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
                     $element->$handle = $this->prepareAuthorForElement($dataValue);
                     break;
                 case 'slug';
+                    if (craft()->config->get('limitAutoSlugsToAscii')) {
+                        $dataValue = StringHelper::asciiString($dataValue);
+                    }
+
                     $element->$handle = ElementHelper::createSlug($dataValue);
                     break;
                 case 'postDate':
@@ -196,7 +204,7 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
                     break;
                 case 'enabled':
                 case 'localeEnabled':
-                    $element->$handle = (bool)$dataValue;
+                    $element->$handle = FeedMeHelper::parseBoolean($dataValue);
                     break;
                 case 'title':
                     $element->getContent()->$handle = $dataValue;

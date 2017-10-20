@@ -88,6 +88,11 @@ class FeedMeVariable
         return craft()->feedMe_data->getFeedForTemplate($options);
     }
 
+    public function feedHeaders($options = array())
+    {
+        return craft()->feedMe_data->getFeedHeadersForTemplate($options);
+    }
+
     public function getFeeds()
     {
         $result = array();
@@ -263,7 +268,7 @@ class FeedMeVariable
                 if ($children) {
                     foreach ($children as $childFolder) {
                         $return[] = array(
-                            'value' => $childFolder['name'],
+                            'value' => $childFolder['id'],
                             'label' => $childFolder['name'],
                         );
                     }
