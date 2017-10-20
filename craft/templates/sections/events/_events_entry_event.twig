@@ -15,7 +15,7 @@
 
     {# Hero #}
 
-    {% if entry.html | length and entry.pageContent | length %}
+    {% if entry.html | length and not entry.pageContent | length %}
 
         {# Intro #}
 
