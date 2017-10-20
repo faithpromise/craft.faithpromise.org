@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <volunteer-form></volunteer-form>
+    <!--<volunteer-form></volunteer-form>-->
 
     <positions-filter
             :area-slug="selected_area"
