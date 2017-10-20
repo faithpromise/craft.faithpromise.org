@@ -51,12 +51,15 @@
 
                 mailer.send(this.fields)
                     .then((result) => {
-                            console.log('success');
-                            this.is_sending = false;
+                            this.is_sending     = false;
+                            this.fields.message = '';
+                            // TODO: Come on! Seriously! This is jank!
+                            alert('Thank you! We\'ll reach out soon.');
                         }
                     )
                     .catch((error) => {
-                        console.log('error', error);
+                        // TODO: Come on! Seriously! This is jank!
+                        alert('Oh no! An error occurred. Please call/email and let us know.');
                         this.is_sending = false;
                     });
             },
