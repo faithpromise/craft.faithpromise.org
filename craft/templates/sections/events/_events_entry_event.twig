@@ -8,26 +8,30 @@
     |--------------------------------------------------------------------------
     #}
 
-    {# Hero #}
-
     {% include '_layout/hero.twig' with {
     imageTall: entry.eventImageTall ? entry.eventImageTall[0] : null,
     imageWide: entry.eventImageWide ? entry.eventImageWide[0] : null,
     } %}
 
-    {# Intro #}
+    {# Hero #}
 
-    {% include '_layout/text_section.twig' with {
-    title: entry.title,
-    subtitle: entry.dateRange,
-    html: entry.html,
-    videoUrl: entry.videoUrl,
-    linkUrl_1: entry.actions|length > 0 ? entry.actions[0].theUrl : null,
-    linkText_1: entry.actions|length > 0 ? entry.actions[0].text : null,
-    linkUrl_2: entry.actions|length > 1 ? entry.actions[1].theUrl : null,
-    linkText_2: entry.actions|length > 1 ? entry.actions[1].text : null,
-    align: entry.videoUrl ? 'left' : 'center',
-    } %}
+    {% if entry.html | length and entry.pageContent | length %}
+
+        {# Intro #}
+
+        {% include '_layout/text_section.twig' with {
+        title: entry.title,
+        subtitle: entry.dateRange,
+        html: entry.html,
+        videoUrl: entry.videoUrl,
+        linkUrl_1: entry.actions|length > 0 ? entry.actions[0].theUrl : null,
+        linkText_1: entry.actions|length > 0 ? entry.actions[0].text : null,
+        linkUrl_2: entry.actions|length > 1 ? entry.actions[1].theUrl : null,
+        linkText_2: entry.actions|length > 1 ? entry.actions[1].text : null,
+        align: entry.videoUrl ? 'left' : 'center',
+        } %}
+
+    {% endif %}
 
     {# Additional content #}
 
