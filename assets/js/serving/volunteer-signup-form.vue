@@ -34,10 +34,10 @@
                 is_sending: false,
                 is_sent:    false,
                 fields:     {
-                    first_name: 'Brad',
-                    last_name:  'Roberts',
-                    email:      'bradr@faithpromise.org',
-                    phone:      '865-973-2311',
+                    first_name: '',
+                    last_name:  '',
+                    email:      '',
+                    phone:      '',
                     message:    '',
                 },
             }
