@@ -7,7 +7,7 @@
 
     let autoplay = {
         youtube: 'autoplay=1',
-        vimeo:   'autoplay=true',
+        vimeo:   'autoplay=1',
     };
 
     let vimeo_params   = '?title=0&byline=0&portrait=0&badge=0',
