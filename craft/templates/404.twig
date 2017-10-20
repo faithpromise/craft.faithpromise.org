@@ -18,11 +18,25 @@
 
 {% extends "_layout/layout.twig" %}
 
+{# Alternate URLs. Entries can have an alternateUrl field to provide redirects. #}
+
+{% set alternateUrl = craft.tags.search(craft.request.path | replace({'-': ''})).first() %}
+{% if alternateUrl %}
+    {% set entry = craft.entries.relatedTo(alternateUrl).first() %}
+    {% if entry.url is defined %}
+        {% redirect entry.url 301 %}
+    {% endif %}
+{% endif %}
+
+{# Fall back to first segment of URL matching entries (i.e. /kyle-gilbert -> /staff/kyle-gilbert) #}
+
 {% set entry = craft.entries.slug(craft.request.firstSegment).first() %}
 
-{% if entry and entry.url %}
+{% if entry.url is defined %}
     {% redirect entry.url 301 %}
 {% endif %}
+
+{# Fall back to first segment of URL matching categories #}
 
 {% set category = craft.categories.slug(craft.request.firstSegment).first() %}
 
