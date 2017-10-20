@@ -65,9 +65,11 @@
 
             <h2 class="Sermon-title">{{ entry.title }}</h2>
             <div class="Sermon-subtitle">{{ entry.guestSpeaker ? 'Guest Speaker, ' }}{{ sermon_speaker }}{{ sermon_speaker_title ? (', ' ~ sermon_speaker_title) : '' }}{% if entry.sermonDate %}{% endif %}</div>
-            <p class="Sermon-text">
-                Lorm ipsum means that its really importent for you to stay off drugs and stay in scool. You need to no things that will help you in life. Like MATHS and gym. You don't want to be dum.
-            </p>
+            {% if entry.text | length %}
+                <p class="Sermon-text">
+                    {{ entry.text }}
+                </p>
+            {% endif %}
 
             <sermon-tools
                     url="{{ entry.url }}"
