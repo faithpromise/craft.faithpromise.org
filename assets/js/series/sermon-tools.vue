@@ -10,15 +10,15 @@
           <span class="SermonTools-label">Audio</span>
         </a>
       </li>
-      <li>
-        <!--TODO: Group study link-->
-        <a href="">
-          <svg>
-            <use xlink:href="/assets/icons.svg#group-study"></use>
-          </svg>
-          <span class="SermonTools-label"><span class="sm-hidden">Group </span>Study</span>
-        </a>
-      </li>
+      <!--TODO: Group study link-->
+      <!--<li>-->
+        <!--<a href="">-->
+          <!--<svg>-->
+            <!--<use xlink:href="/assets/icons.svg#group-study"></use>-->
+          <!--</svg>-->
+          <!--<span class="SermonTools-label"><span class="sm-hidden">Group </span>Study</span>-->
+        <!--</a>-->
+      <!--</li>-->
       <li>
         <a :href="facebook_url" target="_blank">
           <svg>
