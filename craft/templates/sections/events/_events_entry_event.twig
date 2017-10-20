@@ -11,7 +11,8 @@
     {# Hero #}
 
     {% include '_layout/hero.twig' with {
-    image: entry.eventImage ? entry.eventImage[0] : null,
+    imageTall: entry.eventImageTall ? entry.eventImageTall[0] : null,
+    imageWide: entry.eventImageWide ? entry.eventImageWide[0] : null,
     } %}
 
     {# Intro #}

@@ -50,7 +50,7 @@ $Series-one-columns-to: $Series-two-columns-at - 1;
 
   // Clear the nav
   .Series {
-    padding-top: $Nav-height-total;
+    padding-top: $Nav-height-total * 1.5;
   }
 
 }

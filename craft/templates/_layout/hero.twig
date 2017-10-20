@@ -1,8 +1,9 @@
 {% set css_class = 'Hero--' ~ random(9999999) %}
 
 {% set title = title is defined ? title : '' %}
-{% set image = image is defined ? image : null %}
-{% set wide_image = wide_image is defined and wide_image ? wide_image : image %}
+{% set image = imageTall is defined and imageTall | length ? imageTall : (imageWide is defined and imageWide | length ? imageWide : null) %} {# allows passing of single image param for backward compatability #}
+{% set tall_image = imageTall is defined and imageTall | length ? imageTall : image %}
+{% set wide_image = imageWide is defined and imageWide | length ? imageWide : image %}
 {% set style = style is defined ? style : 'imageOnly' %}
 
 {% set css_class = css_class ~ ' Hero--' ~ style %}
@@ -21,11 +22,11 @@
             <source
                     sizes="100vw"
                     srcset="
-                        {{ craft.imageUrl.url(image, { width: 1920 }) }} 1920w,
-                        {{ craft.imageUrl.url(image, { width: 1680 }) }} 1680w,
-                        {{ craft.imageUrl.url(image, { width: 1280 }) }} 1280w,
-                        {{ craft.imageUrl.url(image, { width: 800 }) }} 800w,
-                        {{ craft.imageUrl.url(image, { width: 480 }) }} 480w
+                        {{ craft.imageUrl.url(tall_image, { width: 1920 }) }} 1920w,
+                        {{ craft.imageUrl.url(tall_image, { width: 1680 }) }} 1680w,
+                        {{ craft.imageUrl.url(tall_image, { width: 1280 }) }} 1280w,
+                        {{ craft.imageUrl.url(tall_image, { width: 800 }) }} 800w,
+                        {{ craft.imageUrl.url(tall_image, { width: 480 }) }} 480w
                     ">
             <img class="Hero-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ title }}">
         </picture>

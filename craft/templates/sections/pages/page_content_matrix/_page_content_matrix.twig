@@ -1,5 +1,3 @@
-
-
 {% for matrix_block in entry.pageContent %}
 
     {% set params = {
@@ -14,6 +12,8 @@
     background: matrix_block['background'] is defined ? matrix_block.background : 'default',
     videoUrl: matrix_block['videoUrl'] is defined and matrix_block.videoUrl | length ? matrix_block.videoUrl : false,
     image: matrix_block['image'] is defined and matrix_block.image | length ? matrix_block.image[0] : false,
+    imageTall: matrix_block['imageTall'] is defined and matrix_block.imageTall | length ? matrix_block.imageTall[0] : false,
+    imageWide: matrix_block['imageWide'] is defined and matrix_block.imageWide | length ? matrix_block.imageWide[0] : false,
     imageLayout: matrix_block['imageLayout'] is defined ? matrix_block.imageLayout : 'default',
     id: 'matrix-block-' ~ matrix_block['id'],
     } %}

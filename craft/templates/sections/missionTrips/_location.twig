@@ -10,7 +10,7 @@
 
     {% set hero_image = category.missionLocationPhoto|length ? category.missionLocationPhoto[0] : null %}
 
-    {% include '_layout/hero.twig' with { title: category.title, image: hero_image, style: 'textOverlay' } %}
+    {% include '_layout/hero.twig' with { title: category.title, imageTall: hero_image, style: 'textOverlay' } %}
 
 
     {#
