@@ -29,7 +29,6 @@
         // If reached the end of video
         track_restart();
 
-        // TODO: Google Analytics
         if (window.ga)
             window.ga('send', 'event', 'Home Page Video', marker + '% played');
 
