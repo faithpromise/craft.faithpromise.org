@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% set title = title is defined ? title : (entry is defined ? entry.title: null) %}
-{% set canonical_url = canonical_url is defined ? canonical_url : (entry is defined ? entry.url: null) %}
+{% set canonical_url = canonical_url is defined ? canonical_url : (entry.url is defined ? entry.url: null) %}
 {% set dev_cache_bust = craft.config.devMode ? '?' ~ random() : '' %}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
     <head>
