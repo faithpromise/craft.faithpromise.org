@@ -86,7 +86,7 @@
             {% cache globally using key 'full_nav' %}
             {% set latest_sermon = craft.entries({ type: 'sermon', with: 'series' }).order('sermonDate DESC').first() %}
             <transition name="transition">
-                <div class="FullNav" v-show="is_nav_open">
+                <div class="FullNav" v-show="is_nav_open" v-cloak>
                     <div class="FullNav-container">
                         <div class="FullNav-category">
                             <h5 class="FullNav-heading">Locations</h5>
