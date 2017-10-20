@@ -56,7 +56,7 @@
     {% else %}
 
         <div class="HeaderVideo">
-            {% if craft.request.isMobileBrowser() or craft.config.devMode %}
+            {% if craft.request.isMobileBrowser() %}
                 {% set home_page_image = craft.assets.id(3964).first() %}
                 {% if home_page_image %}
                     <img
