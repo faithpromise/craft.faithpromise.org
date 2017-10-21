@@ -7,7 +7,57 @@ with: ['campusImage', 'serviceTimes']
 
     {% embed '_layout/section.twig' with params %}
         {% block body %}
-            {% include '_layout/components/entry_cards.twig' with { 'entries': entries, 'compact': true } %}
+            {% if entries is defined and entries|length %}
+                <ul class="Cards Cards--compact">
+                    {% for entry_item in entries %}
+
+                        {% set type_template = 'sections/' ~ entry_item.section.handle  ~ '/_' ~ entry_item.type.handle  ~ '_item.twig' %}
+                        {% set section_template = 'sections/' ~ entry_item.section.handle  ~ '/_' ~ entry_item.section.handle  ~ '_item.twig' %}
+                        <li class="Cards-item">
+                            {% include [type_template, section_template] ignore missing %}
+                        </li>
+                    {% endfor %}
+                    <li class="Cards-item">
+                        {% set pastor = craft.entries.slug('kyle-gilbert').first() %}
+
+                        {% set text %}
+                            <p>Join us online during the following times.</p>
+                            <table class="ServiceTimes ServiceTimes--condensed" style="margin-bottom: 2em;">
+                                <tr>
+                                    <td class="ServiceTimes-date">Sun</td>
+                                    <td>
+                                        <span class="ServiceTimes-time">7:45 am</span>
+                                        <span class="ServiceTimes-time">9:00 am</span>
+                                        <span class="ServiceTimes-time">10:15 am</span>
+                                        <span class="ServiceTimes-time">11:30 am</span>
+                                        <span class="ServiceTimes-time">12:45 pm</span>
+                                        <span class="ServiceTimes-time">2:00 pm</span>
+                                        <span class="ServiceTimes-time">3:15 pm</span>
+                                        <span class="ServiceTimes-time">4:30 pm</span>
+                                        <span class="ServiceTimes-time">5:45 pm</span>
+                                        <span class="ServiceTimes-time">7:00 pm</span>
+                                        <span class="ServiceTimes-time">8:15 pm</span>
+                                        <span class="ServiceTimes-time">9:30 pm</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        {% endset %}
+
+                        {% set params = {
+                        'image': craft.assets.id(4232).first(),
+                        'secondary_image': pastor and pastor.staffPhoto[0] ? pastor.staffPhoto[0] : null,
+                        'secondary_image_caption': 'Kyle Gilbert, Campus Pastor',
+                        'title': 'Online Campus',
+                        'subtitle': 'Worldwide',
+                        'text': text,
+                        'action_url': 'http://faithpromise.org/online',
+                        'action_text': 'Watch Online'
+                        } %}
+
+                        {% include '_layout/components/card.twig' with params %}
+                    </li>
+                </ul>
+            {% endif %}
         {% endblock %}
     {% endembed %}
 
