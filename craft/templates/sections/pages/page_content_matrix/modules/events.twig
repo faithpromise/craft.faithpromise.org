@@ -1,4 +1,4 @@
-{% set entries = craft.entries({ section: 'events', with: 'eventImageTall' }) %}
+{% set entries = craft.entries({ section: 'events', with: 'eventImageTall' }).includeOnEventsPage('not 1') %}
 
 {% if entries | length %}
 
