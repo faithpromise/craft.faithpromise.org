@@ -40,17 +40,13 @@
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@{{ socialHandles.twitter }}">
 
-        {# TODO: Prefix with CDN url when in production #}
-        {% set cdn_url = craft.config.devMode ? '' : '' %}
-        <link rel="stylesheet" href="{{ cdn_url }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
+        <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
         {{ getHeadHtml() }}
 
         <link rel="home" href="{{ siteUrl }}">
     </head>
 
     <body>
-
-        {# TODO: Facebook SDK?? #}
 
         <div id="app" class="Layout">
 
@@ -76,7 +72,7 @@
                         </transition>
                         <span class="Nav-toggle" @click="nav_toggle">
                         <svg>
-                            <use xlink:href="/assets/icons.svg#menu" :xlink:href="'/assets/icons.svg#' + toggle_icon"></use>
+                            <use xlink:href="{{ craft.config.cdnUrl }}/assets/icons.svg#menu" :xlink:href="'/assets/icons.svg#' + toggle_icon"></use>
                         </svg>
                     </span>
                     </div>
@@ -202,7 +198,7 @@
                         <ul class="Footer-nav">
                             <li><a class="Footer-link" href="https://www.facebook.com/{{ socialHandles.facebook }}">
                                     <svg class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#facebook"></use>
+                                        <use xlink:href="{{ craft.config.cdnUrl }}/assets/icons.svg#facebook"></use>
                                     </svg>
                                     Facebook
                                 </a>
@@ -210,7 +206,7 @@
                             <li>
                                 <a class="Footer-link" href="https://instagram.com/{{ socialHandles.instagram }}">
                                     <svg class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#instagram"></use>
+                                        <use xlink:href="{{ craft.config.cdnUrl }}/assets/icons.svg#instagram"></use>
                                     </svg>
                                     Instagram
                                 </a>
@@ -218,7 +214,7 @@
                             <li>
                                 <a class="Footer-link" href="https://twitter.com/{{ socialHandles.twitter }}">
                                     <svg class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#twitter"></use>
+                                        <use xlink:href="{{ craft.config.cdnUrl }}/assets/icons.svg#twitter"></use>
                                     </svg>
                                     Twitter
                                 </a>
@@ -226,7 +222,7 @@
                             <li>
                                 <a class="Footer-link" href="https://vimeo.com/{{ socialHandles.vimeo }}">
                                     <svg class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#vimeo"></use>
+                                        <use xlink:href="{{ craft.config.cdnUrl }}/assets/icons.svg#vimeo"></use>
                                     </svg>
                                     Vimeo
                                 </a>
@@ -234,7 +230,7 @@
                             <li>
                                 <a class="Footer-link" href="https://soundcloud.com/{{ socialHandles.soundcloud }}">
                                     <svg class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#soundcloud"></use>
+                                        <use xlink:href="{{ craft.config.cdnUrl }}/assets/icons.svg#soundcloud"></use>
                                     </svg>
                                     Soundcloud
                                 </a>
@@ -242,7 +238,7 @@
                             <li>
                                 <a class="Footer-link" href="/updates">
                                     <svg class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#newsletter"></use>
+                                        <use xlink:href="{{ craft.config.cdnUrl }}/assets/icons.svg#newsletter"></use>
                                     </svg>
                                     Email Updates
                                 </a>
@@ -294,10 +290,10 @@
 
         {{ getFootHtml() }}
 
-        <script src="{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
+        <script src="{{ craft.config.cdnUrl }}{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
         <!-- TODO: Conditionally load these when no support for object-fit -->
-        <script src="/build/object-fit-videos.min.js"></script>
-        <script src="/build/object-fit-images.min.js"></script>
+        <script src="{{ craft.config.cdnUrl }}/build/object-fit-videos.min.js"></script>
+        <script src="{{ craft.config.cdnUrl }}/build/object-fit-images.min.js"></script>
         <script>objectFitVideos();</script>
 
         {% if craft.config.craftEnv == 'live' %}
