@@ -13,8 +13,8 @@ let mix = require('laravel-mix');
 
 mix.webpackConfig({
     externals: {
-        'axios':        'axios',
-        'vue':          'Vue',
+        'axios': 'axios',
+        'vue':   'Vue',
     },
     resolve:   {
         alias: { vue: 'vue/dist/vue.js' },
@@ -26,6 +26,9 @@ mix.options({ processCssUrls: false });
 mix.js('assets/js/main.js', 'public/build/')
     .sass('assets/sass/main.scss', 'public/build/')
     .setPublicPath('public');
+
+mix.copy('node_modules/object-fit-videos/dist/object-fit-videos.min.js', 'public/build/object-fit-videos.min.js')
+    .copy('node_modules/object-fit-images/dist/ofi.min.js', 'public/build/object-fit-images.min.js');
 
 if (mix.inProduction()) {
     mix.version();

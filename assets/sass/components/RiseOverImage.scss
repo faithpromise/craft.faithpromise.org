@@ -133,10 +133,9 @@ $RiseOverImage-medium-screen-to: $RiseOverImage-large-screen-from - 1;
     background-color: $color-gray-light;
 
     > img {
-      height:          100%;
-      width:           100%;
-      object-fit:      cover;
-      object-position: 50% 50%;
+      @include object-fit(cover, center);
+      height: 100%;
+      width:  100%;
     }
 
   }

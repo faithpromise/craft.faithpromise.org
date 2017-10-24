@@ -285,9 +285,9 @@ $z-index-section-container: 4;
   }
 
   > img {
-    height:     100%;
-    width:      100%;
-    object-fit: cover;
+    @include object-fit(cover);
+    height: 100%;
+    width:  100%;
   }
 
 }

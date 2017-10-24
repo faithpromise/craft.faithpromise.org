@@ -19,11 +19,11 @@
 }
 
 .Card-image {
-  position:   absolute;
-  top:        0;
-  left:       0;
-  width:      100%;
-  object-fit: cover;
+  @include object-fit(cover);
+  position: absolute;
+  top:      0;
+  left:     0;
+  width:    100%;
 }
 
 // Secondary image
@@ -140,9 +140,9 @@
       }
 
       > img {
-        object-fit: cover;
-        height:     100%;
-        width:      100%;
+        @include object-fit(cover);
+        height: 100%;
+        width:  100%;
       }
 
     }

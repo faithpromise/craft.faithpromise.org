@@ -295,6 +295,10 @@
         {{ getFootHtml() }}
 
         <script src="{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
+        <!-- TODO: Conditionally load these when no support for object-fit -->
+        <script src="/build/object-fit-videos.min.js"></script>
+        <script src="/build/object-fit-images.min.js"></script>
+        <script>objectFitVideos();</script>
 
         {% if craft.config.craftEnv == 'live' %}
             <!-- Google Tag Manager -->

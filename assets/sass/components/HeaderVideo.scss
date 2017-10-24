@@ -89,8 +89,7 @@
 
 .HeaderVideo > img,
 .HeaderVideo > video {
-  object-fit:      cover;
-  object-position: top center;
+  @include object-fit(cover, top center);
 }
 
 .HeaderVideo-overlay {
