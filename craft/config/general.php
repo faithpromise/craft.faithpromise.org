@@ -40,7 +40,7 @@ return [
         // Dev Mode (see https://craftcms.com/support/dev-mode)
         'devMode'                          => false,
 
-        'CdnUrl'                           => getenv('CRAFTENV_CDN_URL'),
+        'cdnUrl'                           => getenv('CRAFTENV_CDN_URL'),
         'cmsCdnUrl'                        => getenv('CRAFTENV_CMS_CDN_URL'),
     ],
 
