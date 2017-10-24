@@ -280,6 +280,11 @@
 
         </div>
 
+        <!--[if IE]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/svg4everybody/2.1.9/svg4everybody.min.js"></script>
+        <script>svg4everybody();</script>
+        <![endif]-->
+
         <script type="text/javascript">
             window.csrfTokenName  = "{{ craft.config.csrfTokenName|e('js') }}";
             window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
