@@ -33,7 +33,7 @@
         align: gray ? 'right' : 'left'
         } %}
             {% block text %}
-                {{ trip.markdown | markdown }}
+                {{ trip.html | raw }}
                 {% if trip.cost %}
                     <p>The approximate cost is: {{ trip.cost }}.</p>
                 {% endif %}
