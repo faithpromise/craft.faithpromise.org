@@ -5,7 +5,7 @@
 
 <div class="VolunteerPosition">
     <h2 class="VolunteerPosition-title">{{ entry_item.title }}</h2>
-    <p class="VolunteerPosition-title">{{ entry_item.html }}</p>
+    <div class="VolunteerPosition-description">{{ entry_item.html }}</div>
     <div class="VolunteerPosition-meta">
         {% if (entry_item.timeCommitment) %}<span>Ministry Area: {{ entry_item.volunteerArea[0].title }}</span>{% endif %}
         {% if (entry_item.availability) %}<span>Availability: {{ entry_item.availability }}</span>{% endif %}
