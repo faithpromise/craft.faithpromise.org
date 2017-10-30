@@ -30,6 +30,8 @@
 
 {% block content %}
 
+    <!-- Cached with key: {{ cache_key }} -->
+
     {% cache globally using key cache_key %}
 
     {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
