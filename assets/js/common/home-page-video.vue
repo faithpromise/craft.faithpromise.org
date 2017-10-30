@@ -23,6 +23,7 @@
 <script>
 
     import debounce from '../utils/debounce';
+    import Modernizr from '../modernizr';
 
     let video,
         restarts             = 0,
@@ -83,11 +84,6 @@
         video.ontimeupdate = null;
     }
 
-    function can_play_video() {
-        let v = document.createElement('video');
-        return v.canPlayType && v.canPlayType('video/mp4').replace(/no/, '')
-    }
-
     export default {
 
         props: {
@@ -105,16 +101,16 @@
 
         data() {
             return {
-                can_play_video: true,
+                can_play_video: Modernizr.videoautoplay,
             }
         },
 
         mounted() {
 
-            video = document.getElementById('home_page_video');
-            track();
-
-            window.addEventListener('scroll', window_scroll_handler);
+            if (video = document.getElementById('home_page_video')) {
+                track();
+                window.addEventListener('scroll', window_scroll_handler);
+            }
         },
 
     }
