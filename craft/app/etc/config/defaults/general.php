@@ -383,7 +383,7 @@ return array(
 	/**
 	 * The maximum upload file size allowed in bytes.
 	 */
-	'maxUploadFileSize' => 104857600,
+	'maxUploadFileSize' => 16777216,
 
 	/**
 	 * Whether generated URLs should omit 'index.php', e.g. http://domain.com/path as opposed to showing it,
@@ -448,6 +448,13 @@ return array(
 	 * setting) when they are already logged in.
 	 */
 	'postLoginRedirect' => '',
+
+	/**
+	 * Whether the EXIF data should be preserved when manipulating images.
+	 *
+	 * Setting this to false will reduce the image size a little bit, but all EXIF data will be cleared. This will only have effect if Imagick is in use.
+	 */
+	'preserveExifData' => false,
 
 	/**
 	 * Whether the embedded Image Color Profile (ICC) should be preserved when manipulating images.
