@@ -1,7 +1,24 @@
 <template>
-  <video id="home_page_video" autoplay loop muted preload>
-    <source :src="url" type="video/mp4">
-  </video>
+  <div class="HeaderVideo">
+    <img
+            class="Hero-image"
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            sizes="100vw"
+            :srcset="imageSrcset"
+            v-if="!can_play_video">
+    <video id="home_page_video" v-if="can_play_video" autoplay loop muted preload>
+      <source :src="videoUrl" type="video/mp4">
+    </video>
+    <div class="HeaderVideo-overlay"></div>
+    <div class="HeaderVideo-container">
+      <h1 class="HeaderVideo-title">Welcome to<br>Faith Promise</h1>
+      <div class="HeaderVideo-actions">
+        <a class="Button" href="/locations">Find a Location</a>
+        <a class="Button" href="http://online.faithpromise.org">Watch Online</a>
+      </div>
+    </div>
+    <div class="HeaderVideo-cut"></div>
+  </div>
 </template>
 <script>
 
@@ -32,8 +49,6 @@
         if (window.ga)
             window.ga('send', 'event', 'Home Page Video', marker + '% played');
 
-        console.log('%c' + marker + '% of video played', 'color: red');
-
         if (marker >= 300)
             untrack();
 
@@ -43,7 +58,7 @@
 
         let track_it = (new Date()) - restarted_at > 3000;
 
-        if (track_it && Math.ceil(video.currentTime) === Math.floor(video.duration)) {
+        if (track_it && Math.ceil(video.currentTime) >= Math.floor(video.duration)) {
             restarts++;
             restarted_at = new Date();
         }
@@ -54,7 +69,6 @@
     }
 
     let window_scroll_handler = debounce(function () {
-        console.log('window scroll');
         if (!is_video_in_view()) {
             untrack();
             window.removeEventListener('scroll', window_scroll_handler);
@@ -69,11 +83,17 @@
         video.ontimeupdate = null;
     }
 
+    function can_play_video() {
+        let v = document.createElement('video');
+        return v.canPlayType && v.canPlayType('video/mp4').replace(/no/, '')
+    }
+
     export default {
 
         props: {
-            url:       { required: true },
-            isNavOpen: { default: false },
+            videoUrl:    { required: true },
+            imageSrcset: { required: true },
+            isNavOpen:   { default: false },
         },
 
         watch: {
@@ -81,6 +101,12 @@
                 if (value)
                     untrack();
             },
+        },
+
+        data() {
+            return {
+                can_play_video: true,
+            }
         },
 
         mounted() {
@@ -92,4 +118,5 @@
         },
 
     }
+
 </script>

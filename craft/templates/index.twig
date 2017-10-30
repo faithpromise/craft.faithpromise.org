@@ -57,37 +57,21 @@
 
     {% else %}
 
-        <div class="HeaderVideo">
-            {% if craft.request.isMobileBrowser() %}
-                {% set home_page_image = craft.assets.id(3964).first() %}
-                {% if home_page_image %}
-                    <img
-                            class="Hero-image"
-                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                            sizes="100vw"
-                            srcset="
-                    {{ craft.imageUrl.url(home_page_image, { width: 1920 }) }} 1920w,
-                    {{ craft.imageUrl.url(home_page_image, { width: 1680 }) }} 1680w,
-                    {{ craft.imageUrl.url(home_page_image, { width: 1280 }) }} 1280w,
-                    {{ craft.imageUrl.url(home_page_image, { width: 800 }) }} 800w,
-                    {{ craft.imageUrl.url(home_page_image, { width: 480 }) }} 480w,
-                    {{ craft.imageUrl.url(home_page_image, { width: 320 }) }} 320w,
-                ">
-                {% endif %}
-            {% else %}
-                {% set home_page_video = craft.assets.id(1580).first() %}
-                <home-page-video url="{{ home_page_video.url }}" :is-nav-open="is_nav_open"></home-page-video>
-            {% endif %}
-            <div class="HeaderVideo-overlay"></div>
-            <div class="HeaderVideo-container">
-                <h1 class="HeaderVideo-title">Welcome to<br>Faith Promise</h1>
-                <div class="HeaderVideo-actions">
-                    <a class="Button" href="/locations">Find a Location</a>
-                    <a class="Button" href="http://online.faithpromise.org">Watch Online</a>
-                </div>
-            </div>
-            <div class="HeaderVideo-cut"></div>
-        </div>
+        {% set home_page_video = craft.assets.id(1580).first() %}
+        {% set home_page_image = craft.assets.id(3964).first() %}
+        {% set home_page_image_srcset %}
+            {{ craft.imageUrl.url(home_page_image, { width: 1920 }) }} 1920w,
+            {{ craft.imageUrl.url(home_page_image, { width: 1680 }) }} 1680w,
+            {{ craft.imageUrl.url(home_page_image, { width: 1280 }) }} 1280w,
+            {{ craft.imageUrl.url(home_page_image, { width: 800 }) }} 800w,
+            {{ craft.imageUrl.url(home_page_image, { width: 480 }) }} 480w,
+            {{ craft.imageUrl.url(home_page_image, { width: 320 }) }} 320w,
+        {% endset %}
+        <home-page-video
+                video-url="{{ home_page_video.url }}"
+                image-srcset="{{ home_page_image_srcset }}"
+                :is-nav-open="is_nav_open">
+        </home-page-video>
 
     {% endif %}
 
