@@ -63,7 +63,7 @@
                             <playlist-item
                                     id="{{ item.id }}"
                                     title="{{ item.title }}"
-                                    date="{{ item.sermonDate is defined and item.sermonDate ? item.sermonDate|date('M n, Y') : item.postDate|date('M n, Y') }}"
+                                    date="{{ item.sermonDate is defined and item.sermonDate ? item.sermonDate|date('M j, Y') : item.postDate|date('M j, Y') }}"
                                     url="{{ item.url }}"
                                     video-url="{{ item.videoUrl }}"
                             >
