@@ -11,14 +11,14 @@
         </a>
       </li>
       <!--TODO: Group study link-->
-      <!--<li>-->
-        <!--<a href="">-->
-          <!--<svg>-->
-            <!--<use xlink:href="/assets/icons.svg#group-study"></use>-->
-          <!--</svg>-->
-          <!--<span class="SermonTools-label"><span class="sm-hidden">Group </span>Study</span>-->
-        <!--</a>-->
-      <!--</li>-->
+      <li v-if="guideUrl">
+        <a :href="guideUrl">
+          <svg>
+            <use xlink:href="/assets/icons.svg#group-study"></use>
+          </svg>
+          <span class="SermonTools-label">Discussion<span class="sm-hidden"> Guide</span></span>
+        </a>
+      </li>
       <li>
         <a :href="facebook_url" target="_blank">
           <svg>
@@ -53,6 +53,7 @@
             url:          { default: null },
             audioUrl:     { default: null },
             soundcloudId: { default: null },
+            guideUrl:     { default: null },
         },
 
         data() {
