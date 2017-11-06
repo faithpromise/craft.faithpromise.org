@@ -18,15 +18,7 @@
 }
 
 .Card2-header {
-  @extend %ratio-image-16x9;
-}
-
-.Card2-image {
-  @include object-fit(cover);
-  position: absolute;
-  top:      0;
-  left:     0;
-  width:    100%;
+  @extend %ratio-image-16x9; // Sets @include object-fit(cover)
 }
 
 .Card2-body {
@@ -76,8 +68,7 @@
     display: none;
   }
 
-  .Card2-body,
-  .Card2-image {
+  .Card2-body {
     position: absolute;
     top:      0;
     left:     0;
@@ -88,10 +79,6 @@
   .Card2-header {
     position: static;
     padding:  0;
-  }
-
-  .Card2-image {
-    @include object-fit(cover);
   }
 
   .Card2-body {

@@ -293,7 +293,7 @@
         <!-- TODO: Conditionally load these when no support for object-fit -->
         <script src="{{ craft.config.cdnUrl }}/build/object-fit-videos.min.js"></script>
         <script src="{{ craft.config.cdnUrl }}/build/object-fit-images.min.js"></script>
-        <script>objectFitVideos();</script>
+        <script>objectFitImages(); objectFitVideos();</script>
 
         {% if craft.config.craftEnv == 'live' %}
             <!-- Google Tag Manager -->
