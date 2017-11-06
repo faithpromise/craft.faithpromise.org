@@ -200,56 +200,6 @@
         </div>
     </div>
 
-    {#<div class="ImageCards">#}
-    {#<div class="ImageCards-container">#}
-    {#<ul class="ImageCards-list">#}
-    {#<li class="ImageCards-row">#}
-    {#<a class="ImageCards-item" href="{{ latest_sermon.url }}">#}
-    {#<img#}
-    {#class="ImageCards-image"#}
-    {#src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="#}
-    {#sizes="50vw"#}
-    {#srcset="#}
-    {#{{ latest_sermon_image.url({ width: 1920 }) }} 1920w,#}
-    {#{{ latest_sermon_image.url({ width: 1680 }) }} 1680w,#}
-    {#{{ latest_sermon_image.url({ width: 1280 }) }} 1280w,#}
-    {#{{ latest_sermon_image.url({ width: 800 }) }} 800w,#}
-    {#{{ latest_sermon_image.url({ width: 480 }) }} 480w,#}
-    {#{{ latest_sermon_image.url({ width: 320 }) }} 320w,#}
-    {#">#}
-    {#<span class="ImageCards-link" href="/">Latest Sermon</span>#}
-    {#</a>#}
-    {#</li>#}
-    {#<li class="ImageCards-row">#}
-    {#<a class="ImageCards-item" href="/events">#}
-    {#<img#}
-    {#class="ImageCards-image"#}
-    {#src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="#}
-    {#sizes="50vw"#}
-    {#srcset="#}
-    {#{{ events_image.url({ width: 1920 }) }} 1920w,#}
-    {#{{ events_image.url({ width: 1680 }) }} 1680w,#}
-    {#{{ events_image.url({ width: 1280 }) }} 1280w,#}
-    {#{{ events_image.url({ width: 800 }) }} 800w,#}
-    {#{{ events_image.url({ width: 480 }) }} 480w,#}
-    {#{{ events_image.url({ width: 320 }) }} 320w,#}
-    {#">#}
-    {#<span class="ImageCards-link" href="/">News &amp; Events</span>#}
-    {#</a>#}
-    {#</li>#}
-    {#</ul>#}
-    {#</div>#}
-    {#</div>#}
-
     {% endcache %}
-
-    {#{{ entry.body }}#}
-
-    {#<h2>Recent News</h2>#}
-    {#<ul>#}
-    {#{% for entry in craft.entries.section('news').limit(5).find() %}#}
-    {#<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>#}
-    {#{% endfor %}#}
-    {#</ul>#}
 
 {% endblock %}
