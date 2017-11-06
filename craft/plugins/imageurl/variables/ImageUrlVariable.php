@@ -57,7 +57,7 @@ class ImageUrlVariable {
 
         $img_url = $img->getUrl() . '?' . http_build_query($query_params);
 
-        return str_replace('http://s3-us-west-2.amazonaws.com/faithpromise.org', 'https://faithpromise.imgix.net', $img_url);
+        return str_replace('s3-us-west-2.amazonaws.com/faithpromise.org', 'faithpromise.imgix.net', $img_url);
 
     }
 
