@@ -2,12 +2,12 @@
 
 {% block content %}
 
-    {% cache globally using key 'locations-page' %}
+    {#{% cache globally using key 'locations-page' %}#}
 
     {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
     {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
 
-    {% endcache %}
+    {#{% endcache %}#}
 
 {% endblock %}
