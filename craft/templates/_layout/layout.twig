@@ -291,9 +291,7 @@
 
         <script src="{{ craft.config.cdnUrl }}{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
         <!-- TODO: Conditionally load these when no support for object-fit -->
-        <script src="{{ craft.config.cdnUrl }}/build/object-fit-videos.min.js"></script>
-        <script src="{{ craft.config.cdnUrl }}/build/object-fit-images.min.js"></script>
-        <script>objectFitImages(); objectFitVideos();</script>
+        <script src="{{ craft.config.cdnUrl }}/build/objectFitPolyfill.min.js"></script>
 
         {% if craft.config.craftEnv == 'live' %}
             <!-- Google Tag Manager -->
