@@ -1,7 +1,6 @@
 <template>
   <div class="HeaderVideo">
     <img
-            data-object-fit="cover"
             class="Hero-image"
             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
             sizes="100vw"
