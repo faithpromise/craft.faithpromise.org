@@ -28,7 +28,7 @@ mix.js('assets/js/main.js', 'public/build/')
     .setPublicPath('public');
 
 mix.copy('node_modules/object-fit-videos/dist/object-fit-videos.min.js', 'public/build/object-fit-videos.min.js')
-    .copy('node_modules/object-fit-images/dist/ofi.min.js', 'public/build/object-fit-images.min.js');
+    .copy('node_modules/objectFitPolyfill/dist/objectFitPolyfill.min.js', 'public/build/objectFitPolyfill.min.js');
 
 if (mix.inProduction()) {
     mix.version();

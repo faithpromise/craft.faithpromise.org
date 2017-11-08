@@ -1,12 +1,13 @@
 <template>
   <div class="HeaderVideo">
     <img
+            data-object-fit="cover"
             class="Hero-image"
             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
             sizes="100vw"
             :srcset="imageSrcset"
             v-if="!can_play_video">
-    <video id="home_page_video" v-if="can_play_video" autoplay loop muted preload>
+    <video data-object-fit="cover" id="home_page_video" v-if="can_play_video" autoplay loop muted preload>
       <source :src="videoUrl" type="video/mp4">
     </video>
     <div class="HeaderVideo-overlay"></div>

@@ -17,6 +17,7 @@
     "laravel-mix": "^1.4.2",
     "object-fit-images": "^3.2.3",
     "object-fit-videos": "^1.0.3",
+    "objectFitPolyfill": "^2.0.5",
     "portal-vue": "^1.1.1",
     "url-search-params": "^0.10.0",
     "vue": "^2.4.2"
