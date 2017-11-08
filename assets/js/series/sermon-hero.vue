@@ -11,7 +11,7 @@
     </div>
 
     <div class="SermonHero-button image-fg-vibrant-dark" v-if="is_button_visible" @click="play">
-      <svg>
+      <svg role="img">
         <use xlink:href="/assets/icons.svg#play"></use>
       </svg>
     </div>

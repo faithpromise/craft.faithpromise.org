@@ -4,7 +4,7 @@
     <ul class="SermonTools">
       <li>
         <a :href="audioUrl" @click.prevent="play_audio" v-if="soundcloudId">
-          <svg>
+          <svg role="img">
             <use xlink:href="/assets/icons.svg#audio"></use>
           </svg>
           <span class="SermonTools-label">Audio</span>
@@ -13,7 +13,7 @@
       <!--TODO: Group study link-->
       <li v-if="guideUrl">
         <a :href="guideUrl">
-          <svg>
+          <svg role="img">
             <use xlink:href="/assets/icons.svg#group-study"></use>
           </svg>
           <span class="SermonTools-label">Discussion<span class="sm-hidden"> Guide</span></span>
@@ -21,7 +21,7 @@
       </li>
       <li>
         <a :href="facebook_url" target="_blank">
-          <svg>
+          <svg role="img">
             <use xlink:href="/assets/icons.svg#facebook"></use>
           </svg>
           <span class="SermonTools-label">Share</span>
@@ -30,7 +30,7 @@
       </li>
       <li>
         <a :href="twitter_url" target="_blank">
-          <svg>
+          <svg role="img">
             <use xlink:href="/assets/icons.svg#twitter"></use>
           </svg>
           <span class="SermonTools-label">Tweet</span>

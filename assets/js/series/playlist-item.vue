@@ -1,7 +1,7 @@
 <template>
   <div class="Playlist-item" @click="open_sermon(id)">
     <div class="Playlist-play">
-      <svg>
+      <svg role="img">
         <use xlink:href="/assets/icons.svg#play-o"></use>
       </svg>
     </div>
@@ -9,7 +9,7 @@
     <div class="Playlist-date">{{ date }}</div>
     <a class="Playlist-more" :href="url">View</a>
     <div class="Playlist-arrow">
-      <svg>
+      <svg role="img">
         <use xlink:href="/assets/icons.svg#chevron-right"></use>
       </svg>
     </div>

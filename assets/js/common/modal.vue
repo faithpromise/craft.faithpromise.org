@@ -8,7 +8,7 @@
           <div class="Modal-window">
 
             <div class="Modal-close" v-on:click="close">
-              <svg class="Modal-closeIcon">
+              <svg role="img" class="Modal-closeIcon">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close"></use>
               </svg>
             </div>
