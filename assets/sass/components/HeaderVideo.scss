@@ -92,7 +92,7 @@
  */
 .HeaderVideo > img,
 .HeaderVideo video { /* 1 */
-  @include object-fit(cover, top center);
+  @include object-fit(cover, center top);
 }
 
 .HeaderVideo-overlay {
