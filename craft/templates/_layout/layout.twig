@@ -292,9 +292,8 @@
         <script src="{{ craft.config.cdnUrl }}{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
         <!-- TODO: Conditionally load these when no support for object-fit -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js"></script><!-- needed for srcset support in some browsers -->
-        <script src="{{ craft.config.cdnUrl }}/build/object-fit-videos.min.js"></script>
         <script src="{{ craft.config.cdnUrl }}/build/object-fit-images.min.js"></script><!-- polyfill object-fit in IE and some Safari -->
-        <script>objectFitImages(); objectFitVideos();</script>
+        <script>objectFitImages();</script>
 
         {% if craft.config.craftEnv == 'live' %}
             <!-- Google Tag Manager -->
