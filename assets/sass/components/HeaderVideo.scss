@@ -87,8 +87,11 @@
   width:    100%;
 }
 
+/**
+ * 1. Not using direct descendant selector `>` because polyfill adds `object-fit` element between .HeaderVideo and video
+ */
 .HeaderVideo > img,
-.HeaderVideo > video {
+.HeaderVideo video { /* 1 */
   @include object-fit(cover, top center);
 }
 
