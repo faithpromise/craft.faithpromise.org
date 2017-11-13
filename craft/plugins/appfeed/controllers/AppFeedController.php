@@ -81,7 +81,7 @@ class AppFeedController extends BaseController {
         $output = json_encode($data);
 
         // Output and the request
-        http_response_code(404);
+        http_response_code(200);
         echo $output;
         craft()->end();
 
@@ -129,7 +129,7 @@ class AppFeedController extends BaseController {
         $output = json_encode($data);
 
         // Output and the request
-        http_response_code(404);
+        http_response_code(200);
         echo $output;
         craft()->end();
 
@@ -187,7 +187,7 @@ class AppFeedController extends BaseController {
         $output = json_encode($data);
 
         // Output and the request
-        http_response_code(404);
+        http_response_code(200);
         echo $output;
         craft()->end();
     }
