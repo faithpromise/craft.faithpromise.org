@@ -26,9 +26,9 @@ class AppFeedPlugin extends BasePlugin {
     public function registerSiteRoutes() {
 
         $routes = [
-            'app-api/series.json'                                                              => ['action' => 'appFeed/getSeriesList'],
-            'app-api/series/(?P<series_slug>[a-zA-Z0-9-]+).json'                               => ['action' => 'appFeed/getSeries'],
-            'app-api/series/(?P<series_slug>[a-zA-Z0-9-]+)/(?P<media_slug>[a-zA-Z0-9-]+).json' => ['action' => 'appFeed/getMedia'],
+            'app-api/series'                                                              => ['action' => 'appFeed/getSeriesList'],
+            'app-api/series/(?P<series_slug>[a-zA-Z0-9-]+)'                               => ['action' => 'appFeed/getSeries'],
+            'app-api/series/(?P<series_slug>[a-zA-Z0-9-]+)/(?P<media_slug>[a-zA-Z0-9-]+)' => ['action' => 'appFeed/getMedia'],
         ];
 
         return $routes;

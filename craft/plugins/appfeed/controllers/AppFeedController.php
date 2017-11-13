@@ -77,13 +77,8 @@ class AppFeedController extends BaseController {
         }
 
         // Serialize and JSON-encode the data
-        JsonHelper::sendJsonHeaders();
-        $output = json_encode($data);
-
-        // Output and the request
-        http_response_code(200);
-        echo $output;
-        craft()->end();
+        $this->returnJson($data);
+//        craft()->end();
 
     }
 
@@ -118,19 +113,14 @@ class AppFeedController extends BaseController {
                 'actions' => [
                     [
                         'handler' => 'mediaDetail',
-                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug . '/' . $media->slug . '.json',
+                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug . '/' . $media->slug,
                     ],
                 ],
             ];
         }
 
         // Serialize and JSON-encode the data
-        JsonHelper::sendJsonHeaders();
-        $output = json_encode($data);
-
-        // Output and the request
-        http_response_code(200);
-        echo $output;
+        $this->returnJson($data);
         craft()->end();
 
     }
@@ -148,7 +138,7 @@ class AppFeedController extends BaseController {
                     [
                         'actions' => [
                             'handler' => 'list',
-                            'url'     => 'http://faithpromise.org/app-api/series/' . $current_series->slug . '.json',
+                            'url'     => 'http://faithpromise.org/app-api/series/' . $current_series->slug,
                         ],
                         'images'  => [
                             ['width' => 320, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 320])],
@@ -169,7 +159,7 @@ class AppFeedController extends BaseController {
                 'actions' => [
                     [
                         'handler' => 'list',
-                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug . '.json',
+                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug,
                     ],
                 ],
                 'images'  => [
@@ -183,12 +173,7 @@ class AppFeedController extends BaseController {
         }
 
         // Serialize and JSON-encode the data
-        JsonHelper::sendJsonHeaders();
-        $output = json_encode($data);
-
-        // Output and the request
-        http_response_code(200);
-        echo $output;
+        $this->returnJson($data);
         craft()->end();
     }
 
