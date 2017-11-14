@@ -136,10 +136,6 @@ class AppFeedController extends BaseController {
                 'style' => 'banner',
                 'items' => [
                     [
-                        'actions' => [
-                            'handler' => 'list',
-                            'url'     => 'http://faithpromise.org/app-api/series/' . $current_series->slug,
-                        ],
                         'images'  => [
                             ['width' => 320, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 320])],
                             ['width' => 640, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 640])],
