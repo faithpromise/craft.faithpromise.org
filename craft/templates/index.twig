@@ -34,38 +34,15 @@
 
     {#{% cache globally using key cache_key %}#}
 
-    {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
+    {% set home_page_video = craft.assets.id(1580).first() %}
+    {% set home_page_image = craft.assets.id(3964).first() %}
 
-    {% if global_event %}
-
-        <div id="Special" class="EventHero" style="background-image: url(/assets/temp.jpg)">
-            <div class="EventHero-fadeup"></div>
-            <div class="EventHero-container">
-                <div class="EventHero-content">
-                    <h2 class="EventHero-title">&quot;{{ global_event.title }}&quot;</h2>
-                    <p class="EventHero-text">
-                        {{ global_event.excerpt }}
-                    </p>
-                    <div class="EventHero-actions">
-                        {% for action in global_event.actions %}
-                            <a class="Button EventHero-action" href="{{ action.theUrl }}"><span class="u-hide-lt-480">{{ action.text }}</span><span class="u-hide-gte-480">{{ action.text }}</span></a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    {% else %}
-
-        {% set home_page_video = craft.assets.id(1580).first() %}
-        {% set home_page_image = craft.assets.id(3964).first() %}
-
-        <div class="HeaderVideo">
-            <img
-                    class="Hero-image"
-                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                    sizes="100vw"
-                    srcset="
+    <div class="HeaderVideo">
+        <img
+                class="Hero-image"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                sizes="100vw"
+                srcset="
                         {{ craft.imageUrl.url(home_page_image, { width: 1920 }) }} 1920w,
                         {{ craft.imageUrl.url(home_page_image, { width: 1680 }) }} 1680w,
                         {{ craft.imageUrl.url(home_page_image, { width: 1280 }) }} 1280w,
@@ -73,38 +50,36 @@
                         {{ craft.imageUrl.url(home_page_image, { width: 480 }) }} 480w,
                         {{ craft.imageUrl.url(home_page_image, { width: 320 }) }} 320w,
                     ">
-            <video id="home_page_video" autoplay loop preload muted playsinline>
-                <source src="{{ home_page_video.url }}" type="video/mp4">
-            </video>
-            <div class="HeaderVideo-overlay"></div>
-            <div class="HeaderVideo-container">
-                <h1 class="HeaderVideo-title">Welcome to<br>Faith Promise</h1>
-                <div class="HeaderVideo-actions">
-                    <a class="Button" href="/locations">Find a Location</a>
-                    <a class="Button" href="http://online.faithpromise.org">Watch Online</a>
-                </div>
+        <video id="home_page_video" autoplay loop preload muted playsinline>
+            <source src="{{ home_page_video.url }}" type="video/mp4">
+        </video>
+        <div class="HeaderVideo-overlay"></div>
+        <div class="HeaderVideo-container">
+            <h1 class="HeaderVideo-title">Welcome to<br>Faith Promise</h1>
+            <div class="HeaderVideo-actions">
+                <a class="Button" href="/locations">Find a Location</a>
+                <a class="Button" href="http://online.faithpromise.org">Watch Online</a>
             </div>
-            <div class="HeaderVideo-cut"></div>
         </div>
+        <div class="HeaderVideo-cut"></div>
+    </div>
 
-        {% set home_page_image_srcset %}
-            {{ craft.imageUrl.url(home_page_image, { width: 1920 }) }} 1920w,
-            {{ craft.imageUrl.url(home_page_image, { width: 1680 }) }} 1680w,
-            {{ craft.imageUrl.url(home_page_image, { width: 1280 }) }} 1280w,
-            {{ craft.imageUrl.url(home_page_image, { width: 800 }) }} 800w,
-            {{ craft.imageUrl.url(home_page_image, { width: 480 }) }} 480w,
-            {{ craft.imageUrl.url(home_page_image, { width: 320 }) }} 320w,
-        {% endset %}
-        {#<home-page-video#}
-                {#video-url="{{ home_page_video.url }}"#}
-                {#image-srcset="{{ home_page_image_srcset }}"#}
-                {#:is-nav-open="is_nav_open">#}
-            {#<video id="home_page_video" v-if="can_play_video" autoplay loop preload muted playsinline>#}
-                {#<source src="{{ home_page_video.url }}" type="video/mp4">#}
-            {#</video>#}
-        {#</home-page-video>#}
-
-    {% endif %}
+    {% set home_page_image_srcset %}
+        {{ craft.imageUrl.url(home_page_image, { width: 1920 }) }} 1920w,
+        {{ craft.imageUrl.url(home_page_image, { width: 1680 }) }} 1680w,
+        {{ craft.imageUrl.url(home_page_image, { width: 1280 }) }} 1280w,
+        {{ craft.imageUrl.url(home_page_image, { width: 800 }) }} 800w,
+        {{ craft.imageUrl.url(home_page_image, { width: 480 }) }} 480w,
+        {{ craft.imageUrl.url(home_page_image, { width: 320 }) }} 320w,
+    {% endset %}
+    {#<home-page-video#}
+    {#video-url="{{ home_page_video.url }}"#}
+    {#image-srcset="{{ home_page_image_srcset }}"#}
+    {#:is-nav-open="is_nav_open">#}
+    {#<video id="home_page_video" v-if="can_play_video" autoplay loop preload muted playsinline>#}
+    {#<source src="{{ home_page_video.url }}" type="video/mp4">#}
+    {#</video>#}
+    {#</home-page-video>#}
 
     {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
     {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
