@@ -1,4 +1,8 @@
-{% set entries = craft.entries({ section: 'events', with: 'eventImageTall' }).includeOnEventsPage(1) %}
+
+{# Get IDs of events to exclude. We don't want to exclude the globalEvent type. #}
+{% set excludeIds = craft.entries({ section: 'events' }).type(['event', 'eventLink']).includeOnEventsPage('not 1').ids() | join(', ') %}
+
+{% set entries = craft.entries({ section: 'events', with: 'eventImageTall' }).id('not '~ excludeIds) %}
 
 {% if entries | length %}
 
