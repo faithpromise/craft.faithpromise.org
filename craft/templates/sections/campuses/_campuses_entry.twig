@@ -82,7 +82,7 @@ order: 'serviceScheduleEffectiveAt asc',
         {% embed '_layout/text_section.twig' with {
         title: global_event_title,
         align: 'right',
-        image: global_event.featuredEventImage|length ? global_event.featuredEventImage[0] : null,
+        image: global_event.eventImageTall|length ? global_event.eventImageTall[0] : null,
         imageLayout: 'floating',
         background: 'gray',
         } %}
@@ -93,11 +93,11 @@ order: 'serviceScheduleEffectiveAt asc',
                     {#<p>We will meet during our regular service times at the {{ entry.title }} Campus.</p>#}
                     {#<p>During &quot;{{ global_event.title }}&quot; our {{ entry.title }} Campus will meet during our regular service times.</p>#}
                 {% else %}
-                    {% if entry.serviceTimesDescription | length %}
-                        {{ include(template_from_string(entry.serviceTimesDescription)|raw) }}
-                {% else %}
-                    <p>The {{ entry.title }} Campus will have special service times on the following dates.</p>
-                {% endif %}
+                    {% if global_event.serviceTimesDescription | length %}
+                        <p>{{ include(template_from_string(global_event.serviceTimesDescription)|raw) }}</p>
+                    {% else %}
+                        <p>The {{ entry.title }} Campus will have special service times on the following dates.</p>
+                    {% endif %}
                     {#<p>During &quot;{{ global_event.title }}&quot; our {{ entry.title }} Campus will meet during the following service times.</p>#}
                 {% endif %}
 
