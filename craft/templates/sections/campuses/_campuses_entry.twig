@@ -74,7 +74,7 @@ order: 'serviceScheduleEffectiveAt asc',
     |--------------------------------------------------------------------------
     #}
 
-    {% if (global_event and 1 == 2) %}
+    {% if (global_event) %}
 
         {% set global_event_days = global_event.specialServiceTimes.relatedTo(entry).find() %}
         {% set global_event_title = global_event_days ? 'Special Service Times' : global_event.title %}
@@ -93,7 +93,11 @@ order: 'serviceScheduleEffectiveAt asc',
                     {#<p>We will meet during our regular service times at the {{ entry.title }} Campus.</p>#}
                     {#<p>During &quot;{{ global_event.title }}&quot; our {{ entry.title }} Campus will meet during our regular service times.</p>#}
                 {% else %}
+                    {% if entry.serviceTimesDescription | length %}
+                        {{ include(template_from_string(entry.serviceTimesDescription)|raw) }}
+                {% else %}
                     <p>The {{ entry.title }} Campus will have special service times on the following dates.</p>
+                {% endif %}
                     {#<p>During &quot;{{ global_event.title }}&quot; our {{ entry.title }} Campus will meet during the following service times.</p>#}
                 {% endif %}
 

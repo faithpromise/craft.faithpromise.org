@@ -2,7 +2,7 @@
     <table class="ServiceTimes">
         {% for block in days %}
             <tr>
-                <td class="ServiceTimes-date">{{ block.date|date("l M. j") }}</td>
+                <td class="ServiceTimes-date">{{ block.date|date("D M. j") }}</td>
                 <td>
                     {% for time in block.times %}
                         <span class="ServiceTimes-time">{{ time.startTime|lower }}</span>
