@@ -3,7 +3,7 @@
   @include fluid-size(padding-top, 320px, 100px, 160px, 320px);
 
   position:   relative;
-  background: #111 url(/assets/christmas/night-snow-bg.png) 50% repeat;
+  background: #111 url(https://d35yxm8t69h65j.cloudfront.net/christmas/night-snow-bg.png) 50% repeat;
   color:      #fff;
   text-align: center;
 
@@ -15,7 +15,7 @@
     bottom:          0;
     left:            0;
     display:         block;
-    background:      url(/assets/christmas/ornament-border.png) 50% -30px repeat-x;
+    background:      url(https://d35yxm8t69h65j.cloudfront.net/assets/christmas/ornament-border.png) 50% -30px repeat-x;
     background-size: auto 280px;
   }
 
