@@ -1,0 +1,353 @@
+{#
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+#}
+
+    {% set video = craft.assets.id(4319).first() %}
+
+<section class="ChristmasHeader">
+    <video id="home_page_video" autoplay loop preload muted playsinline>
+        <source src="{{ video.url }}" type="video/mp4">
+    </video>
+</section>
+
+<section class="ChristmasIntro">
+
+    <div class="ChristmasIntro-star">
+        <!-- 4x3 -->
+        {#<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAMAAACDKl70AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFN0QzRDYwN0QxNTMxMUU3OTE0OEUxNDhCMjM4M0JFQSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFN0QzRDYwOEQxNTMxMUU3OTE0OEUxNDhCMjM4M0JFQSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU3RDNENjA1RDE1MzExRTc5MTQ4RTE0OEIyMzgzQkVBIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU3RDNENjA2RDE1MzExRTc5MTQ4RTE0OEIyMzgzQkVBIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+rE9hdQAAAAZQTFRF////AAAAVcLTfgAAAA5JREFUeNpiYEABAAEGAAAPAAHUqDK8AAAAAElFTkSuQmCC">#}
+        <!-- 3x4 -->
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAMAAAB883U1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTMyIDc5LjE1OTI4NCwgMjAxNi8wNC8xOS0xMzoxMzo0MCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUuNSAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGQjUzNjE4NkQxOEIxMUU3OTE0OEUxNDhCMjM4M0JFQSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGQjUzNjE4N0QxOEIxMUU3OTE0OEUxNDhCMjM4M0JFQSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU3RDNENjA5RDE1MzExRTc5MTQ4RTE0OEIyMzgzQkVBIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU3RDNENjBBRDE1MzExRTc5MTQ4RTE0OEIyMzgzQkVBIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+n5y4bQAAAAZQTFRF////AAAAVcLTfgAAAAF0Uk5TAEDm2GYAAAAOSURBVHjaYmBABQABBgAAEAABnj6H/QAAAABJRU5ErkJggg==">
+        <svg role="img">
+            <use xlink:href="/assets/christmas/ornaments.svg#star"></use>
+        </svg>
+    </div>
+
+    <div class="ChristmasIntro-container">
+
+        <picture>
+            <source media="(min-width: 1080px)" srcset="{{ craft.config.cmsCdnUrl }}/christmas/title_journey.png">
+            <source srcset="{{ craft.config.cmsCdnUrl }}/christmas/title_journey_stacked.png">
+            <img class="ChristmasIntro-title" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Journey to the North Pole">
+        </picture>
+
+        <p class="ChristmasIntro-text">Come one, come all as Faith Promise hosts A Christmas Spectacular! Come enjoy the holiday cheer throughout Santa's workshop, as you learn what it takes to be one of Santa's elves. Doors open from 6-9pm, December 21st-23rd, and from 9am-12pm, December 24th.</p>
+
+        <p class="ChristmasIntro-button">
+            <a class="ChristmasButton" href="/locations">Find a Location</a>
+        </p>
+
+        <div class="ChristmasIntro-video">
+            <div>
+                <svg class="ChristmasIntro-snowflake" role="img">
+                    <use xlink:href="/assets/christmas/ornaments.svg#snowflake"></use>
+                </svg>
+                <svg class="ChristmasIntro-snowflake" role="img">
+                    <use xlink:href="/assets/christmas/ornaments.svg#snowflake"></use>
+                </svg>
+                <svg class="ChristmasIntro-snowflake2" role="img">
+                    <use xlink:href="/assets/christmas/ornaments.svg#snowflake"></use>
+                </svg>
+                <svg class="ChristmasIntro-snowflake2" role="img">
+                    <use xlink:href="/assets/christmas/ornaments.svg#snowflake"></use>
+                </svg>
+                <video-embed url="https://vimeo.com/243658832"></video-embed>
+            </div>
+        </div>
+
+        <svg class="ChristmasIntro-bow" role="img">
+            <use xlink:href="/assets/christmas/ornaments.svg#bow"></use>
+        </svg>
+
+    </div>
+
+    <div class="ChristmasIntro-border"></div>
+
+</section>
+
+<section class="ChristmasAbout">
+
+    <div class="ChristmasAbout-container">
+
+        <picture>
+            <source media="(min-width: 1080px)" srcset="{{ craft.config.cmsCdnUrl }}/christmas/title_fun.png">
+            <source srcset="{{ craft.config.cmsCdnUrl }}/christmas/title_fun_stacked.png">
+            <img class="ChristmasAbout-title" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Fun For Everyone">
+        </picture>
+
+        <p class="ChristmasAbout-text">A Christmas Spectacular will feature all sorts of activities, including pictures with Santa, seasonal crafts and snacks, and the cinematic Christmas experience of the season!</p>
+
+    </div>
+
+    {% set ornament_image_1 = craft.assets.id(4347).first() %}
+    {% set ornament_image_2 = craft.assets.id(4344).first() %}
+    {% set ornament_image_3 = craft.assets.id(4346).first() %}
+
+    <!-- Mobile only -->
+    <ul class="ChristmasAbout-ornaments">
+        <li class="ChristmasAbout-ornament">
+            <div class="ChristmasOrnament">
+                <div class="ChristmasOrnament-topper angel">
+                    <svg role="img">
+                        <use xlink:href="/assets/christmas/ornaments.svg#angel"></use>
+                    </svg>
+                </div>
+                <div class="ChristmasOrnament-hook"></div>
+                <div class="ChristmasOrnament-image">
+                    <img
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="33vw"
+                            srcset="
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 320 }) }} 320w,
+                                ">
+                </div>
+            </div>
+        </li>
+        <li class="ChristmasAbout-ornament">
+            <div class="ChristmasOrnament">
+                <div class="ChristmasOrnament-topper tree">
+                    <svg role="img">
+                        <use xlink:href="/assets/christmas/ornaments.svg#tree"></use>
+                    </svg>
+                </div>
+                <div class="ChristmasOrnament-hook"></div>
+                <div class="ChristmasOrnament-image">
+                    <img
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="33vw"
+                            srcset="
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 320 }) }} 320w,
+                                ">
+                </div>
+            </div>
+        </li>
+        <li class="ChristmasAbout-ornament">
+            <div class="ChristmasOrnament">
+                <div class="ChristmasOrnament-topper deer">
+                    <svg role="img">
+                        <use xlink:href="/assets/christmas/ornaments.svg#reindeer"></use>
+                    </svg>
+                </div>
+                <div class="ChristmasOrnament-hook"></div>
+                <div class="ChristmasOrnament-image">
+                    <img
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            sizes="33vw"
+                            srcset="
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 320 }) }} 320w,
+                                ">
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="ChristmasAbout-container">
+
+        <ul class="ChristmasAbout-items">
+            <li class="ChristmasAbout-item">
+                <div class="ChristmasItem">
+                    <div class="ChristmasOrnament">
+                        <div class="ChristmasOrnament-topper angel">
+                            <svg role="img">
+                                <use xlink:href="/assets/christmas/ornaments.svg#angel"></use>
+                            </svg>
+                        </div>
+                        <div class="ChristmasOrnament-hook"></div>
+                        <div class="ChristmasOrnament-image">
+                            <img
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                    sizes="33vw"
+                                    srcset="
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(ornament_image_1, { width: 320 }) }} 320w,
+                                ">
+                        </div>
+                    </div>
+                    <h3 class="ChristmasItem-title">Pictures With Santa</h3>
+                    <p class="ChristmasItem-text">Santa is coming to town! And, he's stopping by Faith Promise to take pictures with your kids! Be sure to stop by Santa's Workshop for a FREE photo with Santa.</p>
+                </div>
+            </li>
+            <li class="ChristmasAbout-item">
+                <div class="ChristmasItem">
+                    <div class="ChristmasOrnament">
+                        <div class="ChristmasOrnament-topper tree">
+                            <svg role="img">
+                                <use xlink:href="/assets/christmas/ornaments.svg#tree"></use>
+                            </svg>
+                        </div>
+                        <div class="ChristmasOrnament-hook"></div>
+                        <div class="ChristmasOrnament-image">
+                            <img
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                    sizes="33vw"
+                                    srcset="
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(ornament_image_2, { width: 320 }) }} 320w,
+                                ">
+                        </div>
+                    </div>
+                    <h3 class="ChristmasItem-title">Mrs. Claus' Kitchen</h3>
+                    <p class="ChristmasItem-text">Mrs. Claus has baked Christmas cookies and she needs your help. Stop by and help her decorate these delicious cookies and take some home for Santa.</p>
+                </div>
+            </li>
+            <li class="ChristmasAbout-item">
+                <div class="ChristmasItem">
+                    <div class="ChristmasOrnament">
+                        <div class="ChristmasOrnament-topper deer">
+                            <svg role="img">
+                                <use xlink:href="/assets/christmas/ornaments.svg#reindeer"></use>
+                            </svg>
+                        </div>
+                        <div class="ChristmasOrnament-hook"></div>
+                        <div class="ChristmasOrnament-image">
+                            <img
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                    sizes="33vw"
+                                    srcset="
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(ornament_image_3, { width: 320 }) }} 320w,
+                                ">
+                        </div>
+                    </div>
+                    <h3 class="ChristmasItem-title">Santa's Workshop</h3>
+                    <p class="ChristmasItem-text">With Christmas just around the corner, Santa's Workshop is busier than ever. Can you help make ornaments to decorate the Christmas trees in time for Santa?</p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="ChristmasAbout-border"></div>
+    <div class="ChristmasAbout-border2"></div>
+
+</section>
+
+{% set polaroid_image_1 = craft.assets.id(4345).first() %}
+    {% set polaroid_image_2 = craft.assets.id(4349).first() %}
+    {% set polaroid_image_3 = craft.assets.id(4343).first() %}
+
+    {% set caption_image_1 = craft.assets.id(4341).first() %}
+    {% set caption_image_2 = craft.assets.id(4342).first() %}
+    {% set caption_image_3 = craft.assets.id(4340).first() %}
+
+<section class="ChristmasEars">
+
+    <div class="ChristmasEars-container">
+
+        <picture>
+            <source media="(min-width: 1080px)" srcset="{{ craft.config.cmsCdnUrl }}/christmas/title_ears.png">
+            <source srcset="{{ craft.config.cmsCdnUrl }}/christmas/title_ears_stacked.png">
+            <img class="ChristmasEars-title" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Earn Your Elf Ears">
+        </picture>
+
+        <p class="ChristmasEars-text">As you journey through the North Pole, you'll participate in a variety of activities. Once you've filled your passport, you'll earn your official Elf Ears, making you one of Santa's very own helpers.</p>
+
+        <ul class="ChristmasEars-pics">
+            <li class="ChristmasEars-pic">
+                <div class="ChristmasPic">
+                    <div class="ChristmasPic-image">
+                        <img
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                sizes="40vw"
+                                srcset="
+                                    {{ craft.imageUrl.url(polaroid_image_1, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(polaroid_image_1, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(polaroid_image_1, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(polaroid_image_1, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(polaroid_image_1, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(polaroid_image_1, { width: 320 }) }} 320w,
+                                ">
+                    </div>
+                    <div class="ChristmasPic-caption">
+                        <img src="{{ craft.imageUrl.url(caption_image_1) }}">
+                    </div>
+                </div>
+            </li>
+            <li class="ChristmasEars-pic">
+                <div class="ChristmasPic">
+                    <div class="ChristmasPic-image">
+                        <img
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                sizes="40vw"
+                                srcset="
+                                    {{ craft.imageUrl.url(polaroid_image_2, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(polaroid_image_2, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(polaroid_image_2, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(polaroid_image_2, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(polaroid_image_2, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(polaroid_image_2, { width: 320 }) }} 320w,
+                                ">
+                    </div>
+                    <div class="ChristmasPic-caption">
+                        <img src="{{ craft.imageUrl.url(caption_image_2) }}">
+                    </div>
+                </div>
+            </li>
+            <li class="ChristmasEars-pic">
+                <div class="ChristmasPic">
+                    <div class="ChristmasPic-image">
+                        <img
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                sizes="40vw"
+                                srcset="
+                                    {{ craft.imageUrl.url(polaroid_image_3, { width: 1920 }) }} 1920w,
+                                    {{ craft.imageUrl.url(polaroid_image_3, { width: 1680 }) }} 1680w,
+                                    {{ craft.imageUrl.url(polaroid_image_3, { width: 1280 }) }} 1280w,
+                                    {{ craft.imageUrl.url(polaroid_image_3, { width: 800 }) }} 800w,
+                                    {{ craft.imageUrl.url(polaroid_image_3, { width: 480 }) }} 480w,
+                                    {{ craft.imageUrl.url(polaroid_image_3, { width: 320 }) }} 320w,
+                                ">
+                    </div>
+                    <div class="ChristmasPic-caption">
+                        <img src="{{ craft.imageUrl.url(caption_image_3) }}">
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    {% set moon_image = craft.assets.id(4348).first() %}
+
+    <img
+            class="ChristmasEars-moon"
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            sizes="100vw"
+            srcset="
+                    {{ craft.imageUrl.url(moon_image, { width: 1920 }) }} 1920w,
+                    {{ craft.imageUrl.url(moon_image, { width: 1680 }) }} 1680w,
+                    {{ craft.imageUrl.url(moon_image, { width: 1280 }) }} 1280w,
+                    {{ craft.imageUrl.url(moon_image, { width: 800 }) }} 800w,
+                    {{ craft.imageUrl.url(moon_image, { width: 480 }) }} 480w,
+                    {{ craft.imageUrl.url(moon_image, { width: 320 }) }} 320w,
+                ">
+
+</section>

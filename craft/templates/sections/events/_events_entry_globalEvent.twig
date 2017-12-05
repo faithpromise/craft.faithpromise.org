@@ -3,6 +3,7 @@
 {% block content %}
 
     {# TODO: Finish global event page #}
+    {% include 'sections/events/' ~ entry.slug ~ '.twig' ignore missing %}
 
     {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
 
