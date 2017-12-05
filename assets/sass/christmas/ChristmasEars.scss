@@ -1,0 +1,73 @@
+
+.ChristmasEars {
+  @include fluid-size(padding-top, 320px, 100px, 160px, 320px);
+
+  position:   relative;
+  background: #111 url(/assets/christmas/night-snow-bg.png) 50% repeat;
+  color:      #fff;
+  text-align: center;
+
+  &:before {
+    content:         '';
+    position:        absolute;
+    top:             0;
+    right:           0;
+    bottom:          0;
+    left:            0;
+    display:         block;
+    background:      url(/assets/christmas/ornament-border.png) 50% -30px repeat-x;
+    background-size: auto 280px;
+  }
+
+}
+
+.ChristmasEars-container {
+  @extend .ChristmasContainer;
+  position: relative;
+  z-index:  2;
+  overflow: hidden;
+}
+
+.ChristmasEars-title {
+  max-height:    180px;
+  margin-bottom: 48px;
+
+  @media (min-width: 1080px) {
+    max-height: 88px;
+  }
+}
+
+.ChristmasEars-text {
+  @extend .ChristmasIntro-text;
+}
+
+.ChristmasEars-pics {
+  @extend %list-unstyled;
+  display:         flex;
+  justify-content: center;
+  margin:          8em auto 130px;
+}
+
+.ChristmasEars-pic {
+  position: relative;
+
+  &:nth-child(1) {
+    width:     0;
+    transform: translate(-200px, 80px) rotate(-20deg);
+  }
+  &:nth-child(2) {
+    z-index:   2;
+    width:     33.3333%;
+    transform: translate(-10px, -30px) rotate(4deg);
+  }
+  &:nth-child(3) {
+    width:     0;
+    transform: translate(-120px, 0) rotate(23deg);
+  }
+
+}
+
+.ChristmasEars-moon {
+  position: relative;
+  z-index:  1;
+}

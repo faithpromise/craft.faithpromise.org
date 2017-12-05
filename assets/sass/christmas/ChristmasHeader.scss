@@ -1,0 +1,21 @@
+.ChristmasHeader {
+  position: relative;
+  z-index:  1;
+  height:   56.25vw;
+  overflow: hidden;
+
+  @media (min-width: calc-em(1200px)) {
+    height: 36.4583333vw;
+  }
+
+}
+
+.ChristmasHeader > image,
+.ChristmasHeader > video {
+  @include object-fit(cover);
+  position: absolute;
+  top:      0;
+  left:     0;
+  height:   100%;
+  width:    100%;
+}

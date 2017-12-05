@@ -1,0 +1,114 @@
+
+.ChristmasAbout {
+  @include fluid-size(padding-top, 320px, 100px, 160px, $Section-padding);
+  padding-bottom: 12px;
+  background:     $christmas-color-red url(/assets/christmas/snow-bg.png) 0 0 repeat;
+  color:          #fff;
+  text-align:     center;
+}
+
+.ChristmasAbout-container {
+  @extend .ChristmasContainer;
+}
+
+.ChristmasAbout-title {
+  max-height:    180px;
+  margin-bottom: 48px;
+
+  @media (min-width: 1080px) {
+    max-height: 88px;
+  }
+}
+
+.ChristmasAbout-text {
+  @extend .ChristmasIntro-text;
+  max-width: 480px;
+}
+
+.ChristmasAbout-ornaments {
+  @extend %list-unstyled;
+  display: flex;
+  margin-top: 3em;
+
+  @media (min-width: 1080px) {
+    display: none;
+  }
+
+}
+
+.ChristmasAbout-ornament {
+
+  position: relative;
+
+  &:nth-child(1) {
+    order:   2;
+    width:   46%;
+    z-index: 2;
+  }
+  &:nth-child(2) {
+    order:     1;
+    width:     22%;
+    transform: translateX(13vw);
+  }
+  &:nth-child(3) {
+    order:     3;
+    width:     32%;
+    transform: translateX(-13vw);
+  }
+}
+
+.ChristmasAbout-items {
+
+  @extend %list-unstyled;
+  margin-top:    48px;
+  margin-bottom: 48px;
+
+  @media (min-width: 1080px) {
+    display:     flex;
+    margin-left: -1em;
+    margin-top:  0;
+  }
+
+  @media (max-width: 1079px) {
+    .ChristmasOrnament {
+      display: none;
+    }
+
+    .ChristmasAbout-item {
+      margin-top: 5em;
+    }
+  }
+
+}
+
+.ChristmasAbout-item {
+
+  @media (min-width: 1080px) {
+    width:        33.3333%;
+    padding-left: 1em;
+  }
+
+}
+
+.ChristmasAbout-border {
+  height:          48px;
+  margin-top:      120px;
+  background:      url(/assets/christmas/border.svg) 0 0 repeat-x;
+  background-size: 48px;
+}
+
+.ChristmasAbout-border2 {
+  margin-top:       -8px;
+  padding-top:      3px;
+  border-top:       3px solid $christmas-color-red;
+  border-bottom:    12px solid $christmas-color-gold;
+  background-color: $christmas-color-gold;
+
+  &:before {
+    content:          '';
+    display:          block;
+    height:           6px;
+    width:            100%;
+    background-color: $christmas-color-red;
+  }
+}

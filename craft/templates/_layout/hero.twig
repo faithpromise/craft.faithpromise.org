@@ -4,6 +4,7 @@
 {% set image = imageTall is defined and imageTall | length ? imageTall : (imageWide is defined and imageWide | length ? imageWide : null) %} {# allows passing of single image param for backward compatability #}
 {% set tall_image = imageTall is defined and imageTall | length ? imageTall : image %}
 {% set wide_image = imageWide is defined and imageWide | length ? imageWide : image %}
+{% set headerVideo = headerVideo is defined ? headerVideo : null %}
 {% set style = style is defined ? style : 'imageOnly' %}
 
 {% set css_class = css_class ~ ' Hero--' ~ style %}
@@ -30,6 +31,11 @@
                     ">
             <img class="Hero-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ title }}">
         </picture>
+    {% endif %}
+    {% if headerVideo %}
+        <video class="Hero-video" id="header_video_{{ id }}" autoplay loop preload muted playsinline>
+            <source src="{{ headerVideo.url }}" type="video/mp4">
+        </video>
     {% endif %}
     <div class="Hero-overlay"></div>
     <div class="Hero-container">

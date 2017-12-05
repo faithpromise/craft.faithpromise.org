@@ -1,0 +1,138 @@
+
+.ChristmasIntro {
+  @include fluid-size(padding-top, 320px, 100px, 160px, $Section-padding);
+  @include fluid-size(border-width, 320px, 6px, 1080px, 16px);
+  position:         relative;
+  z-index:          2;
+  border-top:       16px solid #fff;
+  background-color: $christmas-color-gold;
+  color:            $christmas-color-blue;
+  text-align:       center;
+}
+
+.ChristmasIntro-container {
+  @extend .ChristmasContainer;
+  position: relative;
+  z-index:  3;
+  overflow: hidden;
+}
+
+.ChristmasIntro-title {
+  max-height:    180px;
+  margin-bottom: 48px;
+
+  @media (min-width: 1080px) {
+    max-height: 88px;
+  }
+}
+
+.ChristmasIntro-text {
+  max-width: 760px;
+  margin:    0 auto 0;
+  font-size: 22px;
+}
+
+.ChristmasIntro-button {
+  margin: 5em 0;
+}
+
+.ChristmasIntro-video {
+
+  max-width: 760px;
+  margin:    0 auto;
+
+  > div {
+    position:         relative;
+    height:           0;
+    padding-top:      57.1%;
+    background-color: #fff;
+    font-size:        0;
+
+    > iframe {
+      @include fluid-size(border-width, 320px, 4px, 760px, 8px);
+      position: absolute;
+      top:      0;
+      left:     0;
+      height:   100%;
+      width:    100%;
+      border:   8px solid #fff;
+    }
+
+  }
+
+}
+
+.ChristmasIntro-star {
+  @include fluid-size(top, 320px, -42px, 1080px, -125px);
+  position: absolute;
+  z-index:  2;
+  top:      -116px;
+
+  > img {
+    @include fluid-size(width, 320px, 100px, 1080px, 300px);
+    visibility: hidden;
+  }
+  overflow: hidden;
+
+  > svg {
+    position: absolute;
+    top:      0;
+    right:    0;
+    bottom:   0;
+    height:   100%;
+    width:    133%;
+  }
+}
+
+.ChristmasIntro-snowflake {
+  @include fluid-size(top, 320px, -60px, 760px, -120px);
+  @include fluid-size(right, 320px, -60px, 760px, -120px);
+  @include fluid-size(height, 320px, 150px, 760px, 300px);
+  @include fluid-size(width, 320px, 150px, 760px, 300px);
+  position:  absolute;
+  fill:      #fff;
+  transform: rotate(15deg);
+
+  & + & {
+    transform: rotate(15deg) translateY(-4px);
+    fill:      $christmas-color-blue;
+  }
+}
+
+.ChristmasIntro-snowflake2 {
+  @include fluid-size(bottom, 320px, -60px, 760px, -120px);
+  @include fluid-size(left, 320px, -60px, 760px, -120px);
+  @include fluid-size(height, 320px, 150px, 760px, 300px);
+  @include fluid-size(width, 320px, 150px, 760px, 300px);
+  position:  absolute;
+  fill:      #fff;
+  transform: rotate(15deg);
+
+  & + & {
+    transform: rotate(15deg) translateY(-4px);
+    fill:      #f6c892;
+  }
+}
+
+.ChristmasIntro-bow {
+  @include fluid-size(height, 320px, 90px, 760px, 160px);
+  @include fluid-size(width, 320px, 152px, 760px, 270px);
+  margin-top: 5em;
+  fill:       $christmas-color-red;
+}
+
+.ChristmasIntro-border {
+  margin-top:       -8px;
+  padding-top:      3px;
+  border-top:       3px solid $christmas-color-red;
+  border-bottom:    12px solid $christmas-color-gold;
+  background-color: $christmas-color-gold;
+
+  &:before {
+    content:          '';
+    display:          block;
+    height:           6px;
+    width:            100%;
+    background-color: $christmas-color-red;
+  }
+}

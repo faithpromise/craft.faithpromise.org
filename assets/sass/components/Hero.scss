@@ -2,6 +2,7 @@
 .Hero {
   position: relative;
   height:   56.25vw;
+  overflow: hidden;
 
   @media (min-width: calc-em(1200px)) {
     height: 36.4583333vw;
@@ -9,7 +10,8 @@
 
 }
 
-.Hero-image {
+.Hero-image,
+.Hero-video {
   @include object-fit(cover);
   position: absolute;
   top:      0;

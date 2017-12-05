@@ -1,0 +1,41 @@
+.ChristmasButton {
+  @include link-colors-all(#fff);
+  display:          inline-flex;
+  align-items:      center;
+  height:           calc-em(40px, 14px);
+  padding:          1.5em 2em;
+  border:           2px solid #fff;
+  border-radius:    6px;
+  font-size:        calc-em(18px);
+  background-color: $christmas-color-blue;
+  white-space:      nowrap;
+  user-select:      none;
+  cursor:           pointer;
+
+  &, &:hover {
+    text-decoration: none;
+  }
+
+  &:hover {
+    background-color: lighten($christmas-color-blue, 10%);
+  }
+
+}
+
+//.Button--primary {
+//  @include link-colors-all(#fff);
+//  background-color: $color-brand-purple;
+//  border-color:     $color-brand-purple;
+//
+//  &:hover {
+//    background-color: darken($color-brand-purple, 3%);
+//  }
+//
+//}
+//
+//.Button[disabled] {
+//  border-color:     transparent;
+//  background-color: $color-gray-lighter;
+//  color:            $color-gray;
+//  cursor:           not-allowed;
+//}
