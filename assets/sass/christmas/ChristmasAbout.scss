@@ -2,7 +2,7 @@
 .ChristmasAbout {
   @include fluid-size(padding-top, 320px, 100px, 160px, $Section-padding);
   padding-bottom: 12px;
-  background:     $christmas-color-red url(https://d35yxm8t69h65j.cloudfront.net/assets/christmas/snow-bg.png) 0 0 repeat;
+  background:     $christmas-color-red url(https://d35yxm8t69h65j.cloudfront.net/christmas/snow-bg.png) 0 0 repeat;
   color:          #fff;
   text-align:     center;
 }
