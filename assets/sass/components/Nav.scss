@@ -128,6 +128,8 @@ html.nav_transparent .Nav,
 .Nav--transparent {
   position:         absolute;
   z-index:          $z-index-nav;
+  top:              0;
+  left:             0;
   width:            100%;
   background-color: transparent;
   color:            #fff;
