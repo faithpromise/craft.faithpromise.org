@@ -81,16 +81,28 @@
     {#</video>#}
     {#</home-page-video>#}
 
-    {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
-    {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
+    {#{% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}#}
+    {#{% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}#}
+
+    {#{% include '_layout/components/rise-over-image.twig' with {#}
+    {#image: latest_series_image,#}
+    {#title: latest_series.title,#}
+    {#subtitle: 'Latest Series',#}
+    {#text: latest_series.markdown,#}
+    {#action_url: latest_series.url,#}
+    {#action_text: 'More Info',#}
+    {#css_class: 'RiseOverImage--gray RiseOverImage--flushTop',#}
+    {#} %}#}
+
+    {% set christmas_image = craft.assets.id(4361).first() %}
 
     {% include '_layout/components/rise-over-image.twig' with {
-    image: latest_series_image,
-    title: latest_series.title,
-    subtitle: 'Latest Series',
-    text: latest_series.markdown,
-    action_url: latest_series.url,
-    action_text: 'More Info',
+    image: christmas_image,
+    title: 'A Christmas Spectacular',
+    subtitle: 'You Don\'t Want to Miss',
+    text: 'Come one, come all as Faith Promise hosts A Christmas Spectacular! Come enjoy the holiday cheer throughout Santa\'s workshop, as you learn what it takes to be one of Santa\'s elves',
+    action_url: '/christmas',
+    action_text: 'Learn More',
     css_class: 'RiseOverImage--gray RiseOverImage--flushTop',
     } %}
 
