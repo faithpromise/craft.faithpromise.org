@@ -1,0 +1,58 @@
+
+.matrix-block-1881,
+.matrix-block-4366 {
+
+  @include fluid-size(padding-top, 320px, 50px, 640px, 120px);
+  @include fluid-size(padding-bottom, 320px, 50px, 640px, 120px);
+
+  text-align: center;
+
+  .TextSection-copy {
+    display:        flex;
+    flex-direction: column;
+  }
+
+  // Title (We Exist...)
+  .TextSection-text {
+    @include fluid-type(320px, 20px, 640px, 38px);
+    order:          1;
+    text-transform: uppercase;
+    font-weight:    700;
+    color:          $color-gray-darkest;
+
+    > p {
+      margin: 0;
+    }
+
+  }
+
+  .TextSection-subtitle {
+    order:            2;
+    height:           1px;
+    width:            100%;
+    max-width:        120px;
+    margin:           2em auto;
+    background-color: $color-gray-dark;
+  }
+
+  // Tag (-The Vision of...)
+  .TextSection-title {
+    @include fluid-type(320px, 13px, 640px, 16px);
+    order:          3;
+    font-weight:    normal;
+    text-transform: uppercase;
+
+    &:before {
+      content: '-';
+    }
+  }
+
+  .TextSection-actions {
+    display: none;
+  }
+
+}
+
+.matrix-block-4366 .TextSection-text {
+  @include fluid-type(320px, 17px, 640px, 32px);
+}
