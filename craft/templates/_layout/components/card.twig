@@ -25,11 +25,12 @@
     {% elseif image %}
 
         {#TODO: fix sizes#}
-        <img
-                class="Card-image"
-                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                sizes="33vw"
-                srcset="
+        <div class="Card-imageWrap">
+            <img
+                    class="Card-image"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    sizes="33vw"
+                    srcset="
                     {{ craft.imageUrl.url(image, { width: 1920 }) }} 1920w,
                     {{ craft.imageUrl.url(image, { width: 1680 }) }} 1680w,
                     {{ craft.imageUrl.url(image, { width: 1280 }) }} 1280w,
@@ -37,6 +38,7 @@
                     {{ craft.imageUrl.url(image, { width: 480 }) }} 480w,
                     {{ craft.imageUrl.url(image, { width: 320 }) }} 320w,
                 ">
+        </div>
     {% endif %}
 
     {% if secondary_image %}
