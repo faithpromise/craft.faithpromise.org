@@ -1,6 +1,6 @@
 {
-    "/build/main.js": "/build/main.js?id=b49907bb3c172e6db621",
-    "/build/main.css": "/build/main.css?id=2bcb6f8ddf2e3dfb2810",
-    "/build/object-fit-videos.min.js": "/build/object-fit-videos.min.js?id=9f2ca40033b10bb45a1a",
-    "/build/object-fit-images.min.js": "/build/object-fit-images.min.js?id=9a3297a6a2203e7eb84c"
+    "/build/main.js": "/build/main.js",
+    "/build/main.css": "/build/main.css",
+    "/build/object-fit-videos.min.js": "/build/object-fit-videos.min.js",
+    "/build/object-fit-images.min.js": "/build/object-fit-images.min.js"
 }
