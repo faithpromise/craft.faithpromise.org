@@ -48,7 +48,7 @@
     {# If last content block used a gray background, use default (white) #}
 
     {% set last_content = entry.pageContent | length ? entry.pageContent.last() : null %}
-    {% set background = last_content and last_content.background ? last_content.background.value : null %}
+    {% set background = last_content and last_content['background'] is defined and last_content.background ? last_content.background.value : null %}
     {% set background = background == 'gray' ? 'default' : 'gray' %}
 
     {# More events link #}

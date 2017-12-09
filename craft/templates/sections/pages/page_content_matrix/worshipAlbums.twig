@@ -1,0 +1,53 @@
+{% if matrix_block.albums|length %}
+    {% set entries = matrix_block.albums %}
+{% else %}
+    {% set entries = craft.entries({ section: 'worshipAlbums' }) %}
+{% endif %}
+
+{% if entries | length %}
+
+    {% embed '_layout/section.twig' with params %}
+        {% block body %}
+
+            <ul class="Album-list">
+                {% for entry_item in entries %}
+                    <li class="Album-item">
+                        <div class="Album">
+                            <img
+                                    class="Album-image"
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                    sizes="33vw"
+                                    srcset="
+                                {{ craft.imageUrl.url(entry_item.image[0], { width: 1920 }) }} 1920w,
+                                {{ craft.imageUrl.url(entry_item.image[0], { width: 1680 }) }} 1680w,
+                                {{ craft.imageUrl.url(entry_item.image[0], { width: 1280 }) }} 1280w,
+                                {{ craft.imageUrl.url(entry_item.image[0], { width: 800 }) }} 800w,
+                                {{ craft.imageUrl.url(entry_item.image[0], { width: 480 }) }} 480w,
+                                {{ craft.imageUrl.url(entry_item.image[0], { width: 320 }) }} 320w,
+                            ">
+                            <div class="Album-links">
+                                {% if entry_item.iTunesUrl|length %}
+                                    <a class="Album-link" href="{{ entry_item.iTunesUrl }}" target="_blank">
+                                        <img src="/assets/images/itunes.svg">
+                                    </a>
+                                {% endif %}
+                                {% if entry_item.googlePlayUrl|length %}
+                                    <a class="Album-link" href="{{ entry_item.googlePlayUrl }}" target="_blank">
+                                        <img src="/assets/images/google-play.svg">
+                                    </a>
+                                {% endif %}
+                                {% if entry_item.amazonUrl|length %}
+                                    <a class="Album-link" href="{{ entry_item.amazonUrl }}" target="_blank">
+                                        <img src="/assets/images/amazon.svg">
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        {% endblock %}
+    {% endembed %}
+
+{% endif %}

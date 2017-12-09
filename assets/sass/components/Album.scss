@@ -1,0 +1,59 @@
+
+.Album-list {
+  @extend %list-unstyled;
+}
+
+.Album-item {
+  margin-bottom: 3em;
+}
+
+@media (min-width: calc-em(760px)) {
+
+  .Album-list {
+    display:         flex;
+    flex-wrap:       wrap;
+    justify-content: center;
+    margin-left:     -2em;
+  }
+
+  .Album-item {
+    width:   50%;
+    padding: 0 0 2em 2em;
+  }
+
+}
+
+@media (min-width: calc-em(1080px)) {
+
+  .Album-item {
+    width: 33.3333%;
+  }
+
+}
+
+.Album-image {
+  width: 100%;
+}
+
+.Album-links {
+  display:         flex;
+  flex-wrap:       wrap;
+  justify-content: center;
+  align-items:     center;
+}
+
+.Album {
+  text-align: center;
+}
+
+.Album-link {
+  @extend %link-unstyled;
+  width:  156px;
+  margin: .5em;
+
+  > img {
+    width: 100%;
+    //height: 2.25em;
+  }
+
+}
