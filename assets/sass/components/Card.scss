@@ -12,6 +12,10 @@
 
 }
 
+.Card-header {
+  position: relative; // Needed for secondar photo (campus pastors)
+}
+
 .Card-imageWrap {
   @extend %ratio-image-16x9; // Sets @include object-fit(cover)
 }
