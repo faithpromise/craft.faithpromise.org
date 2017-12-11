@@ -15,7 +15,7 @@
 {% set klass = 'Section' %}
 {% set klass = klass ~ (background ? ' Section--' ~ background) %}
 
-<section class="{{ klass }} {{ sectionId }}">
+<section id="{{ sectionId }}" class="{{ klass }} {{ sectionId }}">
 
     <div class="Section-container">
 

@@ -5,6 +5,8 @@ with: ['campusImage', 'serviceTimes']
 
 {% if entries | length %}
 
+    {% set params = params|merge({ 'id': 'locations' }) %}
+
     {% embed '_layout/section.twig' with params %}
         {% block body %}
             {% if entries is defined and entries|length %}
