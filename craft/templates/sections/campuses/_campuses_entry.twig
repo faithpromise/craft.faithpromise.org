@@ -155,14 +155,14 @@ order: 'serviceScheduleEffectiveAt asc',
     {% if (future_service_schedule) %}
 
         {% embed '_layout/text_section.twig' with {
-        title: 'Beginning ' ~ future_service_schedule.serviceScheduleEffectiveAt|date('M j'),
+        title: 'Beginning ' ~ future_service_schedule.serviceScheduleEffectiveAt|date('M j') ~ '!',
         align: 'right',
         image: entry.campusImage|length ? entry.campusImage[0] : null,
         imageLayout: 'floating',
         background: 'gray',
         } %}
             {% block text %}
-                <p>Beginning {{ future_service_schedule.serviceScheduleEffectiveAt|date('M. j') }}, our weekly service times are changing at the {{ entry.title }} Campus to the following times. Please see below for current times.</p>
+                <p>Beginning {{ future_service_schedule.serviceScheduleEffectiveAt|date('M. j') }}, our weekly service times are changing at the {{ entry.title }} Campus to the following times.</p>
                 {% include 'sections/campuses/schedule.twig' with { schedule: future_service_schedule } %}
             {% endblock %}
         {% endembed %}
