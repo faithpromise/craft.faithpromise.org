@@ -67,7 +67,7 @@
 
                 // If we have items in the cart...
                 if (cart_text) {
-                    let qty = parseInt(cart_text.replace(/\D/g, ''));
+                    let qty = parseInt(cart_text.innerText.replace(/\D/g, ''));
                     Cookies.set('fp_items_in_cart', qty, { domain: cookie_domain });
                 }
 
