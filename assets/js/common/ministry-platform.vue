@@ -63,7 +63,7 @@
 
                 let cart_text    = document.getElementById('cartLink'),
                     user_link    = document.getElementById('userLink'),
-                    is_logged_in = user_link && !user_link.match(/login/i);
+                    is_logged_in = user_link ? !user_link.match(/login/i) : false;
 
                 // If we have items in the cart...
                 if (cart_text) {
