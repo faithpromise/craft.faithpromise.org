@@ -2,6 +2,7 @@
 {% set title = title is defined ? title : (entry is defined ? entry.title: null) %}
 {% set canonical_url = canonical_url is defined ? canonical_url : (entry.url is defined ? entry.url: null) %}
 {% set dev_cache_bust = craft.config.devMode ? '?' ~ random() : '' %}
+{% set base_url = 'https://faithpromise.org' %}
 
 {% if not og_image.url is defined %}
     {% set og_image = craft.assets.id(4219).first() %}
@@ -19,13 +20,13 @@
 
         <link rel="canonical" href="{{ canonical_url }}">
 
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/apple-touch-icon-144x144.png">
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/apple-touch-icon-152x152.png">
-        <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ base_url }}/assets/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ base_url }}/assets/favicons/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="{{ base_url }}/assets/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ base_url }}/assets/favicons/favicon-16x16.png" sizes="16x16">
         <meta name="application-name" content="Faith Promise Church">
         <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="/assets/favicons/mstile-144x144.png">
+        <meta name="msapplication-TileImage" content="{{ base_url }}/assets/favicons/mstile-144x144.png">
 
         <meta property="fb:app_id" content="1592675454329086">
 
@@ -64,12 +65,12 @@
                     <div class="Footer-section">
                         <h5 class="Footer-heading">Times &amp; Locations</h5>
                         <ul class="Footer-nav">
-                            <li><a class="Footer-link" href="/locations/pellissippi">Pellissippi</a></li>
-                            <li><a class="Footer-link" href="/locations/blount">Blount</a></li>
-                            <li><a class="Footer-link" href="/locations/north">North Knox</a></li>
-                            <li><a class="Footer-link" href="/locations/anderson">Anderson</a></li>
-                            <li><a class="Footer-link" href="/locations/campbell">Campbell</a></li>
-                            <li><a class="Footer-link" href="/locations">View All</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/locations/pellissippi">Pellissippi</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/locations/blount">Blount</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/locations/north">North Knox</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/locations/anderson">Anderson</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/locations/campbell">Campbell</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/locations">View All</a></li>
                         </ul>
                     </div>
 
@@ -77,18 +78,18 @@
                         <h5 class="Footer-heading">About</h5>
                         <ul class="Footer-nav">
                             {#<li>#}
-                            {#<a class="Footer-link" id="to_locations_from_footer" href="/locations">Times &amp; Locations</a>#}
+                            {#<a class="Footer-link" id="to_locations_from_footer" href="{{ base_url }}/locations">Times &amp; Locations</a>#}
                             {#</li>#}
                             <li>
-                                <a class="Footer-link" id="to_updates_from_footer" href="/what-to-expect">What to Expect</a>
+                                <a class="Footer-link" id="to_updates_from_footer" href="{{ base_url }}/what-to-expect">What to Expect</a>
                             </li>
-                            <li><a class="Footer-link" href="/fpkids">Kids</a></li>
-                            <li><a class="Footer-link" href="/fpstudents">Students</a></li>
-                            <li><a class="Footer-link" id="to_events_from_footer" href="/events">Events</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/fpkids">Kids</a></li>
+                            <li><a class="Footer-link" href="{{ base_url }}/fpstudents">Students</a></li>
+                            <li><a class="Footer-link" id="to_events_from_footer" href="{{ base_url }}/events">Events</a></li>
                             <li>
                                 <a class="Footer-link" id="to_blog_from_footer" href="http://blog.faithpromise.org">Blog</a>
                             </li>
-                            <li><a class="Footer-link" id="to_jobs_from_footer" href="/jobs">Jobs</a></li>
+                            <li><a class="Footer-link" id="to_jobs_from_footer" href="{{ base_url }}/jobs">Jobs</a></li>
                         </ul>
                     </div>
 
@@ -97,7 +98,7 @@
                         <ul class="Footer-nav">
                             <li><a class="Footer-link" href="https://www.facebook.com/{{ socialHandles.facebook }}">
                                     <svg role="img" class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#facebook"></use>
+                                        <use xlink:href="{{ base_url }}/assets/icons.svg#facebook"></use>
                                     </svg>
                                     Facebook
                                 </a>
@@ -105,7 +106,7 @@
                             <li>
                                 <a class="Footer-link" href="https://instagram.com/{{ socialHandles.instagram }}">
                                     <svg role="img" class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#instagram"></use>
+                                        <use xlink:href="{{ base_url }}/assets/icons.svg#instagram"></use>
                                     </svg>
                                     Instagram
                                 </a>
@@ -113,7 +114,7 @@
                             <li>
                                 <a class="Footer-link" href="https://twitter.com/{{ socialHandles.twitter }}">
                                     <svg role="img" class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#twitter"></use>
+                                        <use xlink:href="{{ base_url }}/assets/icons.svg#twitter"></use>
                                     </svg>
                                     Twitter
                                 </a>
@@ -121,7 +122,7 @@
                             <li>
                                 <a class="Footer-link" href="https://vimeo.com/{{ socialHandles.vimeo }}">
                                     <svg role="img" class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#vimeo"></use>
+                                        <use xlink:href="{{ base_url }}/assets/icons.svg#vimeo"></use>
                                     </svg>
                                     Vimeo
                                 </a>
@@ -129,15 +130,15 @@
                             <li>
                                 <a class="Footer-link" href="https://soundcloud.com/{{ socialHandles.soundcloud }}">
                                     <svg role="img" class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#soundcloud"></use>
+                                        <use xlink:href="{{ base_url }}/assets/icons.svg#soundcloud"></use>
                                     </svg>
                                     Soundcloud
                                 </a>
                             </li>
                             <li>
-                                <a class="Footer-link" href="/updates">
+                                <a class="Footer-link" href="{{ base_url }}/updates">
                                     <svg role="img" class="SocialIcon">
-                                        <use xlink:href="/assets/icons.svg#newsletter"></use>
+                                        <use xlink:href="{{ base_url }}/assets/icons.svg#newsletter"></use>
                                     </svg>
                                     Email Updates
                                 </a>
@@ -162,13 +163,13 @@
                 </div>
 
                 <div class="Footer-end">
-                    <a class="Footer-logoWrap" href="/">
+                    <a class="Footer-logoWrap" href="{{ base_url }}">
                         <svg role="img" class="Footer-logo">
-                            <use xlink:href="/assets/logos.svg#logo"></use>
+                            <use xlink:href="{{ base_url }}/assets/logos.svg#logo"></use>
                         </svg>
                         <div class="Footer-logoCover"></div>
                         <svg role="img" class="Footer-mark">
-                            <use xlink:href="/assets/logos.svg#mark"></use>
+                            <use xlink:href="{{ base_url }}/assets/logos.svg#mark"></use>
                         </svg>
                     </a>
                 </div>
