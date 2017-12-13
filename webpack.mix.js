@@ -28,7 +28,8 @@ mix.js('assets/js/main.js', 'public/build/')
     .setPublicPath('public');
 
 mix.copy('node_modules/object-fit-videos/dist/object-fit-videos.min.js', 'public/build/object-fit-videos.min.js')
-    .copy('node_modules/object-fit-images/dist/ofi.min.js', 'public/build/object-fit-images.min.js');
+    .copy('node_modules/object-fit-images/dist/ofi.min.js', 'public/build/object-fit-images.min.js')
+    .copy('node_modules/cookies-js/dist/cookies.min.js', 'public/build/cookies.min.js');
 
 if (mix.inProduction()) {
     mix.version();

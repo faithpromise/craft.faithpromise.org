@@ -1,0 +1,118 @@
+<div class="Footer" v-show="!is_nav_open" v-cloak>
+    <div class="Footer-container">
+
+        <div class="Footer-section">
+            <h5 class="Footer-heading">Times &amp; Locations</h5>
+            <ul class="Footer-nav">
+                <li><a class="Footer-link" href="/locations/pellissippi">Pellissippi</a></li>
+                <li><a class="Footer-link" href="/locations/blount">Blount</a></li>
+                <li><a class="Footer-link" href="/locations/north">North Knox</a></li>
+                <li><a class="Footer-link" href="/locations/anderson">Anderson</a></li>
+                <li><a class="Footer-link" href="/locations/campbell">Campbell</a></li>
+                <li><a class="Footer-link" href="/locations">View All</a></li>
+            </ul>
+        </div>
+
+        <div class="Footer-section">
+            <h5 class="Footer-heading">About</h5>
+            <ul class="Footer-nav">
+                {#<li>#}
+                {#<a class="Footer-link" id="to_locations_from_footer" href="/locations">Times &amp; Locations</a>#}
+                {#</li>#}
+                <li>
+                    <a class="Footer-link" id="to_updates_from_footer" href="/what-to-expect">What to Expect</a>
+                </li>
+                <li><a class="Footer-link" href="/fpkids">Kids</a></li>
+                <li><a class="Footer-link" href="/fpstudents">Students</a></li>
+                <li><a class="Footer-link" id="to_events_from_footer" href="/events">Events</a></li>
+                <li>
+                    <a class="Footer-link" id="to_blog_from_footer" href="http://blog.faithpromise.org">Blog</a>
+                </li>
+                <li><a class="Footer-link" id="to_jobs_from_footer" href="/jobs">Jobs</a></li>
+            </ul>
+        </div>
+
+        <div class="Footer-section">
+            <h5 class="Footer-heading">Follow Us</h5>
+            <ul class="Footer-nav">
+                <li><a class="Footer-link" href="https://www.facebook.com/{{ socialHandles.facebook }}">
+                        <svg role="img" class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#facebook"></use>
+                        </svg>
+                        Facebook
+                    </a>
+                </li>
+                <li>
+                    <a class="Footer-link" href="https://instagram.com/{{ socialHandles.instagram }}">
+                        <svg role="img" class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#instagram"></use>
+                        </svg>
+                        Instagram
+                    </a>
+                </li>
+                <li>
+                    <a class="Footer-link" href="https://twitter.com/{{ socialHandles.twitter }}">
+                        <svg role="img" class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#twitter"></use>
+                        </svg>
+                        Twitter
+                    </a>
+                </li>
+                <li>
+                    <a class="Footer-link" href="https://vimeo.com/{{ socialHandles.vimeo }}">
+                        <svg role="img" class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#vimeo"></use>
+                        </svg>
+                        Vimeo
+                    </a>
+                </li>
+                <li>
+                    <a class="Footer-link" href="https://soundcloud.com/{{ socialHandles.soundcloud }}">
+                        <svg role="img" class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#soundcloud"></use>
+                        </svg>
+                        Soundcloud
+                    </a>
+                </li>
+                <li>
+                    <a class="Footer-link" href="/updates">
+                        <svg role="img" class="SocialIcon">
+                            <use xlink:href="/assets/icons.svg#newsletter"></use>
+                        </svg>
+                        Email Updates
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="Footer-section">
+            <h5 class="Footer-heading">Mailing address:</h5>
+            <div class="Footer-address">
+                <div>10740 Faith Promise Lane</div>
+                <div>Knoxville, TN 37931</div>
+            </div>
+            <div>
+                <a href="mailto:office@faithpromise.org">office@faithpromise.org</a>
+            </div>
+            <div>
+                <a href="tel:1-865-251-2590" class="no-wrap">(865) 251-2590</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="Footer-end">
+        <a class="Footer-logoWrap" href="/">
+            <svg role="img" class="Footer-logo">
+                <use xlink:href="/assets/logos.svg#logo"></use>
+            </svg>
+            <div class="Footer-logoCover"></div>
+            <svg role="img" class="Footer-mark">
+                <use xlink:href="/assets/logos.svg#mark"></use>
+            </svg>
+        </a>
+    </div>
+
+</div>
+
+<portal-target name="modal"></portal-target>

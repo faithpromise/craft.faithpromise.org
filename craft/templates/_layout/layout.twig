@@ -50,102 +50,7 @@
 
         <div id="app" class="Layout">
 
-            {% set nav_class = nav_class is defined ? 'Nav ' ~ nav_class : 'Nav Nav--overlay' %}
-
-            {# Remove 'Nav--overlay' when nav is open #}
-            <nav :class="is_nav_open ? 'Nav Nav--fixed' : '{{ nav_class }}'">
-                <div class="Nav-bg"></div>
-                <div class="Nav-container">
-                    <div class="Nav-inner">
-                        <a class="Nav-logo" href="/" title="Return to Home Page">
-                            <svg role="img">
-                                <use xlink:href="/assets/logos.svg#mark"></use>
-                            </svg>
-                        </a>
-                        <transition name="transition">
-                            <ul class="Nav-menu" v-show="!is_nav_open">
-                                <li class="Nav-item"><a class="Nav-link" href="/locations">Locations</a></li>
-                                <li class="Nav-item"><a class="Nav-link" href="/sermons">Sermons</a></li>
-                                <li class="Nav-item"><a class="Nav-link" href="/what-to-expect">About</a></li>
-                                <li class="Nav-item"><a class="Nav-link" href="/give">Give</a></li>
-                            </ul>
-                        </transition>
-                        <span class="Nav-toggle" @click="nav_toggle">
-                        <svg role="img">
-                            <use xlink:href="/assets/icons.svg#menu" :xlink:href="'/assets/icons.svg#' + toggle_icon"></use>
-                        </svg>
-                    </span>
-                    </div>
-                </div>
-            </nav>
-
-            {% cache globally using key 'full_nav' %}
-            {% set latest_sermon = craft.entries({ type: 'sermon', with: 'series' }).order('sermonDate DESC').first() %}
-            <transition name="transition">
-                <div class="FullNav" v-show="is_nav_open" v-cloak>
-                    <div class="FullNav-container">
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">About</h5>
-                            <a class="FullNav-link" href="/locations">Find a Location</a>
-                            <a class="FullNav-link" href="/what-to-expect">What to Expect</a>
-                            <a class="FullNav-link" href="/fpkids">Kids</a>
-                            <a class="FullNav-link" href="/fpstudents">Students</a>
-                            <a class="FullNav-link" href="/worship">Worship</a>
-                            <a class="FullNav-link" href="/staff">Meet Our Staff</a>
-                            <a class="FullNav-link" href="/beliefs-and-values">Beliefs &amp; Values</a>
-                            <a class="FullNav-link" href="/jobs">Staff Openings</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Sermons</h5>
-                            <a class="FullNav-link" href="/sermons">Past Sermons</a>
-                            <a class="FullNav-link" href="{{ latest_sermon.url }}">Latest Sermon</a>
-                            <a class="FullNav-link" href="https://itun.es/us/tfmeeb.c">Podcast</a>
-                            <a class="FullNav-link" href="/online">Online Campus</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Events</h5>
-                            <a class="FullNav-link" href="/events">Upcoming Events</a>
-                            <a class="FullNav-link" href="/missions">Mission Trips</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Groups</h5>
-                            <a class="FullNav-link" href="/groups">Learn About Groups</a>
-                            <a class="FullNav-link" href="https://fpctystn.infellowship.com/GroupSearch/Show?zipcode=&category=7079&weekday=&start_time=">Find a Group</a>
-                            <a class="FullNav-link" href="/groups/new-leader">Lead a Group</a>
-                            <a class="FullNav-link" href="/groups/leaders">Resources for Leaders</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Missions</h5>
-                            <a class="FullNav-link" href="/missions">Mission Trips</a>
-                            <a class="FullNav-link" href="/love-local">Local Opportunities</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Next Steps</h5>
-                            <a class="FullNav-link" href="/next-steps-class">Next Steps Class</a>
-                            <a class="FullNav-link" href="/salvation">Salvation</a>
-                            <a class="FullNav-link" href="/baptism">Baptism</a>
-                            <a class="FullNav-link" href="/groups">Groups</a>
-                            <a class="FullNav-link" href="/serving">Serving</a>
-                            <a class="FullNav-link" href="/giving">Giving</a>
-                            <a class="FullNav-link" href="/core">Core Membership</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Care</h5>
-                            <a class="FullNav-link" href="/care">Counseling</a>
-                            <a class="FullNav-link" href="/stephen">Stephen Ministry</a>
-                            <a class="FullNav-link" href="/celebrate">fpCelebrate</a>
-                            <a class="FullNav-link" href="/prayer">Prayer</a>
-                        </div>
-                        <div class="FullNav-category">
-                            <h5 class="FullNav-heading">Giving</h5>
-                            <a class="FullNav-link" href="/give">Give Online</a>
-                            <a class="FullNav-link" href="/h4h">Heart for the Harvest</a>
-                            <a class="FullNav-link" href="https://www.dropbox.com/sh/pfdg2k1evnwog27/AABafL6ntVlejTnSaLZcUqoFa?dl=0&lst=">Financial Statements</a>
-                        </div>
-                    </div>
-                </div>
-            </transition>
-            {% endcache %}
+            {% include '' %}
 
             <transition name="transition">
                 <div class="Layout-content" v-show="!is_nav_open">
@@ -279,39 +184,7 @@
             window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
         </script>
 
-        <!--
-            |--------------------------------------------------------------------------
-            | DEPENDENCIES
-            |--------------------------------------------------------------------------
-        -->
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/{{ craft.config.devMode ? 'vue.js' : 'vue.min.js' }}"></script>
-
-        <!--
-            |--------------------------------------------------------------------------
-            | APP
-            |--------------------------------------------------------------------------
-        -->
-
-        {{ getFootHtml() }}
-
-        <script src="{{ craft.config.cdnUrl }}{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
-
-        <!--
-            |--------------------------------------------------------------------------
-            | FEED THE DINOSAURS
-            |--------------------------------------------------------------------------
-        -->
-
-        <!-- TODO: Conditionally include with feature detection -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/svg4everybody/2.1.9/svg4everybody.min.js"></script>
-        <script>svg4everybody();</script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js"></script><!-- needed for srcset support in some browsers -->
-        <script src="{{ craft.config.cdnUrl }}/build/object-fit-images.min.js"></script><!-- polyfill object-fit in IE and some Safari -->
-        <script>objectFitImages();</script>
+        {% include '_layout/javascripts.twig' %}
 
         <!--
             |--------------------------------------------------------------------------

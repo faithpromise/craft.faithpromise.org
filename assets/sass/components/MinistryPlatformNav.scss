@@ -1,0 +1,100 @@
+.UserTools {
+  position:         fixed;
+  z-index:          999;
+  right:            0;
+  bottom:           0;
+  min-width:        180px;
+  border-width:     2px 0 0 2px;
+  border-style:     solid;
+  border-color:     #fff;
+  border-radius:    4px 0 0 0;
+  background-color: #cbda41;
+  color:            $color-gray-darkest;
+
+  a {
+    @include link-colors-all(currentColor);
+  }
+
+}
+
+.UserNav {
+
+}
+
+.UserNav-list {
+  @extend %list-unstyled;
+}
+
+.UserNav-item > a {
+  padding:       13px 0;
+  display:       block;
+  border-bottom: 1px solid #a5af4b;
+  margin:        0 12px;
+  font-size:     13px;
+  font-weight:   600;
+}
+
+.UserActions {
+  position:         relative; // Always on top
+  display:          flex;
+  align-items:      center;
+  font-size:        13px;
+  font-weight:      600;
+  background-color: #cbda41;
+
+  svg {
+    height: 20px;
+    width:  20px;
+  }
+}
+
+.UserActions-name,
+.UserActions-cart {
+  padding: calc-em(12px) calc-em(16px);
+}
+
+.UserActions-cart {
+  padding-right: calc-em(24px);
+}
+
+.UserActions-name {
+  @extend %clickable;
+  display:     inline-flex;
+  align-items: center;
+
+  > svg {
+    margin-right: 8px;
+  }
+}
+
+.UserActions-div {
+  height:           20px;
+  width:            1px;
+  background-color: currentColor;
+}
+
+.UserActions-cart {
+  position: relative;
+
+  > svg {
+    height: 28px;
+    width:  28px;
+  }
+
+  > span {
+    position:         absolute;
+    top:              5px;
+    right:            10px;
+    display:          inline-flex;
+    justify-content:  center;
+    align-items:      center;
+    height:           18px;
+    width:            18px;
+    border-radius:    100px;
+    font-size:        12px;
+    font-weight:      normal;
+    background-color: $color-gray-darkest;
+    color:            #fff;
+  }
+
+}

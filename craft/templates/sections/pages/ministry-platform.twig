@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% set dev_cache_bust = craft.config.devMode ? '?' ~ random() : '' %}
+{% set base_url = 'https://faithpromise.org' %}
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Faith Promise Church</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="google-site-verification" content="hbqvrQMid1Tpy4mlqi-wtEVGpcZ-tlZ5P_28dOhUgQU">
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ base_url }}/assets/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ base_url }}/assets/favicons/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="{{ base_url }}/assets/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ base_url }}/assets/favicons/favicon-16x16.png" sizes="16x16">
+        <meta name="application-name" content="Faith Promise Church">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{{ base_url }}/assets/favicons/mstile-144x144.png">
+
+        <meta property="fb:app_id" content="1592675454329086">
+
+        <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
+        {{ getHeadHtml() }}
+    </head>
+
+    <body>
+
+        <!-- Ministry Platform Nav -->
+        <div style="display: none;">
+            [MPP_UserLogin]
+            [MPP_UserLogout]
+            [MPP_ViewCart]
+        </div>
+
+        <div id="app" class="Layout">
+
+            <ministry-platform></ministry-platform>
+
+            {% include '_layout/nav.twig' %}
+
+            <div class="Layout-content" v-show="!is_nav_open">
+
+                <header class="Hero Hero--913570 Hero--imageOnly">
+                    <picture>
+                        <source media="(min-width: 1200px)" sizes="100vw" srcset="
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1920 1920w,
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1680 1680w,
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1280 1280w
+                    ">
+                        <source sizes="100vw" srcset="
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1920 1920w,
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1680 1680w,
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1280 1280w,
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=800 800w,
+                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=480 480w
+                    ">
+                        <img class="Hero-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+                    </picture>
+                    <div class="Hero-overlay"></div>
+                    <div class="Hero-container">
+                        <div class="Hero-content">
+                        </div>
+                    </div>
+                </header>
+
+                <div class="Layout-ministryPlatform">
+                    [MPP_PageForm]
+                </div>
+
+
+            </div>
+
+            {% include '_layout/footer.twig' %}
+
+        </div>
+
+        {% include '_layout/javascripts.twig' %}
+
+    </body>
+</html>
