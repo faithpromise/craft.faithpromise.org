@@ -4,12 +4,12 @@
         <div class="Footer-section">
             <h5 class="Footer-heading">Times &amp; Locations</h5>
             <ul class="Footer-nav">
-                <li><a class="Footer-link" href="/locations/pellissippi">Pellissippi</a></li>
-                <li><a class="Footer-link" href="/locations/blount">Blount</a></li>
-                <li><a class="Footer-link" href="/locations/north">North Knox</a></li>
-                <li><a class="Footer-link" href="/locations/anderson">Anderson</a></li>
-                <li><a class="Footer-link" href="/locations/campbell">Campbell</a></li>
-                <li><a class="Footer-link" href="/locations">View All</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/locations/pellissippi">Pellissippi</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/locations/blount">Blount</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/locations/north">North Knox</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/locations/anderson">Anderson</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/locations/campbell">Campbell</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/locations">View All</a></li>
             </ul>
         </div>
 
@@ -22,13 +22,13 @@
                 <li>
                     <a class="Footer-link" id="to_updates_from_footer" href="/what-to-expect">What to Expect</a>
                 </li>
-                <li><a class="Footer-link" href="/fpkids">Kids</a></li>
-                <li><a class="Footer-link" href="/fpstudents">Students</a></li>
-                <li><a class="Footer-link" id="to_events_from_footer" href="/events">Events</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/fpkids">Kids</a></li>
+                <li><a class="Footer-link" href="{{ base_url }}/fpstudents">Students</a></li>
+                <li><a class="Footer-link" id="to_events_from_footer" href="{{ base_url }}/events">Events</a></li>
                 <li>
                     <a class="Footer-link" id="to_blog_from_footer" href="http://blog.faithpromise.org">Blog</a>
                 </li>
-                <li><a class="Footer-link" id="to_jobs_from_footer" href="/jobs">Jobs</a></li>
+                <li><a class="Footer-link" id="to_jobs_from_footer" href="{{ base_url }}/jobs">Jobs</a></li>
             </ul>
         </div>
 
@@ -37,7 +37,7 @@
             <ul class="Footer-nav">
                 <li><a class="Footer-link" href="https://www.facebook.com/{{ socialHandles.facebook }}">
                         <svg role="img" class="SocialIcon">
-                            <use xlink:href="/assets/icons.svg#facebook"></use>
+                            <use xlink:href="{{ base_url }}/assets/icons.svg#facebook"></use>
                         </svg>
                         Facebook
                     </a>
@@ -45,7 +45,7 @@
                 <li>
                     <a class="Footer-link" href="https://instagram.com/{{ socialHandles.instagram }}">
                         <svg role="img" class="SocialIcon">
-                            <use xlink:href="/assets/icons.svg#instagram"></use>
+                            <use xlink:href="{{ base_url }}/assets/icons.svg#instagram"></use>
                         </svg>
                         Instagram
                     </a>
@@ -53,7 +53,7 @@
                 <li>
                     <a class="Footer-link" href="https://twitter.com/{{ socialHandles.twitter }}">
                         <svg role="img" class="SocialIcon">
-                            <use xlink:href="/assets/icons.svg#twitter"></use>
+                            <use xlink:href="{{ base_url }}/assets/icons.svg#twitter"></use>
                         </svg>
                         Twitter
                     </a>
@@ -61,7 +61,7 @@
                 <li>
                     <a class="Footer-link" href="https://vimeo.com/{{ socialHandles.vimeo }}">
                         <svg role="img" class="SocialIcon">
-                            <use xlink:href="/assets/icons.svg#vimeo"></use>
+                            <use xlink:href="{{ base_url }}/assets/icons.svg#vimeo"></use>
                         </svg>
                         Vimeo
                     </a>
@@ -69,15 +69,15 @@
                 <li>
                     <a class="Footer-link" href="https://soundcloud.com/{{ socialHandles.soundcloud }}">
                         <svg role="img" class="SocialIcon">
-                            <use xlink:href="/assets/icons.svg#soundcloud"></use>
+                            <use xlink:href="{{ base_url }}/assets/icons.svg#soundcloud"></use>
                         </svg>
                         Soundcloud
                     </a>
                 </li>
                 <li>
-                    <a class="Footer-link" href="/updates">
+                    <a class="Footer-link" href="{{ base_url }}/updates">
                         <svg role="img" class="SocialIcon">
-                            <use xlink:href="/assets/icons.svg#newsletter"></use>
+                            <use xlink:href="{{ base_url }}/assets/icons.svg#newsletter"></use>
                         </svg>
                         Email Updates
                     </a>
@@ -104,11 +104,11 @@
     <div class="Footer-end">
         <a class="Footer-logoWrap" href="/">
             <svg role="img" class="Footer-logo">
-                <use xlink:href="/assets/logos.svg#logo"></use>
+                <use xlink:href="{{ base_url }}/assets/logos.svg#logo"></use>
             </svg>
             <div class="Footer-logoCover"></div>
             <svg role="img" class="Footer-mark">
-                <use xlink:href="/assets/logos.svg#mark"></use>
+                <use xlink:href="{{ base_url }}/assets/logos.svg#mark"></use>
             </svg>
         </a>
     </div>

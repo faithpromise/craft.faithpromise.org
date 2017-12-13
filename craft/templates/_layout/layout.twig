@@ -44,14 +44,14 @@
         <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
         {{ getHeadHtml() }}
 
-        <link rel="home" href="{{ siteUrl }}">
+        {#<link rel="home" href="{{ siteUrl }}">#}
     </head>
 
     <body>
 
         <div id="app" class="Layout">
 
-            {% include '' %}
+            {% include '_layout/nav.twig' %}
 
             <transition name="transition">
                 <div class="Layout-content" v-show="!is_nav_open">
@@ -59,124 +59,7 @@
                 </div>
             </transition>
 
-            <div class="Footer" v-show="!is_nav_open" v-cloak>
-                <div class="Footer-container">
-
-                    <div class="Footer-section">
-                        <h5 class="Footer-heading">Times &amp; Locations</h5>
-                        <ul class="Footer-nav">
-                            <li><a class="Footer-link" href="{{ base_url }}/locations/pellissippi">Pellissippi</a></li>
-                            <li><a class="Footer-link" href="{{ base_url }}/locations/blount">Blount</a></li>
-                            <li><a class="Footer-link" href="{{ base_url }}/locations/north">North Knox</a></li>
-                            <li><a class="Footer-link" href="{{ base_url }}/locations/anderson">Anderson</a></li>
-                            <li><a class="Footer-link" href="{{ base_url }}/locations/campbell">Campbell</a></li>
-                            <li><a class="Footer-link" href="{{ base_url }}/locations">View All</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="Footer-section">
-                        <h5 class="Footer-heading">About</h5>
-                        <ul class="Footer-nav">
-                            {#<li>#}
-                            {#<a class="Footer-link" id="to_locations_from_footer" href="{{ base_url }}/locations">Times &amp; Locations</a>#}
-                            {#</li>#}
-                            <li>
-                                <a class="Footer-link" id="to_updates_from_footer" href="{{ base_url }}/what-to-expect">What to Expect</a>
-                            </li>
-                            <li><a class="Footer-link" href="{{ base_url }}/fpkids">Kids</a></li>
-                            <li><a class="Footer-link" href="{{ base_url }}/fpstudents">Students</a></li>
-                            <li><a class="Footer-link" id="to_events_from_footer" href="{{ base_url }}/events">Events</a></li>
-                            <li>
-                                <a class="Footer-link" id="to_blog_from_footer" href="http://blog.faithpromise.org">Blog</a>
-                            </li>
-                            <li><a class="Footer-link" id="to_jobs_from_footer" href="{{ base_url }}/jobs">Jobs</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="Footer-section">
-                        <h5 class="Footer-heading">Follow Us</h5>
-                        <ul class="Footer-nav">
-                            <li><a class="Footer-link" href="https://www.facebook.com/{{ socialHandles.facebook }}">
-                                    <svg role="img" class="SocialIcon">
-                                        <use xlink:href="{{ base_url }}/assets/icons.svg#facebook"></use>
-                                    </svg>
-                                    Facebook
-                                </a>
-                            </li>
-                            <li>
-                                <a class="Footer-link" href="https://instagram.com/{{ socialHandles.instagram }}">
-                                    <svg role="img" class="SocialIcon">
-                                        <use xlink:href="{{ base_url }}/assets/icons.svg#instagram"></use>
-                                    </svg>
-                                    Instagram
-                                </a>
-                            </li>
-                            <li>
-                                <a class="Footer-link" href="https://twitter.com/{{ socialHandles.twitter }}">
-                                    <svg role="img" class="SocialIcon">
-                                        <use xlink:href="{{ base_url }}/assets/icons.svg#twitter"></use>
-                                    </svg>
-                                    Twitter
-                                </a>
-                            </li>
-                            <li>
-                                <a class="Footer-link" href="https://vimeo.com/{{ socialHandles.vimeo }}">
-                                    <svg role="img" class="SocialIcon">
-                                        <use xlink:href="{{ base_url }}/assets/icons.svg#vimeo"></use>
-                                    </svg>
-                                    Vimeo
-                                </a>
-                            </li>
-                            <li>
-                                <a class="Footer-link" href="https://soundcloud.com/{{ socialHandles.soundcloud }}">
-                                    <svg role="img" class="SocialIcon">
-                                        <use xlink:href="{{ base_url }}/assets/icons.svg#soundcloud"></use>
-                                    </svg>
-                                    Soundcloud
-                                </a>
-                            </li>
-                            <li>
-                                <a class="Footer-link" href="{{ base_url }}/updates">
-                                    <svg role="img" class="SocialIcon">
-                                        <use xlink:href="{{ base_url }}/assets/icons.svg#newsletter"></use>
-                                    </svg>
-                                    Email Updates
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="Footer-section">
-                        <h5 class="Footer-heading">Mailing address:</h5>
-                        <div class="Footer-address">
-                            <div>10740 Faith Promise Lane</div>
-                            <div>Knoxville, TN 37931</div>
-                        </div>
-                        <div>
-                            <a href="mailto:office@faithpromise.org">office@faithpromise.org</a>
-                        </div>
-                        <div>
-                            <a href="tel:1-865-251-2590" class="no-wrap">(865) 251-2590</a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="Footer-end">
-                    <a class="Footer-logoWrap" href="{{ base_url }}">
-                        <svg role="img" class="Footer-logo">
-                            <use xlink:href="{{ base_url }}/assets/logos.svg#logo"></use>
-                        </svg>
-                        <div class="Footer-logoCover"></div>
-                        <svg role="img" class="Footer-mark">
-                            <use xlink:href="{{ base_url }}/assets/logos.svg#mark"></use>
-                        </svg>
-                    </a>
-                </div>
-
-            </div>
-
-            <portal-target name="modal"></portal-target>
+            {% include '_layout/footer.twig' %}
 
         </div>
 
