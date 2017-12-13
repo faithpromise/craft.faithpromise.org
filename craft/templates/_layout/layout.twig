@@ -2,7 +2,8 @@
 {% set title = title is defined ? title : (entry is defined ? entry.title: null) %}
 {% set canonical_url = canonical_url is defined ? canonical_url : (entry.url is defined ? entry.url: null) %}
 {% set dev_cache_bust = craft.config.devMode ? '?' ~ random() : '' %}
-{% set base_url = 'https://faithpromise.org' %}
+{% set base_url = '' %}
+{% set assets_base_url = '' %}
 
 {% if not og_image.url is defined %}
     {% set og_image = craft.assets.id(4219).first() %}
@@ -20,13 +21,13 @@
 
         <link rel="canonical" href="{{ canonical_url }}">
 
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ base_url }}/assets/favicons/apple-touch-icon-144x144.png">
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ base_url }}/assets/favicons/apple-touch-icon-152x152.png">
-        <link rel="icon" type="image/png" href="{{ base_url }}/assets/favicons/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="{{ base_url }}/assets/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ assets_base_url }}/assets/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ assets_base_url }}/assets/favicons/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="{{ assets_base_url }}/assets/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ assets_base_url }}/assets/favicons/favicon-16x16.png" sizes="16x16">
         <meta name="application-name" content="Faith Promise Church">
         <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="{{ base_url }}/assets/favicons/mstile-144x144.png">
+        <meta name="msapplication-TileImage" content="{{ assets_base_url }}/assets/favicons/mstile-144x144.png">
 
         <meta property="fb:app_id" content="1592675454329086">
 

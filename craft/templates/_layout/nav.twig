@@ -7,7 +7,7 @@
         <div class="Nav-inner">
             <a class="Nav-logo" href="{{ base_url }}" title="Return to Home Page">
                 <svg role="img">
-                    <use xlink:href="{{ base_url }}/assets/logos.svg#mark"></use>
+                    <use xlink:href="{{ assets_base_url }}/assets/logos.svg#mark"></use>
                 </svg>
             </a>
             <transition name="transition">
@@ -20,7 +20,7 @@
             </transition>
             <span class="Nav-toggle" @click="nav_toggle">
                 <svg role="img">
-                    <use xlink:href="{{ base_url }}/assets/icons.svg#menu" :xlink:href="'/assets/icons.svg#' + toggle_icon"></use>
+                    <use xlink:href="{{ assets_base_url }}/assets/icons.svg#menu" :xlink:href="'/assets/icons.svg#' + toggle_icon"></use>
                 </svg>
             </span>
         </div>
