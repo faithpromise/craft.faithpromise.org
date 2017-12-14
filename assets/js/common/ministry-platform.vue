@@ -57,7 +57,7 @@
             },
 
             show_user_tools() {
-                return this.is_logged_in && this.user_name;
+                return this.is_logged_in && this.user_name.length;
             },
         },
 
@@ -96,10 +96,11 @@
 
             refresh() {
 
-                let items_in_cart = Cookies.get('fp_items_in_cart');
+                let items_in_cart = Cookies.get('fp_items_in_cart'),
+                    user_name     = Cookies.get('fp_user_name');
 
-                this.is_logged_in  = Cookies.get('fp_is_logged_in');
-                this.user_name     = Cookies.get('fp_user_name');
+                this.is_logged_in  = !!Cookies.get('fp_is_logged_in');
+                this.user_name     = user_name || '';
                 this.items_in_cart = items_in_cart ? parseInt(items_in_cart) : 0;
             },
         }
