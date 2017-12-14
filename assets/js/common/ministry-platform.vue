@@ -63,7 +63,7 @@
 
         created() {
 
-            ready(function () {
+            ready(() => {
 
                 let cart_text    = document.getElementById('cartLink'),
                     user_link    = document.getElementById('userLink'),
@@ -76,11 +76,13 @@
                 }
 
                 // Set logged in cookie...
-                Cookies.set('is_logged_in', is_logged_in, { domain: cookie_domain });
+                Cookies.set('fp_is_logged_in', is_logged_in, { domain: cookie_domain });
 
                 // If logged in, set user's name in cookie...
                 if (is_logged_in)
                     Cookies.set('fp_user_name', user_link.innerText, { domain: cookie_domain });
+
+                this.refresh();
 
             });
 
@@ -93,9 +95,12 @@
             },
 
             refresh() {
-                this.is_logged_in  = Cookies.get('is_logged_in');
+
+                let items_in_cart = Cookies.get('fp_items_in_cart');
+
+                this.is_logged_in  = Cookies.get('fp_is_logged_in');
                 this.user_name     = Cookies.get('fp_user_name');
-                this.items_in_cart = Cookies.get('fp_items_in_cart');
+                this.items_in_cart = items_in_cart ? parseInt(items_in_cart) : 0;
             },
         }
 
