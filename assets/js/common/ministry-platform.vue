@@ -5,11 +5,11 @@
       <div class="UserNav" v-show="is_nav_visible" v-cloak>
         <ul class="UserNav-list">
           <li class="UserNav-item">
-            <a id="userLink" href="https://my.faithpromise.org/portal/my_user_account.aspx">Edit My Profile</a></li>
+            <a href="https://my.faithpromise.org/portal/my_user_account.aspx">Edit My Profile</a></li>
           <li class="UserNav-item">
-            <a id="userLink" href="https://my.faithpromise.org/portal/my_groups.aspx">View My Group</a></li>
+            <a href="https://my.faithpromise.org/portal/my_groups.aspx">View My Group</a></li>
           <li class="UserNav-item">
-            <a id="logoutLink" href="https://my.faithpromise.org/portal/login.aspx?logout=true">Logout</a></li>
+            <a href="https://my.faithpromise.org/portal/login.aspx?logout=true">Logout</a></li>
         </ul>
       </div>
     </transition>
