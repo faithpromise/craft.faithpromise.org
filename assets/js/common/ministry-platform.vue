@@ -57,7 +57,7 @@
             },
 
             show_user_tools() {
-                return this.is_logged_in && this.user_name.length;
+                return this.is_logged_in && this.user_name.length > 0;
             },
         },
 
