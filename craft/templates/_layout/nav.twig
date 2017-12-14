@@ -1,5 +1,7 @@
 {% set nav_class = nav_class is defined ? 'Nav ' ~ nav_class : 'Nav Nav--overlay' %}
 
+<ministry-platform base-url="{{ assets_base_url }}"></ministry-platform>
+
 {# Remove 'Nav--overlay' when nav is open #}
 <nav :class="is_nav_open ? 'Nav Nav--fixed' : '{{ nav_class }}'">
     <div class="Nav-bg"></div>

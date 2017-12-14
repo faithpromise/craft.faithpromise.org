@@ -24,7 +24,7 @@
       <div class="UserActions-div" v-show="items_in_cart"></div>
       <a class="UserActions-cart" href="https://my.faithpromise.org/portal/transaction_summary.aspx" v-show="items_in_cart">
         <svg role="img">
-          <use xlink:href="https://faithpromise.org/assets/icons.svg#cart"></use>
+          <use :xlink:href="baseUrl + '/assets/icons.svg#cart'"></use>
         </svg>
         <span>{{ items_in_cart }}</span>
       </a>
@@ -38,6 +38,10 @@
 
     export default {
 
+        props: {
+            baseUrl: { required: true, },
+        },
+
         data() {
             return {
                 is_logged_in:   false,
@@ -49,7 +53,7 @@
 
         computed: {
             toggle_icon() {
-                return 'https://faithpromise.org/assets/icons.svg#chevron-' + (this.is_nav_visible ? 'up' : 'down');
+                return this.baseUrl + '/assets/icons.svg#chevron-' + (this.is_nav_visible ? 'up' : 'down');
             },
 
             show_user_tools() {
