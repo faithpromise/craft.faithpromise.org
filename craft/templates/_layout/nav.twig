@@ -1,5 +1,12 @@
 {% set nav_class = nav_class is defined ? 'Nav ' ~ nav_class : 'Nav Nav--overlay' %}
 
+<!-- Ministry Platform Nav -->
+<div style="display: none;">
+    [MPP_UserLogin]
+    [MPP_UserLogout]
+    [MPP_ViewCart]
+</div>
+
 <ministry-platform base-url="{{ assets_base_url }}"></ministry-platform>
 
 {# Remove 'Nav--overlay' when nav is open #}

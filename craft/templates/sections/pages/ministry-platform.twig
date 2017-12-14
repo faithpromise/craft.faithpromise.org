@@ -20,20 +20,15 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ assets_base_url }}/assets/favicons/mstile-144x144.png">
 
-        <meta property="fb:app_id" content="1592675454329086">
+        <!-- Needed for Ministry Platform -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
         <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
+
         {{ getHeadHtml() }}
     </head>
 
     <body>
-
-        <!-- Ministry Platform Nav -->
-        <div style="display: none;">
-            [MPP_UserLogin]
-            [MPP_UserLogout]
-            [MPP_ViewCart]
-        </div>
 
         <div id="app" class="Layout">
 
@@ -75,7 +70,6 @@
         </div>
 
         <!-- Necessary for Ministry Platform -->
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
         {% include '_layout/javascripts.twig' %}
