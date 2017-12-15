@@ -69,6 +69,16 @@
                     [MPP_PageForm]
                 </div>
 
+                {% if craft.config.devMode %}
+                    {#<a id="userLink" href="/portal/login.aspx?ReturnUrl=/portal/login.aspx?logout=true">Login</a>#}
+                    {#<a href="#">anonymous</a>#}
+                    {#<a id="cartLink" href="transaction_summary.aspx">Show Summary (0)</a>#}
+
+                    <a id="userLink" href="/portal/my_user_account.aspx">Roberts, Brad</a>
+                    <a id="logoutLink" href="login.aspx?logout=true">Logout</a>
+                    <a id="cartLink" href="transaction_summary.aspx">Show Summary (0)</a>
+                {% endif %}
+
             </div>
 
             {% include '_layout/footer.twig' %}
@@ -88,12 +98,16 @@
         {% include '_layout/script-includes/browser-compatibility.twig' %}
 
         <!-- Necessary for Ministry Platform -->
-        <script>
-            // Ministry Platform injects jQuery and uses noConflict to assign jQuery to $mpp.
-            // There's no conflict for Faith Promise, so it should be safe
-            // to assign it to jQuery, since Bootstrap JS requires it.
-            window.jQuery = window.$mpp;
-        </script>
+        {% if craft.config.devMode %}
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        {% else %}
+            <script>
+                // Ministry Platform injects jQuery and uses noConflict to assign jQuery to $mpp.
+                // There's no conflict for Faith Promise, so it should be safe
+                // to assign it to jQuery, since Bootstrap JS requires it.
+                window.jQuery = window.$mpp;
+            </script>
+        {% endif %}
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     </body>
