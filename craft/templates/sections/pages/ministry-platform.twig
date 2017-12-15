@@ -65,10 +65,6 @@
                     </div>
                 </header>
 
-                <div class="Layout-ministryPlatform">
-                    [MPP_PageForm]
-                </div>
-
                 {% if craft.config.devMode %}
                     {#<a id="userLink" href="/portal/login.aspx?ReturnUrl=/portal/login.aspx?logout=true">Login</a>#}
                     {#<a href="#">anonymous</a>#}
@@ -81,8 +77,12 @@
 
             </div>
 
-            {% include '_layout/footer.twig' %}
+        </div>
 
+        {% include '_layout/footer.twig' %}
+
+        <div class="Layout-ministryPlatform">
+            [MPP_PageForm]
         </div>
 
         <!--
@@ -91,7 +91,6 @@
             |--------------------------------------------------------------------------
         -->
 
-        {% include '_layout/script-includes/lodash.twig' %}
         {% include '_layout/script-includes/vue.twig' %}
         {% include '_layout/script-includes/cookies.twig' %}
         <script src="{{ craft.config.cdnUrl }}{{ '/build/ministry-platform-skin.js' ~ dev_cache_bust | cacheBuster }}"></script>
