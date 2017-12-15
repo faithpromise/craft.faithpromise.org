@@ -67,7 +67,13 @@
 
                 let cart_text    = document.getElementById('cartLink'),
                     user_link    = document.getElementById('userLink'),
-                    is_logged_in = user_link ? !user_link.innerText.match(/login/i) : false;
+                    is_logged_in = user_link ? !user_link.innerText.match(/login/i) : false,
+                    user_name    = user_link ? user_link.innerText : '';
+
+                let name_parts = user_name.split(','),
+                    first_name = name_parts[name_parts.length-1].trim(),
+                    last_name = name_parts.slice(0, -1).join (',').trim(),
+                    name = (first_name + ' ' + last_name).trim();
 
                 // If we have items in the cart...
                 if (cart_text) {
@@ -76,11 +82,10 @@
                 }
 
                 // Set logged in cookie...
-                Cookies.set('fp_is_logged_in', is_logged_in, { domain: cookie_domain });
+                Cookies.set('fp_is_logged_in', is_logged_in ? 'true' : 'false', { domain: cookie_domain });
 
                 // If logged in, set user's name in cookie...
-                if (is_logged_in)
-                    Cookies.set('fp_user_name', user_link.innerText, { domain: cookie_domain });
+                Cookies.set('fp_user_name', is_logged_in ? name : '', { domain: cookie_domain });
 
                 this.refresh();
 
@@ -99,7 +104,7 @@
                 let items_in_cart = Cookies.get('fp_items_in_cart'),
                     user_name     = Cookies.get('fp_user_name');
 
-                this.is_logged_in  = !!Cookies.get('fp_is_logged_in');
+                this.is_logged_in  = Cookies.get('fp_is_logged_in') === 'true';
                 this.user_name     = user_name || '';
                 this.items_in_cart = items_in_cart ? parseInt(items_in_cart) : 0;
             },
