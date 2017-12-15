@@ -25,10 +25,16 @@
 
         <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
 
-        {{ getHeadHtml() }}
     </head>
 
     <body>
+
+        <!-- Ministry Platform Nav -->
+        <div style="display: none;">
+            [MPP_UserLogin]
+            [MPP_UserLogout]
+            [MPP_ViewCart]
+        </div>
 
         <div id="app" class="Layout">
 
@@ -69,16 +75,26 @@
 
         </div>
 
+        <!--
+            |--------------------------------------------------------------------------
+            | DEPENDENCIES
+            |--------------------------------------------------------------------------
+        -->
+
+        {% include '_layout/script-includes/lodash.twig' %}
+        {% include '_layout/script-includes/vue.twig' %}
+        {% include '_layout/script-includes/cookies.twig' %}
+        <script src="{{ craft.config.cdnUrl }}{{ '/build/ministry-platform-skin.js' ~ dev_cache_bust | cacheBuster }}"></script>
+        {% include '_layout/script-includes/browser-compatibility.twig' %}
+
         <!-- Necessary for Ministry Platform -->
         <script>
-            // Ministry Platform uses noConflict to assign jQuery to $mpp.
+            // Ministry Platform injects jQuery and uses noConflict to assign jQuery to $mpp.
             // There's no conflict for Faith Promise, so it should be safe
             // to assign it to jQuery, since Bootstrap JS requires it.
             window.jQuery = window.$mpp;
         </script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-        {% include '_layout/javascripts.twig' %}
 
     </body>
 </html>

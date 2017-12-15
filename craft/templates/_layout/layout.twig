@@ -62,6 +62,8 @@
 
             {% include '_layout/footer.twig' %}
 
+            <portal-target name="modal"></portal-target>
+
         </div>
 
         <script type="text/javascript">
@@ -69,7 +71,29 @@
             window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
         </script>
 
-        {% include '_layout/javascripts.twig' %}
+        <!--
+            |--------------------------------------------------------------------------
+            | DEPENDENCIES
+            |--------------------------------------------------------------------------
+        -->
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        {% include '_layout/script-includes/lodash.twig' %}
+        {% include '_layout/script-includes/vue.twig' %}
+        {% include '_layout/script-includes/cookies.twig' %}
+
+
+        <!--
+            |--------------------------------------------------------------------------
+            | APP
+            |--------------------------------------------------------------------------
+        -->
+
+        {{ getFootHtml() }}
+
+        <script src="{{ craft.config.cdnUrl }}{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
+
+        {% include '_layout/script-includes/browser-compatibility.twig' %}
 
         <!--
             |--------------------------------------------------------------------------
