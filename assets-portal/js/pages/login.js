@@ -22,7 +22,13 @@ function addLoginIntro() {
      | Adds a intro section to the login page.
      */
 
+    let id = 'SignUp';
+
+    if (document.getElementById(id))
+        return;
+
     let el       = document.createElement('div');
+    el.setAttribute('id', id);
     el.className = 'SignUp';
     el.innerHTML = login_intro;
     document.getElementById('UpdatePanel1').appendChild(el);

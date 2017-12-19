@@ -21,7 +21,8 @@ window.setupCustomerEvents = function () {
         case 'giving':
         case 'giving/recurring':
         case 'giving/profile':
-            givingPage.init();
+        case 'giving/guest':
+            givingPage.init(page);
             break;
         case 'login.aspx':
             loginPage.init();
