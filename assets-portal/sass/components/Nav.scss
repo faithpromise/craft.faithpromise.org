@@ -1,0 +1,37 @@
+.Nav {
+  position:         absolute;
+  right:            0;
+  max-width:        90vw;
+
+  padding:          1em 2em;
+  border-radius:    4px;
+  background-color: #fff;
+  color:            $color-gray;
+  box-shadow:       0 7px 14px 0 rgba(50, 50, 93, .1), 0 3px 6px 0 rgba(0, 0, 0, .07);
+
+  &:not(.is-visible) {
+    display: none;
+  }
+}
+
+.Nav-menu {
+  @extend %list-unstyled;
+
+  & + & {
+    margin-top:  1em;
+    padding-top: 1em;
+    border-top:  1px solid $color-gray-lighter;
+  }
+}
+
+.Nav-item {
+  overflow:      hidden;
+  text-overflow: ellipsis;
+}
+
+.Nav-link {
+  display:     inline-block;
+  padding:     .5em 0;
+  white-space: nowrap;
+  user-select: none;
+}

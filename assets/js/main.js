@@ -10,7 +10,6 @@ import videoEmbed from './common/video-embed.vue';
 import homePageVideo from './common/home-page-video.vue';
 import volunteerPositions from './serving/volunteer-positions.vue';
 import readingPlanNav from './common/reading-plan-nav.vue';
-import ministryPlatform from './common/ministry-platform.vue';
 
 require('url-search-params/build/url-search-params.max');
 
@@ -31,7 +30,6 @@ const app = new Vue({
         homePageVideo,
         volunteerPositions,
         readingPlanNav,
-        ministryPlatform,
     },
 
     data: function () {

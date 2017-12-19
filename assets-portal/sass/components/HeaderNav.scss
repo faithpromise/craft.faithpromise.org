@@ -1,0 +1,61 @@
+.HeaderNav {
+  @extend %list-unstyled;
+  position:    relative;
+  display:     flex;
+  align-items: center;
+}
+
+.HeaderNav-link {
+  @include link-colors-all(currentColor);
+  display:     inline-flex;
+  align-items: center;
+  padding:     1em;
+  font-weight: 600;
+  cursor:      pointer;
+  user-select: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  > svg {
+    height: 1.25em;
+    width:  1.25em;
+    fill:   $Header-text-color
+  }
+}
+
+@media (max-width: 339px) {
+  .HeaderNav-item--give {
+    display: none;
+  }
+}
+
+.HeaderNav-cart {
+  position: relative;
+  display:  inline-block;
+
+  > svg {
+    height: 1.25em;
+    width:  1.25em;
+    fill:   $Header-text-color;
+  }
+
+  > span {
+    position:         absolute;
+    top:              7px;
+    right:            3px;
+    display:          inline-flex;
+    justify-content:  center;
+    align-items:      center;
+    height:           20px;
+    width:            20px;
+    border:           2px solid $Header-bg-color;
+    border-radius:    100px;
+    font-size:        12px;
+    font-weight:      normal;
+    background-color: $Header-text-color;
+    color:            #fff;
+  }
+
+}

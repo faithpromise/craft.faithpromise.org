@@ -1,0 +1,20 @@
+a,
+.link {
+  @include link-colors($anchor-color, $anchor-color-hover, $anchor-color-active, $anchor-color-visited);
+
+  text-decoration: none;
+  cursor:          pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.unlink {
+  &, &:link, &:visited, &:hover, &:active {
+    color: inherit;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}

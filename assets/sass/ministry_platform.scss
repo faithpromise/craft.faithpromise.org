@@ -1,6 +1,0 @@
-
-.Layout-ministryPlatform {
-  @extend .Container;
-  @include fluid-size(padding-top, 320px, 40px, 1080px, 80px);
-  @include fluid-size(padding-bottom, 320px, 40px, 1080px, 80px);
-}

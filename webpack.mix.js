@@ -27,7 +27,8 @@ mix.js('assets/js/main.js', 'public/build/')
     .sass('assets/sass/main.scss', 'public/build/')
     .setPublicPath('public');
 
-mix.js('assets/js/ministry-platform-skin.js', 'public/build/');
+mix.js('assets-portal/js/ministry-platform-skin.js', 'public/build/')
+    .sass('assets-portal/sass/ministry-platform-skin.scss', 'public/build');
 
 mix.copy('node_modules/object-fit-videos/dist/object-fit-videos.min.js', 'public/build/object-fit-videos.min.js')
     .copy('node_modules/object-fit-images/dist/ofi.min.js', 'public/build/object-fit-images.min.js')

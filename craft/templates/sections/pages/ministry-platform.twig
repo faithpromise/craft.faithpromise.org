@@ -10,8 +10,6 @@
         <title>Faith Promise Church</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="google-site-verification" content="hbqvrQMid1Tpy4mlqi-wtEVGpcZ-tlZ5P_28dOhUgQU">
-
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ assets_base_url }}/assets/favicons/apple-touch-icon-144x144.png">
         <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ assets_base_url }}/assets/favicons/apple-touch-icon-152x152.png">
         <link rel="icon" type="image/png" href="{{ assets_base_url }}/assets/favicons/favicon-32x32.png" sizes="32x32">
@@ -23,7 +21,7 @@
         <!-- Needed for Ministry Platform -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
+        <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/ministry-platform-skin.css' ~ dev_cache_bust | cacheBuster }}">
 
     </head>
 
@@ -34,56 +32,122 @@
             [MPP_UserLogin]
             [MPP_UserLogout]
             [MPP_ViewCart]
+
+            {#{% if craft.config.devMode %}#}
+                {#<a id="userLink" href="/portal/my_user_account.aspx">Roberts, Brad</a>#}
+                {#<a id="logoutLink" href="login.aspx?logout=true">Logout</a>#}
+                {#<a id="cartLink" href="transaction_summary.aspx">Show Summary (3)</a>#}
+            {#{% endif %}#}
         </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+            <symbol id="logo-mark" viewBox="0 0 100 100">
+                <title>Faith Promise Logo</title>
+                <path d="M98.46,45.08a45.33,45.33,0,0,0-1.56-8.22C93.3,25.54,87,16.34,78.24,10.19A60.36,60.36,0,0,0,72.71,6.9C67.2,3.68,55.26-.3,42.9,1.41A39.79,39.79,0,0,0,33.13,4C20,9.31,9.94,18.32,4.46,31.3-.83,43.82.32,58.61,5.35,70.18,12.57,86.82,28.41,99.3,52.69,99c0-1.71,0-6.81,0-6.81V71.74h.22c2.86,6.07,13.11,9,20.22,4.67C78.59,73,80.93,67,81.65,60.65a23.8,23.8,0,0,0-.3-8.24c-2-7.21-5.07-11.83-11.55-14.44-6.72-2.71-14.29-.06-17.3,5.34-.05-.4,0-4.65,0-5.12H36.24C36.06,27.52,41.49,25.56,52,25.74V16.19c-16.81-.09-27.65,5-27.56,22H17.35A16.93,16.93,0,0,0,15.79,46c2.62,0,8.36.15,8.67.22V73.29c.92,2.28,8.76,7.18,11.78,7.56V46c1.5,0,4.16,0,4.67.06v28.6c0,2.19.34,10.41-.22,10.89-.44.27-2.42-.59-3.11-.89a50.69,50.69,0,0,1-8.22-4.22c-7.74-5.16-12.08-11.57-15.11-21.56a38.34,38.34,0,0,1-1.11-12.44,32.38,32.38,0,0,1,2-8.89c4.14-10.13,11.24-17.62,21.34-21.78a32.71,32.71,0,0,1,10.47-2.59c8.31-.78,14.48,2.16,17.53,3.48,10.73,4.64,17,12.43,20.67,24.22A40.86,40.86,0,0,1,86,57.07,50.47,50.47,0,0,1,84,66C81.16,74.6,74.94,80.5,67.79,84.86a82.86,82.86,0,0,1-8.11,3.75c-.4.32-.35.24-.56.91,0,2.83-.48,8.85.67,8.67a24.52,24.52,0,0,0,5.64-1.67A50.24,50.24,0,0,0,75.79,91.3c11.35-7.55,17-15.19,21.33-29.78a49.39,49.39,0,0,0,1.33-16.45M53.13,52.63c.81-2.75,2.42-5.77,4.66-7.11a4.13,4.13,0,0,1,2-.67c5.66-.11,8,1.89,9.33,6,1.65,5,.81,13.82-1.56,17.11a8.37,8.37,0,0,1-4.44,2.67c-8.55,2.17-12.22-10.47-10-18"/>
+            </symbol>
+            <symbol id="logo-portal" viewBox="0 0 180 40">
+                <title>Faith Promise Portal</title>
+                <path d="M19.8.06a19.94,19.94,0,0,0,.29,39.88l1,0a.27.27,0,0,0,.26-.27V29.11a.07.07,0,0,1,.13,0,4.94,4.94,0,0,0,4.46,2.51c4.62,0,7-4,7-8.82,0-4.22-2-8.06-6.73-8.06a5.25,5.25,0,0,0-4.77,2.34.07.07,0,0,1-.13,0c0-.42,0-1.23,0-1.62a.21.21,0,0,0-.21-.2H14.73a.07.07,0,0,1-.07-.07c0-4.18,1.81-5.17,5.53-5.2a.21.21,0,0,0,.2-.21V6.24A.21.21,0,0,0,20.18,6C14.1,6.1,9.9,8.9,9.87,15.12a.07.07,0,0,1-.07.07H7.22a.21.21,0,0,0-.19.13,12.39,12.39,0,0,0-.67,2.8.21.21,0,0,0,.2.23H9.8a.07.07,0,0,1,.07.07V29.32a.21.21,0,0,0,.05.14,13.15,13.15,0,0,0,4.45,3.23.21.21,0,0,0,.29-.19V18.43a.07.07,0,0,1,.07-.07h1.76a.07.07,0,0,1,.07.07V34.68a.07.07,0,0,1-.09.07A15.2,15.2,0,0,1,20.19,4.8,15.39,15.39,0,0,1,35.5,20.34,15.7,15.7,0,0,1,24.15,35.7.27.27,0,0,0,24,36v3.28a.27.27,0,0,0,.33.27A19.94,19.94,0,0,0,19.8.06Zm5.33,18c3.11,0,3.77,3.1,3.77,5.31,0,1.91-.76,4.85-3.56,4.85-2.21,0-3.68-2.34-3.68-5S23,18,25.13,18Z"/>
+                <g>
+                    <path d="M64.9,25.11H61.41v6.26H56.82V10.51h8.52c5,0,8,3,8,7.21v.06C73.33,22.61,69.58,25.11,64.9,25.11Zm3.78-7.3c0-2.06-1.43-3.16-3.73-3.16H61.41V21H65c2.29,0,3.64-1.37,3.64-3.16Z"/>
+                    <path d="M86.87,31.72A10.69,10.69,0,0,1,75.81,21v-.06A11.09,11.09,0,0,1,98,20.88v.06A10.79,10.79,0,0,1,86.87,31.72Zm6.32-10.79a6.34,6.34,0,0,0-6.32-6.56,6.24,6.24,0,0,0-6.26,6.5v.06a6.34,6.34,0,0,0,6.32,6.56A6.24,6.24,0,0,0,93.18,21Z"/>
+                    <path d="M114.74,31.37l-4.47-6.67h-3.61v6.67h-4.59V10.51h9.54c4.92,0,7.87,2.59,7.87,6.88v.06A6.48,6.48,0,0,1,115,23.92l5.1,7.45Zm.09-13.74c0-2-1.37-3-3.61-3h-4.56v6h4.65c2.24,0,3.52-1.19,3.52-3Z"/>
+                    <path d="M133.07,14.74V31.37h-4.59V14.74h-6.35V10.51h17.28v4.23Z"/>
+                    <path d="M155.78,31.37l-1.91-4.68H145l-1.91,4.68h-4.68l8.94-21h4.23l8.94,21Zm-6.32-15.5-2.77,6.76h5.54Z"/>
+                    <path d="M163.8,31.37V10.51h4.59V27.2h10.4v4.17Z"/>
+                </g>
+            </symbol>
+            <symbol id="icon-chevron-down" viewBox="0 0 20 20">
+                <title>chevron-down</title>
+                <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+            </symbol>
+            <symbol id="icon-cart" viewBox="0 0 24 24">
+                <title>shopping_cart</title>
+                <path d="M17.016 18c1.078 0 1.969 0.938 1.969 2.016s-0.891 1.969-1.969 1.969-2.016-0.891-2.016-1.969 0.938-2.016 2.016-2.016zM0.984 2.016h3.281l0.938 1.969h14.813c0.563 0 0.984 0.469 0.984 1.031 0 0.188-0.047 0.328-0.141 0.469l-3.563 6.469c-0.328 0.609-0.984 1.031-1.734 1.031h-7.453l-0.891 1.641-0.047 0.141c0 0.141 0.094 0.234 0.234 0.234h11.578v2.016h-12c-1.078 0-1.969-0.938-1.969-2.016 0-0.328 0.094-0.656 0.234-0.938l1.359-2.484-3.609-7.594h-2.016v-1.969zM6.984 18c1.078 0 2.016 0.938 2.016 2.016s-0.938 1.969-2.016 1.969-1.969-0.891-1.969-1.969 0.891-2.016 1.969-2.016z"></path>
+            </symbol>
+        </svg>
 
         <div id="app" class="Layout">
 
-            {% include '_layout/nav.twig' %}
+            <header class="Header">
 
-            <div class="Layout-content" v-show="!is_nav_open">
+                <div class="Header-container">
 
-                <header class="Hero Hero--913570 Hero--imageOnly">
-                    <picture>
-                        <source media="(min-width: 1200px)" sizes="100vw" srcset="
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1920 1920w,
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1680 1680w,
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1280 1280w
-                    ">
-                        <source sizes="100vw" srcset="
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1920 1920w,
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1680 1680w,
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=1280 1280w,
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=800 800w,
-                        https://faithpromise.imgix.net/common/what-to-expect.jpg?auto=compress%2Cformat&amp;w=480 480w
-                    ">
-                        <img class="Hero-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
-                    </picture>
-                    <div class="Hero-overlay"></div>
-                    <div class="Hero-container">
-                        <div class="Hero-content">
-                        </div>
-                    </div>
-                </header>
+                    <svg class="Header-mark">
+                        <use xlink:href="#logo-mark"></use>
+                    </svg>
+                    <svg class="Header-logo">
+                        <use xlink:href="#logo-portal"></use>
+                    </svg>
 
-                {% if craft.config.devMode %}
-                    {#<a id="userLink" href="/portal/login.aspx?ReturnUrl=/portal/login.aspx?logout=true">Login</a>#}
-                    {#<a href="#">anonymous</a>#}
-                    {#<a id="cartLink" href="transaction_summary.aspx">Show Summary (0)</a>#}
+                    <ul class="HeaderNav">
 
-                    <a id="userLink" href="/portal/my_user_account.aspx">Roberts, Brad</a>
-                    <a id="logoutLink" href="login.aspx?logout=true">Logout</a>
-                    <a id="cartLink" href="transaction_summary.aspx">Show Summary (0)</a>
-                {% endif %}
+                        <li class="HeaderNav-item show-when-items-in-cart">
+                            <a class="HeaderNav-link HeaderNav-cart" href="/portal/transaction_summary.aspx">
+                                <svg role="img">
+                                    <use xlink:href="#icon-cart"></use>
+                                </svg>
+                                <span id="js_qty_in_cart"></span>
+                            </a>
+                        </li>
 
-            </div>
+                        <li class="HeaderNav-item HeaderNav-item--give">
+                            <a class="HeaderNav-link" href="/portal/give">Give</a>
+                        </li>
+
+                        <li class="HeaderNav-item">
+
+                            <span id="js_nav_toggle" class="HeaderNav-link">
+                                <span class="hide-when-logged-in">My Account</span>
+                                <span class="show-when-logged-in">
+                                    <span id="js_first_name" class="Header-firstName"></span>
+                                    <span id="js_last_name" class="Header-lastName"></span>
+                                </span>
+                                <svg role="img"><use xlink:href="#icon-chevron-down"></use></svg>
+                            </span>
+
+                            <div id="js_nav" class="Nav">
+                                <ul class="Nav-menu">
+                                    <li class="Nav-item"><a class="Nav-link" href="/portal/give">Give Online</a></li>
+                                    <li class="Nav-item">
+                                        <a class="Nav-link" href="/portal/my_giving.aspx">Your Giving History</a></li>
+                                    <li class="Nav-item">
+                                        <a class="Nav-link" href="/portal/my_contribution_statement.aspx">Your Contribution Statement</a>
+                                    </li>
+                                </ul>
+
+                                <ul class="Nav-menu">
+                                    <li class="Nav-item is-active">
+                                        <a class="Nav-link" href="/portal/group_finder.aspx">Find a Group</a></li>
+                                    <li class="Nav-item">
+                                        <a class="Nav-link" href="/portal/my_groups.aspx">View Your Group</a>
+                                    </li>
+                                </ul>
+
+                                <ul class="Nav-menu">
+                                    <li class="Nav-item">
+                                        <a class="Nav-link" href="/portal/my_user_account.aspx">Update Your Profile</a>
+                                    </li>
+                                    <li class="Nav-item show-when-logged-in">
+                                        <a class="Nav-link" href="/portal/login.aspx?logout=true">Logout</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </header>
 
         </div>
 
-        <div class="Layout-ministryPlatform">
+        <div id="fp_content" class="Layout-ministryPlatform">
             [MPP_PageForm]
         </div>
-
-        {% include '_layout/footer.twig' %}
 
         <!--
             |--------------------------------------------------------------------------
@@ -91,14 +155,24 @@
             |--------------------------------------------------------------------------
         -->
 
-        {% include '_layout/script-includes/vue.twig' %}
-        {% include '_layout/script-includes/cookies.twig' %}
+        <script>
+            window.fp               = {};
+            window.fp.MPP_User_Data = '[MPP_User_Data]';
+        </script>
+
+        {#{% include '_layout/script-includes/vue.twig' %}#}
+        {#{% include '_layout/script-includes/cookies.twig' %}#}
         <script src="{{ craft.config.cdnUrl }}{{ '/build/ministry-platform-skin.js' ~ dev_cache_bust | cacheBuster }}"></script>
-        {% include '_layout/script-includes/browser-compatibility.twig' %}
 
         <!-- Necessary for Ministry Platform -->
         {% if craft.config.devMode %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script>
+                if (window.setupPageEvents)
+                    window.setupPageEvents();
+                if (window.setupCustomerEvents)
+                    window.setupCustomerEvents();
+            </script>
         {% else %}
             <script>
                 // Ministry Platform injects jQuery and uses noConflict to assign jQuery to $mpp.

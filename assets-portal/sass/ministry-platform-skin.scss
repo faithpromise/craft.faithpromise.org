@@ -1,0 +1,34 @@
+@import "../../node_modules/normalize.css/normalize";
+@import "variables/variables";
+@import "functions/functions";
+@import "mixins/mixins";
+@import "utilities/utilities";
+@import "base/base";
+@import "components/components";
+
+$max-width: 1080px;
+
+body.logged-in .hide-when-logged-in {
+  display: none;
+}
+
+body:not(.logged-in) .show-when-logged-in {
+  display: none;
+}
+
+body:not(.items-in-cart) .show-when-items-in-cart {
+  display: none;
+}
+
+.Layout-ministryPlatform {
+  @include fluid-size(padding-right, 320px, 16px, $max-width, 60px);
+  @include fluid-size(padding-left, 320px, 16px, $max-width, 60px);
+  width:        100%;
+  max-width:    calc-em($max-width);
+  margin-right: auto;
+  margin-left:  auto;
+
+  //@extend .Container;
+  @include fluid-size(padding-top, 320px, 40px, $max-width, 80px);
+  @include fluid-size(padding-bottom, 320px, 40px, $max-width, 80px);
+}

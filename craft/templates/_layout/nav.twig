@@ -1,11 +1,5 @@
 {% set nav_class = nav_class is defined ? 'Nav ' ~ nav_class : 'Nav Nav--overlay' %}
 
-<!--
- | This is the logged-in user nav including the "cart."
- | Needed for both main website and Ministry Platform skin.
- -->
-<ministry-platform base-url="{{ assets_base_url }}"></ministry-platform>
-
 {# Remove 'Nav--overlay' when nav is open #}
 <nav :class="is_nav_open ? 'Nav Nav--fixed' : '{{ nav_class }}'">
     <div class="Nav-bg"></div>
