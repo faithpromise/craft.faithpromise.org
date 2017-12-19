@@ -10,8 +10,8 @@ export default {
 let login_intro = `
     <h1>Welcome to the new <span class="nowrap">Faith Promise</span> Portal</h1>
     <p>
-      If you haven't already done so, please <a href="/portal/create_account.aspx">Sign Up</a>.
-      Creating an account will provide you with giving history and allow you to give more easily in the future. Or, you can always <a href="">Give as a Guest</a>.
+      If you haven't already done so, please <a class="nowrap" href="/portal/create_account.aspx">Sign Up</a>.
+      Creating an account will provide you with giving history and allow you to give more easily in the future. Or, you can always <a class="nowrap" href="/portal/giving/guest">Give as a Guest</a>.
       Thank you so much for helping us make this transition and furthering the mission of Faith Promise Church. If you have questions or need assistance, please contact us by sending an email to <a href="mailto:giving@faithpromise.org">giving@faithpromise.org</a>.
     </p>
 `;
