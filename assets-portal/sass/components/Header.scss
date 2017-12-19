@@ -2,6 +2,7 @@ $Header-bg-color: $color-brand-green;
 $Header-text-color: $color-brand-gray;
 
 .Header {
+  border-bottom:    7px solid $Header-text-color;
   background-color: $Header-bg-color;
   color:            $Header-text-color;
 }

@@ -1,6 +1,6 @@
 window.setupCustomerEvents = function () {
 
-    let page         = window.location.pathname.replace(/^\//, ''),
+    let page         = window.location.pathname.replace(/^\/portal\//, ''),
         content_elem = document.getElementById('fp_content');
 
     init_nav();
@@ -80,14 +80,14 @@ window.setupCustomerEvents = function () {
         // Embed Online Giving
         let js = document.createElement('script');
         js.setAttribute('data-id', 'og-embed-script');
-        js.setAttribute('data-church-code', 'faithpromise');
+        js.setAttribute('data-church-code', 'faithpromise_org');
         js.setAttribute('data-default-page', '');
         js.setAttribute('data-token-type', 'mp-token');
         js.setAttribute('data-mp-token', window.fp.MPP_User_Data);
         js.setAttribute('data-bg-color', '#ffffff');
         js.src = 'https://www.onlinegiving.org/assets/embed.js';
 
-        content_elem.parentNode.insertBefore(js, content_elem);
+        content_elem.insertBefore(js, content_elem);
     }
 
 };
