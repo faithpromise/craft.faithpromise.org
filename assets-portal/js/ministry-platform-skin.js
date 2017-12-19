@@ -87,7 +87,7 @@ window.setupCustomerEvents = function () {
         js.setAttribute('data-bg-color', '#ffffff');
         js.src = 'https://www.onlinegiving.org/assets/embed.js';
 
-        content_elem.insertBefore(js, content_elem);
+        content_elem.appendChild(js);
     }
 
 };
