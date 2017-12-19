@@ -102,10 +102,15 @@ window.setupCustomerEvents = function () {
     }
 
     function init_login_page() {
-        let elem = document.getElementById('btnForgotPassword');
 
-        if (elem)
-            elem.innerText = 'Recover Your Password';
+        // Change "Reset Account" button text
+        document.getElementById('btnForgotPassword').innerText = 'Recover Your Password';
+
+        // Insert Sign Up paragraph
+        document
+            .getElementById('h1Login')
+            .insertAdjacentHTML('afterend', '<p class="SignUp">Don\'t have an account? Please <a href="/portal/create_account.aspx">Sign Up</a>');
+
     }
 
     function init_create_account_page() {

@@ -1,4 +1,98 @@
-.mpp_bottomButtons {
-  text-align: left;
-  padding:    1em 0;
+%mpp_input {
+  width:         100%;
+  padding:       1em;
+  border:        1px solid #a0a0a0;
+  border-radius: 2px;
+}
+
+%mpp_button {
+  border-radius: 2px;
+}
+
+%mpp_button_block {
+  display:    block;
+  width:      100%;
+  text-align: center;
+}
+
+%mpp_button_primary {
+  @extend %mpp_button;
+  border:           none;
+  padding:          1em;
+  background-color: $color-brand-gray;
+  color:            #fff;
+
+  &:hover {
+    text-decoration:  none;
+    background-color: lighten($color-brand-gray, 10%);
+  }
+}
+
+#btnLogin {
+  @extend %mpp_button_primary;
+  @extend %mpp_button_block;
+  margin: 2em 0 1em;
+}
+
+//.mpp_bottomButtons {
+//  text-align: left;
+//  padding:    1em 0;
+//}
+
+#mpp_page_login {
+
+  // Form wrapper
+  #UpdatePanel1 {
+    max-width:  480px;
+    background: #fff;
+    padding:    2em;
+    box-shadow: 0 7px 14px 0 rgba(50, 50, 93, .1), 0 3px 6px 0 rgba(0, 0, 0, .07);
+    margin:     0 auto;
+  }
+
+  // Title
+  h1 {
+    font-size:     0;
+    margin-bottom: 24px;
+    &:before {
+      content:   'Please Log-In';
+      font-size: 24px;
+    }
+  }
+
+  // Things to hide
+  #btnCreateAccount,
+  h4 {
+    display: none;
+  }
+
+  #btnForgotPassword {
+    display:          inline-block;
+    border:           none;
+    background-color: transparent;
+  }
+
+  // Labels
+  .mpp_formField label {
+    display:     block;
+    font-size:   13px;
+    margin:      1em .5em 0;
+    padding:     0;
+    font-weight: 400;
+  }
+
+  .mpp_formControl {
+    display: block;
+    width:   100%;
+    margin:  0;
+
+    input {
+      @extend %mpp_input;
+    }
+  }
+
+  .mpp_bottomButtons {
+    text-align: center;
+  }
+
 }
