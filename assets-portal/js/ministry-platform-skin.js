@@ -84,7 +84,7 @@ window.setupCustomerEvents = function () {
         js.setAttribute('data-default-page', '');
         js.setAttribute('data-token-type', 'mp-token');
         js.setAttribute('data-mp-token', window.fp.MPP_User_Data);
-        js.setAttribute('data-bg-color', '#ffffff');
+        js.setAttribute('data-bg-color', '#f9f9f9');
         js.src = 'https://www.onlinegiving.org/assets/embed.js';
 
         content_elem.appendChild(js);
