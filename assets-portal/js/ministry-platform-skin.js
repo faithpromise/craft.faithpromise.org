@@ -1,17 +1,22 @@
 window.setupCustomerEvents = function () {
 
-    let page         = window.location.pathname.replace(/^\/portal\//, ''),
-        content_elem = document.getElementById('fp_content');
+    let page                = window.location.pathname.replace(/^\/portal\/?/i, ''),
+        content_elem        = document.getElementById('fp_content'),
+        online_giving_pages = {
+            'giving':           '/donate/index',
+            'giving/profile':   '/donate/profile',
+            'giving/recurring': '/donate/recurring',
+        };
 
     init_nav();
     init_page();
     init_user_name();
 
     switch (page) {
-        case 'portal':
-            break;
-        case 'give':
-            init_give_page();
+        case 'giving':
+        case 'giving/recurring':
+        case 'giving/profile':
+            init_giving_page();
             break;
         case 'login.aspx':
             init_login_page();
@@ -77,17 +82,17 @@ window.setupCustomerEvents = function () {
 
     }
 
-    function init_give_page() {
+    function init_giving_page() {
 
         // Require login
         if (!is_logged_in())
-            window.location.href = '/portal/login.aspx?ReturnUrl=%2fportal%2fgive';
+            window.location.href = '/portal/login.aspx?ReturnUrl=%2fportal%2fgiving';
 
         // Embed Online Giving
         let js = document.createElement('script');
         js.setAttribute('data-id', 'og-embed-script');
         js.setAttribute('data-church-code', 'faithpromise_org');
-        js.setAttribute('data-default-page', '');
+        js.setAttribute('data-default-page', online_giving_pages[page]);
         js.setAttribute('data-token-type', 'mp-token');
         js.setAttribute('data-mp-token', window.fp.MPP_User_Data);
         js.setAttribute('data-bg-color', '#f9f9f9');
