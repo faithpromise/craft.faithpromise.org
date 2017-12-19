@@ -13,6 +13,12 @@ window.setupCustomerEvents = function () {
         case 'give':
             init_give_page();
             break;
+        case 'login.aspx':
+            init_login_page();
+            break;
+        case 'create_account.aspx':
+            init_create_account_page();
+            break;
     }
 
     function is_logged_in() {
@@ -88,6 +94,19 @@ window.setupCustomerEvents = function () {
         js.src = 'https://www.onlinegiving.org/assets/embed.js';
 
         content_elem.appendChild(js);
+    }
+
+    function init_login_page() {
+        let elem = document.getElementById('btnForgotPassword');
+
+        if (elem)
+            elem.innerText = 'Recover Your Password';
+    }
+
+    function init_create_account_page() {
+        let elem = document.getElementById('btnForgotPassword')[0];
+        if (elem)
+            elem.style = 'display: none;';
     }
 
 };
