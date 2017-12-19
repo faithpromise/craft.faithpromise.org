@@ -28,7 +28,14 @@
   }
 }
 
-#btnLogin {
+%mpp_button_link {
+  display:          inline-block;
+  border:           none;
+  background-color: transparent;
+}
+
+#btnLogin,
+#btnResetPassword {
   @extend %mpp_button_primary;
   @extend %mpp_button_block;
   margin: 2em 0 1em;
@@ -41,8 +48,47 @@
 
 #mpp_page_login {
 
+  // Things to hide
+  #h1Login,
+  #h1Forgot,
+  #btnCreateAccount,
+  #btnCreateAccountRedirect {
+    display: none;
+  }
+
   // Form wrapper
   #UpdatePanel1 {
+    display:        flex;
+    flex-direction: column-reverse;
+  }
+
+  @media (max-width: 959px) {
+    .SignUp {
+      max-width:  480px;
+      margin:     0 auto;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 960px) {
+    #UpdatePanel1 {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .SignUp {
+    max-width: 480px;
+    padding:   2em;
+
+    h1 {
+      line-height: 1.2;
+    }
+  }
+
+  #Div1, // Forgot password form
+  #existingSignIn {
+    width:      100%;
+    min-width:  300px;
     max-width:  480px;
     background: #fff;
     padding:    2em;
@@ -50,26 +96,19 @@
     margin:     0 auto;
   }
 
-  // Title
-  h1 {
-    font-size:     0;
-    margin-bottom: 24px;
-    &:before {
-      content:   'Please Log-In';
-      font-size: 24px;
-    }
+  #existingSignIn h4 {
+    text-align:     center;
+    font-size:      16px;
+    text-transform: uppercase;
   }
 
-  // Things to hide
-  #btnCreateAccount,
-  h4 {
-    display: none;
+  #Div1 h4 {
+    font-weight: 400;
   }
 
-  #btnForgotPassword {
-    display:          inline-block;
-    border:           none;
-    background-color: transparent;
+  #btnForgotPassword,
+  #LinkButton_Reset_Cancel {
+    @extend %mpp_button_link;
   }
 
   // Labels
