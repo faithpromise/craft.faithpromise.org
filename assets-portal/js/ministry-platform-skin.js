@@ -10,7 +10,20 @@ import loginPage from './pages/login';
 import givingPage from './pages/giving';
 import nav from './components/nav';
 
+/**
+ | On my_contribution_statement.aspx, Ministry Platform
+ | scripts (loadPortalScripts) are loaded twice, so
+ | setupCustomerEvents is called twice. This has the
+ | negative consequence of loading our scripts and
+ | binding our event handlers twice.
+ * @type {boolean}
+ */
+let customer_events_called = false;
+
 window.setupCustomerEvents = function () {
+
+    if (customer_events_called) return;
+    customer_events_called = true;
 
     let page = window.location.pathname.replace(/^\/portal\/?/i, '');
 
