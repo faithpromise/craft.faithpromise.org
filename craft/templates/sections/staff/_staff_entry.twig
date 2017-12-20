@@ -59,14 +59,14 @@
                     </a>
                 {% endif %}
                 {% if entry.twitter %}
-                    <a class="StaffHero-icon" href="{{ entry.twitter }}">
+                    <a class="StaffHero-icon" href="https://twitter.com/{{ entry.twitter }}">
                         <svg role="img" class="SocialIcon">
                             <use xlink:href="/assets/icons.svg#twitter"></use>
                         </svg>
                     </a>
                 {% endif %}
                 {% if entry.email %}
-                    <a class="StaffHero-icon" href="https://twitter.com/{{ entry.email }}">
+                    <a class="StaffHero-icon" href="mailto:{{ entry.email }}">
                         <svg role="img" class="SocialIcon">
                             <use xlink:href="/assets/icons.svg#mail"></use>
                         </svg>
