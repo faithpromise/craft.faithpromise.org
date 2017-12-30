@@ -81,29 +81,17 @@
     {#</video>#}
     {#</home-page-video>#}
 
-    {#{% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}#}
-    {#{% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}#}
-
-    {#{% include '_layout/components/rise-over-image.twig' with {#}
-    {#image: latest_series_image,#}
-    {#title: latest_series.title,#}
-    {#subtitle: 'Latest Series',#}
-    {#text: latest_series.markdown,#}
-    {#action_url: latest_series.url,#}
-    {#action_text: 'More Info',#}
-    {#css_class: 'RiseOverImage--gray RiseOverImage--flushTop',#}
-    {#} %}#}
-
-    {% set christmas_image = craft.assets.id(4361).first() %}
+    {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
+    {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
 
     {% include '_layout/components/rise-over-image.twig' with {
-    image: christmas_image,
-    title: 'A Christmas Spectacular',
-    subtitle: 'You Don\'t Want to Miss',
-    text: 'Come one, come all as Faith Promise hosts A Christmas Spectacular! Come enjoy the holiday cheer throughout Santa\'s workshop, as you learn what it takes to be one of Santa\'s elves',
-    action_url: '/christmas',
-    action_text: 'Learn More',
-    css_class: 'RiseOverImage--gray RiseOverImage--flushTop',
+        image: latest_series_image,
+        title: latest_series.title,
+        subtitle: 'Latest Series',
+        text: latest_series.markdown,
+        action_url: latest_series.url,
+        action_text: 'More Info',
+        css_class: 'RiseOverImage--gray RiseOverImage--flushTop',
     } %}
 
     <section class="Section2">
@@ -116,31 +104,31 @@
                     <li class="Cards2-item">
                         {% set new_here_image = craft.assets.id(4113).first() %}
                         {% include '_layout/components/card2.twig' with {
-                        image: new_here_image,
-                        title: 'New Here?',
-                        text: 'Discover what it\'s like to attend on the weekend, and learn about our students and kids ministries.',
-                        action_url: '/what-to-expect',
-                        action_text: 'Times & Locations',
+                            image: new_here_image,
+                            title: 'New Here?',
+                            text: 'Discover what it\'s like to attend on the weekend, and learn about our students and kids ministries.',
+                            action_url: '/what-to-expect',
+                            action_text: 'Times & Locations',
                         } %}
                     </li>
                     <li class="Cards2-item">
                         {% set events_image = craft.assets.id(4112).first() %}
                         {% include '_layout/components/card2.twig' with {
-                        image: events_image,
-                        title: 'Events',
-                        text: 'There\'s a lot happening at Faith Promise. Check out these upcoming events.',
-                        action_url: '/events',
-                        action_text: 'View Events',
+                            image: events_image,
+                            title: 'Events',
+                            text: 'There\'s a lot happening at Faith Promise. Check out these upcoming events.',
+                            action_url: '/events',
+                            action_text: 'View Events',
                         } %}
                     </li>
                     <li class="Cards2-item">
                         {% set social_image = craft.assets.id(4114).first() %}
                         {% include '_layout/components/card2.twig' with {
-                        image: social_image,
-                        title: 'Social Media',
-                        text: 'Join the conversation on Facebook, Instagram, and Twitter.',
-                        action_url: '/updates',
-                        action_text: 'Follow Faith Promise',
+                            image: social_image,
+                            title: 'Social Media',
+                            text: 'Join the conversation on Facebook, Instagram, and Twitter.',
+                            action_url: '/updates',
+                            action_text: 'Follow Faith Promise',
                         } %}
                     </li>
                 </ul>
@@ -151,13 +139,13 @@
     {% set map_image = craft.assets.id(4111).first() %}
 
     {% include '_layout/components/rise-over-image.twig' with {
-    image: map_image,
-    title: 'One Church, Many Locations',
-    subtitle: 'Times & Locations',
-    text: 'Get times & directions to each of our campuses as well as online services. Join us this weekend. We\'d love to see you there!',
-    action_url: '/locations',
-    action_text: 'Find a Location',
-    css_class: 'RiseOverImage--gray',
+        image: map_image,
+        title: 'One Church, Many Locations',
+        subtitle: 'Times & Locations',
+        text: 'Get times & directions to each of our campuses as well as online services. Join us this weekend. We\'d love to see you there!',
+        action_url: '/locations',
+        action_text: 'Find a Location',
+        css_class: 'RiseOverImage--gray',
     } %}
 
     <div class="ConnectBar">
