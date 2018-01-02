@@ -10,7 +10,7 @@
 {% set regular_service_schedule = craft.entries({
 section: 'serviceSchedules',
 relatedTo: entry,
-serviceScheduleEffectiveAt: '<= ' ~ now,
+serviceScheduleEffectiveAt: '<= ' ~ now|date_modify('+6 days'),
 order: 'serviceScheduleEffectiveAt desc',
 }).first() %}
 
