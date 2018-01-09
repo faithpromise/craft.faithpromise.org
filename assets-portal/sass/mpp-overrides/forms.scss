@@ -1,8 +1,20 @@
 %mpp_input {
-  width:         100%;
+  width:         100% !important;
   padding:       1em;
   border:        1px solid #a0a0a0;
   border-radius: 2px;
+}
+
+.formTable {
+  display: block;
+
+  tr, td {
+    display: block;
+  }
+}
+
+input {
+  @extend %mpp_input;
 }
 
 %mpp_button {
