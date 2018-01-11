@@ -5,6 +5,7 @@ export default {
         addLoggedInClass();
         addCartClass();
         updateUsersName();
+        replacePageTitle();
     }
 }
 
@@ -21,4 +22,21 @@ function addCartClass() {
 function updateUsersName() {
     document.getElementById('js_first_name').innerText = user.getFirstName();
     document.getElementById('js_last_name').innerText  = user.getLastName();
+}
+
+function replacePageTitle() {
+
+    let replacements = {
+            'My Purchase History': 'Event Registrations',
+        },
+        title        = document.querySelector('.mpp_formTitle');
+
+    for (let key in replacements) {
+        if (replacements.hasOwnProperty(key) && title.innerText === key) {
+            title.innerText = replacements[key];
+        }
+    }
+
+    document.body.classList.add('titles-replaced');
+
 }

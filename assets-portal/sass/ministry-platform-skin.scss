@@ -33,3 +33,8 @@ body:not(.items-in-cart) .show-when-items-in-cart {
   @include fluid-size(padding-top, 320px, 40px, $max-width, 80px);
   @include fluid-size(padding-bottom, 320px, 40px, $max-width, 80px);
 }
+
+// Hide titles until they are replaced
+body:not(.titles-replaced) .mpp_formTitle {
+  display: none;
+}
