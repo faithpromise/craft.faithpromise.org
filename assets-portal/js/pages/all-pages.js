@@ -31,10 +31,14 @@ function replacePageTitle() {
         },
         title        = document.querySelector('.mpp_formTitle');
 
-    for (let key in replacements) {
-        if (replacements.hasOwnProperty(key) && title.innerText === key) {
-            title.innerText = replacements[key];
+    if (title) {
+
+        for (let key in replacements) {
+            if (replacements.hasOwnProperty(key) && title.innerText === key) {
+                title.innerText = replacements[key];
+            }
         }
+
     }
 
     document.body.classList.add('titles-replaced');
