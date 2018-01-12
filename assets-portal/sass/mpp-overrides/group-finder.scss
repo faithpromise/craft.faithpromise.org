@@ -1,4 +1,11 @@
 
-#mpp_group_finder_tr_parent_group {
+#mpp_group_finder_tr_parent_group,
+#mpp_group_finder_tr_keyword,
+#mpp_group_finder_tr_groupfocus,
+#mpp_group_finder_tr_meetingtimes {
   display: none;
+}
+
+#mpp_group_finder_tr_meetingdays .mpp_formControlGroup {
+  min-width: 2em;
 }
