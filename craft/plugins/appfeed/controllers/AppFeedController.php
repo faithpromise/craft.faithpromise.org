@@ -113,7 +113,7 @@ class AppFeedController extends BaseController {
                 'actions' => [
                     [
                         'handler' => 'mediaDetail',
-                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug . '/' . $media->slug,
+                        'url'     => 'https://faithpromise.org/app-api/series/' . $series->slug . '/' . $media->slug,
                     ],
                 ],
             ];
@@ -155,7 +155,7 @@ class AppFeedController extends BaseController {
                 'actions' => [
                     [
                         'handler' => 'list',
-                        'url'     => 'http://faithpromise.org/app-api/series/' . $series->slug,
+                        'url'     => 'https://faithpromise.org/app-api/series/' . $series->slug,
                     ],
                 ],
                 'images'  => [
