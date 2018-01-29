@@ -49,7 +49,7 @@ $RiseOverImage-medium-screen-to: $RiseOverImage-large-screen-from - 1;
   .RiseOverImage-image {
     @include ratio-image-9x6();
     > img {
-      object-position: 100% 100%;
+      object-position: 50% 50%;
     }
   }
 
