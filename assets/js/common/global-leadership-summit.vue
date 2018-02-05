@@ -74,9 +74,6 @@
                     },
                 ],
 
-                PELLISSIPPI_CAMPUS: 'pel',
-                NORTH_CAMPUS:       'north',
-                BLOUNT_CAMPUS:      'blount',
             }
         },
 
