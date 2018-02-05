@@ -23,9 +23,10 @@
     {% endif %}
 
     {% embed '_layout/text_section.twig' with {
-    title: 'About This Study',
-    subtitle: subtitle,
-    align: 'center',
+        title: 'About This Study',
+        subtitle: subtitle,
+        align: category.videoUrl ? 'left' : 'center',
+        videoUrl: category.videoUrl,
     } %}
         {% block text %}
             {{ category.html }}
@@ -42,8 +43,8 @@
     {% set groups = craft.entries({ section: 'shortTermGroups', with: 'campuses', relatedTo: { targetElement: category, field: 'study' } }).find() %}
 
     {% embed '_layout/section.twig' with {
-    title: 'Times & Registration',
-    background: 'gray',
+        title: 'Times & Registration',
+        background: 'gray',
     } %}
 
         {% block body %}
@@ -61,7 +62,6 @@
                         <tr>
                             <td>
                                 {{ group.campus[0].title }}
-                                <span class="Schedule-meta">Room 217</span>
                             </td>
                             <td>
                                 {{ group.startsAt|date('D g:i A') }}
@@ -94,16 +94,17 @@
     #}
 
     {% set section_params = {
-    title: 'Looking for something else?',
-    text: 'Check out these other opportunities to plug into a short term group!',
-    linkUrl_1: '/groups/short-term',
-    linkText_1: 'View All',
+        title: 'Looking for something else?',
+        text: 'Check out these other opportunities to plug into a short term group!',
+        linkUrl_1: '/groups/short-term',
+        linkText_1: 'View All',
     } %}
 
     {% include 'sections/shortTermGroups/studies.twig' with {
-    exclude: category.id,
-    show_empty_message: false,
-    params: section_params,
+        exclude: category.id,
+        show_empty_message: false,
+        params: section_params,
+        limit: 3,
     } %}
 
 {% endblock %}
