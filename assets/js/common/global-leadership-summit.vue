@@ -19,12 +19,13 @@
       <p>Let's get you registered for the {{ selected_campus.name }} Campus. Please enter the Faith Promise priority code.</p>
       <iframe :src="selected_campus.attender_url" width="350" height="100" style="border: 0;"></iframe>
       <p>
-        If you're a regular attender at Faith Promise Church, and you don't have the church priority code, please contact Brenda Moore at <a href="mailto:brendam@faithpromise.org">brendam@faithpromise.org</a>.
+        If you're a regular attender at Faith Promise Church, and you don't have the church priority code, please contact Brenda Moore at
+        <a href="mailto:brendam@faithpromise.org">brendam@faithpromise.org</a>.
       </p>
     </div>
 
     <!--Redirect-->
-    <div v-show="should_show_redirect">
+    <div v-show="should_redirect">
       <p>Please wait. We're redirecting you to the registration page...</p>
     </div>
 
@@ -93,16 +94,19 @@
                 return this.ticket_type === ATTENDER && this.selected_campus;
             },
 
-            should_show_redirect() {
-                return this.selected_campus && this.ticket_type === GUEST;
+            should_redirect() {
+                return this.ticket_type === GUEST && this.selected_campus;
             },
 
         },
 
         watch: {
-            should_show_redirect() {
-                window.location.href = this.selected_campus.guest_url;
+
+            should_redirect(value) {
+                if (value)
+                    window.location.href = this.selected_campus.guest_url;
             },
+
         },
 
         methods: {
