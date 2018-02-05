@@ -20,12 +20,13 @@
 
 <div class="Card-header">
 
-    {% if is_book %}
-        {% include '_layout/components/book_header.twig' with { image: image } %}
-    {% elseif image %}
+    {#TODO: fix sizes#}
+    <div class="Card-imageWrap">
 
-        {#TODO: fix sizes#}
-        <div class="Card-imageWrap">
+        {% if is_book %}
+            {% include '_layout/components/book_header.twig' with { image: image } %}
+        {% elseif image %}
+
             <img
                     class="Card-image"
                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
@@ -38,8 +39,8 @@
                     {{ craft.imageUrl.url(image, { width: 480 }) }} 480w,
                     {{ craft.imageUrl.url(image, { width: 320 }) }} 320w,
                 ">
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 
     {% if secondary_image %}
         <div class="Card-secondaryOverlay"></div>
