@@ -1,0 +1,63 @@
+{% set og_image = entry.eventImageTall ? entry.eventImageTall[0] : null %}
+
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Event
+    |--------------------------------------------------------------------------
+    #}
+
+    {% include '_layout/hero.twig' with {
+        imageTall: entry.eventImageTall ? entry.eventImageTall[0] : null,
+        imageWide: entry.eventImageWide ? entry.eventImageWide[0] : null,
+    } %}
+
+    {# Hero #}
+
+    {% if entry.html | length and not entry.pageContent | length %}
+
+        {# Intro #}
+
+        {% include '_layout/text_section.twig' with {
+            title: entry.title,
+            subtitle: entry.dateRange,
+            html: entry.html,
+            videoUrl: entry.videoUrl,
+            linkUrl_1: entry.actions|length > 0 ? entry.actions[0].theUrl : null,
+            linkText_1: entry.actions|length > 0 ? entry.actions[0].text : null,
+            linkUrl_2: entry.actions|length > 1 ? entry.actions[1].theUrl : null,
+            linkText_2: entry.actions|length > 1 ? entry.actions[1].text : null,
+            align: entry.videoUrl ? 'left' : 'center',
+        } %}
+
+    {% endif %}
+
+    {# Additional content #}
+
+    {% include 'sections/pages/page_content_matrix/_page_content_matrix.twig' %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Additional events
+    |--------------------------------------------------------------------------
+    #}
+
+    {# If last content block used a gray background, use default (white) #}
+
+    {% set last_content = entry.pageContent | length ? entry.pageContent.last() : null %}
+    {% set background = last_content and last_content['background'] is defined and last_content.background ? last_content.background.value : null %}
+    {% set background = background == 'gray' ? 'default' : 'gray' %}
+
+    {# More events link #}
+
+    {% include '_layout/text_section.twig' with {
+        title: 'Register Online',
+        html: '<global-leadership-summit></global-leadership-summit>',
+        align: 'center',
+        background: background,
+    } %}
+
+{% endblock %}

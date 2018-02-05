@@ -77,7 +77,7 @@
             <div class="TextSection-text">
                 {% block text %}{% endblock %} {# text block #}
                 {{ text | markdown }} {# text passed as param #}
-                {{ html }} {# text passed as param #}
+                {{ html | raw }} {# text passed as param #}
             </div>
             <div class="TextSection-actions">
                 {% if linkUrl_1 and linkText_1 %}

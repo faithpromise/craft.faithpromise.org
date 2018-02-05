@@ -1,1 +1,4 @@
-{% include 'sections/events/_events_entry_' ~ entry.type ~ '.twig' %}
+{% set custom_template = 'sections/events/' ~ entry.slug ~ '.twig' %}
+{% set event_type_template = 'sections/events/_events_entry_' ~ entry.type ~ '.twig' %}
+
+{% include [custom_template, event_type_template] %}
