@@ -111,6 +111,11 @@ class FeedMeVariable
         return craft()->feedMe_license->isProEdition();
     }
 
+    public function getEdition()
+    {
+        return craft()->feedMe_license->getEdition();
+    }
+
     //
     // Fields + Field Mapping
     //
@@ -241,6 +246,28 @@ class FeedMeVariable
         // Get the field layout for this Tag Group
         $layoutId = $group->fieldLayoutId;
         return craft()->fields->getLayoutById($layoutId);
+    }
+
+    public function getProductsFieldLayout($sources)
+    {
+        $productTypeIds = array();
+
+        if (is_array($sources)) {
+            foreach ($sources as $source) {
+                list($type, $id) = explode(':', $source);
+                $productTypeIds[] = $id;
+            }
+        }
+
+        if (count($productTypeIds)) {
+            $productType = craft()->commerce_productTypes->getProductTypeById($productTypeIds[0]);
+
+            if (!$productType) {
+                return false;
+            }
+
+            return craft()->fields->getLayoutById($productType->fieldLayoutId);
+        }
     }
 
     public function getAssetSourceById($id)

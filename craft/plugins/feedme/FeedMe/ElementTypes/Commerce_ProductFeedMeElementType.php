@@ -131,15 +131,21 @@ class Commerce_ProductFeedMeElementType extends BaseFeedMeElementType
 
     public function delete(array $elements)
     {
-        $return = true;
+        $success = true;
 
         foreach ($elements as $element) {
             if (!craft()->commerce_products->deleteProduct($element)) {
-                $return = false;
+                if ($element->getErrors()) {
+                    throw new Exception(json_encode($element->getErrors()));
+                } else {
+                    throw new Exception(Craft::t('Something went wrong while updating elements.'));
+                }
+
+                $success = false;
             }
         }
 
-        return $return;
+        return $success;
     }
     
     public function prepForElementModel(BaseElementModel $element, array &$data, $settings)
@@ -272,6 +278,7 @@ class Commerce_ProductFeedMeElementType extends BaseFeedMeElementType
 
     private function _populateProductVariantModels(Commerce_ProductModel $product, &$data, $settings)
     {
+        $orphanedValues = [];
         $variants = [];
         $count = 1;
 
@@ -284,14 +291,30 @@ class Commerce_ProductFeedMeElementType extends BaseFeedMeElementType
         // Ensure we handle single-variants correctly
         $keys = array_keys($variantData);
 
-        if (!is_numeric($keys[0])) {
-            $variantData = array($variantData);
+        foreach ($keys as $index => $key) {
+            if (!is_numeric($key)) {
+                // Save for later
+                $orphanedValues[$key] = $variantData[$key];
+
+                // Remove from original data
+                unset($variantData[$key]);
+            }
+        }
+
+        // If we've actually just got a single variant, we've messed with things above, so put all attributes
+        // back to their first variant. This should also move in the defaults as well.
+        if (empty($variantData)) {
+            $variantData = array($orphanedValues);
         }
 
         // Update original data
         $data['variants'] = $variantData;
 
         foreach ($variantData as $key => $variant) {
+            // Check each to add our orphaned data in (if any), which is usually dropped in through
+            // defaults - this is pretty nasty, and will be much better in future Feed Me versions
+            $variant = array_merge($variant, $orphanedValues);
+
             $variantModel = $this->_getVariantBySku($variant['sku']['data']);
 
             if (!$variantModel) {

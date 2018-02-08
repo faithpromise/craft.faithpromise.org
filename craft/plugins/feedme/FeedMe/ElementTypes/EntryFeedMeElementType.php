@@ -55,15 +55,17 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
         $element->sectionId = $settings['elementGroup']['Entry']['section'];
         $element->typeId = $settings['elementGroup']['Entry']['entryType'];
 
+        $section = craft()->sections->getSectionById($element->sectionId);
+
         if ($settings['locale']) {
             $element->locale = $settings['locale'];
         }
 
-        $section = craft()->sections->getSectionById($element->sectionId);
-        $locale = craft()->i18n->getPrimarySiteLocale();
-
-        if (isset($section->locales[$locale->id])) {
-            $element->localeEnabled = $section->locales[$locale->id]->enabledByDefault;
+        foreach ($element->getLocales() as $localeId => $locale) {
+            if (isset($section->locales[$localeId])) {
+                // $element->localeEnabled = $locale['enabledByDefault'];
+                $element->enabled = $locale['enabledByDefault'];
+            }
         }
 
         // While we're at it - save a list of required fields for later. We only want to do this once
@@ -141,7 +143,21 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
 
     public function delete(array $elements)
     {
-        return craft()->entries->deleteEntry($elements);
+        $success = true;
+
+        foreach ($elements as $element) {
+            if (!craft()->entries->deleteEntry($element)) {
+                if ($element->getErrors()) {
+                    throw new Exception(json_encode($element->getErrors()));
+                } else {
+                    throw new Exception(Craft::t('Something went wrong while updating elements.'));
+                }
+
+                $success = false;
+            }
+        }
+
+        return $success;
     }
 
     public function disable(array $elements)
@@ -219,6 +235,9 @@ class EntryFeedMeElementType extends BaseFeedMeElementType
             // Update the original data in our feed - for clarity in debugging
             $data[$handle] = $element->$handle;
         }
+
+        // Locale status should always reference the entry status
+        // $element->localeEnabled = $element->enabled;
 
         // Set default author if not set
         if (!$element->authorId) {
