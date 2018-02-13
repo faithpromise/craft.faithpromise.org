@@ -196,6 +196,7 @@ class AppFeedController extends BaseController {
             $seriesMedia = craft()->elements->getCriteria(ElementType::Entry)->section('seriesMedia')->relatedTo($series)->find();
 
             $episodes = [];
+            $episode_number = count($seriesMedia) + 1;
 
             foreach ($seriesMedia as $media) {
                 $episodes[] = [
@@ -213,7 +214,7 @@ class AppFeedController extends BaseController {
                         'duration'  => 1800, // TODO: Need to get actual duration
                     ],
                     'thumbnail'        => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1920]),
-                    'episodeNumber'    => 1,
+                    'episodeNumber'    => --$episode_number,
                     'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
                     'shortDescription' => $media->text,
                 ];
