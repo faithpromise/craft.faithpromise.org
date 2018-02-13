@@ -136,7 +136,7 @@ class AppFeedController extends BaseController {
                 'style' => 'banner',
                 'items' => [
                     [
-                        'images'  => [
+                        'images' => [
                             ['width' => 320, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 320])],
                             ['width' => 640, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 640])],
                             ['width' => 768, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 768])],
@@ -173,4 +173,68 @@ class AppFeedController extends BaseController {
         craft()->end();
     }
 
+    public function actionGetRoku() {
+
+        $today = new DateTime();
+        $today->setTime(0, 0);
+
+        $series_entries = craft()->elements->getCriteria(ElementType::Entry)->type('series')->seriesIsOfficial(1)->with('seriesImageWide')->limit(null)->order('postDate desc')->find();
+
+        $data = [
+            'providerName'    => 'Faith Promise Church',
+            'lastUpdated'     => $today->atom(),
+            'language'        => 'en-US',
+            'series'          => [],
+            'shortFormVideos' => [],
+            'movies'          => [],
+            'playlists'       => [],
+            'categories'      => [],
+        ];
+
+        foreach ($series_entries as $series) {
+
+            $seriesMedia = craft()->elements->getCriteria(ElementType::Entry)->section('seriesMedia')->relatedTo($series)->find();
+
+            $episodes = [];
+
+            foreach ($seriesMedia as $media) {
+                $episodes[] = [
+                    'id'               => $media->id,
+                    'title'            => $media->title,
+                    'content'          => [
+                        'dateAdded' => $media->postDate->format(DateTime::W3C_DATE),
+                        'videos'    => [
+                            [
+                                'url'       => $media->videoStreamUrl,
+                                'quality'   => 'HD',
+                                'videoType' => 'MP4',
+                            ],
+                        ],
+                        'duration'  => 1800, // TODO: Need to get actual duration
+                    ],
+                    'thumbnail'        => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1920]),
+                    'episodeNumber'    => 1,
+                    'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
+                    'shortDescription' => $media->text,
+                ];
+            }
+
+            $data['series'][] = [
+                'id'               => $series->id,
+                'title'            => $series->title,
+                'episodes'         => $episodes,
+                'genres'           => ['educational'], // TODO: What are the available genres?
+                'thumbnail'        => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1920]),
+                'releaseDate'      => $series->postDate->format(DateTime::W3C_DATE),
+                'shortDescription' => $series->text,
+
+            ];
+
+        }
+
+        // Serialize and JSON-encode the data
+        $this->returnJson($data);
+        craft()->end();
+
+    }
 }
