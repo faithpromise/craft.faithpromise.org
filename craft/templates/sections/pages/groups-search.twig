@@ -1,0 +1,36 @@
+{% extends "_layout/layout.twig" %}
+
+{% set location = craft.request.getQuery('location') %}
+{% set params = { target: location, range: 100 } %}
+{% set groups = craft.entries.section('groups').groupAddress(params).order('distance').find() %}
+
+{#.groupAddress(params).order('distance')#}
+
+{#{{ dump(groups) }}#}
+
+{% block content %}
+
+<div class="GroupSearchHeader">
+    <div class="GroupSearchHeader-container">
+        Search Field
+    </div>
+</div>
+
+<h1>{{ groups | length }}</h1>
+
+<table>
+    {% for group in groups %}
+        <tr>
+            <td>{{ group.title }}</td>
+            <td>{{ group.groupAddress.street1 }}</td>
+            <td>{{ group.groupAddress.city }}</td>
+            <td>{{ group.groupAddress.state }}</td>
+            <td>{{ group.groupAddress.distance | number_format(1) }} miles away</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+    {#Do we have a location?#}
+
+{% endblock %}
