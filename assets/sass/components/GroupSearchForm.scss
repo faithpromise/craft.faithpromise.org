@@ -1,0 +1,31 @@
+
+%GroupSearchForm-control {
+
+}
+
+.GroupSearchForm-input {
+  width:            100%;
+  max-width:        calc-em(400px, 20px);
+  padding:          calc-em(24px, 20px);
+  border:           none;
+  background-color: $color-white;
+  font-size:        calc-em(20px);
+  line-height:      1.5; // 30px
+  color:            $color-gray-dark;
+}
+
+.GroupSearchForm-submit {
+  padding:          calc-em(24px, 18px) calc-em(24px, 18px);
+  border:           none;
+  font-size:        calc-em(18px);
+  line-height:      1.666666667;
+  background-color: $color-brand-color;
+  color:            $color-brand-black;
+  text-transform:   uppercase;
+  font-weight:      700;
+  cursor:           pointer;
+
+  &:hover {
+    background-color: lighten($color-brand-color, 10%);
+  }
+}

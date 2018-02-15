@@ -2,7 +2,7 @@
 
 namespace Craft;
 
-class ImageUrl_UrlService extends BaseApplicationComponent {
+class ImageUrlService extends BaseApplicationComponent {
 
     public function url(AssetFileModel $img, $params = []) {
 

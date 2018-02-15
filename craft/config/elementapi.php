@@ -123,5 +123,72 @@ return [
                 },
             ];
         },
+
+        'api/groups' => function () {
+
+            $default_image = craft()->elements->getCriteria(ElementType::Asset)->id(4860)->first();
+            $location = craft()->request->getParam('location');
+
+            $criteria = [
+                'section' => 'groups',
+                'with'    => ['groupCategory.groupCategoryImage', 'groupImage', 'groupLifeStage'],
+
+            ];
+
+            if ($location) {
+                $criteria['groupAddress'] = ['target' => $location, 'range' => 50];
+                $criteria['order'] = ['distance'];
+            }
+
+            // If any coordinates were provided
+            if (!empty($allLats) && !empty($allLngs)) {
+                // Calculate center of map
+                $centerLat = (min($allLats) + max($allLats)) / 2;
+                $centerLng = (min($allLngs) + max($allLngs)) / 2;
+                $center = [
+                    'lat' => round($centerLat, 6),
+                    'lng' => round($centerLng, 6),
+                ];
+            }
+
+
+            return [
+                'elementType' => ElementType::Entry,
+                'criteria'    => $criteria,
+                'transformer' => function (EntryModel $entry) use ($default_image, $location) {
+
+                    $imageUrlService = new ImageUrlService();
+                    $image = $entry->groupImage ? $entry->groupImage[0] : ($entry->groupCategory && $entry->groupCategory[0]->groupCategoryImage ? $entry->groupCategory[0]->groupCategoryImage[0] : $default_image);
+//                    $image = $entry->groupImage ? $entry->groupImage[0] : $default_image;
+
+//                    $image = $default_image;
+
+                    return [
+                        'id'          => $entry->id,
+                        'title'       => $entry->title,
+                        'subtitle'    => $entry->subtitle,
+                        'category'    => count($entry->groupCategory) ? $entry->groupCategory[0]->title : null,
+                        'life_stage'  => count($entry->groupLifeStage) ? $entry->groupLifeStage[0]->title : null,
+                        'description' => $entry->groupDescription,
+                        'city'        => $entry->groupAddress->city,
+                        'day_of_week' => $entry->groupDayOfWeek,
+                        'frequency'   => $entry->groupFrequency,
+                        'start_time'  => $entry->groupStartTime,
+                        'location'    => $entry->groupAddress->lat ? ['lat' => round(floatval($entry->groupAddress->lat), 4), 'lng' => round(floatval($entry->groupAddress->lng), 4)] : null,
+                        'distance'    => $location ? round($entry->groupAddress->distance, 1) : null,
+                        'image'       => $imageUrlService->url($image),
+                    ];
+                },
+            ];
+            // {% set image = group.groupImage | length ? : (group.groupCategory | length ? group.groupCategory[0].groupCategoryImage[0] : default_image) %}
+//            {% set groups = craft.entries({ section: 'groups', with: ['groupCategory.groupCategoryImage', 'groupImage','groupLifeStage'] }).find() %}
+        },
+
+        'api/campuses' => function () {
+
+
+
+        },
+
     ],
 ];

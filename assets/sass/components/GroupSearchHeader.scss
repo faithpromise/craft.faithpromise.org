@@ -1,0 +1,33 @@
+.GroupSearchHeader {
+  position: relative;
+  padding:  calc-em(200px) 0;
+  overflow: hidden;
+  color:    $color-white;
+}
+
+.GroupSearchHeader-image {
+  @include object-fit(cover);
+  position: absolute;
+  top:      0;
+  left:     0;
+  height:   100%;
+  width:    100%;
+}
+
+.GroupSearchHeader-overlay {
+  position:         absolute;
+  z-index:          1;
+  top:              0;
+  bottom:           0;
+  width:            100%;
+  height:           100%;
+  opacity:          .3;
+  background-color: #000;
+}
+
+.GroupSearchHeader-container {
+  @extend .Container;
+  position:   relative;
+  z-index:    1;
+  text-align: center;
+}

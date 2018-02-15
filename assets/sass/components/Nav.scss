@@ -5,8 +5,13 @@ $Nav-mobile-end: $Nav-desktop-start - 1px;
 
 $Nav-logo-height: 46px;
 $Nav-logo-width: 46px;
-$Nav-padding-top: 24px;
-$Nav-padding-bottom: 12px;
+
+$Nav-padding-top: 18px;
+$Nav-padding-bottom: 18px;
+
+// Offset because of "tag" logo
+$Nav-overlay-padding-top: 24px;
+$Nav-overlay-padding-bottom: 12px;
 
 $Nav-bg-color: $color-brand-black;
 
@@ -46,7 +51,7 @@ $Nav-height-total: $Nav-logo-height + $Nav-padding-top + $Nav-padding-bottom;
 
 .Nav-logo {
 
-  @include link-colors-all($color-brand-black);
+  @include link-colors-all($color-white);
 
   //background-color: $color-brand-color;
   padding:      0 calc-em(12px);
@@ -54,21 +59,10 @@ $Nav-height-total: $Nav-logo-height + $Nav-padding-top + $Nav-padding-bottom;
 
   > svg {
     position: relative;
+    display:  block; // removes white space
     height:   calc-em($Nav-logo-height);
     width:    calc-em($Nav-logo-width);
     fill:     currentColor;
-  }
-
-  position:     relative;
-
-  &:before {
-    content:          '';
-    position:         absolute;
-    top:              -24px;
-    right:            0;
-    bottom:           -12px;
-    left:             0;
-    background-color: $color-brand-color;
   }
 
 }
@@ -124,7 +118,12 @@ $Nav-height-total: $Nav-logo-height + $Nav-padding-top + $Nav-padding-bottom;
 |--------------------------------------------------------------------------
 */
 
-html.nav_transparent .Nav,
+.Nav--flush {
+  .Nav-container {
+    max-width: none;
+  }
+}
+
 .Nav--transparent {
   position:         absolute;
   z-index:          $z-index-nav;
@@ -135,7 +134,6 @@ html.nav_transparent .Nav,
   color:            #fff;
 }
 
-html.nav_overlay .Nav,
 .Nav--overlay {
   @extend .Nav--transparent;
 
@@ -159,6 +157,34 @@ html.nav_black .Nav,
   .Nav-bg {
     display: none;
   }
+}
+
+.Nav--transparent,
+.Nav--overlay,
+html.nav_black .Nav,
+.Nav--black {
+
+  .Nav-inner {
+    padding-top:    calc-em($Nav-overlay-padding-top);
+    padding-bottom: calc-em($Nav-overlay-padding-bottom);
+  }
+
+  .Nav-logo {
+    @include link-colors-all($color-brand-black);
+
+    position: relative;
+
+    &:before {
+      content:          '';
+      position:         absolute;
+      top:              -24px;
+      right:            0;
+      bottom:           -12px;
+      left:             0;
+      background-color: $color-brand-color;
+    }
+  }
+
 }
 
 @media (max-width: $Nav-mobile-end) {

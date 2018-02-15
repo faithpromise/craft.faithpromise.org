@@ -11,7 +11,10 @@ import homePageVideo from './common/home-page-video.vue';
 import volunteerPositions from './serving/volunteer-positions.vue';
 import readingPlanNav from './common/reading-plan-nav.vue';
 import globalLeadershipSummit from './common/global-leadership-summit.vue';
+import groupResults from './groups/group-results.vue';
+import groupLocationSearch from './groups/group-location-search.vue';
 
+require('./custom_functions/_custom_functions');
 require('url-search-params/build/url-search-params.max');
 
 Vue.prototype.$http = axios;
@@ -32,6 +35,8 @@ const app = new Vue({
         volunteerPositions,
         readingPlanNav,
         globalLeadershipSummit,
+        groupResults,
+        groupLocationSearch,
     },
 
     data: function () {
