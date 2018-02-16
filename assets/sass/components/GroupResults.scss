@@ -48,14 +48,6 @@ $GroupResults-width: 800px;
 
 @media (min-width: calc-em(1080px)) {
 
-  .Nav {
-    position: fixed;
-    z-index:  $z-index-nav;
-    top:      0;
-    left:     0;
-    width:    100%;
-  }
-
   .GroupResults {
     min-height: calc(100vh - #{$Nav-height-total});
     width:      $GroupResults-width;

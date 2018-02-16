@@ -194,3 +194,15 @@ html.nav_black .Nav,
   }
 
 }
+
+@media (min-width: calc-em(1080px)) {
+
+  .Nav--groups {
+    position: fixed;
+    z-index:  $z-index-nav;
+    top:      0;
+    left:     0;
+    width:    100%;
+  }
+
+}
