@@ -1,11 +1,14 @@
 .GroupSearchHeader {
-  position: relative;
-  padding:  calc-em(200px) 0;
-  overflow: hidden;
-  color:    $color-white;
+  position:         relative;
+  z-index:          1;
+  padding:          calc-em(200px) 0;
+  overflow:         hidden;
+  background-color: $color-brand-black;
+  color:            $color-white;
 }
 
-.GroupSearchHeader-image {
+.GroupSearchHeader > img,
+.GroupSearchHeader > video {
   @include object-fit(cover);
   position: absolute;
   top:      0;

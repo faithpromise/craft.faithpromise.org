@@ -1,6 +1,7 @@
 {% extends "_layout/layout.twig" %}
 
-{% set header_image = craft.assets.id(67).first() %}
+{% set video = craft.assets.id(4903).first() %}
+{#{% set header_image = craft.assets.id(67).first() %}#}
 
 {% block content %}
 
@@ -11,17 +12,9 @@
     {% block page_content %}{% endblock %}
 
     <div class="GroupSearchHeader">
-        <img
-                class="GroupSearchHeader-image"
-                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                sizes="100vw"
-                srcset="
-                            {{ craft.imageUrl.url(header_image, { width: 1920 }) }} 1920w,
-                            {{ craft.imageUrl.url(header_image, { width: 1080 }) }} 1080w,
-                            {{ craft.imageUrl.url(header_image, { width: 800 }) }} 800w,
-                            {{ craft.imageUrl.url(header_image, { width: 480 }) }} 480w,
-                            {{ craft.imageUrl.url(header_image, { width: 320 }) }} 320w,
-                        ">
+        <video id="home_page_video" autoplay loop preload muted playsinline>
+            <source src="{{ video.url }}" type="video/mp4">
+        </video>
         <div class="GroupSearchHeader-overlay"></div>
         <div class="GroupSearchHeader-container">
             <h1 class="GroupSearchHeader-title">Find Nearby Groups</h1>
