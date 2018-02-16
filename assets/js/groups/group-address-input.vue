@@ -2,7 +2,7 @@
   <input
           id="js_search_by_address"
           name="location"
-          placeholder="enter your address or zip">
+          placeholder="enter your starting place">
 </template>
 <script>
 

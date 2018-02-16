@@ -1,4 +1,5 @@
 .GroupItem {
+  @extend %link-unstyled;
   display:          flex;
   flex-direction:   column;
   margin:           calc-em(32px) 0;

@@ -20,7 +20,7 @@
 
     <div class="GroupResults-items" v-show="!is_loading">
 
-      <div class="GroupItem" v-for="group in groups" :key="group.id">
+      <a class="GroupItem" v-for="group in groups" :key="group.id" :href="'https://my.faithpromise.org/portal/group_detail.aspx?id=' + group.slug" target="_blank">
 
         <div class="GroupItem-image">
           <div class="GroupItem-imageWrap">
@@ -36,7 +36,7 @@
         <div class="GroupItem-body">
 
           <h2 class="GroupItem-title">{{ group.title }}</h2>
-          <p class="GroupItem-subtitle">{{ group.life_stage }} {{ group.category }} in {{ group.city }}</p>
+          <p class="GroupItem-subtitle">{{ group.life_stage }} {{ group.category }} <span v-show="group.city">in {{ group.city }}</span></p>
           <p class="GroupItem-description">{{ excerpt(group.description) }}</p>
           <ul class="GroupItemDetails">
             <li v-if="group.distance">
@@ -51,7 +51,7 @@
 
         </div>
 
-      </div>
+      </a>
 
       <p class="GroupResults-more" v-show="total_pages > 1">
         <button class="Button" type="button" @click="previousPage" v-show="current_page > 1">Prev Page</button>

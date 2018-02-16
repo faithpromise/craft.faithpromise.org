@@ -160,8 +160,8 @@
 
             updateLocation(place) {
 
-                console.log('place', place);
                 this.location = { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+                this.is_geocode_complete = true;
 
                 this.$emit('location:updated', this.location);
                 this.show_address_search = false;

@@ -192,6 +192,7 @@ return [
 
                     return [
                         'id'          => $entry->id,
+                        'slug'        => $entry->slug,
                         'title'       => $entry->title,
                         'subtitle'    => $entry->groupSubtitle,
                         'category'    => count($entry->groupCategory) ? $entry->groupCategory[0]->title : null,
