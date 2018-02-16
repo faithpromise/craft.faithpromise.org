@@ -1,0 +1,26 @@
+{% set categories = craft.categories({ with: 'groupCategoryImage' }).group('groupCategories') %}
+
+{% embed '_layout/section.twig' with params %}
+    {% block body %}
+
+        <div class="Cards">
+            {% for category in categories %}
+
+                    {% set params = {
+                        title: category.title,
+                        subtitle: null,
+                        text: category.text,
+                        image: category.groupCategoryImage[0],
+                        action_url: category.url,
+                        action_text: 'View Groups',
+                    } %}
+
+                    <li class="Cards-item">
+                        {% include '_layout/components/card.twig' with params %}
+                    </li>
+
+            {% endfor %}
+        </div>
+
+    {% endblock %}
+{% endembed %}
