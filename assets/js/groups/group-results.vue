@@ -3,7 +3,7 @@
 
     <h1 class="GroupResults-title">
       <loading v-show="is_loading"></loading>
-      <span v-if="groups.length && !is_loading">Page {{ current_page }} of {{ total_pages }}</span>
+      <span v-if="groups.length && !is_loading">Found {{ total }} Groups {{ total_pages > 1 ? '(pg. ' + current_page + ')' : '' }}</span>
       <span v-if="none_found">No Groups Found</span>
     </h1>
 
@@ -15,15 +15,12 @@
     </div>
 
     <div class="GroupResults-map">
-      <groups-map
-              :groups="groups"
-              :location="location">
-      </groups-map>
+      <groups-map></groups-map>
     </div>
 
     <div class="GroupResults-items" v-show="!is_loading">
 
-      <div class="GroupItem" v-for="group in current_groups" :key="group.id">
+      <div class="GroupItem" v-for="group in groups" :key="group.id">
 
         <div class="GroupItem-image">
           <div class="GroupItem-imageWrap">
@@ -31,7 +28,7 @@
                     :image="group.image"
                     :options="{ fit: 'crop', crop: 'entropy' }"
                     sizes="25w"
-                    dimensions="square">
+                    dimensions="16x9">
             </img-srcset>
           </div>
         </div>
@@ -43,13 +40,14 @@
           <p class="GroupItem-description">{{ excerpt(group.description) }}</p>
           <ul class="GroupItemDetails">
             <li v-if="group.distance">
-              {{ group.distance + ' miles away' }}
+              <span class="GroupItemDetails-dist">{{ group.distance }} miles away</span>
+              <span class="GroupItemDetails-abbrevDist">{{ group.distance }} miles</span>
             </li>
             <li>
-              {{ group.day_of_week }} at {{ group.start_time }}
+              <span class="GroupItemDetails-time">{{ group.day_of_week }} at {{ group.start_time }}</span>
+              <span class="GroupItemDetails-abbrevTime">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
             </li>
           </ul>
-          <!--<p class="GroupItem-subtitle"><strong>{{ group.day_of_week }} at {{ group.start_time || group.frequency }}</strong> {{ // group.subtitle }}</p>-->
 
         </div>
 
@@ -65,6 +63,7 @@
 </template>
 <script>
 
+    import * as paramHelper from './group-query-params';
     import groupService from './group.service';
     import groupsMap from './groups-map.vue';
     import groupSearchForm from './group-search-form.vue';
@@ -84,38 +83,24 @@
 
         beforeRouteUpdate(to, from, next) {
             next();
-            if (this.should_reload)
-                this.load();
-            this.should_reload = false;
+            this.load();
         },
 
         data() {
 
             return {
-                per_page:      20,
-                groups:        [],
-                is_loading:    true,
-                should_reload: false,
+                groups:     [],
+                markers:    [],
+                is_loading: true,
+
+                per_page:     20,
+                total:        0,
+                total_pages:  0,
+                current_page: 1,
             }
         },
 
         computed: {
-
-            location() {
-                return parseLocation(this.$route.query.location);
-            },
-
-            total() {
-                return this.groups.length;
-            },
-
-            total_pages() {
-                return Math.ceil(this.groups.length / this.per_page)
-            },
-
-            current_page() {
-                return parseInt(this.$route.query.page) || 1;
-            },
 
             none_found() {
                 return this.is_loaded && this.total === 0;
@@ -125,16 +110,7 @@
                 return this.total_pages > this.current_page;
             },
 
-            current_groups() {
-                let end   = this.current_page * this.per_page,
-                    start = end - this.per_page;
-
-                return this.groups.slice(start, end);
-            },
-
         },
-
-        watch: {},
 
         created() {
             this.load();
@@ -142,14 +118,17 @@
 
         methods: {
 
-            load(params) {
-                let criteria = Object.assign({}, this.$route.query, params);
+            load() {
+                let criteria = Object.assign({}, this.$route.query);
 
                 this.is_loading = true;
 
                 groupService.all(criteria).then((result) => {
-                    this.groups     = result.data.data;
-                    this.is_loading = false;
+                    this.groups       = result.data.data;
+                    this.total        = result.data.meta.pagination.total;
+                    this.total_pages  = result.data.meta.pagination.total_pages;
+                    this.current_page = result.data.meta.pagination.current_page;
+                    this.is_loading   = false;
                 });
             },
 
@@ -162,20 +141,19 @@
             },
 
             goToPage(page) {
-                let params = Object.assign({}, this.$route.query, { page });
+                let params = paramHelper.cleanParams(this.$route.query, { page });
                 this.$router.push({ name: this.$route.name, query: params });
             },
 
             update(new_params = {}) {
-                let params = cleanParams(this.$route.query, new_params);
+                let params = paramHelper.cleanParams(this.$route.query, new_params);
                 delete params.page;
-                this.should_reload = true;
                 this.$router.push({ name: this.$route.name, query: params });
             },
 
             updateLocation(location) {
                 console.log('updating location', location);
-                this.update({ location: formatLocation(location) });
+                this.update({ location: paramHelper.formatLocation(location) });
             },
 
             updateCategory(category) {
@@ -197,33 +175,5 @@
 
         },
 
-    }
-
-    function cleanParams(query, params) {
-        let new_params = Object.assign({}, query, params);
-
-        for (let key in new_params) {
-            if (new_params.hasOwnProperty(key) && new_params[key] === null) {
-                delete new_params[key];
-            }
-        }
-        console.log('cleanParams', new_params);
-        return new_params;
-    }
-
-    function formatLocation(location) {
-        return location ? location.lat + ',' + location.lng : null;
-    }
-
-    function parseLocation(location) {
-        if (location) {
-            let lat_lng = location.split(',');
-            return {
-                lat: parseFloat(lat_lng[0]),
-                lng: parseFloat(lat_lng[1]),
-            };
-        }
-
-        return null;
     }
 </script>

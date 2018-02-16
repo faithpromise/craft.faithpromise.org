@@ -20,7 +20,10 @@
 
         methods: {
 
-            go(location) {
+            go(place) {
+
+                let location = place.geometry.location.lat() + ',' + place.geometry.location.lng();
+
                 window.location.href = '/groups/search/?location=' + location;
             },
 

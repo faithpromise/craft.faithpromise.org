@@ -127,18 +127,22 @@ return [
         'api/groups' => function () {
 
             $default_image = craft()->elements->getCriteria(ElementType::Asset)->id(4860)->first();
+            $markers_only = craft()->request->getParam('dataset') === 'markers';
             $location = craft()->request->getParam('location');
+            $distance = 25;
 
             $criteria = [
                 'section' => 'groups',
-                'with'    => ['groupCategory.groupCategoryImage', 'groupImage', 'groupLifeStage'],
-
             ];
 
-            if ($location) {
-                $criteria['groupAddress'] = ['target' => $location, 'range' => 50];
-                $criteria['order'] = ['distance', 'title'];
-            }
+            // Include group category, image, life stage, etc
+            if (!$markers_only)
+                $criteria['with'] = ['groupCategory.groupCategoryImage', 'groupImage', 'groupLifeStage'];
+
+            /**
+             * | Search by category and life stage
+             * | -----------------------------------------
+             */
 
             $related_to = ['and'];
 
@@ -151,17 +155,35 @@ return [
             if (count($related_to) > 1)
                 $criteria['relatedTo'] = $related_to;
 
+            // Increase distance for interest and serving groups
+            // TODO: Instead of hard coding, this could be a "radius" field on the categories
+            if ($category && ($category === 'embrace-group' || $category === 'engage-group'))
+                $distance = 50;
+
+            /**
+             * | Search by location
+             * | -----------------------------------------
+             */
+            if ($location) {
+                $criteria['groupAddress'] = ['target' => $location, 'range' => $distance];
+                $criteria['order'] = ['distance', 'title'];
+            }
+
             return [
                 'elementType'     => ElementType::Entry,
                 'criteria'        => $criteria,
-                'elementsPerPage' => 400,
-                'transformer'     => function (EntryModel $entry) use ($default_image, $location) {
+                'elementsPerPage' => $markers_only ? 500 : 20,
+                'transformer'     => function (EntryModel $entry) use ($default_image, $location, $markers_only) {
 
                     $imageUrlService = new ImageUrlService();
                     $image = $entry->groupImage ? $entry->groupImage[0] : ($entry->groupCategory && $entry->groupCategory[0]->groupCategoryImage ? $entry->groupCategory[0]->groupCategoryImage[0] : $default_image);
-//                    $image = $entry->groupImage ? $entry->groupImage[0] : $default_image;
 
-//                    $image = $default_image;
+                    if ($markers_only) {
+                        return [
+                            'id'       => $entry->id,
+                            'location' => $entry->groupAddress->lat ? ['lat' => round(floatval($entry->groupAddress->lat), 4), 'lng' => round(floatval($entry->groupAddress->lng), 4)] : null,
+                        ];
+                    }
 
                     return [
                         'id'          => $entry->id,

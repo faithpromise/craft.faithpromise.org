@@ -1,20 +1,15 @@
 <template>
-  <form class="GroupCriteria" @submit.prevent="search">
+  <form class="GroupCriteria" @submit.prevent>
 
-    <select class="GroupCriteria-input" v-model="location">
-      <option :value="null">Choose an Area</option>
+    <select class="GroupCriteria-input" v-model="location" v-show="!show_address_search">
+      <option :value="null">Any area</option>
       <option disabled>- - - - - - - -</option>
       <option v-for="item in locations_list" :key="item.id" :value="item.location">{{ item.name }}</option>
       <option disabled>- - - - - - - -</option>
       <option value="new">Enter a New Address</option>
     </select>
 
-    <!--<group-address-input class="GroupCriteria-input" @input="updateLocation"></group-address-input>-->
-
-    <!--<select class="GroupCriteria-input" v-model="selected_campus">-->
-    <!--<option :value="null">Any Campus</option>-->
-    <!--<option v-for="campus in campuses" :key="campus.id">{{ campus.title }}</option>-->
-    <!--</select>-->
+    <group-address-input class="GroupCriteria-input" @input="updateLocation" v-if="show_address_search"></group-address-input>
 
     <div class="GroupCriteria-row">
       <div>
@@ -41,6 +36,8 @@
     import lifeStageService from './group-life-stages.service';
     import groupAddressInput from './group-address-input.vue';
 
+    let old_location = null;
+
     export default {
 
         props: {},
@@ -55,7 +52,6 @@
                 categories:  [],
                 life_stages: [],
 
-                selected_campus:     this.$route.query.campus || null,
                 selected_category:   this.$route.query.category || null,
                 selected_life_stage: this.$route.query.stage || null,
 
@@ -63,6 +59,8 @@
                 is_geocode_complete: false,
 
                 location: parseLocation(this.$route.query.location),
+
+                show_address_search: false,
             }
         },
 
@@ -102,9 +100,13 @@
 
         watch: {
 
-            location(value) {
-                if (value !== 'new')
-                    this.$emit('location:updated', value);
+            location(value, old_value) {
+                if (value === 'new') {
+                    old_location = old_value;
+                    return this.show_address_search = true;
+                }
+
+                this.$emit('location:updated', value);
             },
 
             selected_category(value) {
@@ -153,6 +155,18 @@
                             this.geocoded_address = formatAddress(results[0].address_components);
                     });
                 });
+
+            },
+
+            updateLocation(place) {
+
+                console.log('place', place);
+                this.location = { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() };
+
+                this.$emit('location:updated', this.location);
+                this.show_address_search = false;
+
+                this.geocoded_address = formatAddress(place.address_components);
 
             },
 

@@ -3,9 +3,13 @@
 </template>
 <script>
 
+    import axios from 'axios';
+    import * as paramHelper from './group-query-params';
     import googleMaps from '../common/google-maps';
+    import groupService from './group.service';
 
-    let map_promise_resolve,
+    let old_params = {},
+        map_promise_resolve,
         map_promise,
         markers,
         home_marker;
@@ -23,38 +27,30 @@
 
     export default {
 
-        props: {
-            groups:   { required: true, },
-            location: { default: null, },
-        },
-
-        components: {},
-
         data() {
             return {}
         },
 
-        computed: {},
+        computed: {
+            location() {
+                return paramHelper.parseLocation(this.$route.query.location);
+            }
+        },
 
         watch: {
 
-            groups: {
-
+            '$route': {
                 immediate: true,
-
-                handler: function (new_value) {
-
-                    if (!new_value || new_value.length === 0)
-                        return;
-
-                    this.addMarkers();
-
+                handler() {
+                    this.loadMarkers();
                 },
-
             },
 
-            location() {
-                this.setCenter();
+            location: {
+                immediate: true,
+                handler(value) {
+                    this.addHomeMarker(value);
+                },
             },
 
         },
@@ -104,41 +100,69 @@
 
             },
 
-            setCenter() {
-                map_promise.then((map) => {
+            addHomeMarker(center) {
 
-                    if (this.location)
-                        map.setCenter(this.location);
+                map_promise.then((map) => {
 
                     if (home_marker)
                         home_marker.setMap(null);
 
-                    if (this.location) {
-                        home_marker = new google.maps.Marker({
-                            position: this.location,
-                            map:      map,
-                            icon:     {
-                                url:        '/assets/map-marker-home.svg',
-                                scaledSize: new google.maps.Size(32, 38),
-                            }
-                        });
-                    }
+                    if (!center)
+                        return;
+
+                    home_marker = new google.maps.Marker({
+                        position: center,
+                        map:      map,
+                        icon:     {
+                            url:        '/assets/map-marker-home.svg',
+                            scaledSize: new google.maps.Size(32, 38),
+                        }
+                    });
 
                 });
             },
 
-            addMarkers() {
+            loadMarkers() {
 
-                map_promise.then((map) => {
+                let criteria    = Object.assign({}, this.$route.query, { dataset: 'markers', page: 1 }),
+                    should_load = paramsHaveChanged(criteria, old_params);
 
-                    console.log('adding markers');
+                if (!should_load)
+                    return;
 
-                    let bounds      = new google.maps.LatLngBounds(),
-                        marker_size = new google.maps.Size(25, 30);
+                axios.all([map_promise, groupService.all(criteria)])
+                    .then(axios.spread((map, groups) => {
+                            this.addMarkers(map, groups.data.data);
+                        })
+                    );
 
-                    this.groups.forEach((group) => {
+                old_params = criteria;
+            },
 
-                        if (!group.location || markers.hasOwnProperty(group.id)) return;
+            addMarkers(map, groups) {
+
+                // Keeps track of current listing results so we
+                // can determine if previously created markers
+                // not in the current results should be removed.
+                let group_ids = {};
+
+                let bounds      = new google.maps.LatLngBounds(),
+                    marker_size = new google.maps.Size(25, 30);
+
+                // Add location to bounds
+                if (this.location)
+                    bounds.extend(this.location);
+
+                groups.forEach((group) => {
+
+                    // Nothing to do if group has no location
+                    if (!group.location)
+                        return;
+
+                    group_ids[group.id] = null;
+
+                    // Add marker if it hasn't been added previously
+                    if (!markers.hasOwnProperty(group.id)) {
 
                         markers[group.id] = new google.maps.Marker({
                             position: group.location,
@@ -149,18 +173,54 @@
                             }
                         });
 
-                        bounds.extend(markers[group.id].getPosition());
+                    }
 
-                    });
-
-                    if (!this.location)
-                        map.setCenter(bounds.getCenter() || { lat: 35.96411, lng: -84.16774 });
+                    bounds.extend(markers[group.id].getPosition());
 
                 });
+
+                map.fitBounds(bounds);
+
+                // Remove markers not in the current list
+                for (let id in markers) {
+                    if (markers.hasOwnProperty(id)) {
+                        let in_results = group_ids.hasOwnProperty(id);
+                        if (!in_results) {
+                            markers[id].setMap(null);
+                            delete markers[id];
+                        }
+                    }
+
+                }
 
             },
 
         },
 
+    }
+
+    function paramsHaveChanged(new_params, old_params) {
+
+        let ignore_params = ['page', 'dataset'];
+
+        // If old_params is empty, this is the initial request
+        if (Object.keys(old_params).length === 0)
+            return true;
+
+        for (let key in new_params) {
+            if (new_params.hasOwnProperty(key)) {
+                if (!old_params.hasOwnProperty(key) || new_params[key] !== old_params[key])
+                    return true;
+            }
+        }
+
+        for (let key in old_params) {
+            if (old_params.hasOwnProperty(key)) {
+                if (!new_params.hasOwnProperty(key))
+                    return true;
+            }
+        }
+
+        return false;
     }
 </script>

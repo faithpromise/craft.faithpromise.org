@@ -14,6 +14,8 @@
 
         mounted() {
 
+            this.$el.focus();
+
             googleMaps.load().then(() => {
 
                 // Create the autocomplete object, restricting the search to geographical
@@ -39,12 +41,7 @@
         methods: {
 
             onSelect() {
-
-                let place    = autocomplete.getPlace(),
-                    location = place.geometry.location.lat() + ',' + place.geometry.location.lng();
-
-                this.$emit('input', location);
-
+                this.$emit('input', autocomplete.getPlace());
             },
 
         },
