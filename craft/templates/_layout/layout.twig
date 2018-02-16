@@ -5,6 +5,10 @@
 {% set base_url = '' %}
 {% set assets_base_url = '' %}
 
+{% set main_script = main_script ?? 'main.js' %}
+{% set include_vue_router = include_vue_router ?? false %}
+{% set include_footer = include_footer ?? true %}
+
 {% if not og_image.url is defined %}
     {% set og_image = craft.assets.id(4219).first() %}
 {% endif %}
@@ -60,7 +64,9 @@
                 </div>
             </transition>
 
-            {% include '_layout/footer.twig' %}
+            {% if include_footer %}
+                {% include '_layout/footer.twig' %}
+            {% endif %}
 
             <portal-target name="modal"></portal-target>
 
@@ -83,7 +89,6 @@
         {% include '_layout/script-includes/vue.twig' %}
         {% include '_layout/script-includes/cookies.twig' %}
 
-
         <!--
             |--------------------------------------------------------------------------
             | APP
@@ -92,7 +97,7 @@
 
         {{ getFootHtml() }}
 
-        <script src="{{ craft.config.cdnUrl }}{{ '/build/main.js' ~ dev_cache_bust | cacheBuster }}"></script>
+        <script src="{{ craft.config.cdnUrl }}{{ '/build/' ~ main_script ~ dev_cache_bust | cacheBuster }}"></script>
 
         {% include '_layout/script-includes/browser-compatibility.twig' %}
 

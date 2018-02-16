@@ -1,9 +1,12 @@
 {% extends "_layout/layout.twig" %}
 
 {% set nav_class = 'Nav--flush' %}
+{% set main_script = 'groups.js' %}
+{% set include_vue_router = true %}
+{% set include_footer = false %}
 
 {% block content %}
 
-    <group-results></group-results>
+    <router-view></router-view>
 
 {% endblock %}

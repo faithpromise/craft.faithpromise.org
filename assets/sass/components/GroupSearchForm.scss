@@ -29,3 +29,44 @@
     background-color: lighten($color-brand-color, 10%);
   }
 }
+
+.GroupCriteria {
+  max-width: calc-em(600px);
+  margin:    0 auto;
+}
+
+.GroupCriteria-input {
+  display:          block; // collapses margins
+  width:            100%;
+  margin-top:       calc-em(8px);
+  padding:          0.75em 0.8em;
+  border:           1px solid $color-gray-lighter;
+  color:            inherit;
+  border-radius:    3px;
+  background-color: $color-gray-lighter;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:focus,
+  &.has-value {
+    background-color: $color-white;
+    border-color:     $anchor-color;
+  }
+}
+
+select.GroupCriteria-input {
+  appearance: menulist;
+  height:     calc-em(44px);
+}
+
+.GroupCriteria-row {
+  display:     flex;
+  margin-left: -1em;
+
+  > div {
+    width:        50%;
+    padding-left: 1em;
+  }
+}

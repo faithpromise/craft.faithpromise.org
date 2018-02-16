@@ -1,0 +1,52 @@
+/* http://tobiasahlin.com/spinkit/ */
+
+.Loading {
+  display:     inline-block;
+  margin:      0 auto;
+  text-align:  center;
+  white-space: nowrap;
+}
+
+.Loading-dot {
+  width:            1em;
+  height:           1em;
+  border-radius:    100%;
+  display:          inline-block;
+  animation:        sk-bouncedelay 1.4s infinite ease-in-out both;
+  background-color: $color-brand-black;
+
+  .Loading--small > & {
+    width:  .5em;
+    height: .5em;
+  }
+
+  .Loading--large > & {
+    width:  2em;
+    height: 2em;
+  }
+}
+
+.Loading-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.Loading-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1.0);
+  }
+}
+
+.Loading-text {
+  display:      inline-block;
+  margin-right: .5em;
+  font-weight:  600;
+  color:        $color-brand-black;
+  font-style:   italic;
+}

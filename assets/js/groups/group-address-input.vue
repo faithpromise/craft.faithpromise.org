@@ -1,12 +1,8 @@
 <template>
-  <form class="GroupSearchForm" @submit.prevent="">
-    <input
-            id="js_search_by_address"
-            class="GroupSearchForm-input"
-            name="location"
-            placeholder="enter your address or zip">
-    <!--<button class="GroupSearchForm-submit">Find Your Group</button>-->
-  </form>
+  <input
+          id="js_search_by_address"
+          name="location"
+          placeholder="enter your address or zip">
 </template>
 <script>
 
@@ -15,16 +11,6 @@
     let autocomplete;
 
     export default {
-
-        props: {},
-
-        components: {},
-
-        data() {
-            return {}
-        },
-
-        computed: {},
 
         mounted() {
 
@@ -57,7 +43,7 @@
                 let place    = autocomplete.getPlace(),
                     location = place.geometry.location.lat() + ',' + place.geometry.location.lng();
 
-                window.location.href = '/groups/search/?location=' + location;
+                this.$emit('input', location);
 
             },
 

@@ -2,19 +2,9 @@ import Vue from 'vue';
 import axios from 'axios';
 import PortalVue from 'portal-vue';
 
-import seriesList from './series/series-list.vue';
-import playlistItem from './series/playlist-item.vue';
-import sermonHero from './series/sermon-hero.vue';
-import sermonTools from './series/sermon-tools.vue';
-import videoEmbed from './common/video-embed.vue';
-import homePageVideo from './common/home-page-video.vue';
-import volunteerPositions from './serving/volunteer-positions.vue';
-import readingPlanNav from './common/reading-plan-nav.vue';
-import globalLeadershipSummit from './common/global-leadership-summit.vue';
-import groupAddressSearch from './groups/group-address-search.vue';
+import router from './groups/group-routes';
 
 require('./custom_functions/_custom_functions');
-require('url-search-params/build/url-search-params.max');
 
 Vue.prototype.$http = axios;
 
@@ -22,20 +12,9 @@ Vue.use(PortalVue);
 
 const app = new Vue({
 
-    el: '#app',
+    router,
 
-    components: {
-        seriesList,
-        playlistItem,
-        sermonHero,
-        sermonTools,
-        videoEmbed,
-        homePageVideo,
-        volunteerPositions,
-        readingPlanNav,
-        globalLeadershipSummit,
-        groupAddressSearch,
-    },
+    el: '#app',
 
     data: function () {
         return {

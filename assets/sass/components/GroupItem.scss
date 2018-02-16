@@ -1,8 +1,10 @@
 .GroupItem {
   display:          flex;
-  margin:           calc-em(24px) 0;
+  margin:           calc-em(32px) 0;
   background-color: $color-white;
   box-shadow:       $Box-shadow;
+  cursor:           pointer;
+  transition:       box-shadow .15s ease-in-out;
 
   &:hover {
     box-shadow: $Box-shadow-raised;
@@ -11,11 +13,12 @@
 
 .GroupItem-image {
   flex-shrink: 0;
+  width:       40%;
 }
 
 .GroupItem-imageWrap {
   @extend %ratio-image;
-  width:  200px;
+  width:  100%;
   height: 100%;
 
 }
@@ -24,6 +27,7 @@
   display:        flex;
   flex-direction: column;
   flex-grow:      1;
+  padding:        2em;
 }
 
 .GroupItem-overview {
@@ -40,9 +44,9 @@
 }
 
 .GroupItem-title {
-  margin:      0;
-  font-size:   calc-em(24px);
-  font-weight: normal;
+  margin:      0 0 calc-em(4px, 20px);
+  font-size:   calc-em(20px);
+  font-weight: 700;
 }
 
 .GroupItem-subtitle {
@@ -52,6 +56,6 @@
 
 .GroupItem-description {
   margin:    1em 0 0;
-  font-size: calc-em(14px);
+  font-size: calc-em(15px);
   color:     $color-gray-darker;
 }

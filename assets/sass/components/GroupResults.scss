@@ -2,13 +2,34 @@ $GroupResults-width: 800px;
 
 .GroupResults {
   padding:          calc-em(24px);
-  background-color: $color-gray-light;
+  background-color: $color-gray-lightest;
+}
+
+.GroupResults-search {
+  margin-bottom: 2em;
 }
 
 .GroupResults-map {
   position: relative;
   width:    100%;
   height:   400px;
+}
+
+.GroupResults-loading {
+  padding:    3em 0;
+  text-align: center;
+}
+
+.GroupResults-more {
+  margin:     3em 0;
+  text-align: center;
+}
+
+.GroupResults-title {
+  margin:         calc-em(48px, 20px) 0;
+  text-align:     center;
+  font-size:      calc-em(20px);
+  text-transform: uppercase;
 }
 
 @media (min-width: calc-em(1080px)) {
@@ -22,8 +43,9 @@ $GroupResults-width: 800px;
   }
 
   .GroupResults {
-    width:  $GroupResults-width;
-    margin: calc-em($Nav-height-total) auto 0 0;
+    min-height: calc(100vh - #{$Nav-height-total});
+    width:      $GroupResults-width;
+    margin:     calc-em($Nav-height-total) auto 0 0;
   }
 
   .GroupResults-map {

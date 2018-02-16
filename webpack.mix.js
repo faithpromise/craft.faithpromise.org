@@ -27,6 +27,9 @@ mix.js('assets/js/main.js', 'public/build/')
     .sass('assets/sass/main.scss', 'public/build/')
     .setPublicPath('public');
 
+mix.js('assets/js/groups.js', 'public/build/')
+    .setPublicPath('public');
+
 mix.js('assets-portal/js/ministry-platform-skin.js', 'public/build/')
     .sass('assets-portal/sass/ministry-platform-skin.scss', 'public/build');
 

@@ -137,25 +137,25 @@ return [
 
             if ($location) {
                 $criteria['groupAddress'] = ['target' => $location, 'range' => 50];
-                $criteria['order'] = ['distance'];
+                $criteria['order'] = ['distance', 'title'];
             }
 
-            // If any coordinates were provided
-            if (!empty($allLats) && !empty($allLngs)) {
-                // Calculate center of map
-                $centerLat = (min($allLats) + max($allLats)) / 2;
-                $centerLng = (min($allLngs) + max($allLngs)) / 2;
-                $center = [
-                    'lat' => round($centerLat, 6),
-                    'lng' => round($centerLng, 6),
-                ];
-            }
+            $related_to = ['and'];
 
+            if ($category = craft()->request->getParam('category'))
+                $related_to[] = craft()->elements->getCriteria(ElementType::Category)->slug($category)->first();
+
+            if ($stage = craft()->request->getParam('stage'))
+                $related_to[] = craft()->elements->getCriteria(ElementType::Category)->slug($stage)->first();
+
+            if (count($related_to) > 1)
+                $criteria['relatedTo'] = $related_to;
 
             return [
-                'elementType' => ElementType::Entry,
-                'criteria'    => $criteria,
-                'transformer' => function (EntryModel $entry) use ($default_image, $location) {
+                'elementType'     => ElementType::Entry,
+                'criteria'        => $criteria,
+                'elementsPerPage' => 400,
+                'transformer'     => function (EntryModel $entry) use ($default_image, $location) {
 
                     $imageUrlService = new ImageUrlService();
                     $image = $entry->groupImage ? $entry->groupImage[0] : ($entry->groupCategory && $entry->groupCategory[0]->groupCategoryImage ? $entry->groupCategory[0]->groupCategoryImage[0] : $default_image);
@@ -166,7 +166,7 @@ return [
                     return [
                         'id'          => $entry->id,
                         'title'       => $entry->title,
-                        'subtitle'    => $entry->subtitle,
+                        'subtitle'    => $entry->groupSubtitle,
                         'category'    => count($entry->groupCategory) ? $entry->groupCategory[0]->title : null,
                         'life_stage'  => count($entry->groupLifeStage) ? $entry->groupLifeStage[0]->title : null,
                         'description' => $entry->groupDescription,
@@ -180,13 +180,68 @@ return [
                     ];
                 },
             ];
+
             // {% set image = group.groupImage | length ? : (group.groupCategory | length ? group.groupCategory[0].groupCategoryImage[0] : default_image) %}
 //            {% set groups = craft.entries({ section: 'groups', with: ['groupCategory.groupCategoryImage', 'groupImage','groupLifeStage'] }).find() %}
         },
 
+        'api/groups/categories' => function () {
+
+            return [
+                'elementType' => ElementType::Category,
+                'criteria'    => [
+                    'group' => 'groupCategories',
+                    'order' => ['title'],
+                ],
+                'transformer' => function (CategoryModel $entry) {
+
+                    return [
+                        'id'    => $entry->id,
+                        'slug'  => $entry->slug,
+                        'title' => $entry->title,
+                    ];
+                },
+            ];
+
+        },
+
+        'api/groups/life-stages' => function () {
+
+            return [
+                'elementType' => ElementType::Category,
+                'criteria'    => [
+                    'group' => 'groupLifeStages',
+                    'order' => ['title'],
+                ],
+                'transformer' => function (CategoryModel $entry) {
+
+                    return [
+                        'id'    => $entry->id,
+                        'slug'  => $entry->slug,
+                        'title' => $entry->title,
+                    ];
+                },
+            ];
+
+        },
+
         'api/campuses' => function () {
 
+            return [
+                'elementType' => ElementType::Entry,
+                'criteria'    => [
+                    'type'  => 'campus',
+                    'order' => ['title'],
+                ],
+                'transformer' => function (EntryModel $entry) {
 
+                    return [
+                        'id'       => $entry->id,
+                        'title'    => $entry->title,
+                        'location' => ['lat' => $entry->lat, 'lng' => $entry->lng],
+                    ];
+                },
+            ];
 
         },
 

@@ -5,6 +5,22 @@
 
     import googleMaps from '../common/google-maps';
 
+    let map_promise_resolve,
+        map_promise,
+        markers,
+        home_marker;
+
+    // Re-initialize map promise each time this component is created.
+    function init() {
+
+        map_promise = new Promise(function (resolve) {
+            map_promise_resolve = resolve;
+        });
+
+        markers     = {};
+        home_marker = null;
+    }
+
     export default {
 
         props: {
@@ -19,6 +35,33 @@
         },
 
         computed: {},
+
+        watch: {
+
+            groups: {
+
+                immediate: true,
+
+                handler: function (new_value) {
+
+                    if (!new_value || new_value.length === 0)
+                        return;
+
+                    this.addMarkers();
+
+                },
+
+            },
+
+            location() {
+                this.setCenter();
+            },
+
+        },
+
+        beforeCreate() {
+            init();
+        },
 
         mounted() {
 
@@ -52,64 +95,68 @@
                 };
 
                 if (this.location)
-                    config.center = { lat: this.location.lat, lng: this.location.lng }; // Can't use Vue object
+                    config.center = this.location;
 
                 googleMaps.createMap(this.$el, config).then((map) => {
-
-                    this.addMarkers(map);
-
-                    google.maps.event.addListener(map, 'idle', () => {
-
-                        console.log('map bounds', map.getBounds().toJSON());
-
-                        // When map bounds change, compare the zoom and center of the map
-                        // with the zoom and center of the bounds we're searching (in criteria)
-                        // to determine if the user has repositioned the map.
-
-                    });
-
+                    map_promise_resolve(map);
+                    window.search_map = map; // Ref so we can remove it when navigating away from search
                 });
-
 
             },
 
-            addMarkers(map) {
+            setCenter() {
+                map_promise.then((map) => {
 
-                let markers     = {},
-                    home_marker = null,
-                    bounds      = new google.maps.LatLngBounds(),
-                    marker_size = new google.maps.Size(25, 30);
+                    if (this.location)
+                        map.setCenter(this.location);
 
-                if (this.location) {
-                    home_marker = new google.maps.Marker({
-                        position: this.location,
-                        map:      map,
-                        icon:     {
-                            url:        '/assets/map-marker-home.svg',
-                            scaledSize: new google.maps.Size(32, 38),
-                        }
-                    });
-                }
+                    if (home_marker)
+                        home_marker.setMap(null);
 
-                this.groups.forEach((group) => {
-
-                    if (!group.location) return;
-
-                    markers[group.id] = new google.maps.Marker({
-                        position: group.location,
-                        map:      map,
-                        icon:     {
-                            url:        '/assets/map-marker.svg',
-                            scaledSize: marker_size,
-                        }
-                    });
-
-                    bounds.extend(markers[group.id].getPosition());
+                    if (this.location) {
+                        home_marker = new google.maps.Marker({
+                            position: this.location,
+                            map:      map,
+                            icon:     {
+                                url:        '/assets/map-marker-home.svg',
+                                scaledSize: new google.maps.Size(32, 38),
+                            }
+                        });
+                    }
 
                 });
+            },
 
-                if (!this.location)
-                    map.setCenter(bounds.getCenter());
+            addMarkers() {
+
+                map_promise.then((map) => {
+
+                    console.log('adding markers');
+
+                    let bounds      = new google.maps.LatLngBounds(),
+                        marker_size = new google.maps.Size(25, 30);
+
+                    this.groups.forEach((group) => {
+
+                        if (!group.location || markers.hasOwnProperty(group.id)) return;
+
+                        markers[group.id] = new google.maps.Marker({
+                            position: group.location,
+                            map:      map,
+                            icon:     {
+                                url:        '/assets/map-marker.svg',
+                                scaledSize: marker_size,
+                            }
+                        });
+
+                        bounds.extend(markers[group.id].getPosition());
+
+                    });
+
+                    if (!this.location)
+                        map.setCenter(bounds.getCenter() || { lat: 35.96411, lng: -84.16774 });
+
+                });
 
             },
 
