@@ -137,7 +137,7 @@ return [
 
             // Include group category, image, life stage, etc
             if (!$markers_only)
-                $criteria['with'] = ['groupCategory.groupCategoryImage', 'groupImage', 'groupLifeStage'];
+                $criteria['with'] = ['groupCategory.groupCategoryImage', 'groupImage', 'groupLifeStage.groupLifeStageImage'];
 
             /**
              * | Search by category and life stage
@@ -175,8 +175,13 @@ return [
                 'elementsPerPage' => $markers_only ? 500 : 20,
                 'transformer'     => function (EntryModel $entry) use ($default_image, $location, $markers_only) {
 
+                    // Prefer group image, then life stage image, then category image, then a default image
                     $imageUrlService = new ImageUrlService();
-                    $image = $entry->groupImage ? $entry->groupImage[0] : ($entry->groupCategory && $entry->groupCategory[0]->groupCategoryImage ? $entry->groupCategory[0]->groupCategoryImage[0] : $default_image);
+                    $image = $entry->groupImage ? $entry->groupImage[0] : (
+                    $entry->groupLifeStage && $entry->groupLifeStage[0]->groupLifeStageImage ? $entry->groupLifeStage[0]->groupLifeStageImage[0] : (
+                    $entry->groupCategory && $entry->groupCategory[0]->groupCategoryImage ? $entry->groupCategory[0]->groupCategoryImage[0] : $default_image
+                    )
+                    );
 
                     if ($markers_only) {
                         return [
