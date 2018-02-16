@@ -9,10 +9,24 @@ $GroupResults-width: 800px;
   margin-bottom: 2em;
 }
 
+.GroupResults-none {
+  max-width: calc-em(600px);
+  margin:    2em auto;
+}
+
 .GroupResults-map {
   position: relative;
   width:    100%;
   height:   400px;
+
+  > img {
+    @include object-fit(cover);
+    position: absolute;
+    top:      0;
+    left:     0;
+    height:   100%;
+    width:    100%;
+  }
 }
 
 .GroupResults-loading {

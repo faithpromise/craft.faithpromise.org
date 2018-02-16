@@ -167,6 +167,8 @@ return [
             if ($location) {
                 $criteria['groupAddress'] = ['target' => $location, 'range' => $distance];
                 $criteria['order'] = ['distance', 'title'];
+            } else {
+                $criteria['order'] = ['title'];
             }
 
             return [

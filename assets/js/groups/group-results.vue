@@ -3,7 +3,7 @@
 
     <h1 class="GroupResults-title">
       <loading v-show="is_loading"></loading>
-      <span v-if="groups.length && !is_loading">Found {{ total }} Groups {{ total_pages > 1 ? '(pg. ' + current_page + ')' : '' }}</span>
+      <span v-if="groups.length && !is_loading">Found {{ total }} Groups {{ total_pages > 1 ? '(pg. ' + current_page + '/' + total_pages + ')' : '' }}</span>
       <span v-if="none_found">No Groups Found</span>
     </h1>
 
@@ -12,10 +12,21 @@
               @location:updated="updateLocation"
               @category:updated="updateCategory"
               @stage:updated="updateLifeStage"></group-search-form>
+
+      <p class="GroupResults-none" v-if="none_found">Unfortunately, there aren't any groups that match your criteria. However, we're adding new groups all the time. You may even want to
+        <a class="nowrap" href="/groups/leaders">start a group</a> of your own! If you'd like help finding a group or want to know more about starting one, we'd love to hear from you. Please take a moment to
+        <a class="nowrap" href="mailto:groups@faithpromise.org">send an email</a>.</p>
+
     </div>
 
     <div class="GroupResults-map">
-      <groups-map></groups-map>
+      <groups-map v-if="total"></groups-map>
+      <img-srcset
+              image="https://faithpromise.imgix.net/common/phil-coffman-161251-1.jpg"
+              :options="{ fit: 'crop', crop: 'entropy', htn: 3, sepia: 50 }"
+              sizes="50w"
+              dimensions="square">
+      </img-srcset>
     </div>
 
     <div class="GroupResults-items" v-show="!is_loading">
@@ -36,7 +47,8 @@
         <div class="GroupItem-body">
 
           <h2 class="GroupItem-title">{{ group.title }}</h2>
-          <p class="GroupItem-subtitle">{{ group.life_stage }} {{ group.category }} <span v-show="group.city">in {{ group.city }}</span></p>
+          <p class="GroupItem-subtitle">{{ group.life_stage }} {{ group.category }}
+            <span v-show="group.city">in {{ group.city }}</span></p>
           <p class="GroupItem-description">{{ excerpt(group.description) }}</p>
           <ul class="GroupItemDetails">
             <li v-if="group.distance">
@@ -103,7 +115,7 @@
         computed: {
 
             none_found() {
-                return this.is_loaded && this.total === 0;
+                return !this.is_loading && this.total === 0;
             },
 
             has_more() {

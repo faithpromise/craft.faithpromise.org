@@ -27,10 +27,6 @@
 
     export default {
 
-        data() {
-            return {}
-        },
-
         computed: {
             location() {
                 return paramHelper.parseLocation(this.$route.query.location);
@@ -60,9 +56,7 @@
         },
 
         mounted() {
-
             this.load();
-
         },
 
         methods: {
