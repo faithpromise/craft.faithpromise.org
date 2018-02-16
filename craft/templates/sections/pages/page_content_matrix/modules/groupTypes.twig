@@ -7,7 +7,7 @@
             {% for category in categories %}
 
                     {% set params = {
-                        title: category.title,
+                        title: category.title ~ 's',
                         subtitle: null,
                         text: category.text,
                         image: category.groupCategoryImage[0],
