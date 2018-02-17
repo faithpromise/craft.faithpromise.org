@@ -188,6 +188,7 @@ return [
                     if ($markers_only) {
                         return [
                             'id'       => $entry->id,
+                            'slug'     => $entry->slug,
                             'location' => $entry->groupAddress->lat ? ['lat' => round(floatval($entry->groupAddress->lat), 4), 'lng' => round(floatval($entry->groupAddress->lng), 4)] : null,
                         ];
                     }
