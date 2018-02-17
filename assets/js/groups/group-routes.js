@@ -1,15 +1,18 @@
-import main from './group-results.vue';
+import main from './route-groups-home.vue';
+import detail from './route-groups-detail.vue';
 
 const routes = [
     {
         name:      'groups',
         path:      '/',
         component: main,
-    },
-    {
-        name:      'foo',
-        path:      '/foo',
-        component: main,
+        children: [
+            {
+                name: 'group-detail',
+                path: '/:slug',
+                component: detail,
+            }
+        ],
     },
 
 ];
