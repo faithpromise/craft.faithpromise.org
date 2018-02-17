@@ -1,6 +1,8 @@
 <template>
   <div class="GroupResults">
 
+    <router-view></router-view>
+
     <h1 class="GroupResults-title">
       <loading v-show="is_loading"></loading>
       <span v-if="groups.length && !is_loading">Found {{ total }} Groups {{ total_pages > 1 ? '(pg. ' + current_page + '/' + total_pages + ')' : '' }}</span>
@@ -68,7 +70,7 @@
 
       <p class="GroupResults-more" v-show="total_pages > 1">
         <button class="Button" type="button" @click="previousPage" v-show="current_page > 1">Prev Page</button>
-        <button class="Button" type="button" @click="nextPage" v-show="has_more">Nex Page</button>
+        <button class="Button" type="button" @click="nextPage" v-show="has_more">Next Page</button>
       </p>
     </div>
 
