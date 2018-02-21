@@ -50,13 +50,26 @@
   padding:          0 calc-em(12px);
   border-radius:    4px;
   background-color: #fff;;
+}
 
+.ServiceTimes-asl {
+  display: inline-flex;
+  margin-top: .5em;
+  font-size: calc-rem(14px);
+  > span {
+    padding: 0 calc-em(8px);
+  }
+}
+
+.ServiceTimes-time,
+.ServiceTimes-asl {
   > svg {
     display:     inline-block;
     height:      calc-em(32px);
     width:       calc-em(32px);
     margin-left: .5em;
     fill:        currentColor;
+    text-align:  center;
   }
 }
 
@@ -71,7 +84,7 @@
   }
 
   .ServiceTimes-time {
-    height: calc-em(36px, 14px);
+    height:       calc-em(36px, 14px);
     border-width: 1px;
     font-size:    calc-em(14px);
   }

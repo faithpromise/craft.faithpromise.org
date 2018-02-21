@@ -35,6 +35,8 @@
                 <p>The {{ entry_item.title }} Campus is located at {{ entry_item.address }} and meets weekly during the following times.</p>
             {% endif %}
 
+            {% set has_asl = false %}
+
             <table class="ServiceTimes ServiceTimes--condensed" style="margin-bottom: 2em;">
                 {% for day in schedule.serviceTimes %}
                     <tr>
@@ -44,14 +46,26 @@
                                 <span class="ServiceTimes-time">
                                     <span>{{ time.startTime|date('g:i a') }}</span>
                                     {% if time.signLanguageAvailable %}
+                                        {% set has_asl = true %}
                                         <svg role="img"><use xlink:href="{{ assets_base_url }}/assets/icons.svg#asl"></use></svg>
-                                        <span>ASL</span>
                                     {% endif %}
                                 </span>
                             {% endfor %}
                         </td>
                     </tr>
                 {% endfor %}
+                {% if has_asl %}
+                    <tr>
+                        <td colspan="2">
+                            <div class="ServiceTimes-asl">
+                                <svg role="img">
+                                    <use xlink:href="{{ assets_base_url }}/assets/icons.svg#asl"></use>
+                                </svg>
+                                <span>ASL available at marked service times</span>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
             </table>
 
         {% endif %}
