@@ -10,7 +10,13 @@
             <td class="ServiceTimes-date">{{ day.dayOfWeek.label }}</td>
             <td>
                 {% for time in day.times %}
-                    <span class="ServiceTimes-time">{{ time.startTime|date('g:i a') }}</span>
+                    <span class="ServiceTimes-time">
+                        <span>{{ time.startTime|date('g:i a') }}</span>
+                        {% if time.signLanguageAvailable %}
+                            <svg role="img"><use xlink:href="{{ assets_base_url }}/assets/icons.svg#asl"></use></svg>
+                            <span>ASL</span>
+                        {% endif %}
+                    </span>
                 {% endfor %}
             </td>
         </tr>

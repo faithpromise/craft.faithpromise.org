@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
-
 // Variables & Mixins
 @import "variables/variables";
 @import "functions/functions";
@@ -14,7 +13,9 @@
 @import "forms/forms";
 @import "cms-modifications/cms-modifications";
 
-[v-cloak] { display: none }
+[v-cloak] {
+  display: none
+}
 
 .body_text {
   @include fluid-type(320px, 18px, 1000px, 22px);
@@ -41,12 +42,22 @@
 
 .ServiceTimes-time {
   white-space:      nowrap;
-  display:          inline-block;
+  display:          inline-flex;
+  align-items:      center;
+  height:           calc-em(42px);
   margin:           calc-em(4px) calc-em(8px) calc-em(4px) 0;
   border:           2px solid #b9b9b9;
-  padding:          calc-em(8px) calc-em(12px);
+  padding:          0 calc-em(12px);
   border-radius:    4px;
-  background-color: #fff;
+  background-color: #fff;;
+
+  > svg {
+    display:     inline-block;
+    height:      calc-em(32px);
+    width:       calc-em(32px);
+    margin-left: .5em;
+    fill:        currentColor;
+  }
 }
 
 .ServiceTimes-none {
@@ -60,6 +71,7 @@
   }
 
   .ServiceTimes-time {
+    height: calc-em(36px, 14px);
     border-width: 1px;
     font-size:    calc-em(14px);
   }

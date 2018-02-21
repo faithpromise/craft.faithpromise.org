@@ -1,8 +1,8 @@
 {% set schedule = craft.entries({
-section: 'serviceSchedules',
-relatedTo: entry_item,
-serviceScheduleEffectiveAt: '<= ' ~ now,
-order: 'serviceScheduleEffectiveAt desc',
+    section: 'serviceSchedules',
+    relatedTo: entry_item,
+    serviceScheduleEffectiveAt: '<= ' ~ now,
+    order: 'serviceScheduleEffectiveAt desc',
 }).first() %}
 
 {% set global_event = entry.type == 'globalEvent' ? entry : craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
@@ -41,7 +41,13 @@ order: 'serviceScheduleEffectiveAt desc',
                         <td class="ServiceTimes-date">{{ day.dayOfWeek.label|slice(0, 3) }}</td>
                         <td>
                             {% for time in day.times %}
-                                <span class="ServiceTimes-time">{{ time.startTime|date('g:i a') }}</span>
+                                <span class="ServiceTimes-time">
+                                    <span>{{ time.startTime|date('g:i a') }}</span>
+                                    {% if time.signLanguageAvailable %}
+                                        <svg role="img"><use xlink:href="{{ assets_base_url }}/assets/icons.svg#asl"></use></svg>
+                                        <span>ASL</span>
+                                    {% endif %}
+                                </span>
                             {% endfor %}
                         </td>
                     </tr>
@@ -55,14 +61,14 @@ order: 'serviceScheduleEffectiveAt desc',
 {% endset %}
 
 {% set params = {
-'image': entry_item.campusImage[0] ?? null,
-'secondary_image': pastor and pastor.staffPhoto[0] ? pastor.staffPhoto[0] : null,
-'secondary_image_caption': pastor ? pastor.title ~ ', Campus Pastor' : null,
-'title': entry_item.area ?: entry_item.title,
-'subtitle': entry_item.title ~ ' Campus',
-'text': text,
-'action_url': entry_item.theUrl ?: entry_item.url,
-'action_text': entry_item.linkText ?: 'More Details'
+    'image': entry_item.campusImage[0] ?? null,
+    'secondary_image': pastor and pastor.staffPhoto[0] ? pastor.staffPhoto[0] : null,
+    'secondary_image_caption': pastor ? pastor.title ~ ', Campus Pastor' : null,
+    'title': entry_item.area ?: entry_item.title,
+    'subtitle': entry_item.title ~ ' Campus',
+    'text': text,
+    'action_url': entry_item.theUrl ?: entry_item.url,
+    'action_text': entry_item.linkText ?: 'More Details'
 } %}
 
 {% include '_layout/components/card.twig' with params %}
