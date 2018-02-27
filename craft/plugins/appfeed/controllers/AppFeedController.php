@@ -213,7 +213,7 @@ class AppFeedController extends BaseController {
                         ],
                         'duration'  => 1800, // TODO: Need to get actual duration
                     ],
-                    'thumbnail'        => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1920]),
+                    'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
                     'episodeNumber'    => --$episode_number,
                     'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
                     'shortDescription' => $media->text,
@@ -225,7 +225,7 @@ class AppFeedController extends BaseController {
                 'title'            => $series->title,
                 'episodes'         => $episodes,
                 'genres'           => ['educational'], // TODO: What are the available genres?
-                'thumbnail'        => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1920]),
+                'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
                 'releaseDate'      => $series->postDate->format(DateTime::W3C_DATE),
                 'shortDescription' => $series->text,
 
