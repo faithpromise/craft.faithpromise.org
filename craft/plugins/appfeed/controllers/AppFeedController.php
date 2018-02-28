@@ -28,10 +28,10 @@ class AppFeedController extends BaseController {
                 'title' => 'Sermons',
             ],
             'images'         => [
-                ['width' => 320, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 320])],
-                ['width' => 640, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 640])],
-                ['width' => 768, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 768])],
-                ['width' => 1536, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1536])],
+                ['width' => 320, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 320])],
+                ['width' => 640, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 640])],
+                ['width' => 768, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 768])],
+                ['width' => 1536, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1536])],
             ],
             'title'          => $media->title,
             'subtitle'       => $speaker_prefix . $speaker . $speaker_title,
@@ -51,10 +51,10 @@ class AppFeedController extends BaseController {
                 'format'       => 'mp3',
                 'downloadable' => 'true',
                 'images'       => [
-                    ['width' => 320, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 320])],
-                    ['width' => 640, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 640])],
-                    ['width' => 768, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 768])],
-                    ['width' => 1536, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1536])],
+                    ['width' => 320, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 320])],
+                    ['width' => 640, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 640])],
+                    ['width' => 768, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 768])],
+                    ['width' => 1536, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1536])],
                 ],
 
             ];
@@ -96,10 +96,10 @@ class AppFeedController extends BaseController {
                 'items' => [
                     [
                         'images' => [
-                            ['width' => 320, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 320])],
-                            ['width' => 640, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 640])],
-                            ['width' => 768, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 768])],
-                            ['width' => 1536, 'url' => craft()->imageUrl_url->url($series->seriesImageTall[0], ['width' => 1536])],
+                            ['width' => 320, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 320])],
+                            ['width' => 640, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 640])],
+                            ['width' => 768, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 768])],
+                            ['width' => 1536, 'url' => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1536])],
                         ],
                     ],
                 ],
@@ -137,10 +137,10 @@ class AppFeedController extends BaseController {
                 'items' => [
                     [
                         'images' => [
-                            ['width' => 320, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 320])],
-                            ['width' => 640, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 640])],
-                            ['width' => 768, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 768])],
-                            ['width' => 1536, 'url' => craft()->imageUrl_url->url($current_series->seriesImageWide[0], ['width' => 1536])],
+                            ['width' => 320, 'url' => craft()->imageUrl->url($current_series->seriesImageWide[0], ['width' => 320])],
+                            ['width' => 640, 'url' => craft()->imageUrl->url($current_series->seriesImageWide[0], ['width' => 640])],
+                            ['width' => 768, 'url' => craft()->imageUrl->url($current_series->seriesImageWide[0], ['width' => 768])],
+                            ['width' => 1536, 'url' => craft()->imageUrl->url($current_series->seriesImageWide[0], ['width' => 1536])],
                         ],
                     ],
                 ],
@@ -159,10 +159,10 @@ class AppFeedController extends BaseController {
                     ],
                 ],
                 'images'  => [
-                    ['width' => 320, 'url' => craft()->imageUrl_url->url($series->seriesImageSquare[0], ['width' => 320])],
-                    ['width' => 640, 'url' => craft()->imageUrl_url->url($series->seriesImageSquare[0], ['width' => 640])],
-                    ['width' => 768, 'url' => craft()->imageUrl_url->url($series->seriesImageSquare[0], ['width' => 768])],
-                    ['width' => 1536, 'url' => craft()->imageUrl_url->url($series->seriesImageSquare[0], ['width' => 1536])],
+                    ['width' => 320, 'url' => craft()->imageUrl->url($series->seriesImageSquare[0], ['width' => 320])],
+                    ['width' => 640, 'url' => craft()->imageUrl->url($series->seriesImageSquare[0], ['width' => 640])],
+                    ['width' => 768, 'url' => craft()->imageUrl->url($series->seriesImageSquare[0], ['width' => 768])],
+                    ['width' => 1536, 'url' => craft()->imageUrl->url($series->seriesImageSquare[0], ['width' => 1536])],
                 ],
             ];
 
