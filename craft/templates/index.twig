@@ -76,18 +76,36 @@
     {#</video>#}
     {#</home-page-video>#}
 
-    {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
-    {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
+    {% set global_event = craft.entries({ type: 'globalEvent' }).order('expiryDate').first() %}
 
-    {% include '_layout/components/rise-over-image.twig' with {
-        image: latest_series_image,
-        title: latest_series.title,
-        subtitle: 'Latest Series',
-        text: latest_series.markdown,
-        action_url: latest_series.url,
-        action_text: 'More Info',
-        css_class: 'RiseOverImage--gray RiseOverImage--flushTop',
-    } %}
+    {% if global_event %}
+
+        {% include '_layout/components/rise-over-image.twig' with {
+            image: global_event.featuredEventImage.first(),
+            title: global_event.title,
+            subtitle: global_event.dateRange,
+            text: global_event.excerpt,
+            action_url: global_event.url,
+            action_text: global_event.linkText ?: 'More Info',
+            css_class: 'RiseOverImage--gray RiseOverImage--flushTop',
+        } %}
+
+    {% else %}
+
+        {% set latest_series = craft.entries({ type: 'series', with: 'seriesImageSquare' }).order('postDate desc').first() %}
+        {% set latest_series_image = latest_series.seriesImageHome | length ? latest_series.seriesImageHome[0] : latest_series.seriesImageSquare[0] %}
+
+        {% include '_layout/components/rise-over-image.twig' with {
+            image: latest_series_image,
+            title: latest_series.title,
+            subtitle: 'Latest Series',
+            text: latest_series.markdown,
+            action_url: latest_series.url,
+            action_text: 'More Info',
+            css_class: 'RiseOverImage--gray RiseOverImage--flushTop',
+        } %}
+
+    {% endif %}
 
     <section class="Section2">
         <div class="Section2-container">
