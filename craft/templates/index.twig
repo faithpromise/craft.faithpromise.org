@@ -24,15 +24,10 @@
 #}
 
 {% set nav_class = 'Nav--overlay' %}
-{% set cache_key = 'home_page_' ~ (craft.request.isMobileBrowser() ? 'mobile' : 'desktop') %}
 
 {% extends '_layout/layout.twig' %}
 
 {% block content %}
-
-    <!-- Cached with key: {{ cache_key }} -->
-
-    {#{% cache globally using key cache_key %}#}
 
     {% set home_page_video = craft.assets.id(1580).first() %}
     {% set home_page_image = craft.assets.id(3964).first() %}
@@ -174,7 +169,5 @@
             </a>
         </div>
     </div>
-
-    {#{% endcache %}#}
 
 {% endblock %}
