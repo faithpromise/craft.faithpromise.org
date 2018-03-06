@@ -35,9 +35,12 @@
 }
 
 .ServiceTimes-date {
-  font-size:   calc-em(20px);
-  font-weight: 600;
-  line-height: 2.5em;
+  font-size:      calc-em(18px);
+  font-weight:    600;
+  letter-spacing: -.25px;
+  line-height:    2.5em;
+  white-space:    nowrap;
+  vertical-align: top;
 }
 
 .ServiceTimes-time {
@@ -53,9 +56,9 @@
 }
 
 .ServiceTimes-asl {
-  display: inline-flex;
+  display:    inline-flex;
   margin-top: .5em;
-  font-size: calc-rem(14px);
+  font-size:  calc-rem(14px);
   > span {
     padding: 0 calc-em(8px);
   }
