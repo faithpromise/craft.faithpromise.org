@@ -46,13 +46,14 @@
           <p class="GroupItem-description">{{ excerpt(group.description) }}</p>
           <ul class="GroupItemDetails">
             <li v-if="group.distance">
-              <span class="GroupItemDetails-dist">{{ group.distance }} miles away</span>
-              <span class="GroupItemDetails-abbrevDist">{{ group.distance }} miles</span>
+              <span class="GroupItemDetails-dist">{{ group.distance }} mi. away</span>
+              <span class="GroupItemDetails-abbrevDist">{{ group.distance }} mi.</span>
             </li>
             <li>
-              <span class="GroupItemDetails-time">{{ group.day_of_week }} at {{ group.start_time }}</span>
+              <span class="GroupItemDetails-time">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
               <span class="GroupItemDetails-abbrevTime">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
             </li>
+            <li v-if="group.campus">{{ group.campus.name }}</li>
           </ul>
 
         </div>
