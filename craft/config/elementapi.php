@@ -130,6 +130,7 @@ return [
             $markers_only = craft()->request->getParam('dataset') === 'markers';
             $location = craft()->request->getParam('location');
             $distance = 25;
+            $allow_location = true;
 
             $criteria = [
                 'section' => 'groups',
@@ -146,8 +147,12 @@ return [
 
             $related_to = ['and'];
 
-            if ($category = craft()->request->getParam('category'))
-                $related_to[] = craft()->elements->getCriteria(ElementType::Category)->slug($category)->first();
+            if ($category_param = craft()->request->getParam('category')) {
+                $category = craft()->elements->getCriteria(ElementType::Category)->slug($category_param)->first();
+                $related_to[] = $category;
+                $distance = $category->groupCategoryDistance;
+                $allow_location = $category->groupCategoryUsesLocation;
+            }
 
             if ($stage = craft()->request->getParam('stage'))
                 $related_to[] = craft()->elements->getCriteria(ElementType::Category)->slug($stage)->first();
@@ -155,16 +160,11 @@ return [
             if (count($related_to) > 1)
                 $criteria['relatedTo'] = $related_to;
 
-            // Increase distance for interest and serving groups
-            // TODO: Instead of hard coding, this could be a "radius" field on the categories
-            if ($category && ($category === 'embrace-group' || $category === 'engage-group'))
-                $distance = 50;
-
             /**
              * | Search by location
              * | -----------------------------------------
              */
-            if ($location) {
+            if ($location && $allow_location) {
                 $criteria['groupAddress'] = ['target' => $location, 'range' => $distance];
                 $criteria['order'] = ['distance', 'title'];
             } else {
