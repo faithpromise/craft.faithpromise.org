@@ -15,7 +15,7 @@
       <div>
         <select class="GroupCriteria-input" v-model="selected_category">
           <option :value="null">Any Group Type</option>
-          <option v-for="category in categories" :key="category.id" :value="category.slug">{{ category.title }}</option>
+          <option v-for="category in categories" :key="category.id" :value="category.slug">{{ category.title }}{{ category.subtitle ? ' - ' + category.subtitle : '' }}</option>
         </select>
       </div>
       <div>
