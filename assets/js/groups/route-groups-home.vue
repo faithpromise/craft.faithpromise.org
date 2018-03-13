@@ -21,16 +21,7 @@
 
     </div>
 
-    <div class="GroupResults-map">
-      <groups-map v-if="total"></groups-map>
-      <img-srcset
-              v-if="!total"
-              image="https://faithpromise.imgix.net/common/phil-coffman-161251-1.jpg"
-              :options="{ fit: 'crop', crop: 'entropy', htn: 3, sepia: 50 }"
-              sizes="50w"
-              dimensions="square">
-      </img-srcset>
-    </div>
+    <groups-map></groups-map>
 
     <div class="GroupResults-items" v-show="!is_loading">
 

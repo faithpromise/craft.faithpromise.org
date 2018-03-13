@@ -15,9 +15,10 @@ $GroupResults-width: 800px;
 }
 
 .GroupResults-map {
-  position: relative;
-  width:    100%;
-  height:   400px;
+  position:         relative;
+  width:            100%;
+  height:           400px;
+  background-color: $color-gray-lightest;
 
   > img {
     @include object-fit(cover);

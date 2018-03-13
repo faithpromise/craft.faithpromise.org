@@ -1,5 +1,7 @@
 <template>
-  <div style="height: 100%; width: 100%;"></div>
+  <div class="GroupResults-map">
+    <div style="height: 100%; width: 100%;" v-bind:style="{ visibility: has_markers ? 'visible' : 'hidden' }"></div>
+  </div>
 </template>
 <script>
 
@@ -7,6 +9,7 @@
     import * as paramHelper from './group-query-params';
     import googleMaps from '../common/google-maps';
     import groupService from './group.service';
+    import imgSrcset from '../common/image-srcset.vue';
 
     let old_params = {},
         map_promise_resolve,
@@ -26,6 +29,16 @@
     }
 
     export default {
+
+        components: {
+            imgSrcset,
+        },
+
+        data() {
+            return {
+                has_markers: false,
+            }
+        },
 
         computed: {
             location() {
@@ -87,7 +100,7 @@
                 if (this.location)
                     config.center = this.location;
 
-                googleMaps.createMap(this.$el, config).then((map) => {
+                googleMaps.createMap(this.$el.querySelector('div'), config).then((map) => {
                     map_promise_resolve(map);
                     window.search_map = map; // Ref so we can remove it when navigating away from search
                 });
@@ -176,6 +189,8 @@
                     bounds.extend(markers[group.id].getPosition());
 
                 });
+
+                this.has_markers = Object.keys(group_ids).length > 0;
 
                 map.fitBounds(bounds);
 
