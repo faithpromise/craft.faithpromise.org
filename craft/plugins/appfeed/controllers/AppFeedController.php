@@ -199,37 +199,41 @@ class AppFeedController extends BaseController {
             $episode_number = count($seriesMedia) + 1;
 
             foreach ($seriesMedia as $media) {
-                $episodes[] = [
-                    'id'               => $media->id,
-                    'title'            => $media->title,
-                    'content'          => [
-                        'dateAdded' => $media->postDate->format(DateTime::W3C_DATE),
-                        'videos'    => [
-                            [
-                                'url'       => $media->videoStreamUrl,
-                                'quality'   => 'HD',
-                                'videoType' => 'MP4',
+                if ($media->videoStreamUrl) {
+                    $episodes[] = [
+                        'id'               => $media->id,
+                        'title'            => $media->title,
+                        'content'          => [
+                            'dateAdded' => $media->postDate->format(DateTime::W3C_DATE),
+                            'videos'    => [
+                                [
+                                    'url'       => $media->videoStreamUrl,
+                                    'quality'   => 'HD',
+                                    'videoType' => 'MP4',
+                                ],
                             ],
+                            'duration'  => 1800, // TODO: Need to get actual duration
                         ],
-                        'duration'  => 1800, // TODO: Need to get actual duration
-                    ],
-                    'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
-                    'episodeNumber'    => --$episode_number,
-                    'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
-                    'shortDescription' => $media->text,
-                ];
+                        'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
+                        'episodeNumber'    => --$episode_number,
+                        'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
+                        'shortDescription' => $media->text ?: $media->title . ' is a video from Faith Promise Church.',
+                    ];
+                }
             }
 
-            $data['series'][] = [
-                'id'               => $series->id,
-                'title'            => $series->title,
-                'episodes'         => $episodes,
-                'genres'           => ['educational'], // TODO: What are the available genres?
-                'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
-                'releaseDate'      => $series->postDate->format(DateTime::W3C_DATE),
-                'shortDescription' => $series->text,
+            if (count($episodes)) {
+                $data['series'][] = [
+                    'id'               => $series->id,
+                    'title'            => $series->title,
+                    'episodes'         => $episodes,
+                    'genres'           => ['educational'], // TODO: What are the available genres?
+                    'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
+                    'releaseDate'      => $series->postDate->format(DateTime::W3C_DATE),
+                    'shortDescription' => $series->text ?: $series->title . ' is a sermon series from Faith Promise Church.',
 
-            ];
+                ];
+            }
 
         }
 
