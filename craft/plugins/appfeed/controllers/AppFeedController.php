@@ -207,7 +207,7 @@ class AppFeedController extends BaseController {
                             'dateAdded' => $media->postDate->format(DateTime::W3C_DATE),
                             'videos'    => [
                                 [
-                                    'url'       => $media->videoStreamUrl,
+                                    'url'       => $media->videoHdUrl,
                                     'quality'   => 'HD',
                                     'videoType' => 'MP4',
                                 ],
