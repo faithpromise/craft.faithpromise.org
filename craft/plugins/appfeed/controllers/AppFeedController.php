@@ -179,6 +179,7 @@ class AppFeedController extends BaseController {
         $today->setTime(0, 0);
 
         $series_entries = craft()->elements->getCriteria(ElementType::Entry)->type('series')->seriesIsOfficial(1)->with('seriesImageWide')->limit(null)->order('postDate desc')->find();
+        $alignment_entries = craft()->elements->getCriteria(ElementType::Entry)->type('alignments')->with('alignmentImage')->limit(null)->order('postDate desc')->find();
 
         $data = [
             'providerName'    => 'Faith Promise Church',
@@ -231,7 +232,52 @@ class AppFeedController extends BaseController {
                     'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
                     'releaseDate'      => $series->postDate->format(DateTime::W3C_DATE),
                     'shortDescription' => $series->text ?: $series->title . ' is a sermon series from Faith Promise Church.',
+                    'tags'             => 'sermon',
+                ];
+            }
 
+        }
+
+        foreach ($alignment_entries as $alignment) {
+
+            $alignmentMedia = craft()->elements->getCriteria(ElementType::Entry)->section('alignmentMedia')->relatedTo($alignment)->find();
+            $episodes = [];
+            $episode_number = count($alignmentMedia) + 1;
+
+            foreach ($alignmentMedia as $media) {
+                if ($media->videoHdUrl) {
+                    $episodes[] = [
+                        'id'               => $media->id,
+                        'title'            => $media->title,
+                        'content'          => [
+                            'dateAdded' => $media->postDate->format(DateTime::W3C_DATE),
+                            'videos'    => [
+                                [
+                                    'url'       => $media->videoHdUrl,
+                                    'quality'   => 'HD',
+                                    'videoType' => 'MP4',
+                                ],
+                            ],
+                            'duration'  => 1800, // TODO: Need to get actual duration
+                        ],
+                        'thumbnail'        => craft()->imageUrl->url($alignment->alignmentImage[0], ['width' => 1920]),
+                        'episodeNumber'    => --$episode_number,
+                        'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
+                        'shortDescription' => $media->title . ' - Part of ' . $alignment->title . ', a group alignment from Faith Promise Church.',
+                    ];
+                }
+            }
+
+            if (count($episodes)) {
+                $data['series'][] = [
+                    'id'               => $alignment->id,
+                    'title'            => $alignment->title,
+                    'episodes'         => $episodes,
+                    'genres'           => ['educational'], // TODO: What are the available genres?
+                    'thumbnail'        => craft()->imageUrl->url($alignment->alignmentImage[0], ['width' => 1920]),
+                    'releaseDate'      => $alignment->postDate->format(DateTime::W3C_DATE),
+                    'shortDescription' => $alignment->title . ' is a group alignment from Faith Promise Church.',
+                    'tags'             => 'study',
                 ];
             }
 
