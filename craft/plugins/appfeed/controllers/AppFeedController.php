@@ -232,7 +232,7 @@ class AppFeedController extends BaseController {
                     'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
                     'releaseDate'      => $series->postDate->format(DateTime::W3C_DATE),
                     'shortDescription' => $series->text ?: $series->title . ' is a sermon series from Faith Promise Church.',
-                    'tags'             => 'sermon',
+                    'tags'             => ['sermon'],
                 ];
             }
 
@@ -277,7 +277,7 @@ class AppFeedController extends BaseController {
                     'thumbnail'        => craft()->imageUrl->url($alignment->alignmentImage[0], ['width' => 1920]),
                     'releaseDate'      => $alignment->postDate->format(DateTime::W3C_DATE),
                     'shortDescription' => $alignment->title . ' is a group alignment from Faith Promise Church.',
-                    'tags'             => 'study',
+                    'tags'             => ['study'],
                 ];
             }
 
