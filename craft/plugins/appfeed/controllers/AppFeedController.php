@@ -198,6 +198,7 @@ class AppFeedController extends BaseController {
 
             $episodes = [];
             $episode_number = count($seriesMedia) + 1;
+            $seriesImage = craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920, 'height' => 1080, 'fit' => 'crop']);
 
             foreach ($seriesMedia as $media) {
                 if ($media->videoStreamUrl) {
@@ -215,7 +216,7 @@ class AppFeedController extends BaseController {
                             ],
                             'duration'  => 1800, // TODO: Need to get actual duration
                         ],
-                        'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
+                        'thumbnail'        => $seriesImage,
                         'episodeNumber'    => --$episode_number,
                         'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
                         'shortDescription' => $media->text ?: $media->title . ' is a video from Faith Promise Church.',
@@ -229,7 +230,7 @@ class AppFeedController extends BaseController {
                     'title'            => $series->title,
                     'episodes'         => $episodes,
                     'genres'           => ['educational'], // TODO: What are the available genres?
-                    'thumbnail'        => craft()->imageUrl->url($series->seriesImageTall[0], ['width' => 1920]),
+                    'thumbnail'        => $seriesImage,
                     'releaseDate'      => $series->postDate->format(DateTime::W3C_DATE),
                     'shortDescription' => $series->text ?: $series->title . ' is a sermon series from Faith Promise Church.',
                     'tags'             => ['sermon'],
@@ -243,6 +244,7 @@ class AppFeedController extends BaseController {
             $alignmentMedia = craft()->elements->getCriteria(ElementType::Entry)->section('alignmentMedia')->relatedTo($alignment)->find();
             $episodes = [];
             $episode_number = count($alignmentMedia) + 1;
+            $alignmentImage = craft()->imageUrl->url($alignment->alignmentImage[0], ['width' => 1920, 'height' => '1080', 'fit' => 'fill', 'bg' => '363436']);
 
             foreach ($alignmentMedia as $media) {
                 if ($media->videoHdUrl) {
@@ -260,7 +262,7 @@ class AppFeedController extends BaseController {
                             ],
                             'duration'  => 1800, // TODO: Need to get actual duration
                         ],
-                        'thumbnail'        => craft()->imageUrl->url($alignment->alignmentImage[0], ['width' => 1920]),
+                        'thumbnail'        => $alignmentImage,
                         'episodeNumber'    => --$episode_number,
                         'releaseDate'      => $media->postDate->format(DateTime::W3C_DATE),
                         'shortDescription' => $media->title . ' - Part of ' . $alignment->title . ', a group alignment from Faith Promise Church.',
@@ -274,7 +276,7 @@ class AppFeedController extends BaseController {
                     'title'            => $alignment->title,
                     'episodes'         => $episodes,
                     'genres'           => ['educational'], // TODO: What are the available genres?
-                    'thumbnail'        => craft()->imageUrl->url($alignment->alignmentImage[0], ['width' => 1920]),
+                    'thumbnail'        => $alignmentImage,
                     'releaseDate'      => $alignment->postDate->format(DateTime::W3C_DATE),
                     'shortDescription' => $alignment->title . ' is a group alignment from Faith Promise Church.',
                     'tags'             => ['study'],
