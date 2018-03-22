@@ -1,3 +1,5 @@
+{% set has_asl = false %}
+
 {% if days|length %}
     <table class="ServiceTimes">
         {% for block in days %}
@@ -5,7 +7,13 @@
                 <td class="ServiceTimes-date">{{ block.date|date("D M. j") }}</td>
                 <td>
                     {% for time in block.times %}
-                        <span class="ServiceTimes-time">{{ time.startTime|lower }}</span>
+                        <span class="ServiceTimes-time">
+                            <span>{{ time.startTime|lower }}</span>
+                            {% if time.signLanguageAvailable %}
+                                {% set has_asl = true %}
+                                <svg role="img"><use xlink:href="{{ assets_base_url }}/assets/icons.svg#asl"></use></svg>
+                            {% endif %}
+                        </span>
                     {% endfor %}
                     {% if block.times|length == 0 %}
                         <span class="ServiceTimes-none">No Services</span>
@@ -14,7 +22,19 @@
             </tr>
         {% endfor %}
         {% if days|length == 0 %}
-            <li>During each of our regular service times.</li>
+            <tr><td colspan="2">During each of our regular service times.</td></tr>
+        {% endif %}
+        {% if has_asl %}
+            <tr>
+                <td colspan="2">
+                    <div class="ServiceTimes-asl">
+                        <svg role="img">
+                            <use xlink:href="{{ assets_base_url }}/assets/icons.svg#asl"></use>
+                        </svg>
+                        <span>ASL available at marked service times</span>
+                    </div>
+                </td>
+            </tr>
         {% endif %}
     </table>
 {% endif %}
