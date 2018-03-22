@@ -2,3 +2,6 @@
 .env.sh
 .env.php
 node_modules
+
+.data
+public/.htaccess

@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  web:
+    depends_on:
+      - db
+    build: .
+    links:
+      - db
+    volumes:
+      - ".:/var/www/html/"
+      - "./public/htaccess:/var/www/html/public/.htaccess"
+      - "./env-docker.php:/var/www/html/.env.php"
+    ports:
+      - "8440:80"
+  db:
+    image: mysql:5.7
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+      - "./.data/sql:/docker-entrypoint-initdb.d"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel_ddb
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+    ports:
+      - "3306:3306"
