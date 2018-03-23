@@ -16,7 +16,7 @@
     imageWide: matrix_block['imageWide'] is defined and matrix_block.imageWide | length ? matrix_block.imageWide[0] : false,
     imageLayout: matrix_block['imageLayout'] is defined ? matrix_block.imageLayout : 'default',
     headerVideo: matrix_block['headerVideo'] is defined and matrix_block.headerVideo | length ? matrix_block.headerVideo[0] : null,
-    id: is defined matrix_block['sectionId'] ? matrix_block.sectionId : 'matrix-block-' ~ matrix_block['id'],
+    id: matrix_block['sectionId'] is defined ? matrix_block.sectionId : 'matrix-block-' ~ matrix_block['id'],
     } %}
 
     {% include 'sections/pages/page_content_matrix/' ~ matrix_block.type ~ '.twig' ignore missing %}
