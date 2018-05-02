@@ -30,6 +30,7 @@ class AppFeedPlugin extends BasePlugin {
             'app-api/series/(?P<series_slug>[a-zA-Z0-9-]+)'                               => ['action' => 'appFeed/getSeries'],
             'app-api/series/(?P<series_slug>[a-zA-Z0-9-]+)/(?P<media_slug>[a-zA-Z0-9-]+)' => ['action' => 'appFeed/getMedia'],
             'app-api/roku'                                                                => ['action' => 'appFeed/getRoku'],
+            'app-api/online'                                                              => ['action' => 'appFeed/getOnline'],
         ];
 
         return $routes;

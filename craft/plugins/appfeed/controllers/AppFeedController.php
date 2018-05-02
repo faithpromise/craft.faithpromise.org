@@ -290,4 +290,20 @@ class AppFeedController extends BaseController {
         craft()->end();
 
     }
+
+    public function actionGetOnline() {
+
+        $online = craft()->elements->getCriteria(ElementType::Entry)->section('onlineService')->first();
+        $seriesImage = craft()->imageUrl->url($online->series[0]->seriesImageTall[0], ['width' => 1920, 'height' => 1080, 'fit' => 'crop']);
+
+        $data = [
+            'hd_url'     => $online->videoHdUrl,
+            'stream_url' => $online->videoStreamUrl,
+            'image'      => $seriesImage,
+        ];
+
+        $this->returnJson($data);
+
+    }
+
 }
