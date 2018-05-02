@@ -297,9 +297,11 @@ class AppFeedController extends BaseController {
         $seriesImage = craft()->imageUrl->url($online->series[0]->seriesImageTall[0], ['width' => 1920, 'height' => 1080, 'fit' => 'crop']);
 
         $data = [
-            'hd_url'     => $online->videoHdUrl,
-            'stream_url' => $online->videoStreamUrl,
-            'image'      => $seriesImage,
+            'hd_url'      => $online->videoHdUrl,
+            'stream_url'  => $online->videoStreamUrl,
+            'image'       => $seriesImage,
+            'title'       => $online->series[0]->title,
+            'description' => $online->series[0]->markdown,
         ];
 
         $this->returnJson($data);
