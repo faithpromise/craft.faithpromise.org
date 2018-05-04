@@ -1,0 +1,22 @@
+{
+    "name": "faithpromise/craft-ministry-platform",
+    "description": "A Craft CMS plugin to execute basic tasks in Ministry Platform",
+    "authors": [
+        {
+            "name": "Brad Roberts",
+            "email": "brad@bradroberts.net"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/faithpromise/ministry-platform"
+        }
+    ],
+    "require": {
+        "faithpromise/ministry-platform": "dev-master"
+    },
+    "autoload": {
+        "files": ["OauthTokenPersistence.php"]
+    }
+}
