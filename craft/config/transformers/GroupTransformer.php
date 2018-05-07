@@ -15,7 +15,7 @@ class GroupTransformer extends TransformerAbstract {
 
     protected $availableIncludes = ['campus'];
 
-    public function __construct($location, $markers_only, $default_image) {
+    public function __construct($location = null, $markers_only = false, $default_image = null) {
 
         $this->location = $location;
         $this->markers_only = $markers_only;
@@ -27,9 +27,9 @@ class GroupTransformer extends TransformerAbstract {
 
         // Prefer group image, then life stage image, then category image, then a default image
         $imageUrlService = new ImageUrlService();
-        $image = $entry->groupImage ? $entry->groupImage[0] : (
-        $entry->groupLifeStage && $entry->groupLifeStage[0]->groupLifeStageImage ? $entry->groupLifeStage[0]->groupLifeStageImage[0] : (
-        $entry->groupCategory && $entry->groupCategory[0]->groupCategoryImage ? $entry->groupCategory[0]->groupCategoryImage[0] : $this->default_image
+        $image = count($entry->groupImage) ? $entry->groupImage[0] : (
+        count($entry->groupLifeStage) && count($entry->groupLifeStage[0]->groupLifeStageImage) ? $entry->groupLifeStage[0]->groupLifeStageImage[0] : (
+        count($entry->groupCategory) && count($entry->groupCategory[0]->groupCategoryImage) ? $entry->groupCategory[0]->groupCategoryImage[0] : $this->default_image
         )
         );
 
@@ -41,12 +41,19 @@ class GroupTransformer extends TransformerAbstract {
             ];
         }
 
+        $leaders = [];
+        if ($entry->groupLeaders) {
+            foreach ($entry->groupLeaders as $leader) {
+                $leaders[] = trim($leader['firstName'] . ' ' . $leader['lastName']);
+            }
+        }
+
         return [
             'id'          => $entry->id,
             'slug'        => $entry->slug,
             'title'       => $entry->title,
             'subtitle'    => $entry->groupSubtitle,
-            'category'    => count($entry->groupCategory) ? $entry->groupCategory[0]->title : null,
+            'category'    => count($entry->groupCategory) ? ['title' => $entry->groupCategory[0]->title, 'description' => $entry->groupCategory[0]->text] : null,
             'life_stage'  => count($entry->groupLifeStage) ? $entry->groupLifeStage[0]->title : null,
             'description' => $entry->groupDescription,
             'city'        => $entry->groupAddress->city,
@@ -55,7 +62,8 @@ class GroupTransformer extends TransformerAbstract {
             'start_time'  => $entry->groupStartTime,
             'location'    => $entry->groupAddress->lat ? ['lat' => round(floatval($entry->groupAddress->lat), 4), 'lng' => round(floatval($entry->groupAddress->lng), 4)] : null,
             'distance'    => $this->location ? round($entry->groupAddress->distance, 1) : null,
-            'image'       => $imageUrlService->url($image),
+            'image'       => $image ? $imageUrlService->url($image) : null,
+            'leaders'     => $leaders,
         ];
 
     }
