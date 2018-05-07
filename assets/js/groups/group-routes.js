@@ -4,14 +4,15 @@ import detail from './route-groups-detail.vue';
 const routes = [
     {
         name:      'groups',
-        path:      '/',
+        path:      '/search',
         component: main,
-        children: [
+        children:  [
             {
-                name: 'group-detail',
-                path: '/:slug',
+                name:      'group-detail',
+                path:      '/:slug(\\d+)',
                 component: detail,
-            }
+                meta:      { scroll_to_top: false, },
+            },
         ],
     },
 
@@ -19,10 +20,13 @@ const routes = [
 
 const router = new VueRouter({
     routes:         routes.concat([]),
-    base:           '/groups/search',
+    base:           '/groups',
     mode:           'history',
     scrollBehavior: (to, from, savedPosition) => {
-        return savedPosition ? savedPosition : { x: 0, y: 0 }
+
+        let no_change = to.meta.scroll_to_top === false || from.meta.scroll_to_top === false;
+
+        return savedPosition ? savedPosition : (no_change ? false : { x: 0, y: 0 });
     }
 });
 
