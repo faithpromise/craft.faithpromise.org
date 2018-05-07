@@ -88,11 +88,6 @@
             loading,
         },
 
-        beforeRouteUpdate(to, from, next) {
-            next();
-            this.load();
-        },
-
         data() {
 
             return {
@@ -156,6 +151,7 @@
                 let params = paramHelper.cleanParams(this.$route.query, new_params);
                 delete params.page;
                 this.$router.push({ name: this.$route.name, query: params });
+                this.load();
             },
 
             updateLocation(location) {
