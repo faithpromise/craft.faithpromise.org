@@ -41,7 +41,7 @@
         <div class="GroupItem-body">
 
           <h2 class="GroupItem-title">{{ group.title }}</h2>
-          <p class="GroupItem-subtitle">{{ group.life_stage }} {{ group.category }}
+          <p class="GroupItem-subtitle">{{ group.life_stage }}, {{ group.category.title }} Group
             <span v-show="group.city">in {{ group.city }}</span></p>
           <p class="GroupItem-description">{{ excerpt(group.description) }}</p>
           <ul class="GroupItemDetails">
