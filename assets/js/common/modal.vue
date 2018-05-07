@@ -1,90 +1,141 @@
 <template>
+
   <portal to="modal">
-    <transition name="transition" v-on:after-leave="after_leave" v-on:before-enter="before_enter">
 
-      <div class="Modal" v-show="show && is_visible" v-bind:class="modalClass" v-on:keyup.esc="close">
-        <div class="Modal-container">
+    <div class="Modal" @click.self="close">
 
-          <div class="Modal-window">
+      <loading v-if="!show"></loading>
 
-            <div class="Modal-close" v-on:click="close">
-              <svg role="img" class="Modal-closeIcon">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close"></use>
-              </svg>
-            </div>
+      <transition name="modal" @after-leave="afterLeave" @before-enter="beforeEnter">
 
-            <h2 class="Modal-title">{{ title }}</h2>
+        <div class="Modal-dialog" :class="klass" v-show="is_dialog_visible">
 
-            <div class="Model-body">
-              <slot></slot>
-            </div>
-
+          <div class="Modal-close" @click="close" v-if="closeable">
+            <svg role="img">
+              <use xlink:href="/assets/icons.svg#modal-close"></use>
+            </svg>
           </div>
+
+          <div class="Modal-header">
+            <div class="Modal-title">{{ title }}</div>
+          </div>
+
+          <div class="Modal-body">
+            <slot></slot>
+          </div>
+
+          <div class="Modal-footer">
+            <slot name="footer"></slot>
+          </div>
+
         </div>
-      </div>
 
-    </transition>
+      </transition>
+
+    </div>
+
   </portal>
-</template>
 
+</template>
 <script>
+
+    import loading from './loading.vue';
+
     export default {
 
         props: {
-            show:       { required: true },
-            modalClass: { default: null },
-            title:      { default: null }
+            show:      { required: true },
+            closeable: { default: true },
+            title:     { required: true },
+            size:      { default: 'medium' },
+        },
+
+        components: {
+            loading,
         },
 
         data() {
             return {
-                is_visible: false
+                is_visible: false,
             }
         },
 
-        created: function () {
-            console.log('Modal Created');
-            // Body because ListingPhotos needs to stopPropagation
-            document.addEventListener('keyup', this.escClose);
-        },
+        computed: {
+            klass() {
+                return 'Modal--' + this.size;
+            },
 
-        beforeDestroy: function () {
-            // Body because ListingPhotos needs to stopPropagation
-            document.removeEventListener('keyup', this.escClose);
+            is_dialog_visible() {
+                return this.show && this.is_visible && !this.loading;
+            },
 
-            // Make sure modal is closed so `modal-open` class is removed from body tag
-            document.documentElement.classList.remove('modal-open');
         },
 
         mounted: function () {
             this.is_visible = true;
         },
 
+        created: function () {
+            this.bindEscapeKey();
+            this.disableScrolling();
+            this.showLoading();
+        },
+
+        beforeDestroy: function () {
+            this.unbindEscapeKey();
+            this.enableScrolling();
+            this.hideLoading();
+        },
+
         methods: {
 
-            escClose: function (e) {
-                if (e.keyCode == 27) {
-                    // TODO: This is getting fired twice for some reason
-                    console.log('Modal closed by esc key');
+            close() {
+                this.is_visible = !this.closeable;
+            },
+
+            escapeKeyHandler(e) {
+                if (e.keyCode === 27)
                     this.close();
-                }
             },
 
-            close: function () {
-                this.is_visible = false;
+            beforeEnter() {
+                this.hideLoading();
             },
 
-            before_enter: function () {
-                console.log('before_enter');
+            afterLeave() {
+                this.enableScrolling();
+                this.$emit('close');
+                // this.is_visible = true;
+                this.hideLoading();
+            },
+
+            enableScrolling() {
+                document.documentElement.classList.remove('modal-open');
+            },
+
+            disableScrolling() {
                 document.documentElement.classList.add('modal-open');
             },
 
-            after_leave: function () {
-                document.documentElement.classList.remove('modal-open');
-                this.$emit('close');
-                this.is_visible = true;
+            bindEscapeKey() {
+                if (this.closeable)
+                    document.addEventListener('keyup', this.escapeKeyHandler);
+            },
+
+            unbindEscapeKey() {
+                if (this.closeable)
+                    document.removeEventListener('keyup', this.escapeKeyHandler);
+            },
+
+            showLoading() {
+                document.documentElement.classList.add('modal-loading');
+            },
+
+            hideLoading() {
+                document.documentElement.classList.remove('modal-loading');
             },
 
         }
+
     }
 </script>
