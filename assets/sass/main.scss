@@ -17,6 +17,10 @@
   display: none
 }
 
+.margin-top-0 {
+  margin-top: 0;
+}
+
 .body_text {
   @include fluid-type(320px, 18px, 1000px, 22px);
 }

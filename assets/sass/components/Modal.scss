@@ -1,0 +1,159 @@
+$Modal-border-radius: .25em;
+$Modal-transition-speed: .25s;
+
+.modal-open body {
+  overflow:      hidden; // No scrolling
+  padding-right: 15px; // Offset scrollbar
+}
+
+.modal-loading .Modal {
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+}
+
+.Modal-backdrop {
+  position:         fixed;
+  z-index:          100;
+  top:              0;
+  right:            100%;
+  bottom:           0;
+  left:             0;
+  background-color: transparent;
+  transition:       background-color $Modal-transition-speed linear, right 0s $Modal-transition-speed;
+
+  .modal-loading &,
+  .modal-open & {
+    right:            0;
+    background-color: rgba(0, 0, 0, .85);
+    transition:       background-color $Modal-transition-speed linear;
+  }
+
+}
+
+.Modal {
+  position: fixed;
+  top:      0;
+  right:    0;
+  bottom:   0;
+  left:     0;
+  z-index:  1050;
+  overflow: hidden;
+  // Prevent Chrome on Windows from adding a focus outline. For details, see
+  // https://github.com/twbs/bootstrap/pull/10951.
+  outline:  0;
+  // We deliberately don't use `-webkit-overflow-scrolling: touch;` due to a
+  // gnarly iOS Safari bug: https://bugs.webkit.org/show_bug.cgi?id=158342
+  // See also https://github.com/twbs/bootstrap/issues/17695
+
+  .modal-open & {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .Loading-dot {
+    background-color: $color-white;
+  }
+
+}
+
+.Modal-dialog {
+  width:      88%;
+  margin:     3.5rem auto;
+  transform:  translate(0px, 0); // Prevents jerking transition
+  transition: all $Modal-transition-speed ease;
+
+  &.Modal--small {
+    max-width: calc-em(480px);
+  }
+
+  &.Modal--medium {
+    max-width: calc-em(760px);
+  }
+
+  &.Modal--large {
+    max-width: calc-em(960px);
+  }
+
+  // Transition
+
+  &.modal-enter {
+    //transform: scale(1.1);
+    transform: translateY(20%);
+    opacity:   0;
+  }
+
+  &.modal-leave-active {
+    //transform: scale(1.1);
+    transform: translateY(20%);
+    opacity:   0;
+  }
+
+}
+
+.Modal-header,
+.Modal-body,
+.Modal-footer {
+  background-color: #fff;
+}
+
+.Modal-title {
+  white-space:   nowrap;
+  text-overflow: ellipsis;
+  overflow:      hidden;
+}
+
+.Modal-close {
+  position: absolute;
+  z-index:  102;
+  top:      .75em;
+  right:    .75em;
+  padding:  0.25em 0.5em;
+  color:    $color-gray;
+  cursor:   pointer;
+
+  &:hover {
+    color: $color-gray-darker;
+  }
+
+  > svg {
+    height: 1.25em;
+    width:  1.25em;
+    fill:   currentColor;
+  }
+}
+
+.Modal-body {
+  padding: 2rem;
+
+  .Modal-header + & {
+    border-top-left-radius:  0;
+    border-top-right-radius: 0;
+  }
+}
+
+.Modal-header {
+  @extend %user-select-none;
+  padding:       1rem 3em 1em 2em;
+  border-bottom: 1px solid $color-gray-light;
+  border-radius: $Modal-border-radius $Modal-border-radius 0 0;
+}
+
+.Modal-title {
+  line-height: 1.2em;
+  font-size:   1.25em;
+  font-weight: 500;
+}
+
+.Modal-footer {
+  padding:          1rem 2rem;
+  border-top:       1px solid $color-gray-light;
+  border-radius:    0 0 $Modal-border-radius $Modal-border-radius;
+  background-color: $color-gray-lighter;
+
+  &:empty {
+    padding:          $Modal-border-radius;
+    border-top:       none;
+    background-color: #fff;
+  }
+}
