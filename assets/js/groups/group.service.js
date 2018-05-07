@@ -6,4 +6,8 @@ export default {
         return axios.get('/api/groups', { params });
     },
 
+    find(slug) {
+        return axios.get('/api/groups/' + slug);
+    },
+
 }
