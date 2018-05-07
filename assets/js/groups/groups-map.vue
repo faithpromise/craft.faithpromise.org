@@ -50,8 +50,9 @@
 
             '$route': {
                 immediate: true,
-                handler() {
-                    this.loadMarkers();
+                handler(value) {
+                    if (value.name === 'groups')
+                        this.loadMarkers();
                 },
             },
 
