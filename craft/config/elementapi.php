@@ -227,6 +227,22 @@ return [
 
         },
 
+        'api/groups/<slug:\d+>' => function ($slug) {
+
+            require craft()->path->getConfigPath() . 'transformers/GroupTransformer.php';
+
+            $default_image = craft()->elements->getCriteria(ElementType::Asset)->id(4860)->first();
+
+            return [
+                'elementType' => ElementType::Entry,
+                'criteria'    => ['slug' => $slug],
+                'one'         => true,
+                'transformer' => new GroupTransformer(null, false, $default_image),
+                'includes'    => 'campus',
+                'with'        => ['groupCampus'], // TODO: Not sure if this actually eager loads the campus
+            ];
+        },
+
         'api/campuses' => function () {
 
             return [
