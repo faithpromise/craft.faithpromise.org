@@ -34,7 +34,6 @@ class MinistryPlatform_GroupsController extends BaseController {
 
             $contact = $mp->contacts()->firstOrCreate($message['First_Name'], $message['Last_Name'], $message['Email']);
 
-            $message['Group_ID'] = 4; // TODO: Remove
             $message['Contact_ID'] = $contact->Contact_ID;
             $message['Inquiry_Date'] = Carbon::now()->format('Y-m-d\TH:i:s');
 
