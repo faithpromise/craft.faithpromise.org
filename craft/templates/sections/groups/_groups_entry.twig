@@ -1,0 +1,46 @@
+{% extends "_layout/layout.twig" %}
+
+{% block content %}
+
+    {# Prefer group image, then life stage image, then category image, then a default image #}
+    {% set group_image = entry.groupImage|length ? entry.groupImage[0] : (
+        entry.groupLifeStage|length and entry.groupLifeStage[0].groupLifeStageImage|length ? entry.groupLifeStage[0].groupLifeStageImage[0] : (
+        entry.groupCategory|length and entry.groupCategory[0].groupCategoryImage|length ? entry.groupCategory[0].groupCategoryImage[0] : null
+        )
+        )
+    %}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Hero
+    |--------------------------------------------------------------------------
+    #}
+
+    {#{% set hero_image = entry.campusHeaderImage|length ? entry.campusHeaderImage[0] : (entry.campusImage|length ? entry.campusImage[0] : null) %}#}
+
+    {#{% embed '_layout/hero.twig' with { title: entry.title ~ ' Campus', style: 'textOverlay', imageTall: hero_image } %}#}
+        {#{% block text %}#}
+            {#{{ entry.intro }}#}
+        {#{% endblock %}#}
+    {#{% endembed %}#}
+
+    {#
+    |--------------------------------------------------------------------------
+    | Group info
+    |--------------------------------------------------------------------------
+    #}
+
+    {% embed '_layout/text_section.twig' with {
+        title: entry.title,
+        align: 'left',
+        image: group_image,
+        imageLayout: 'floating'
+    } %}
+        {% block text %}
+            <p>{{ entry.groupDescription }}</p>
+            <p>We're an {{ entry.groupCategory[0].title }} Group which means we primarily focus on {{ entry.groupCategory[0].text }} Our group is led by  and usually meets on {{ entry.groupDayOfWeek }}s at {{ entry.groupStartTime }}.</p>
+            <groups-contact-standalone id="{{ entry.slug }}"></groups-contact-standalone>
+        {% endblock %}
+    {% endembed %}
+
+{% endblock %}
