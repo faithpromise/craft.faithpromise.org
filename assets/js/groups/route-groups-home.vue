@@ -145,6 +145,7 @@
             goToPage(page) {
                 let params = paramHelper.cleanParams(this.$route.query, { page });
                 this.$router.push({ name: this.$route.name, query: params });
+                this.load();
             },
 
             update(new_params = {}) {
