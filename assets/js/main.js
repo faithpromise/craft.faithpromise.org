@@ -12,6 +12,7 @@ import volunteerPositions from './serving/volunteer-positions.vue';
 import readingPlanNav from './common/reading-plan-nav.vue';
 import globalLeadershipSummit from './common/global-leadership-summit.vue';
 import groupAddressSearch from './groups/group-address-search.vue';
+import groupsContactStandalone from './groups/groups-contact-standalone.vue';
 
 require('./custom_functions/_custom_functions');
 require('url-search-params/build/url-search-params.max');
@@ -35,6 +36,7 @@ const app = new Vue({
         readingPlanNav,
         globalLeadershipSummit,
         groupAddressSearch,
+        groupsContactStandalone,
     },
 
     data: function () {
