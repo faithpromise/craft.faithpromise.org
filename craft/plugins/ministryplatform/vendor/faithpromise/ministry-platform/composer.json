@@ -1,0 +1,20 @@
+{
+    "name": "faithpromise/ministry-platform",
+    "description": "PHP Wrapper for the Ministry Platform API",
+    "authors": [
+        {
+            "name": "Brad Roberts",
+            "email": "brad@bradroberts.net"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "kamermans/guzzle-oauth2-subscriber": "^1.0",
+        "illuminate/cache": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "MinistryPlatform\\": "src/"
+        }
+    }
+}

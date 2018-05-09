@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bab9b3f4b5447fd7271ca23f9bced5a1",
+    "content-hash": "c962d4b8bcc590eb553b679827d4e7b9",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -72,44 +72,6 @@
                 "string"
             ],
             "time": "2018-01-09T20:05:19+00:00"
-        },
-        {
-            "name": "faithpromise/ministry-platform",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/faithpromise/ministry-platform.git",
-                "reference": "3fc6ee518c2b234f2063328318b03982042b0655"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/faithpromise/ministry-platform/zipball/3fc6ee518c2b234f2063328318b03982042b0655",
-                "reference": "3fc6ee518c2b234f2063328318b03982042b0655",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.3",
-                "illuminate/cache": "^5.6",
-                "kamermans/guzzle-oauth2-subscriber": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MinistryPlatform\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Brad Roberts",
-                    "email": "brad@bradroberts.net"
-                }
-            ],
-            "description": "PHP Wrapper for the Ministry Platform API",
-            "support": {
-                "source": "https://github.com/faithpromise/ministry-platform/tree/master",
-                "issues": "https://github.com/faithpromise/ministry-platform/issues"
-            },
-            "time": "2018-05-04T18:14:49+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -294,16 +256,16 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v5.6.21",
+            "version": "v5.6.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
-                "reference": "befdd3ee01faa38a63830eec5bc2ccdc8f7eb1f5"
+                "reference": "c04e07baf0377671031b12469c3165c4c2ebb3e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/cache/zipball/befdd3ee01faa38a63830eec5bc2ccdc8f7eb1f5",
-                "reference": "befdd3ee01faa38a63830eec5bc2ccdc8f7eb1f5",
+                "url": "https://api.github.com/repos/illuminate/cache/zipball/c04e07baf0377671031b12469c3165c4c2ebb3e4",
+                "reference": "c04e07baf0377671031b12469c3165c4c2ebb3e4",
                 "shasum": ""
             },
             "require": {
@@ -339,20 +301,20 @@
             ],
             "description": "The Illuminate Cache package.",
             "homepage": "https://laravel.com",
-            "time": "2018-05-04T13:22:51+00:00"
+            "time": "2018-04-07T17:05:26+00:00"
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.6.21",
+            "version": "v5.6.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "6a11fbccbc7da16a85fcd1d4b08e51b5658de0d4"
+                "reference": "322ec80498b3bf85bc4025d028e130a9b50242b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/6a11fbccbc7da16a85fcd1d4b08e51b5658de0d4",
-                "reference": "6a11fbccbc7da16a85fcd1d4b08e51b5658de0d4",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/322ec80498b3bf85bc4025d028e130a9b50242b9",
+                "reference": "322ec80498b3bf85bc4025d028e130a9b50242b9",
                 "shasum": ""
             },
             "require": {
@@ -383,20 +345,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2018-05-08T13:22:33+00:00"
+            "time": "2018-04-07T17:05:26+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.6.21",
+            "version": "v5.6.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "6e84d4140310246ace38fdb0909da5b2fb22eadf"
+                "reference": "2a97d211c052f6d6ce9756c89d64b855d860d923"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/6e84d4140310246ace38fdb0909da5b2fb22eadf",
-                "reference": "6e84d4140310246ace38fdb0909da5b2fb22eadf",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/2a97d211c052f6d6ce9756c89d64b855d860d923",
+                "reference": "2a97d211c052f6d6ce9756c89d64b855d860d923",
                 "shasum": ""
             },
             "require": {
@@ -440,7 +402,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-05-07T14:12:37+00:00"
+            "time": "2018-05-02T14:59:13+00:00"
         },
         {
             "name": "kamermans/guzzle-oauth2-subscriber",
@@ -809,9 +771,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "faithpromise/ministry-platform": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
