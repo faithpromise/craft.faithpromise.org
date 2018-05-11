@@ -59,7 +59,7 @@
 
         data() {
             return {
-                message:      { Group_ID: this.group.slug, First_Name: '', Last_Name: '', Email: '', Phone: '', Comments: '', },
+                message:      { Group_ID: this.group.slug, First_Name: '', Last_Name: '', Email: '', Phone: '', Comments: '', _From_Group_Finder: true, },
                 save_message: true,
                 form_state:   FORM_STATE_IDLE,
                 is_sending:   true,
