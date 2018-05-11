@@ -32,7 +32,7 @@ class MinistryPlatform_GroupsController extends BaseController {
                 $persistence
             );
 
-            $contact = $mp->contacts()->firstOrCreate($message['First_Name'], $message['Last_Name'], $message['Email']);
+            $contact = $mp->contacts()->firstOrCreate($message['First_Name'], $message['Last_Name'], $message['Email'], $message['Phone']);
 
             $message['Group_ID'] = intval($message['Group_ID']);
             $message['Contact_ID'] = $contact->Contact_ID;
