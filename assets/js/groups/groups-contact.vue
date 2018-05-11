@@ -95,10 +95,9 @@
             loadLocalData() {
                 let data = client_storage.get(local_data_key, {});
 
-                // Be careful not to store the Group_ID
+                // Be careful not to copy the Group_ID from a previous submission
                 delete data.Group_ID;
 
-                // Be careful not to copy the Group_ID from a previous submission
                 this.message = Object.assign(this.message, data);
             },
 
