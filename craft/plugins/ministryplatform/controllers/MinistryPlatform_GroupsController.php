@@ -44,7 +44,7 @@ class MinistryPlatform_GroupsController extends BaseController {
 
         } catch (\Exception $e) {
             HeaderHelper::setHeader(['status' => 500]);
-            $this->returnErrorJson($e->getMessage());
+            $this->returnErrorJson($e->getBody());
         }
 
     }
