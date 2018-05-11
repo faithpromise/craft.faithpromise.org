@@ -95,6 +95,10 @@
             loadLocalData() {
                 let data = client_storage.get(local_data_key, {});
 
+                // Be careful not to store the Group_ID
+                delete data.Group_ID;
+
+                // Be careful not to copy the Group_ID from a previous submission
                 this.message = Object.assign(this.message, data);
             },
 
@@ -114,8 +118,14 @@
                         alert('Oh no! An error occurred. Your message was not sent. Please try again or contact us for help.');
                     });
 
-                if (this.save_message)
-                    client_storage.set(local_data_key, this.message);
+                if (this.save_message) {
+
+                    // Be careful not to store the Group_ID
+                    let data = Object.assign({}, this.message);
+                    delete data.Group_ID;
+
+                    client_storage.set(local_data_key, data);
+                }
 
             },
 
