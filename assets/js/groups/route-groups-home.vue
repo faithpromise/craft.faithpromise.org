@@ -25,7 +25,7 @@
 
     <div class="GroupResults-items" v-show="!is_loading">
 
-      <router-link class="GroupItem" v-for="group in groups" :key="group.id" :to="{ name: 'group-detail', params: { slug: group.slug } }">
+      <a class="GroupItem" v-for="group in groups" :key="group.id" :href="'https://my.faithpromise.org/portal/group_detail.aspx?id=' + group.slug" target="_blank">
 
         <div class="GroupItem-image">
           <div class="GroupItem-imageWrap">
@@ -58,7 +58,7 @@
 
         </div>
 
-      </router-link>
+      </a>
 
       <p class="GroupResults-more" v-show="total_pages > 1">
         <button class="Button" type="button" @click="previousPage" v-show="current_page > 1">Prev Page</button>

@@ -184,7 +184,7 @@
                     }
 
                     google.maps.event.addListener(markers[group.id], 'click', () => {
-                        this.$router.push({ name: 'group-detail', params: { slug: group.slug } });
+                        window.open('https://my.faithpromise.org/portal/group_detail.aspx?id=' + group.slug);
                     });
 
                     bounds.extend(markers[group.id].getPosition());
