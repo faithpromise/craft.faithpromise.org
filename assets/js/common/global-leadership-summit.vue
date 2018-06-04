@@ -57,19 +57,19 @@
                     {
                         name:         'Pellissippi',
                         location:     'West Knoxville',
-                        guest_url:    'https://www.willowcreek.com/rega/#/reg/trans/one?invtID=EV-LSS1708-MAIN-269',
+                        guest_url:    'https://www.willowcreek.com/events/leadership/htmlreglink_guest.asp?siteId=145618',
                         attender_url: 'https://www.willowcreek.com/events/leadership/central/regi/htmlhost.asp?siteid=145618',
                     },
                     {
                         name:         'Blount',
                         location:     'Maryville',
-                        guest_url:    'https://www.willowcreek.com/rega/#/reg/trans/one?invtID=EV-LSS1708-MAIN-343',
+                        guest_url:    'https://www.willowcreek.com/events/leadership/htmlreglink_guest.asp?siteId=1432207',
                         attender_url: 'https://www.willowcreek.com/events/leadership/central/regi/htmlhost.asp?siteid=1432207',
                     },
                     {
                         name:         'North Knox',
                         location:     'North Knoxville',
-                        guest_url:    'https://www.willowcreek.com/rega/#/reg/trans/one?invtID=EV-LSS1708-MAIN-453',
+                        guest_url:    'https://www.willowcreek.com/events/leadership/htmlreglink_guest.asp?siteId=1600046',
                         attender_url: 'https://www.willowcreek.com/events/leadership/central/regi/htmlhost.asp?siteid=1600046',
                     },
                 ],
