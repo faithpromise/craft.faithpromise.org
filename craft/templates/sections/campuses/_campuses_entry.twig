@@ -187,7 +187,7 @@ order: 'serviceScheduleEffectiveAt asc',
         {% block text %}
             <p>
                 Our
-                <span class="nowrap">{{ entry.title }} Campus</span> is located in {{ entry.area }} at {% if entry.mapUrl %}
+                <span class="nowrap">{{ entry.title }} Campus</span> {% if (entry.meetingPlace) %} meets at {{ entry.meetingPlace }}, {% else %} is {% endif %} located at {% if entry.mapUrl %}
                 <span class="nowrap"><a href="{{ entry.mapUrl }}">{{ entry.address }}</a></span>{% else %}
                 <span class="nowrap">{{ entry.address }}</span>{% endif %},
                 <span class="nowrap">{{ entry.city }}, {{ entry.state }} {{ entry.zip }}</span>. We'd love to see you this weekend!

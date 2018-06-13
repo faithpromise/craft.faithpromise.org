@@ -32,7 +32,7 @@
             {% if (entry_item.excerpt) %}
                 <p>{{ entry_item.excerpt }}</p>
             {% else %}
-                <p>The {{ entry_item.title }} Campus is located at {{ entry_item.address }} and meets weekly during the following times.</p>
+                <p>The {{ entry_item.title }} Campus {% if (entry.meetingPlace) %} meets at {{ entry.meetingPlace }}, {% else %} is {% endif %} located at {{ entry_item.address }}. Join us this weekend at one of the following times.</p>
             {% endif %}
 
             {% set has_asl = false %}
@@ -79,7 +79,7 @@
     'secondary_image': pastor and pastor.staffPhoto[0] ? pastor.staffPhoto[0] : null,
     'secondary_image_caption': pastor ? pastor.title ~ ', Campus Pastor' : null,
     'title': entry_item.area ?: entry_item.title,
-    'subtitle': entry_item.title ~ ' Campus',
+    'subtitle': entry_item.meetingPlace ? ('Meets at ' ~ entry_item.meetingPlace) : (entry_item.title ~ ' Campus'),
     'text': text,
     'action_url': entry_item.theUrl ?: entry_item.url,
     'action_text': entry_item.linkText ?: 'More Details'
