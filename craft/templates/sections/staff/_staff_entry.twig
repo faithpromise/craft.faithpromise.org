@@ -40,9 +40,7 @@
         <div class="StaffHero-text">
             <h1 class="StaffHero-title">{{ entry.title }}</h1>
             <div class="StaffHero-subtitle">{{ entry.jobTitle }}</div>
-            {% if entry.phoneExtension %}
-                <p class="StaffHero-phone">(865) 251-2590 x {{ entry.phoneExtension }}</p>
-            {% endif %}
+                <p class="StaffHero-phone">(865) 251-2590{% if entry.phoneExtension %} x {{ entry.phoneExtension }}{% endif %}</p>
             <div class="StaffHero-social">
                 {% if entry.facebook %}
                     <a class="StaffHero-icon" href="https://www.facebook.com/{{ entry.facebook }}">
