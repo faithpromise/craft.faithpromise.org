@@ -60,6 +60,7 @@ class EntriesFeedMeFieldType extends BaseFeedMeFieldType
             $criteria->status = null;
             $criteria->sectionId = $sectionIds;
             $criteria->limit = $settings->limit;
+            $criteria->locale = $settings->targetLocale;
 
             // Check if we've specified which attribute we're trying to match against
             $attribute = Hash::get($fieldData, 'options.match', 'title');
@@ -113,7 +114,7 @@ class EntriesFeedMeFieldType extends BaseFeedMeFieldType
 
                 $preppedData[$fieldHandle] = $data;
 
-                if (craft()->config->get('checkExistingFieldData', 'feedMe')) {
+                if (craft()->config->get('checkExistingFieldData', 'feedme')) {
                     $field = craft()->fields->getFieldByHandle($fieldHandle);
 
                     craft()->feedMe_fields->checkExistingFieldData($entry, $preppedData, $fieldHandle, $field);
