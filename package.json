@@ -22,5 +22,8 @@
     "portal-vue": "^1.1.1",
     "url-search-params": "^0.10.0",
     "vue": "^2.4.2"
+  },
+  "dependencies": {
+    "cookies-js": "^1.2.3"
   }
 }
