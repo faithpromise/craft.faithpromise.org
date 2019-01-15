@@ -76,7 +76,8 @@ class GroupTransformer extends TransformerAbstract {
         return $this->item($entry->groupCampus->first(), function ($campus) {
 
             return [
-                'name' => $campus->title,
+                'name'       => $campus->title,
+                'map_marker' => '/assets/map-marker-' . $campus->slug . '.svg',
             ];
         });
 

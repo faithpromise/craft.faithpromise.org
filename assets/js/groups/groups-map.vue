@@ -176,7 +176,7 @@
                             position: group.location,
                             map:      map,
                             icon:     {
-                                url:        '/assets/map-marker.svg',
+                                url:        group.campus.map_marker,
                                 scaledSize: marker_size,
                             }
                         });

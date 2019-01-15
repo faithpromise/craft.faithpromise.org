@@ -168,9 +168,9 @@ return [
              */
             if ($location && $allow_location) {
                 $criteria['groupAddress'] = ['target' => $location, 'range' => $distance];
-                $criteria['order'] = ['distance', 'title'];
+                $criteria['order'] = ['featuredGroup desc', 'distance', 'title'];
             } else {
-                $criteria['order'] = ['title'];
+                $criteria['order'] = ['featuredGroup desc', 'title'];
             }
 
             return [
@@ -254,9 +254,10 @@ return [
                 'transformer' => function (EntryModel $entry) {
 
                     return [
-                        'id'       => $entry->id,
-                        'title'    => $entry->title,
-                        'location' => ['lat' => $entry->lat, 'lng' => $entry->lng],
+                        'id'         => $entry->id,
+                        'map_marker' => '/assets/map-marker-' . $entry->slug . '.svg',
+                        'title'      => $entry->title,
+                        'location'   => ['lat' => $entry->lat, 'lng' => $entry->lng],
                     ];
                 },
             ];
