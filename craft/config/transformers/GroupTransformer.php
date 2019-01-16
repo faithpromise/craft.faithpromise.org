@@ -64,6 +64,7 @@ class GroupTransformer extends TransformerAbstract {
             'distance'    => $this->location ? round($entry->groupAddress->distance, 1) : null,
             'image'       => $image ? $imageUrlService->url($image) : null,
             'leaders'     => $leaders,
+            'is_featured' => $entry->featuredGroup,
         ];
 
     }
