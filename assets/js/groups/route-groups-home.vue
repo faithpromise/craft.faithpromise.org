@@ -39,7 +39,7 @@
         </div>
 
         <div class="GroupItem-body">
-          <div class="GroupItem-featured" v-if="group.is_featured">Recommended Group</div>
+          <div class="GroupItem-featured" v-if="group.is_featured === '1'">Recommended Group</div>
           <h2 class="GroupItem-title">{{ group.title }}</h2>
           <p class="GroupItem-subtitle">{{ group.life_stage }}, {{ group.category.title }} Group
             <span v-show="group.city">in {{ group.city }}</span></p>
