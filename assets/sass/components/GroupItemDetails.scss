@@ -5,25 +5,16 @@
   padding-top: 1em;
   border-top:  1px solid $color-gray-light;
 
-  //display:          flex;
-  //width:            100%;
-  //background-color: $color-gray-lighter;
-  //padding:          .75em 0;
-  //line-height:      1.2;
-  //
-  //> li {
-  //  flex-grow:   1;
-  //  max-width:   calc-em(150px);
-  //  padding:     .25em 1em;
-  //  border-left: 1px solid $color-gray;
-  //
-  //  &:first-child {
-  //    border-left: none;
-  //  }
-  //}
-
   > li {
     display: inline-block;
+
+    &.GroupItemDetails-campus {
+      display: inline-flex;
+      align-items: center;
+      > img {
+        margin-left: 4px;
+      }
+    }
   }
 
   > li:nth-child(1n+2) {
