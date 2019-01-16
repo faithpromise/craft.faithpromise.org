@@ -53,7 +53,10 @@
               <span class="GroupItemDetails-time">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
               <span class="GroupItemDetails-abbrevTime">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
             </li>
-            <li v-if="group.campus">{{ group.campus.name }}</li>
+            <li class="GroupItemDetails-campus" v-if="group.campus">
+              <span>{{ group.campus.name }}</span>
+              <img :src="group.campus.map_marker" width="20" height="20" alt="Map marker color"/>
+            </li>
           </ul>
 
         </div>

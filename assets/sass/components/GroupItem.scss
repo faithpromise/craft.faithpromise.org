@@ -44,6 +44,14 @@
 
 }
 
+.GroupItemDetails-campus {
+  display: inline-flex;
+  align-items: center;
+  > img {
+    margin-left: 4px;
+  }
+}
+
 .GroupItem-imageWrap {
   @extend %ratio-image;
   width:  100%;
