@@ -48,8 +48,11 @@
 
         <link rel="stylesheet" href="{{ craft.config.cdnUrl }}{{ '/build/main.css' ~ dev_cache_bust | cacheBuster }}">
         {{ getHeadHtml() }}
-
-        {#<link rel="home" href="{{ siteUrl }}">#}
+        {% for script in jsScripts.jsScripts %}
+            {% if script.active and script.placement == 'head' %}
+                {{ script.tag | raw }}
+            {% endif %}
+        {% endfor %}
     </head>
 
     <body>
@@ -97,6 +100,11 @@
         -->
 
         {{ getFootHtml() }}
+        {% for script in jsScripts.jsScripts %}
+            {% if script.active and script.placement == 'body' %}
+                {{ script.tag | raw }}
+            {% endif %}
+        {% endfor %}
 
         <script src="{{ craft.config.cdnUrl }}{{ '/build/' ~ main_script ~ dev_cache_bust | cacheBuster }}"></script>
 
