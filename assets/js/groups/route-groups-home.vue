@@ -11,12 +11,14 @@
 
     <div class="GroupResults-search">
       <group-search-form
-              @location:updated="updateLocation"
-              @category:updated="updateCategory"
-              @stage:updated="updateLifeStage"></group-search-form>
+         @location:updated="updateLocation"
+         @category:updated="updateCategory"
+         @stage:updated="updateLifeStage"></group-search-form>
 
-      <p class="GroupResults-none" v-if="none_found">Unfortunately, there aren't any groups that match your criteria. However, we're adding new groups all the time. You may even want to
-        <a class="nowrap" href="/groups/leaders">start a group</a> of your own! If you'd like help finding a group or want to know more about starting one, we'd love to hear from you. Please take a moment to
+      <p class="GroupResults-none" v-if="none_found">Unfortunately, there aren't any groups that match your criteria.
+        However, we're adding new groups all the time. You may even want to
+        <a class="nowrap" href="/groups/leaders">start a group</a> of your own! If you'd like help finding a group or
+        want to know more about starting one, we'd love to hear from you. Please take a moment to
         <a class="nowrap" href="mailto:groups@faithpromise.org">send an email</a>.</p>
 
     </div>
@@ -25,15 +27,16 @@
 
     <div class="GroupResults-items" v-show="!is_loading">
 
-      <router-link class="GroupItem" v-for="group in groups" :key="group.id" :to="{ name: 'group-detail', params: { slug: group.slug } }">
+      <router-link class="GroupItem" v-for="group in groups" :key="group.id"
+                   :to="{ name: 'group-detail', params: { slug: group.slug } }">
 
-      <div class="GroupItem-image">
+        <div class="GroupItem-image">
           <div class="GroupItem-imageWrap">
             <img-srcset
-                    :image="group.image"
-                    :options="{ fit: 'crop', crop: 'entropy' }"
-                    sizes="25w"
-                    dimensions="16x9">
+               :image="group.image"
+               :options="{ fit: 'crop', crop: 'entropy' }"
+               sizes="25w"
+               dimensions="16x9">
             </img-srcset>
           </div>
         </div>
@@ -50,7 +53,8 @@
               <span class="GroupItemDetails-abbrevDist">{{ group.distance }} mi.</span>
             </li>
             <li>
-              <span class="GroupItemDetails-time">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
+              <span
+                 class="GroupItemDetails-time">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
               <span class="GroupItemDetails-abbrevTime">{{ group.day_of_week.substring(0, 3) }} at {{ group.start_time }}</span>
             </li>
             <li class="GroupItemDetails-campus" v-if="group.campus">
@@ -73,114 +77,113 @@
 </template>
 <script>
 
-    import * as paramHelper from './group-query-params';
-    import groupService from './group.service';
-    import groupsMap from './groups-map.vue';
-    import groupSearchForm from './group-search-form.vue';
-    import imgSrcset from '../common/image-srcset.vue';
-    import loading from '../common/loading.vue';
+  import * as paramHelper from './group-query-params'
+  import groupService from './group.service'
+  import groupsMap from './groups-map.vue'
+  import groupSearchForm from './group-search-form.vue'
+  import imgSrcset from '../common/image-srcset.vue'
+  import loading from '../common/loading.vue'
 
-    export default {
+  export default {
 
-        props: {},
+    props: {},
 
-        components: {
-            groupsMap,
-            groupSearchForm,
-            imgSrcset,
-            loading,
-        },
+    components: {
+      groupsMap,
+      groupSearchForm,
+      imgSrcset,
+      loading
+    },
 
-        data() {
+    data() {
 
-            return {
-                groups:     [],
-                markers:    [],
-                is_loading: true,
+      return {
+        groups: [],
+        markers: [],
+        is_loading: true,
 
-                per_page:     20,
-                total:        0,
-                total_pages:  0,
-                current_page: 1,
-            }
-        },
+        per_page: 20,
+        total: 0,
+        total_pages: 0,
+        current_page: 1
+      }
+    },
 
-        computed: {
+    computed: {
 
-            none_found() {
-                return !this.is_loading && this.total === 0;
-            },
+      none_found() {
+        return !this.is_loading && this.total === 0
+      },
 
-            has_more() {
-                return this.total_pages > this.current_page;
-            },
+      has_more() {
+        return this.total_pages > this.current_page
+      }
 
-        },
+    },
 
-        created() {
-            this.load();
-        },
+    created() {
+      this.load()
+    },
 
-        methods: {
+    methods: {
 
-            load() {
-                let criteria = Object.assign({}, this.$route.query);
+      load() {
+        let criteria = Object.assign({}, this.$route.query)
 
-                this.is_loading = true;
+        this.is_loading = true
 
-                groupService.all(criteria).then((result) => {
-                    this.groups       = result.data.data;
-                    this.total        = result.data.meta.pagination.total;
-                    this.total_pages  = result.data.meta.pagination.total_pages;
-                    this.current_page = result.data.meta.pagination.current_page;
-                    this.is_loading   = false;
-                });
-            },
+        groupService.all(criteria).then((result) => {
+          this.groups = result.data.data
+          this.total = result.data.meta.pagination.total
+          this.total_pages = result.data.meta.pagination.total_pages
+          this.current_page = result.data.meta.pagination.current_page
+          this.is_loading = false
+        })
+      },
 
-            previousPage() {
-                this.goToPage(this.current_page - 1);
-            },
+      previousPage() {
+        this.goToPage(this.current_page - 1)
+      },
 
-            nextPage() {
-                this.goToPage(this.current_page + 1);
-            },
+      nextPage() {
+        this.goToPage(this.current_page + 1)
+      },
 
-            goToPage(page) {
-                let params = paramHelper.cleanParams(this.$route.query, { page });
-                this.$router.push({ name: this.$route.name, query: params });
-                this.load();
-            },
+      goToPage(page) {
+        let params = paramHelper.cleanParams(this.$route.query, {page})
+        this.$router.push({name: this.$route.name, query: params})
+        this.load()
+      },
 
-            update(new_params = {}) {
-                let params = paramHelper.cleanParams(this.$route.query, new_params);
-                delete params.page;
-                this.$router.push({ name: this.$route.name, query: params });
-                this.load();
-            },
+      update(new_params = {}) {
+        let params = paramHelper.cleanParams(this.$route.query, new_params)
+        delete params.page
+        this.$router.push({name: this.$route.name, query: params})
+        this.load()
+      },
 
-            updateLocation(location) {
-                console.log('updating location', location);
-                this.update({ location: paramHelper.formatLocation(location) });
-            },
+      updateLocation(location) {
+        this.update({location: paramHelper.formatLocation(location)})
+      },
 
-            updateCategory(category) {
-                this.update({ category });
-            },
+      updateCategory(category) {
+        this.update({category})
+      },
 
-            updateLifeStage(stage) {
-                this.update({ stage });
-            },
+      updateLifeStage(stage) {
+        this.update({stage})
+      },
 
-            excerpt(text) {
-                let limit = 120;
+      excerpt(text) {
+        let limit = 120
 
-                if (text.length <= limit)
-                    return text;
+        if (text.length <= limit)
+          return text
 
-                return text.substr(0, limit).replace(/(\s*\S+)$/, '') + '...';
-            },
-
-        },
+        return text.substr(0, limit).replace(/(\s*\S+)$/, '') + '...'
+      }
 
     }
+
+  }
 </script>
