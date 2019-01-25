@@ -1,10 +1,10 @@
 <template>
   <form class="GroupCriteria" @submit.prevent>
 
-    <select class="GroupCriteria-input" v-model="location" v-show="!show_address_search">
+    <select class="GroupCriteria-input" v-model="campus" v-show="!show_address_search">
       <option :value="null">Any area</option>
       <option disabled>- - - - - - - -</option>
-      <option v-for="item in locations_list" :key="item.id" :value="item.location">{{ item.name }}</option>
+      <option v-for="item in locations_list" :key="item.id" :value="item.id">{{ item.name }}</option>
       <option disabled>- - - - - - - -</option>
       <option value="new">Enter a New Address</option>
     </select>
@@ -63,6 +63,7 @@
         geocoded_address: null,
         is_geocode_complete: false,
 
+        campus: this.$route.query.campus,
         location: parseLocation(this.$route.query.location),
 
         show_address_search: false
@@ -80,7 +81,7 @@
           let is_selected = this.location && this.location.lat === this.campuses[i].location.lat && this.location.lng === this.campuses[i].location.lng
           items.push({
             id: this.campuses[i].id,
-            name: 'Near the ' + this.campuses[i].title + ' Campus',
+            name: this.campuses[i].title + ' Campus Groups',
             location: this.campuses[i].location,
             is_selected: is_selected
           })
@@ -105,13 +106,13 @@
 
     watch: {
 
-      location(value, old_value) {
+      campus(value, old_value) {
         if (value === 'new') {
           old_location = old_value
           return this.show_address_search = true
         }
 
-        this.$emit('location:updated', value)
+        this.$emit('campus:updated', value)
       },
 
       selected_category(value) {

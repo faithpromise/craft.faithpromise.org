@@ -11,6 +11,7 @@
 
     <div class="GroupResults-search">
       <group-search-form
+         @campus:updated="updateCampus"
          @location:updated="updateLocation"
          @category:updated="updateCategory"
          @stage:updated="updateLifeStage"></group-search-form>
@@ -164,6 +165,10 @@
 
       updateLocation(location) {
         this.update({location: paramHelper.formatLocation(location)})
+      },
+
+      updateCampus(campus) {
+        this.update({campus})
       },
 
       updateCategory(category) {

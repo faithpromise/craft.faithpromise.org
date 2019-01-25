@@ -159,6 +159,9 @@ return [
             if ($stage = craft()->request->getParam('stage'))
                 $related_to[] = craft()->elements->getCriteria(ElementType::Category)->slug($stage)->first();
 
+            if ($campus = craft()->request->getParam('campus'))
+                $related_to[] = craft()->elements->getCriteria(ElementType::Entry)->id($campus)->first();
+
             if (count($related_to) > 1)
                 $criteria['relatedTo'] = $related_to;
 
