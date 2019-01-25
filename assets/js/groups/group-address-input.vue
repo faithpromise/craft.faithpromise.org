@@ -2,7 +2,7 @@
   <input
      id="js_search_by_address"
      name="location"
-     placeholder="enter your starting place">
+     :placeholder="placeholder">
 </template>
 <script>
 
@@ -11,6 +11,12 @@
   let autocomplete
 
   export default {
+    props: {
+      placeholder: {
+        type: String,
+        default: 'enter your starting place'
+      }
+    },
 
     mounted() {
 
