@@ -61,6 +61,32 @@ select.GroupCriteria-input {
   height:     calc-em(44px);
 }
 
+.GroupCriteria-address {
+  display:          flex;
+  align-items:      center;
+  justify-content:  space-between;
+  width:            100%;
+  margin-top:       calc-em(8px);
+  padding:          0.75em 0.8em;
+  border:           1px solid $color-gray-lighter;
+  color:            inherit;
+  border-radius:    3px;
+  background-color: $color-gray-lighter;
+
+  overflow:         hidden;
+  white-space:      nowrap;
+  text-overflow:    ellipsis;
+  user-select:      none;
+  cursor:           default;
+}
+
+.GroupCriteria-addressClose {
+  @extend .link;
+  flex-shrink: 1;
+  margin-left: 1em;
+  cursor:      pointer;
+}
+
 .GroupCriteria-row {
   display:     flex;
   margin-left: -1em;

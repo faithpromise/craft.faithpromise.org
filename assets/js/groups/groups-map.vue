@@ -47,10 +47,10 @@
     },
 
     watch: {
-
       '$route': {
         immediate: true,
         handler(value) {
+          console.log('map route change')
           if (value.name === 'groups')
             this.loadMarkers()
         }
@@ -62,7 +62,6 @@
           this.addHomeMarker(value)
         }
       }
-
     },
 
     beforeCreate() {
@@ -132,6 +131,7 @@
 
       loadMarkers() {
 
+        // Up to 500 markers are fetched, so always use page 1
         let criteria = Object.assign({}, this.$route.query, {dataset: 'markers', page: 1}),
           should_load = paramsHaveChanged(criteria, old_params)
 
