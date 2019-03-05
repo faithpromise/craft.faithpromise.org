@@ -195,7 +195,6 @@ return [
                 'elementType' => ElementType::Category,
                 'criteria'    => [
                     'group' => 'groupCategories',
-                    'order' => ['title'],
                 ],
                 'transformer' => function (CategoryModel $entry) {
 
