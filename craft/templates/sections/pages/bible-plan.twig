@@ -22,7 +22,7 @@
 
     {% set bible_plan_entry = craft.entries.section('biblePlan').slug(day_of_year).first() %}
 
-    {% set title = 'Bible Reading Plan for ' ~ reading_date | date('F') ~ ' ' ~ reading_date | date('j') %}
+    {% set title = reading_date | date('F j') %}
 
 {% block content %}
 
@@ -30,12 +30,7 @@
 
     {% embed '_layout/text_section.twig' with { title: title, align: 'left', background: 'gray' } %}
         {% block text %}
-            {{ reading_date | date('M j Y') }}
-            <p>
-                Get ready to walk with God and thousands of your church family on a journey through the Bible over the course of a year. Download Pastor Chris' new book,
-                <a href="https://www.amazon.com/New-Rivers-Roads-Chris-Stephens-ebook/dp/B0788B1T4T" target="_blank">"New Rivers, New Roads"</a>. Also, check out
-                <a href="http://youversion.com">YouVersion</a>, a Bible app for your phone or tablet.
-            </p>
+            <p>You'll find the Bible passages for {{ reading_date | date('M j') }} below. You can jump to a specific day by changing the following date.</p>
             <reading-plan-nav :month="{{ reading_date | date('n') }}" :day="{{ reading_date | date('j') }}"></reading-plan-nav>
         {% endblock %}
     {% endembed %}
